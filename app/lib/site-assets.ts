@@ -19,7 +19,7 @@ export const GRITO_LINHA_1 = "À minha voz.....";
 export const GRITO_LINHA_2 = "FOGO!";
 
 /** Vídeo de divulgação — public/videos/divulgacao.mp4 */
-export const VIDEO_DIVULGACAO_VERSION = "2";
+export const VIDEO_DIVULGACAO_VERSION = "3";
 export const VIDEO_DIVULGACAO_SRC = `/videos/divulgacao.mp4?v=${VIDEO_DIVULGACAO_VERSION}`;
 /** Opcional: imagem antes de carregar — public/videos/divulgacao-poster.jpg */
 export const VIDEO_DIVULGACAO_POSTER = "/videos/divulgacao-poster.jpg";
