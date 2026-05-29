@@ -5,11 +5,12 @@ import { useState } from "react";
 import { BRASAO_ALT, BRASAO_SRC } from "../lib/site-assets";
 
 const sizeMap = {
-  sm: { box: 36, img: 28 },
-  nav: { box: 40, img: 32 },
-  md: { box: 88, img: 72 },
-  lg: { box: 200, img: 168 },
-  xl: { box: 320, img: 272 },
+  sm: { boxW: 36, boxH: 36, imgW: 28, imgH: 28 },
+  nav: { boxW: 40, boxH: 40, imgW: 32, imgH: 32 },
+  md: { boxW: 88, boxH: 88, imgW: 72, imgH: 72 },
+  lg: { boxW: 220, boxH: 280, imgW: 200, imgH: 260 },
+  xl: { boxW: 300, boxH: 380, imgW: 280, imgH: 360 },
+  hero: { boxW: 400, boxH: 500, imgW: 380, imgH: 480 },
 } as const;
 
 type UnitCrestProps = {
@@ -30,13 +31,13 @@ export function UnitCrest({
   variant = "framed",
 }: UnitCrestProps) {
   const [failed, setFailed] = useState(false);
-  const { box, img } = sizeMap[size];
+  const { boxW, boxH, imgW, imgH } = sizeMap[size];
 
   if (failed) {
     return (
       <span
         className={`flex shrink-0 items-center justify-center border border-gold/40 bg-gold/5 font-display font-bold text-gold ${className}`}
-        style={{ width: box, height: box }}
+        style={{ width: boxW, height: boxH }}
         title="Carro de Combate"
       >
         <span className={size === "sm" || size === "nav" ? "text-xs" : "text-sm"}>
@@ -55,18 +56,18 @@ export function UnitCrest({
           ? `crest-bare relative flex shrink-0 items-center justify-center ${className}`
           : `crest-frame relative flex shrink-0 items-center justify-center ${className}`
       }
-      style={{ width: box, height: box }}
+      style={{ width: boxW, height: boxH }}
     >
       <Image
         src={BRASAO_SRC}
         alt={BRASAO_ALT}
-        width={img}
-        height={img}
+        width={imgW}
+        height={imgH}
         priority={priority}
         className={
           isBare
-            ? "crest-bare-image relative z-10 object-contain drop-shadow-[0_4px_28px_rgba(198,164,75,0.2)]"
-            : "relative z-10 object-contain drop-shadow-[0_4px_24px_rgba(198,164,75,0.25)]"
+            ? "crest-bare-image relative z-10 h-full w-full object-contain object-center drop-shadow-[0_6px_36px_rgba(198,164,75,0.28)]"
+            : "relative z-10 h-full w-full object-contain drop-shadow-[0_4px_24px_rgba(198,164,75,0.25)]"
         }
         onError={() => setFailed(true)}
       />

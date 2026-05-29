@@ -11,35 +11,25 @@ export function EntrySection() {
       id="entrada"
       className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pt-16"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/75 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/50 to-background" />
 
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <Image
           src={CASTELO_SRC}
           alt=""
-          width={900}
-          height={900}
+          width={1100}
+          height={1100}
           priority
-          className="castle-entry-bg h-auto max-h-[min(92vh,900px)] w-auto max-w-[min(95vw,900px)] object-contain opacity-[0.14] sm:opacity-[0.18]"
+          className="castle-entry-bg h-auto max-h-[min(96vh,1100px)] w-auto max-w-[min(98vw,1100px)] object-contain opacity-[0.32] sm:opacity-[0.38] lg:opacity-[0.42]"
           aria-hidden
         />
       </div>
 
-      <div className="absolute inset-0 military-map-overlay opacity-30" />
+      <div className="absolute inset-0 military-map-overlay opacity-20" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
           <div className="max-w-3xl">
-            <motion.p
-              className="section-label mb-4 flex items-center gap-3"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <span className="inline-block h-px w-8 bg-gold/60" />
-              Regimento de Cavalaria 4 · Ex-RC4
-            </motion.p>
-
             <motion.h1
               className="display-heading mb-3 text-5xl font-bold text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
               initial={{ opacity: 0, y: 22 }}
@@ -70,25 +60,11 @@ export function EntrySection() {
               confiança entre quem serviu e quem continua este legado.
             </motion.p>
 
-            <motion.div
-              className="flex flex-col gap-4 sm:flex-row sm:items-center"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.3 }}
-            >
-              <motion.a href="#comunidade" className="btn-primary" whileHover={{ y: -2 }}>
-                Aderir à Comunidade
-              </motion.a>
-              <motion.a href="#loja" className="btn-outline" whileHover={{ y: -2 }}>
-                Loja do Carrista
-              </motion.a>
-            </motion.div>
-
             <motion.dl
-              className="mt-16 grid grid-cols-3 gap-4 border-t border-gold/15 pt-8 sm:gap-8"
+              className="mt-12 grid grid-cols-3 gap-4 border-t border-gold/15 pt-8 sm:gap-8"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.4 }}
+              transition={{ duration: 0.75, delay: 0.3 }}
             >
               {[
                 { value: "7", label: "Eventos Anuais" },
@@ -108,22 +84,22 @@ export function EntrySection() {
           </div>
 
           <motion.div
-            className="hidden justify-center lg:flex"
+            className="hidden items-center justify-center lg:flex"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
-            <UnitCrest size="xl" priority variant="bare" />
+            <UnitCrest size="hero" priority variant="bare" />
           </motion.div>
         </div>
 
         <motion.div
-          className="mt-10 flex justify-center lg:hidden"
+          className="mt-12 flex justify-center lg:hidden"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <UnitCrest size="lg" priority variant="bare" />
+          <UnitCrest size="xl" priority variant="bare" />
         </motion.div>
       </div>
 

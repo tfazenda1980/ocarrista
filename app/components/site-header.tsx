@@ -56,13 +56,6 @@ export function SiteHeader() {
               {link.label}
             </motion.a>
           ))}
-          <motion.a
-            href="#comunidade"
-            className="btn-primary px-5 py-2.5 text-[0.65rem]"
-            whileHover={{ y: -1 }}
-          >
-            Aderir
-          </motion.a>
         </nav>
 
         <button
@@ -96,15 +89,6 @@ export function SiteHeader() {
                 </a>
               </li>
             ))}
-            <li className="pt-2">
-              <a
-                href="#comunidade"
-                className="btn-primary w-full text-center"
-                onClick={() => setOpen(false)}
-              >
-                Aderir
-              </a>
-            </li>
           </ul>
         </nav>
       )}
