@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { CASTELO_SRC } from "../lib/site-assets";
-import { UnitCrest } from "./unit-crest";
 
 export function EntrySection() {
   return (
@@ -28,8 +27,7 @@ export function EntrySection() {
       <div className="absolute inset-0 military-map-overlay opacity-20" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
-          <div className="max-w-3xl">
+        <div className="max-w-3xl">
             <motion.h1
               className="display-heading mb-3 text-5xl font-bold text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
               initial={{ opacity: 0, y: 22 }}
@@ -81,26 +79,7 @@ export function EntrySection() {
                 </div>
               ))}
             </motion.dl>
-          </div>
-
-          <motion.div
-            className="hidden items-center justify-center lg:flex"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <UnitCrest size="hero" priority variant="bare" />
-          </motion.div>
         </div>
-
-        <motion.div
-          className="mt-12 flex justify-center lg:hidden"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          <UnitCrest size="xl" priority variant="bare" />
-        </motion.div>
       </div>
 
       <motion.a

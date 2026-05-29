@@ -2,6 +2,7 @@ import { TacticalBackground } from "./components/tactical-background";
 import { SiteHeader } from "./components/site-header";
 import { EntrySection } from "./components/entry-section";
 import { GritoSection } from "./components/grito-section";
+import { LemaSection } from "./components/lema-section";
 import { VideoPromoSection } from "./components/video-promo-section";
 import { EventosSection } from "./components/sections/eventos";
 import { HistoriaSection } from "./components/sections/historia";
@@ -19,6 +20,7 @@ export default function Home() {
         <main>
           <EntrySection />
           <GritoSection />
+          <LemaSection />
           <VideoPromoSection />
           <EventosSection />
           <HistoriaSection />
