@@ -13,7 +13,7 @@ export function SiteFooter() {
               De Santa Margarida
             </p>
             <p className="mt-2 max-w-xs text-sm text-muted">
-              Comunidade Ex-RC4. Eventos, história, loja e GesCO.
+              Comunidade do QCav e Ex-RC4. Eventos, história, loja e GesCO.
             </p>
           </div>
 

@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# cópias de segurança grandes (não enviar para o repo)
+public/historia/slideshow-original.pdf
+public/videos/divulgacao-original.mp4
+public/videos/divulgacao-compressed.mp4
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

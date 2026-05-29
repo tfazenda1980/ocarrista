@@ -1,6 +1,8 @@
 import { TacticalBackground } from "./components/tactical-background";
 import { SiteHeader } from "./components/site-header";
-import { Hero } from "./components/hero";
+import { EntrySection } from "./components/entry-section";
+import { GritoSection } from "./components/grito-section";
+import { VideoPromoSection } from "./components/video-promo-section";
 import { EventosSection } from "./components/sections/eventos";
 import { HistoriaSection } from "./components/sections/historia";
 import { LojaSection } from "./components/sections/loja";
@@ -15,7 +17,9 @@ export default function Home() {
       <div className="relative z-10 flex min-h-full flex-col">
         <SiteHeader />
         <main>
-          <Hero />
+          <EntrySection />
+          <GritoSection />
+          <VideoPromoSection />
           <EventosSection />
           <HistoriaSection />
           <LojaSection />

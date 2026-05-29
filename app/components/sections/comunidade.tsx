@@ -4,7 +4,7 @@ import { IconUsers, IconShop } from "../icons";
 const benefits = [
   "Acesso à Loja do Carrista — prendas e artigos exclusivos",
   "Inscrição e informação sobre os 7 eventos anuais",
-  "Rede de veteranos, famílias e amigos do Ex-RC4",
+  "Rede de veteranos, famílias e amigos do QCav e do Ex-RC4",
   "Área de membro e comunicações via GesCO",
 ];
 
@@ -14,7 +14,7 @@ export function ComunidadeSection() {
       id="comunidade"
       label="Secção 04 · Comunidade"
       title="Aderir & Comprar"
-      description="Registe-se como novo membro para integrar a comunidade O Carrista e aceder à Loja do Carrista — eventos, GesCO e identidade Ex-RC4."
+      description="Registe-se como novo membro para integrar a comunidade O Carrista e aceder à Loja do Carrista ou Eventos com participação exterior."
       alt
     >
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">

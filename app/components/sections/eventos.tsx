@@ -5,16 +5,16 @@ import { IconCalendar, IconTarget, IconShield } from "../icons";
 const events = [
   {
     title: "Dia do Quartel da Cavalaria e do Ex-RC4",
-    meta: "EDIÇÃO ANUAL",
+    meta: "EDIÇÃO ANUAL · EFEMÉRIDE",
     description:
-      "Encontro no quartel de Santa Margarida: homenagens, convívio entre veteranos e ativos e celebração da casa do Regimento de Cavalaria 4.",
+      "Efeméride que evoca o combate entre cavalarias em Viella, África, onde 264 cavaleiros do RC 4 desenvolveram uma notável carga de Cavalaria sob o comando do Coronel John Campbell — homenagem, memória e convívio no quartel.",
     icon: <IconShield />,
   },
   {
-    title: "Concurso Nacional Combinado",
-    meta: "EDIÇÃO ANUAL",
+    title: "Prova Equestre Militar",
+    meta: "EDIÇÃO ANUAL · ENSINO · CROSS · OBSTÁCULOS",
     description:
-      "Competição nacional que reúne equipas em provas combinadas de precisão, conhecimento e espírito de corpo dos carristas.",
+      "Prova equestre militar composta por três fases: Ensino, Cross e Obstáculos — rigor técnico, tradição e espírito de corpo dos carristas.",
     icon: <IconTarget />,
   },
   {
@@ -26,30 +26,30 @@ const events = [
   },
   {
     title: "Marcha a Cavalo à Batalha",
-    meta: "EDIÇÃO ANUAL",
+    meta: "EDIÇÃO ANUAL · ARMA DA CAVALARIA",
     description:
-      "Percurso a cavalo em memória das campanhas e tradições equestres do regimento, com participação da comunidade e convidados.",
+      "Atividade da Arma da Cavalaria em honra do patrono Mouzinho de Albuquerque. O Quartel da Cavalaria organiza o percurso, que culmina na Batalha — tradição equestre e identidade da cavalaria portuguesa.",
     icon: <IconShield />,
   },
   {
     title: "São Martinho",
-    meta: "EDIÇÃO ANUAL",
+    meta: "EDIÇÃO ANUAL · FESTA DA COMUNIDADE",
     description:
-      "Magusto e convívio de outono à mesa, no espírito de união que caracteriza os encontros do Ex-RC4 em Santa Margarida.",
+      "A nossa festa anual, onde celebramos também os valores da lenda de São Martinho como valores nossos — partilha, generosidade e união.",
     icon: <IconCalendar />,
   },
   {
     title: "A Noite de Fados",
     meta: "EDIÇÃO ANUAL",
     description:
-      "Noite de fado e tradição portuguesa entre carristas, famílias e amigos — cultura e camaradagem em ambiente íntimo.",
+      "A combinação entre tradição, união e identidade do Carrista — uma noite de fado, memória e camaradagem entre a comunidade.",
     icon: <IconCalendar />,
   },
   {
     title: 'Challenger "O Carrista"',
-    meta: "EDIÇÃO ANUAL",
+    meta: "EDIÇÃO ANUAL · DESTREZA",
     description:
-      "Desafio competitivo da comunidade O Carrista: provas, equipas e espírito de superação entre membros e convidados.",
+      "Prova de destreza técnica e física para as guarnições de carristas — superação, precisão e espírito de equipa em ambiente competitivo.",
     icon: <IconTarget />,
   },
 ];
@@ -60,7 +60,7 @@ export function EventosSection() {
       id="eventos"
       label="Secção 01 · Eventos"
       title="Agenda Anual"
-      description="Sete eventos com edições anuais que marcam o calendário da comunidade — do quartel de Santa Margarida aos desafios e tradições do Ex-RC4."
+      description="Eventos com edições anuais que marcam o calendário do Carrista — do Quartel da Cavalaria de Santa Margarida aos desafios e tradições do Ex-RC4."
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (

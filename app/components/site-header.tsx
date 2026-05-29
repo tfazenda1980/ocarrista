@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { UnitCrest } from "./unit-crest";
 
 const navLinks = [
   { href: "#eventos", label: "Eventos" },
@@ -33,12 +34,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6">
         <a href="#" className="group flex items-center gap-3">
-          <span
-            className="flex h-9 w-9 items-center justify-center border border-gold/40 bg-gold/5 font-display text-sm font-bold text-gold transition-colors group-hover:border-gold/70 group-hover:bg-gold/10"
-            title="Carro de Combate"
-          >
-            CC
-          </span>
+          <UnitCrest size="nav" className="transition-opacity group-hover:opacity-95" priority />
           <div className="flex flex-col">
             <span className="font-display text-sm font-semibold tracking-[0.2em] text-foreground uppercase sm:text-base">
               O Carrista

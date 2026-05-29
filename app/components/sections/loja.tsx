@@ -2,36 +2,15 @@ import { SectionShell } from "../section-shell";
 import { IconShop } from "../icons";
 
 const products = [
-  {
-    name: "Camisola O Carrista",
-    price: "—",
-    note: "Edição comunidade · vários tamanhos",
-  },
-  {
-    name: "Insígnia Ex-RC4",
-    price: "—",
-    note: "Pin metálico · colecionável",
-  },
-  {
-    name: "Boné Tático",
-    price: "—",
-    note: "Bordado O Carrista · preto e dourado",
-  },
-  {
-    name: "Caneca Comemorativa",
-    price: "—",
-    note: "Santa Margarida · edição limitada",
-  },
-  {
-    name: "Sweatshirt RC4",
-    price: "—",
-    note: "Algodão premium · unissexo",
-  },
-  {
-    name: "Pack Prendas",
-    price: "—",
-    note: "Conjunto para oferta · membros",
-  },
+  { name: "Coin GCC", price: "—", note: "Moeda comemorativa · GCC" },
+  { name: "Coin ERec", price: "—", note: "Moeda comemorativa · ERec" },
+  { name: "Galhardete GCC", price: "—", note: "Galhardete · GCC" },
+  { name: "Galhardete ERec", price: "—", note: "Galhardete · ERec" },
+  { name: "O Carrista", price: "—", note: "Artigo de identidade · comunidade" },
+  { name: "Crachá GCC", price: "—", note: "Crachá · GCC" },
+  { name: "Crachá ERec", price: "—", note: "Crachá · ERec" },
+  { name: "Velcro GCC", price: "—", note: "Patch velcro · GCC" },
+  { name: "Velcro ERec", price: "—", note: "Patch velcro · ERec" },
 ];
 
 export function LojaSection() {

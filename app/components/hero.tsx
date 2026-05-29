@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { UnitCrest, UnitCrestWatermark } from "./unit-crest";
 
 export function Hero() {
   const { scrollY } = useScroll();
@@ -37,6 +38,8 @@ export function Hero() {
         transition={{ duration: 1.1 }}
       />
 
+      <UnitCrestWatermark />
+
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 left-1/2 h-[200%] w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-gold/20 to-transparent opacity-30" />
         <div className="absolute top-1/4 right-[10%] h-32 w-32 border border-gold/10 rotate-45 opacity-40" />
@@ -44,6 +47,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
         <div className="max-w-3xl">
           <motion.p
             className="section-label mb-4 flex items-center gap-3"
@@ -79,9 +83,10 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.2 }}
           >
-            A comunidade dos carristas e amigos do Ex-RC4. Tradição de Santa
-            Margarida, eventos anuais, memória do regimento e uma rede de
-            confiança entre quem serviu e quem continua o legado.
+            A comunidade dos carristas e amigos do Quartel da Cavalaria e do
+            RC4. O Carrista de Santa Margarida será local de coordenação de
+            eventos, divulgação cultural e histórica, bem como uma rede de
+            confiança entre quem serviu e quem continua este legado.
           </motion.p>
 
           <motion.div
@@ -120,6 +125,25 @@ export function Hero() {
             ))}
           </motion.dl>
         </div>
+
+        <motion.div
+          className="hidden justify-center lg:flex"
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <UnitCrest size="xl" priority />
+        </motion.div>
+        </div>
+
+        <motion.div
+          className="mt-10 flex justify-center lg:hidden"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <UnitCrest size="lg" priority />
+        </motion.div>
       </div>
 
       <motion.div
