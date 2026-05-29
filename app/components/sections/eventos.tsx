@@ -1,6 +1,7 @@
 import { SectionShell } from "../section-shell";
-import { TacticalCard } from "../tactical-card";
+import { EventCard } from "../events/event-card";
 import { IconCalendar, IconTarget, IconShield } from "../icons";
+import { WORKSHOP_26_SRC } from "../../lib/site-assets";
 
 const events = [
   {
@@ -19,10 +20,12 @@ const events = [
   },
   {
     title: "Workshop de Carros de Combate",
-    meta: "EDIÇÃO ANUAL",
+    meta: "EDIÇÃO ANUAL · WORKSHOP 2026",
     description:
       "Sessões técnicas e demonstrações sobre viaturas blindadas, manutenção e doutrina — para entusiastas e profissionais.",
     icon: <IconCalendar />,
+    href: "/#workshop-2026",
+    backgroundImage: WORKSHOP_26_SRC,
   },
   {
     title: "Marcha a Cavalo à Batalha",
@@ -64,22 +67,9 @@ export function EventosSection() {
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (
-          <TacticalCard key={event.title} {...event} />
+          <EventCard key={event.title} {...event} />
         ))}
       </div>
-
-      <p className="mt-10 border border-gold/15 bg-gold/5 px-6 py-4 text-center text-sm text-muted sm:text-base">
-        Todos os eventos decorrem em edição anual. Consulte datas e inscrições
-        através da{" "}
-        <a href="#comunidade" className="text-gold underline-offset-4 hover:underline">
-          Comunidade
-        </a>{" "}
-        ou do{" "}
-        <a href="#gesco" className="text-gold underline-offset-4 hover:underline">
-          GesCO
-        </a>
-        .
-      </p>
     </SectionShell>
   );
 }

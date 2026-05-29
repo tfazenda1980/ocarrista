@@ -1,0 +1,96 @@
+{
+  "slug": "workshop-2026",
+  "title": "Workshop de Carros de Combate",
+  "edition": "Workshop 2026",
+  "slogan": "Experiência, doutrina e inovação ao serviço do carrista moderno.",
+  "date": "2026-06-18T09:00:00+01:00",
+  "dateDisplay": "18 de Junho de 2026",
+  "location": "Quartel da Cavalaria · Santa Margarida",
+  "heroImage": "/images/workshop26.png",
+  "cardImage": "/images/workshop26.png",
+  "purpose": "Reunir carristas, especialistas e decisores num ambiente propício ao debate sobre a guerra moderna, quer pelo impacto da tecnologia nos Carros de Combate, quer pela necessária transformação do conhecimento em prática operacional.",
+  "objectives": [
+    "Analisar o impacto da guerra contemporânea nos Carros de Combate",
+    "Partilhar experiência de campo e lições aprendidas entre várias gerações de Carristas",
+    "Ligar a inovação tecnológica à doutrina, ao treino e à formação",
+    "Traduzir a evolução em ações práticas operacionais"
+  ],
+  "themes": [
+    {
+      "id": "guerra-atual",
+      "title": "A Guerra Atual",
+      "subtitle": "Impactos nos Carros de Combate",
+      "description": "Cenários operacionais, ameaças emergentes e implicações para a doutrina e o emprego de forças blindadas.",
+      "details": "Painéis sobre UAV, guerra electrónica, proteção balística, coordenação joint e lições de teatros recentes — com foco na decisão do comandante de carro e da unidade."
+    },
+    {
+      "id": "experiencia-pratica",
+      "title": "Experiência em Prática",
+      "subtitle": "Transformar conhecimento em ação",
+      "description": "Workshops técnicos, estudos de caso e dinâmicas de equipa para converter experiência em procedimentos e competências.",
+      "details": "Sessões interactivas sobre manutenção, tiro, táticas de secção e pelotão, simulação e cultura de segurança operacional."
+    }
+  ],
+  "panels": [
+    {
+      "name": "Painel I — Cenário e Doutrina",
+      "sessions": [
+        { "time": "09:30", "title": "Abertura institucional", "highlight": true },
+        { "time": "10:00", "title": "A guerra atual e o futuro dos sistemas blindados" },
+        { "time": "11:15", "title": "Doutrina e emprego do carro de combate em operações" }
+      ]
+    },
+    {
+      "name": "Painel II — Técnica e Experiência",
+      "sessions": [
+        { "time": "14:00", "title": "Manutenção e disponibilidade operacional", "highlight": true },
+        { "time": "15:00", "title": "Tiro, precisão e treino avançado" },
+        { "time": "16:00", "title": "Estudos de caso — lições do terreno" },
+        { "time": "17:15", "title": "Encerramento e rede de contactos" }
+      ]
+    }
+  ],
+  "speakers": [
+    {
+      "id": "orador-1",
+      "name": "Coronel (R) A. Silva",
+      "role": "Especialista em doutrina blindada",
+      "bio": "Mais de 30 anos de experiência no RC4 e consultoria em emprego de forças mecanizadas.",
+      "bioLong": "Participou em missões internacionais e no desenvolvimento de programas de formação para comandantes de carros de combate. Foco em cenários híbridos e coordenação multinacional."
+    },
+    {
+      "id": "orador-2",
+      "name": "Maj. Eng. R. Costa",
+      "role": "Sistemas e inovação",
+      "bio": "Engenheiro militar com percurso em integração de sistemas e modernização de plataformas.",
+      "bioLong": "Liga academia, indústria de defesa e operadores de carro. Aborda sensores, redes e manutenção preditiva em ambientes exigentes."
+    },
+    {
+      "id": "orador-3",
+      "name": "Cap. M. Ferreira",
+      "role": "Instrutor e carrista operacional",
+      "bio": "Instrutor de tiro e táticas com experiência em exercícios nacionais e internacionais.",
+      "bioLong": "Conduz workshops práticos sobre tiro, manobra e trabalho de guarnição — da preparação individual à coesão de pelotão."
+    }
+  ],
+  "gallery": [
+    { "src": "/images/workshop26.png", "alt": "Workshop 2026 — identidade visual", "type": "image" }
+  ],
+  "registration": {
+    "enabled": true,
+    "cta": "Solicitar inscrição",
+    "note": "Áreas reservadas a convidados e membros serão disponibilizadas após confirmação."
+  },
+  "seo": {
+    "title": "Workshop 2026 — Carros de Combate | O Carrista",
+    "description": "Workshop profissional de carros de combate no Quartel da Cavalaria. Doutrina, inovação e experiência operacional — Santa Margarida, 2026."
+  },
+  "contacts": {
+    "email": "workshop@ocarrista.cc",
+    "organizer": "O Carrista · QCav e Ex-RC4"
+  },
+  "legal": {
+    "privacy": "/privacidade",
+    "terms": "/termos"
+  }
+}

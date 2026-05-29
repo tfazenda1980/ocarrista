@@ -1,14 +1,12 @@
-# Brasão / imagem da unidade
+# Logo O Carrista
 
-Coloque aqui o brasão (ou imagem de referência do layout).
-
-**Caminho completo no projeto:**
-
-`ocarrista-site/public/images/brasao-rc4.png`
+**Ficheiro principal:** `ocarrista.png` (logo — figura do carrista)
 
 (Não coloque na raiz do projeto — a raiz não é servida pelo site.)
 
-- **Ficheiro:** `brasao-rc4.png`
+- **Logo (navbar):** `ocarrista.png`
+- **Brasão RC4:** `brasao-rc4.png` — secção História e marca d’água
+- **Workshop 2026:** `workshop26.png` — cartão de eventos e página do workshop
 - **Entrada (castelo):** `cc_castelo.png` — imagem grande e transparente no ecrã inicial
 - **Formato:** PNG com fundo transparente (recomendado) ou SVG
 - **Tamanho sugerido:** 800×800 px ou superior (quadrado)
@@ -24,8 +22,8 @@ Se o ficheiro ainda não existir, aparece o monograma **CC** como alternativa.
 
 ## Troquei a imagem e continua a antiga?
 
-1. Confirme que substituiu o ficheiro em `public/images/brasao-rc4.png` (mesmo nome).
-2. Em `app/lib/site-assets.ts`, aumente `BRASAO_VERSION` (ex.: `"2"` → `"3"`).
+1. Confirme que substituiu o ficheiro em `public/images/brasao-rc4.png` ou `ocarrista.png` (consoante o caso).
+2. Em `app/lib/site-assets.ts`, aumente `BRASAO_VERSION` ou `LOGO_VERSION`.
 3. Pare o servidor (`Ctrl+C`) e corra:
    ```bash
    rm -rf .next && npm run dev

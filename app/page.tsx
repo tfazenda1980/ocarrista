@@ -5,6 +5,7 @@ import { GritoSection } from "./components/grito-section";
 import { LemaSection } from "./components/lema-section";
 import { VideoPromoSection } from "./components/video-promo-section";
 import { EventosSection } from "./components/sections/eventos";
+import { WorkshopTeaserSection } from "./components/sections/workshop-teaser";
 import { HistoriaSection } from "./components/sections/historia";
 import { LojaSection } from "./components/sections/loja";
 import { ComunidadeSection } from "./components/sections/comunidade";
@@ -23,6 +24,7 @@ export default function Home() {
           <LemaSection />
           <VideoPromoSection />
           <EventosSection />
+          <WorkshopTeaserSection />
           <HistoriaSection />
           <LojaSection />
           <ComunidadeSection />
