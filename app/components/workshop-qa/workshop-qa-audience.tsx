@@ -90,7 +90,8 @@ export function WorkshopQaAudience({ year }: { year: string }) {
         Enviar pergunta
       </h1>
       <p className="mb-8 text-sm leading-relaxed text-muted">
-        Introduza a password que o moderador anunciar na sala. Não é necessário criar conta.
+        Introduza a password do workshop (o moderador indica na sala — por defeito{" "}
+        <span className="font-mono text-gold">1762</span>). Não é necessário criar conta.
       </p>
 
       <label className="mb-2 block font-mono text-[0.65rem] tracking-wider text-gold uppercase">
@@ -118,7 +119,7 @@ export function WorkshopQaAudience({ year }: { year: string }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password do público"
+            placeholder="Password (ex.: 1762)"
             autoComplete="off"
             className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
           />

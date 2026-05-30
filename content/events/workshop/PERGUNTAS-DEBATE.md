@@ -1,28 +1,31 @@
 # Perguntas ao debate — Workshop
 
-## URLs (edição 2026)
+## Passwords
 
-| Quem | URL |
-|------|-----|
-| Público | `/eventos/workshop/2026/perguntas` |
-| Moderador | `/eventos/workshop/2026/moderador` |
+Por defeito (sem configurar nada na Vercel):
 
-No programa, cada «Sessão de debate» tem o link **Enviar pergunta ao debate**.
+| Uso | Password |
+|-----|----------|
+| Público — enviar pergunta | **1762** |
+| Moderador — ver fila | **1762** |
 
-## Configuração na Vercel
+Para mudar: variáveis na Vercel → Settings → Environment Variables:
 
-1. Marketplace → **Upstash Redis** → ligar ao projeto (gera `UPSTASH_REDIS_REST_URL` e `UPSTASH_REDIS_REST_TOKEN`).
-2. Environment Variables:
-   - `WORKSHOP_QA_P1_PASSWORD` — ex.: palavra curta para o debate do Painel 1
-   - `WORKSHOP_QA_P2_PASSWORD` — para o Painel 2
-   - `WORKSHOP_QA_MOD_PASSWORD` — só para o moderador ver a fila
+- `WORKSHOP_QA_PASSWORD` — público
+- `WORKSHOP_QA_MOD_PASSWORD` — moderador (se omitir, usa a mesma do público)
 
-Em desenvolvimento local, sem Redis, as perguntas ficam em memória (reiniciam ao parar o servidor).
+## URLs (2026)
 
-## No dia do evento
+- Público: `/eventos/workshop/2026/perguntas`
+- Moderador: `/eventos/workshop/2026/moderador`
 
-1. Moderador diz a password do público para o debate em curso.
-2. Público abre o link (ou QR) e envia perguntas.
-3. Moderador abre `/moderador`, entra com a password de moderação, aprova as perguntas para ler no painel.
+## Redis (produção)
 
-Perguntas expiram ao fim de 48 h no Redis.
+Ligar **Upstash Redis** ao projeto Vercel para guardar perguntas entre visitantes.
+Sem Redis, em `npm run dev` funciona em memória local.
+
+## No dia
+
+1. Dizer ao público: «Password **1762**» (ou a que configurou).
+2. Link ou QR para `/perguntas`.
+3. Moderador abre `/moderador` com **1762** e aprova perguntas.
