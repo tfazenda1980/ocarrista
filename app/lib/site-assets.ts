@@ -3,7 +3,7 @@
  * Ao trocar ficheiros, aumente a versão correspondente.
  */
 export const LOGO_VERSION = "1";
-export const BRASAO_VERSION = "3";
+export const BRASAO_VERSION = "4";
 export const CASTELO_VERSION = "1";
 export const WORKSHOP_26_VERSION = "1";
 

@@ -26,7 +26,7 @@ type UnitCrestProps = {
   priority?: boolean;
   /** logo = ocarrista.png · brasao = brasao-rc4.png */
   asset?: "logo" | "brasao";
-  /** Sem moldura; fundo branco do brasão funde com o fundo escuro */
+  /** Sem moldura — imagem com cores originais */
   variant?: "framed" | "bare";
 };
 
@@ -77,9 +77,7 @@ export function UnitCrest({
         priority={priority}
         className={
           isBare
-            ? `relative z-10 h-full w-full object-contain object-center drop-shadow-[0_6px_36px_rgba(198,164,75,0.28)] ${
-                isBrasao ? "crest-bare-image crest-bare-image--brasao" : "crest-bare-image"
-              }`
+            ? "crest-bare-image relative z-10 h-full w-full object-contain object-center drop-shadow-[0_4px_28px_rgba(198,164,75,0.2)]"
             : "relative z-10 h-full w-full object-contain drop-shadow-[0_4px_24px_rgba(198,164,75,0.25)]"
         }
         onError={() => setFailed(true)}

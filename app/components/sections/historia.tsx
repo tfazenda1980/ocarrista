@@ -73,7 +73,7 @@ export function HistoriaSection() {
         description="A história do Regimento de Cavalaria 4 e de Santa Margarida — preservada para quem serviu, para as famílias e para as gerações futuras."
         alt
       >
-        <div className="historia-crest-wrap mb-10 flex justify-center">
+        <div className="mb-10 flex justify-center">
           <UnitCrest size="lg" asset="brasao" variant="bare" />
         </div>
       </SectionShell>

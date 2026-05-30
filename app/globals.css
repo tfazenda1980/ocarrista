@@ -314,25 +314,6 @@ body {
   box-shadow: none;
 }
 
-.crest-bare-image {
-  filter: contrast(1.06) saturate(1.02) drop-shadow(0 8px 32px rgba(0, 0, 0, 0.45));
-}
-
-.crest-bare-image--brasao {
-  mix-blend-mode: multiply;
-  filter: contrast(1.1) saturate(1.05);
-}
-
-/* História: fundo da secção funde com o branco/cinza do PNG do brasão */
-.historia-crest-wrap {
-  background-color: var(--background);
-  isolation: isolate;
-}
-
-.historia-crest-wrap .crest-bare {
-  background-color: var(--background);
-}
-
 .crest-bare::before {
   display: none;
 }
