@@ -14,6 +14,7 @@ import { EventGallery } from "./sections/event-gallery";
 import { EventRegistration } from "./sections/event-registration";
 import { EventFooter } from "./sections/event-footer";
 import { EditionPlaceholder } from "./sections/edition-placeholder";
+import { StickyBackLink } from "../sticky-back-link";
 
 type EventPageProps = {
   event: EventData;
@@ -44,6 +45,11 @@ export function EventPageView({
         {showEditionBar && (
           <EditionYearBar years={seriesYears} activeYear={activeYear} />
         )}
+        <StickyBackLink
+          href="/#eventos"
+          label="Agenda O Carrista"
+          variant={showEditionBar ? "workshop" : "default"}
+        />
         <main>
           <EventHero event={event} showRegistrationCta={published} />
           {published ? (

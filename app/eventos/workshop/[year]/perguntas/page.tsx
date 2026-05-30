@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { TacticalBackground } from "@/app/components/tactical-background";
+import { StickyBackLink } from "@/app/components/sticky-back-link";
 import { WorkshopQaAudience } from "@/app/components/workshop-qa/workshop-qa-audience";
 import {
   getWorkshopEdition,
@@ -33,6 +34,11 @@ export default async function WorkshopPerguntasPage({ params }: PageProps) {
     <>
       <TacticalBackground />
       <main className="relative z-10 min-h-[100dvh] px-4 py-24 sm:px-6">
+        <StickyBackLink
+          href={`/eventos/workshop/${year}`}
+          label="Workshop"
+          variant="default"
+        />
         <Suspense fallback={<p className="text-muted">A carregar…</p>}>
           <WorkshopQaAudience year={year} />
         </Suspense>

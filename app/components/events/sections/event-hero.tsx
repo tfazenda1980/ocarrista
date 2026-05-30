@@ -46,12 +46,6 @@ export function EventHero({ event, showRegistrationCta = true }: EventHeroProps)
         style={{ opacity }}
         className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-16 pt-8 sm:px-6 sm:pb-24 lg:pb-28"
       >
-        <Link
-          href="/#eventos"
-          className="section-label mb-8 inline-flex items-center gap-2 text-gold/80 transition-colors hover:text-gold"
-        >
-          ← Agenda O Carrista
-        </Link>
         <p className="font-mono mb-3 text-[0.7rem] tracking-[0.25em] text-gold uppercase">
           {event.edition}
         </p>

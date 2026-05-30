@@ -14,6 +14,17 @@ function getRedis(): Redis | null {
   return new Redis({ url, token });
 }
 
+/** Em produção (Vercel) é obrigatório; em local usa memória do servidor de dev. */
+export function hasPersistentStorage(): boolean {
+  return getRedis() !== null;
+}
+
+export function storageMode(): "redis" | "local" | "unavailable" {
+  if (getRedis()) return "redis";
+  if (process.env.VERCEL) return "unavailable";
+  return "local";
+}
+
 type DevGlobal = typeof globalThis & {
   __workshopQaStore?: Map<string, QaQuestion[]>;
   __workshopQaRate?: Map<string, number>;
@@ -57,6 +68,24 @@ export async function addQuestion(
     return;
   }
   devStore().set(key, list);
+}
+
+export async function deleteQuestion(
+  year: string,
+  room: QaRoomId,
+  id: string,
+): Promise<boolean> {
+  const list = await listQuestions(year, room);
+  const next = list.filter((q) => q.id !== id);
+  if (next.length === list.length) return false;
+  const key = storageKey(year, room);
+  const redis = getRedis();
+  if (redis) {
+    await redis.set(key, next, { ex: TTL_SECONDS });
+  } else {
+    devStore().set(key, next);
+  }
+  return true;
 }
 
 export async function updateQuestionStatus(

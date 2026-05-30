@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { QA_ROOMS, isQaRoomId, qaRoomLabel } from "@/app/lib/workshop-qa/rooms";
-import type { QaRoomId } from "@/app/lib/workshop-qa/types";
+import type { QaQuestion, QaRoomId } from "@/app/lib/workshop-qa/types";
 
 const STORAGE_PREFIX = "workshop-qa-auth:";
 
@@ -22,8 +21,13 @@ export function WorkshopQaAudience({ year }: { year: string }) {
   const [unlocked, setUnlocked] = useState(false);
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "sending" | "ok" | "error">(
+    "idle",
+  );
   const [message, setMessage] = useState("");
+  const [questions, setQuestions] = useState<QaQuestion[]>([]);
+  const [storage, setStorage] = useState<"redis" | "local" | "unavailable" | null>(null);
+  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
     const saved = sessionStorage.getItem(storageKey(year, room));
@@ -32,8 +36,45 @@ export function WorkshopQaAudience({ year }: { year: string }) {
       setUnlocked(true);
     } else {
       setUnlocked(false);
+      setQuestions([]);
     }
   }, [year, room]);
+
+  const loadQuestions = useCallback(async () => {
+    const pwd = sessionStorage.getItem(storageKey(year, room));
+    if (!pwd) return;
+    try {
+      const res = await fetch(`/api/workshop/${year}/qa?room=${room}`, {
+        headers: { "x-workshop-qa": pwd },
+      });
+      const data = (await res.json()) as {
+        questions?: QaQuestion[];
+        error?: string;
+        storage?: "redis" | "local" | "unavailable";
+      };
+      if (res.status === 401) {
+        sessionStorage.removeItem(storageKey(year, room));
+        setUnlocked(false);
+        return;
+      }
+      if (!res.ok) {
+        setLoadError(data.error ?? "Erro ao carregar perguntas.");
+        return;
+      }
+      setStorage(data.storage ?? null);
+      setQuestions(data.questions ?? []);
+      setLoadError("");
+    } catch {
+      setLoadError("Erro de ligação ao atualizar a lista.");
+    }
+  }, [room, year]);
+
+  useEffect(() => {
+    if (!unlocked) return;
+    loadQuestions();
+    const id = window.setInterval(loadQuestions, 4000);
+    return () => window.clearInterval(id);
+  }, [unlocked, loadQuestions]);
 
   const unlock = useCallback(() => {
     if (!password.trim()) return;
@@ -44,7 +85,7 @@ export function WorkshopQaAudience({ year }: { year: string }) {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("sending");
+    setSubmitStatus("sending");
     setMessage("");
     try {
       const res = await fetch(`/api/workshop/${year}/qa`, {
@@ -63,35 +104,30 @@ export function WorkshopQaAudience({ year }: { year: string }) {
           sessionStorage.removeItem(storageKey(year, room));
           setUnlocked(false);
         }
-        setStatus("error");
+        setSubmitStatus("error");
         setMessage(data.error ?? "Não foi possível enviar.");
         return;
       }
-      setStatus("ok");
+      setSubmitStatus("ok");
       setText("");
-      setMessage("Pergunta enviada. O moderador poderá selecioná-la para o debate.");
+      setMessage("Pergunta enviada.");
+      loadQuestions();
     } catch {
-      setStatus("error");
+      setSubmitStatus("error");
       setMessage("Erro de ligação. Verifique a rede.");
     }
   };
 
   return (
     <div className="mx-auto max-w-lg">
-      <Link
-        href={`/eventos/workshop/${year}`}
-        className="mb-8 inline-block font-mono text-xs tracking-wider text-muted hover:text-gold"
-      >
-        ← Voltar ao Workshop
-      </Link>
-
-      <p className="section-label mb-2">Perguntas ao debate</p>
+      <p className="section-label mb-2 pt-12 sm:pt-0">Perguntas ao debate</p>
       <h1 className="font-display mb-4 text-2xl font-semibold tracking-wide uppercase sm:text-3xl">
-        Enviar pergunta
+        Ler e enviar perguntas
       </h1>
       <p className="mb-8 text-sm leading-relaxed text-muted">
-        Introduza a password do workshop (o moderador indica na sala — por defeito{" "}
-        <span className="font-mono text-gold">1762</span>). Não é necessário criar conta.
+        Todos usam a mesma password do workshop (por defeito{" "}
+        <span className="font-mono text-gold">1762</span>) — pode ler as perguntas dos
+        outros e enviar a sua. Sem contas nem perfis diferentes.
       </p>
 
       <label className="mb-2 block font-mono text-[0.65rem] tracking-wider text-gold uppercase">
@@ -128,41 +164,85 @@ export function WorkshopQaAudience({ year }: { year: string }) {
           </button>
         </div>
       ) : (
-        <form onSubmit={submit} className="card-tactical space-y-4 p-6 sm:p-8">
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            placeholder="Nome ou iniciais (opcional)"
-            maxLength={40}
-            className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
-          />
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="A sua pergunta"
-            required
-            minLength={8}
-            maxLength={300}
-            rows={4}
-            className="w-full resize-none border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="btn-primary w-full disabled:opacity-60"
-          >
-            {status === "sending" ? "A enviar…" : "Enviar pergunta"}
-          </button>
-          {message && (
-            <p
-              className={`text-sm ${status === "ok" ? "text-gold" : "text-muted"}`}
-              role="status"
-            >
-              {message}
+        <>
+          {storage === "unavailable" && (
+            <p className="mb-6 border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200/90">
+              As perguntas não ficam guardadas sem Redis na Vercel. Ligue Upstash Redis ao
+              projeto e faça redeploy.
             </p>
           )}
-        </form>
+
+          <div className="mb-8">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h2 className="font-display text-sm tracking-[0.12em] text-gold uppercase">
+                Perguntas ({questions.length})
+              </h2>
+              <button
+                type="button"
+                onClick={loadQuestions}
+                className="font-mono text-[0.65rem] text-muted hover:text-gold"
+              >
+                Atualizar
+              </button>
+            </div>
+
+            {loadError && <p className="mb-4 text-sm text-muted">{loadError}</p>}
+
+            <ul className="space-y-3">
+              {questions.map((q) => (
+                <li key={q.id} className="border border-gold/20 bg-surface/60 px-4 py-3">
+                  <p className="font-display text-xs tracking-wider text-gold uppercase">
+                    {q.author}
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-foreground">{q.text}</p>
+                </li>
+              ))}
+            </ul>
+
+            {questions.length === 0 && !loadError && (
+              <p className="text-sm text-muted">Ainda não há perguntas neste debate.</p>
+            )}
+          </div>
+
+          <form onSubmit={submit} className="card-tactical space-y-4 p-6 sm:p-8">
+            <h2 className="font-display text-sm tracking-[0.12em] text-gold uppercase">
+              Nova pergunta
+            </h2>
+            <input
+              type="text"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              placeholder="Nome ou iniciais (opcional)"
+              maxLength={40}
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
+            />
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="A sua pergunta"
+              required
+              minLength={8}
+              maxLength={300}
+              rows={4}
+              className="w-full resize-none border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={submitStatus === "sending"}
+              className="btn-primary w-full disabled:opacity-60"
+            >
+              {submitStatus === "sending" ? "A enviar…" : "Enviar pergunta"}
+            </button>
+            {message && (
+              <p
+                className={`text-sm ${submitStatus === "ok" ? "text-gold" : "text-muted"}`}
+                role="status"
+              >
+                {message}
+              </p>
+            )}
+          </form>
+        </>
       )}
     </div>
   );

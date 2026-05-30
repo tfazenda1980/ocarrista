@@ -1,11 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { checkAudiencePassword, checkModPassword, qaConfigured } from "@/app/lib/workshop-qa/auth";
+import { checkWorkshopQaPassword, qaConfigured } from "@/app/lib/workshop-qa/auth";
 import { isQaRoomId } from "@/app/lib/workshop-qa/rooms";
 import {
   addQuestion,
   countRecentByIp,
   incrementRate,
   listQuestions,
+  storageMode,
 } from "@/app/lib/workshop-qa/store";
 import type { QaQuestion } from "@/app/lib/workshop-qa/types";
 
@@ -21,23 +22,32 @@ function clientIp(request: Request): string {
   );
 }
 
+function readPassword(request: NextRequest): string {
+  return (
+    request.headers.get("x-workshop-qa") ??
+    request.nextUrl.searchParams.get("password") ??
+    ""
+  );
+}
+
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ year: string }> },
 ) {
   const { year } = await context.params;
   const room = request.nextUrl.searchParams.get("room") ?? "";
-  const modPassword = request.headers.get("x-workshop-qa-mod") ?? "";
+  const password = readPassword(request);
 
   if (!isQaRoomId(room)) {
     return NextResponse.json({ error: "Sala inválida." }, { status: 400 });
   }
-  if (!checkModPassword(modPassword)) {
-    return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
+  if (!checkWorkshopQaPassword(room, password)) {
+    return NextResponse.json({ error: "Password incorreta." }, { status: 401 });
   }
 
   const questions = await listQuestions(year, room);
-  return NextResponse.json({ questions });
+  const sorted = [...questions].sort((a, b) => a.createdAt - b.createdAt);
+  return NextResponse.json({ questions: sorted, storage: storageMode() });
 }
 
 export async function POST(
@@ -48,7 +58,7 @@ export async function POST(
 
   if (!qaConfigured()) {
     return NextResponse.json(
-      { error: "Perguntas indisponíveis (configuração em falta)." },
+      { error: "Perguntas indisponíveis." },
       { status: 503 },
     );
   }
@@ -73,7 +83,7 @@ export async function POST(
   }
 
   const password = String(data.password ?? "");
-  if (!checkAudiencePassword(room, password)) {
+  if (!checkWorkshopQaPassword(room, password)) {
     return NextResponse.json({ error: "Password incorreta." }, { status: 401 });
   }
 
@@ -105,8 +115,19 @@ export async function POST(
     createdAt: Date.now(),
   };
 
+  const mode = storageMode();
+  if (mode === "unavailable") {
+    return NextResponse.json(
+      {
+        error:
+          "Armazenamento indisponível. Ligue Upstash Redis na Vercel e faça redeploy.",
+      },
+      { status: 503 },
+    );
+  }
+
   await addQuestion(year, question);
   await incrementRate(year, room, ip);
 
-  return NextResponse.json({ ok: true, id: question.id });
+  return NextResponse.json({ ok: true, id: question.id, storage: mode });
 }

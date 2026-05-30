@@ -111,7 +111,7 @@ export function EventProgramItem({
               href={`/eventos/workshop/${eventYear}/perguntas?sala=${session.qaRoom}`}
               className="event-program-qa-link mt-4 inline-flex font-display text-[0.65rem] tracking-[0.14em] text-gold uppercase hover:underline"
             >
-              Enviar pergunta ao debate →
+              Perguntas ao debate (ler e enviar) →
             </a>
           )}
           {session.highlight && kind === "session" && (

@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { SectionShell } from "../section-shell";
 import { IconUsers, IconShop } from "../icons";
+import { ComunidadeJoinForm } from "../comunidade/comunidade-join-form";
 
 const benefits = [
   "Acesso à Loja do Carrista — prendas e artigos exclusivos",
@@ -89,9 +91,9 @@ export function ComunidadeSection() {
                 </p>
               </div>
             </div>
-            <a href="#loja" className="btn-outline shrink-0 text-center">
-              Ir à Loja
-            </a>
+            <Link href="/entrar" className="btn-outline shrink-0 text-center">
+              Entrar
+            </Link>
           </div>
 
           <blockquote className="border-l-2 border-gold/50 pl-6">
