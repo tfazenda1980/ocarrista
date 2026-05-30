@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MotionReveal } from "../../motion-reveal";
 import type { EventData, EventSpeaker } from "../../../lib/events/types";
+import { speakerHashId } from "../../../lib/events/speaker-links";
 
 function SpeakerInitials({ name }: { name: string }) {
   const parts = name.split(" ").filter(Boolean);
@@ -42,9 +43,13 @@ export function EventSpeakers({
           {event.speakers.map((speaker, i) => (
             <MotionReveal key={speaker.id} delay={i * 0.07}>
               <button
+                id={speakerHashId(speaker)}
                 type="button"
-                onClick={() => setSelected(speaker)}
-                className="event-speaker-card group w-full text-left"
+                onClick={() => {
+                  window.location.hash = speakerHashId(speaker);
+                  setSelected(speaker);
+                }}
+                className="event-speaker-card group w-full scroll-mt-28 text-left"
               >
                 <div className="mb-4 flex aspect-[4/5] max-h-48 items-center justify-center border border-gold/20 bg-gradient-to-b from-gold/10 to-transparent transition-colors group-hover:border-gold/45">
                   <SpeakerInitials name={speaker.name} />

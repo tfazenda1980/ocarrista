@@ -32,6 +32,7 @@ export function EventProgram({ event }: { event: EventData }) {
                     <EventProgramItem
                       key={`${session.time}-${session.title}`}
                       session={session}
+                      speakers={event.speakers}
                     />
                   ))}
                 </ol>

@@ -99,18 +99,8 @@
           "duration": "25'",
           "title": "Sessão de debate",
           "description": "Conclusões do Painel 1.",
-          "kind": "session"
-        }
-      ]
-    },
-    {
-      "name": "",
-      "sessions": [
-        {
-          "time": "12:30",
-          "endTime": "14:00",
-          "title": "Almoço",
-          "kind": "meal"
+          "kind": "session",
+          "qaRoom": "debate-painel-1"
         }
       ]
     },
@@ -166,7 +156,8 @@
           "duration": "25'",
           "title": "Sessão de debate",
           "description": "Conclusões do Painel 2.",
-          "kind": "session"
+          "kind": "session",
+          "qaRoom": "debate-painel-2"
         }
       ]
     },

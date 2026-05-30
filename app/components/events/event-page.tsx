@@ -52,9 +52,11 @@ export function EventPageView({
               {useAxesLayout ? (
                 <EventAxesSection event={event} />
               ) : (
-                <EventProgram event={event} />
+                <>
+                  <EventProgram event={event} />
+                  <EventSpotlight event={event} />
+                </>
               )}
-              <EventSpotlight event={event} />
               <EventSpeakers event={event} hideModerators={useAxesLayout} />
               <EventGallery event={event} />
               <EventRegistration event={event} />

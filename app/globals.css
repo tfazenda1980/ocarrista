@@ -377,6 +377,16 @@ body {
   right: 0;
 }
 
+/* Brasão História — mesmas dimensões do vídeo (bleed + 4:3 + max 85vh) */
+.historia-crest-shell {
+  background: var(--background);
+}
+
+.historia-crest-shell img {
+  object-fit: contain;
+  object-position: center;
+}
+
 /* PDF história — scroll horizontal página a página */
 .pdf-horizontal-wrap {
   width: 100vw;
@@ -671,29 +681,27 @@ body {
   background: rgba(198, 164, 75, 0.04);
 }
 
-/* Workshop — dois eixos */
-.event-axes-grid {
-  align-items: stretch;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.event-axis-column {
-  padding: 0 0 1.5rem;
-}
-
-.event-axis-column .event-program-list {
-  margin-top: 0.25rem;
+/* Workshop — programa cronológico por eixo */
+.event-axis-track {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 1024px) {
-  .event-axis-column:first-child {
-    padding-right: 2.5rem;
+  .event-axis-track {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
   }
+}
 
-  .event-axis-column:last-child {
-    padding-left: 2.5rem;
-  }
+.event-axis-track .event-program-list {
+  margin-top: 0.25rem;
+}
+
+.event-program-midday-note a {
+  text-underline-offset: 3px;
 }
 
 .event-axis-header {

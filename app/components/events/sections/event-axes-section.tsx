@@ -4,6 +4,7 @@ import { MotionReveal } from "../../motion-reveal";
 import { IconShield, IconTarget } from "../../icons";
 import type { EventData, EventPanel, EventTheme } from "../../../lib/events/types";
 import { EventProgramItem } from "./event-program-item";
+import { EventSpotlight } from "./event-spotlight";
 
 const axisIcons = [<IconShield key="s" />, <IconTarget key="t" />];
 
@@ -27,25 +28,29 @@ function TransversalBlock({ panel }: { panel: EventPanel }) {
   );
 }
 
-function AxisColumn({
+function AxisTrack({
   theme,
   panel,
   moderator,
   index,
+  speakers,
+  eventYear,
 }: {
   theme: EventTheme;
   panel: EventPanel | undefined;
   moderator?: { name: string };
   index: number;
+  speakers: EventData["speakers"];
+  eventYear: string;
 }) {
   return (
-    <div className="event-axis-column">
+    <div className="event-axis-track">
       <div className="event-axis-header">
         <div className="mb-4 flex h-12 w-12 items-center justify-center border border-gold/35 text-gold">
           {axisIcons[index % axisIcons.length]}
         </div>
         <p className="font-mono mb-2 text-[0.65rem] tracking-[0.2em] text-gold uppercase">
-          Eixo {index + 1}
+          Eixo {index + 1} · {index === 0 ? "Manhã" : "Tarde"}
         </p>
         <p className="font-display mb-2 text-sm tracking-[0.1em] text-gold/90 uppercase">
           {theme.subtitle}
@@ -66,7 +71,7 @@ function AxisColumn({
 
       {panel && (
         <div className="mt-8">
-          <ol className="event-program-list">
+          <ol className="event-program-list mx-auto lg:mx-0">
             {panel.sessions.map((session) => {
               const sessionOnly = panel.sessions.filter(
                 (s) => (s.kind ?? "session") === "session",
@@ -84,6 +89,8 @@ function AxisColumn({
                   key={`${session.time}-${session.title}`}
                   session={session}
                   sessionLabel={label}
+                  speakers={speakers}
+                  eventYear={eventYear}
                 />
               );
             })}
@@ -97,9 +104,20 @@ function AxisColumn({
 export function EventAxesSection({ event }: { event: EventData }) {
   const transversal = event.panels.filter((p) => !p.axisId);
   const opening = transversal[0];
-  const midday = transversal.find((p) => p.sessions.some((s) => s.kind === "meal"));
   const closing = transversal.find((p) =>
     p.sessions.some((s) => s.title === "Considerações finais"),
+  );
+
+  const themes = event.themes;
+  const morningTheme = themes[0];
+  const afternoonTheme = themes[1];
+  const morningPanel = event.panels.find((p) => p.axisId === morningTheme?.id);
+  const afternoonPanel = event.panels.find((p) => p.axisId === afternoonTheme?.id);
+  const morningModerator = event.moderators?.find(
+    (m) => m.axisId === morningTheme?.id,
+  );
+  const afternoonModerator = event.moderators?.find(
+    (m) => m.axisId === afternoonTheme?.id,
   );
 
   return (
@@ -111,8 +129,8 @@ export function EventAxesSection({ event }: { event: EventData }) {
             Dois eixos, um dia
           </h2>
           <p className="mb-6 max-w-3xl text-muted">
-            A manhã centra-se nas lições da guerra atual; a tarde transforma conhecimento em
-            mudança operacional — com abertura, intervalos e encerramento.
+            Programa em ordem cronológica: Painel 1 de manhã, destaque Challenger ao
+            meio-dia, Painel 2 à tarde — mais abertura e encerramento.
           </p>
           <div className="gold-line mb-14 w-24" />
         </MotionReveal>
@@ -123,36 +141,49 @@ export function EventAxesSection({ event }: { event: EventData }) {
           </MotionReveal>
         )}
 
-        <div className="event-axes-grid relative grid gap-10 lg:grid-cols-2 lg:gap-0">
-          <div
-            className="event-axes-divider pointer-events-none absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-gold/35 to-transparent lg:block"
-            aria-hidden
-          />
+        {morningTheme && (
+          <MotionReveal className="mb-14">
+            <AxisTrack
+              theme={morningTheme}
+              panel={morningPanel}
+              moderator={morningModerator}
+              index={0}
+              speakers={event.speakers}
+              eventYear={event.year}
+            />
+          </MotionReveal>
+        )}
 
-          {event.themes.map((theme, i) => {
-            const panel = event.panels.find((p) => p.axisId === theme.id);
-            const moderator = event.moderators?.find((m) => m.axisId === theme.id);
-            return (
-              <MotionReveal key={theme.id} delay={i * 0.1}>
-                <AxisColumn
-                  theme={theme}
-                  panel={panel}
-                  moderator={moderator}
-                  index={i}
-                />
-              </MotionReveal>
-            );
-          })}
-        </div>
+        {event.spotlight && (
+          <>
+            <p className="event-program-midday-note mx-auto mb-8 max-w-lg px-4 text-center text-sm leading-relaxed text-muted sm:mb-10">
+              Entre o Painel 1 (manhã) e o Painel 2 (tarde). O destaque{" "}
+              <a href="#destaque" className="text-gold hover:underline">
+                Challenger — Pista Final
+              </a>{" "}
+              decorre das 12:00 às 12:30, antes do almoço.
+            </p>
+            <MotionReveal className="mb-14">
+              <EventSpotlight event={event} embedded />
+            </MotionReveal>
+          </>
+        )}
 
-        {midday && (
-          <MotionReveal className="mt-14">
-            <TransversalBlock panel={midday} />
+        {afternoonTheme && (
+          <MotionReveal className="mb-14">
+            <AxisTrack
+              theme={afternoonTheme}
+              panel={afternoonPanel}
+              moderator={afternoonModerator}
+              index={1}
+              speakers={event.speakers}
+              eventYear={event.year}
+            />
           </MotionReveal>
         )}
 
         {closing && (
-          <MotionReveal className="mt-14">
+          <MotionReveal>
             <TransversalBlock panel={closing} />
           </MotionReveal>
         )}

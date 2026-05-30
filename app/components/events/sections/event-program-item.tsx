@@ -1,4 +1,5 @@
-import type { EventSession, EventSessionKind } from "../../../lib/events/types";
+import type { EventSession, EventSessionKind, EventSpeaker } from "../../../lib/events/types";
+import { EventProgramSpeakers } from "./event-program-speakers";
 
 export function timeLabel(session: EventSession): string {
   if (session.endTime) return `${session.time} – ${session.endTime}`;
@@ -24,9 +25,16 @@ type EventProgramItemProps = {
   session: EventSession;
   /** A, B, C… só em sessões do painel */
   sessionLabel?: string;
+  speakers?: EventSpeaker[];
+  eventYear?: string;
 };
 
-export function EventProgramItem({ session, sessionLabel }: EventProgramItemProps) {
+export function EventProgramItem({
+  session,
+  sessionLabel,
+  speakers = [],
+  eventYear,
+}: EventProgramItemProps) {
   const kind = session.kind ?? "session";
   const isInterval = kind === "break" || kind === "meal";
   const isSection = kind === "section";
@@ -86,15 +94,25 @@ export function EventProgramItem({ session, sessionLabel }: EventProgramItemProp
           >
             {session.title}
           </h4>
-          {session.speaker && (
+          {session.speaker && speakers.length > 0 ? (
+            <EventProgramSpeakers speakerField={session.speaker} speakers={speakers} />
+          ) : session.speaker ? (
             <p className="event-program-speaker font-display text-sm leading-relaxed tracking-wide text-gold uppercase">
               {session.speaker}
             </p>
-          )}
+          ) : null}
           {session.description && (
             <p className="event-program-desc text-sm leading-relaxed text-muted">
               {session.description}
             </p>
+          )}
+          {session.qaRoom && eventYear && (
+            <a
+              href={`/eventos/workshop/${eventYear}/perguntas?sala=${session.qaRoom}`}
+              className="event-program-qa-link mt-4 inline-flex font-display text-[0.65rem] tracking-[0.14em] text-gold uppercase hover:underline"
+            >
+              Enviar pergunta ao debate →
+            </a>
           )}
           {session.highlight && kind === "session" && (
             <span className="mt-4 inline-block border border-gold/30 bg-gold/10 px-2 py-0.5 font-mono text-[0.55rem] tracking-wider text-gold uppercase">

@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
+import Image from "next/image";
 import { SectionShell } from "../section-shell";
-import { UnitCrest } from "../unit-crest";
 import { PdfHorizontalViewer } from "../pdf-horizontal-viewer";
-import { HISTORIA_SLIDESHOW_PDF } from "../../lib/site-assets";
+import { BRASAO_ALT, BRASAO_SRC, HISTORIA_SLIDESHOW_PDF } from "../../lib/site-assets";
 import {
   DEFAULT_MARCOS,
   loadMarcosFromJson,
@@ -73,10 +73,23 @@ export function HistoriaSection() {
         description="A história do Regimento de Cavalaria 4 e de Santa Margarida — preservada para quem serviu, para as famílias e para as gerações futuras."
         alt
       >
-        <div className="mb-10 flex justify-center">
-          <UnitCrest size="lg" asset="brasao" variant="bare" />
-        </div>
+        {null}
       </SectionShell>
+
+      <div className="video-bleed -mt-4 sm:-mt-6">
+        <div className="video-frame mx-auto flex justify-center">
+          <div className="video-player-shell historia-crest-shell flex items-center justify-center">
+            <Image
+              src={BRASAO_SRC}
+              alt={BRASAO_ALT}
+              width={1536}
+              height={1024}
+              className="h-full w-full object-contain object-center"
+              priority
+            />
+          </div>
+        </div>
+      </div>
 
       <PdfHorizontalViewer pdfUrl={HISTORIA_SLIDESHOW_PDF} active={inView} />
 

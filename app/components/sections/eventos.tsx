@@ -12,7 +12,7 @@ const events = [
     icon: <IconShield />,
   },
   {
-    title: "Prova Equestre Militar",
+    title: "Concurso Completo Combinado de Equitação",
     meta: "EDIÇÃO ANUAL · ENSINO · CROSS · OBSTÁCULOS",
     description:
       "Prova equestre militar composta por três fases: Ensino, Cross e Obstáculos — rigor técnico, tradição e espírito de corpo dos carristas.",

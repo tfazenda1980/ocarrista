@@ -22,6 +22,8 @@ export type EventSession = {
   speaker?: string;
   highlight?: boolean;
   kind?: EventSessionKind;
+  /** Sala de perguntas ao debate (`debate-painel-1` | `debate-painel-2`) */
+  qaRoom?: "debate-painel-1" | "debate-painel-2";
 };
 
 export type EventPanel = {

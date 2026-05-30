@@ -4,16 +4,27 @@ import { MotionReveal } from "../../motion-reveal";
 import type { EventData } from "../../../lib/events/types";
 import { timeLabel } from "./event-program-item";
 
-export function EventSpotlight({ event }: { event: EventData }) {
+export function EventSpotlight({
+  event,
+  embedded = false,
+}: {
+  event: EventData;
+  /** Dentro do bloco «eixos» — entre Painel 1 e Painel 2 */
+  embedded?: boolean;
+}) {
   const item = event.spotlight;
   if (!item) return null;
 
   return (
     <section
       id="destaque"
-      className="event-section scroll-mt-24 border-y border-gold/20 bg-gradient-to-r from-gold/10 via-surface/60 to-gold/5 py-14 sm:py-16"
+      className={
+        embedded
+          ? "scroll-mt-24 rounded border border-gold/25 bg-gradient-to-r from-gold/10 via-surface/60 to-gold/5 px-4 py-8 sm:px-6 sm:py-10"
+          : "event-section scroll-mt-24 border-y border-gold/20 bg-gradient-to-r from-gold/10 via-surface/60 to-gold/5 py-14 sm:py-16"
+      }
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className={embedded ? undefined : "mx-auto max-w-6xl px-4 sm:px-6"}>
         <MotionReveal>
           <p className="section-label mb-3">Destaque do dia</p>
           <div className="event-spotlight-banner">
