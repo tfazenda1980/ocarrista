@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { BRASAO_ALT, BRASAO_SRC } from "../lib/site-assets";
+import {
+  BRASAO_ALT,
+  BRASAO_SRC,
+  LOGO_ALT,
+  LOGO_SRC,
+} from "../lib/site-assets";
 
 const sizeMap = {
   sm: { boxW: 36, boxH: 36, imgW: 28, imgH: 28 },
@@ -19,7 +24,9 @@ type UnitCrestProps = {
   /** Mostra "CC" se a imagem ainda não existir em public/ */
   fallbackMonogram?: string;
   priority?: boolean;
-  /** Sem moldura; fundo branco do PNG funde com o fundo escuro */
+  /** logo = ocarrista.png · brasao = brasao-rc4.png */
+  asset?: "logo" | "brasao";
+  /** Sem moldura; fundo branco do brasão funde com o fundo escuro */
   variant?: "framed" | "bare";
 };
 
@@ -28,6 +35,7 @@ export function UnitCrest({
   className = "",
   fallbackMonogram = "CC",
   priority = false,
+  asset = "logo",
   variant = "framed",
 }: UnitCrestProps) {
   const [failed, setFailed] = useState(false);
@@ -48,6 +56,9 @@ export function UnitCrest({
   }
 
   const isBare = variant === "bare";
+  const isBrasao = asset === "brasao";
+  const src = isBrasao ? BRASAO_SRC : LOGO_SRC;
+  const alt = isBrasao ? BRASAO_ALT : LOGO_ALT;
 
   return (
     <span
@@ -59,14 +70,16 @@ export function UnitCrest({
       style={{ width: boxW, height: boxH }}
     >
       <Image
-        src={BRASAO_SRC}
-        alt={BRASAO_ALT}
+        src={src}
+        alt={alt}
         width={imgW}
         height={imgH}
         priority={priority}
         className={
           isBare
-            ? "crest-bare-image relative z-10 h-full w-full object-contain object-center drop-shadow-[0_6px_36px_rgba(198,164,75,0.28)]"
+            ? `relative z-10 h-full w-full object-contain object-center drop-shadow-[0_6px_36px_rgba(198,164,75,0.28)] ${
+                isBrasao ? "crest-bare-image crest-bare-image--brasao" : "crest-bare-image"
+              }`
             : "relative z-10 h-full w-full object-contain drop-shadow-[0_4px_24px_rgba(198,164,75,0.25)]"
         }
         onError={() => setFailed(true)}

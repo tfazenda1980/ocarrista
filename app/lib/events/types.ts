@@ -6,15 +6,28 @@ export type EventTheme = {
   details: string;
 };
 
+export type EventSessionKind =
+  | "session"
+  | "section"
+  | "break"
+  | "meal"
+  | "activity";
+
 export type EventSession = {
   time: string;
+  endTime?: string;
+  duration?: string;
   title: string;
+  description?: string;
   speaker?: string;
   highlight?: boolean;
+  kind?: EventSessionKind;
 };
 
 export type EventPanel = {
   name: string;
+  /** Liga o painel a um eixo (theme.id). Sem axisId = bloco transversal. */
+  axisId?: string;
   sessions: EventSession[];
 };
 
@@ -25,6 +38,14 @@ export type EventSpeaker = {
   bio: string;
   bioLong?: string;
   image?: string;
+  /** Eixo do painel em que participa */
+  axisId?: string;
+};
+
+export type EventModerator = {
+  id: string;
+  name: string;
+  axisId?: string;
 };
 
 export type EventGalleryItem = {
@@ -33,21 +54,34 @@ export type EventGalleryItem = {
   type: "image" | "video";
 };
 
-export type EventData = {
+export type WorkshopSeries = {
   slug: string;
+  title: string;
+  defaultYear: string;
+  years: string[];
+};
+
+export type EventData = {
+  year: string;
+  slug: string;
+  published?: boolean;
+  placeholderMessage?: string;
   title: string;
   edition: string;
   slogan: string;
   date: string;
   dateDisplay: string;
   location: string;
-  heroImage: string;
-  cardImage: string;
+  heroImage?: string;
+  cardImage?: string;
   purpose: string;
   objectives: string[];
   themes: EventTheme[];
   panels: EventPanel[];
   speakers: EventSpeaker[];
+  moderators?: EventModerator[];
+  /** Destaque fora da agenda (ex.: Challenger — Pista Final) */
+  spotlight?: EventSession;
   gallery: EventGalleryItem[];
   registration: {
     enabled: boolean;
@@ -64,8 +98,7 @@ export type EventData = {
     phone?: string;
   };
   legal?: {
-    privacy: string;
-    terms: string;
+    terms?: string;
   };
 };
 

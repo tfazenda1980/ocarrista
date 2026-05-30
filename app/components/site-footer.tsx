@@ -12,8 +12,12 @@ export function SiteFooter() {
             <p className="mt-1 font-display text-xs tracking-[0.2em] text-gold uppercase">
               De Santa Margarida
             </p>
-            <p className="mt-2 max-w-xs text-sm text-muted">
-              Comunidade do QCav e Ex-RC4. Eventos, história, loja e GesCO.
+            <p className="mt-2 max-w-sm text-sm text-muted">
+              Comunidade do QCav e Ex-RC4 — eventos, história e Loja do Carrista.
+            </p>
+            <p className="mt-2 max-w-sm text-xs text-muted/80">
+              GesCO: plataforma interna de Gestão de Competências Operacionais
+              (acesso restrito).
             </p>
           </div>
 
@@ -23,7 +27,6 @@ export function SiteFooter() {
               { href: "#historia", label: "História" },
               { href: "#loja", label: "Loja" },
               { href: "#comunidade", label: "Comunidade" },
-              { href: "#gesco", label: "GesCO" },
             ].map((link) => (
               <a
                 key={link.href}
@@ -33,6 +36,12 @@ export function SiteFooter() {
                 {link.label}
               </a>
             ))}
+            <a
+              href="#gesco"
+              className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
+            >
+              GesCO
+            </a>
           </nav>
         </div>
 

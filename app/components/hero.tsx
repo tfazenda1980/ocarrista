@@ -112,7 +112,7 @@ export function Hero() {
             {[
               { value: "7", label: "Eventos Anuais" },
               { value: "RC4", label: "Regimento de Cavalaria 4" },
-              { value: "GesCO", label: "Gestão Integrada" },
+              { value: "GesCO", label: "Competências Operacionais" },
             ].map((stat) => (
               <div key={stat.label}>
                 <dt className="font-display text-2xl font-semibold text-gold sm:text-3xl">

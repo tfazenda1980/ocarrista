@@ -1,9 +1,7 @@
 import type { EventData } from "./types";
-import workshop2026 from "../../../content/events/workshop-2026.json";
 
-const registry: Record<string, EventData> = {
-  "workshop-2026": workshop2026 as EventData,
-};
+/** Eventos avulsos (não-Workshop) — registar aqui quando existirem */
+const registry: Record<string, EventData> = {};
 
 export function getEventBySlug(slug: string): EventData | null {
   return registry[slug] ?? null;

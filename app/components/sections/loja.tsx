@@ -30,7 +30,7 @@ export function LojaSection() {
           <a href="#comunidade" className="text-gold hover:underline">
             Comunidade
           </a>{" "}
-          para comprar na loja.
+          para entrar como membro e comprar na loja.
         </p>
       </div>
 
@@ -70,13 +70,13 @@ export function LojaSection() {
               Loja online para membros
             </p>
             <p className="mt-1 max-w-lg text-muted">
-              Após adesão, aceda ao catálogo completo, encomendas e entregas
-              através da área de membro — integrada com o GesCO.
+              Entre como membro na Comunidade para aceder ao catálogo completo,
+              encomendas e entregas.
             </p>
           </div>
         </div>
         <a href="#comunidade" className="btn-primary shrink-0">
-          Entrar / Aderir
+          Entrar na Comunidade
         </a>
       </div>
     </SectionShell>

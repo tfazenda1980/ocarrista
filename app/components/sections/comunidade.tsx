@@ -5,7 +5,7 @@ const benefits = [
   "Acesso à Loja do Carrista — prendas e artigos exclusivos",
   "Inscrição e informação sobre os 7 eventos anuais",
   "Rede de veteranos, famílias e amigos do QCav e do Ex-RC4",
-  "Área de membro e comunicações via GesCO",
+  "Informação sobre eventos e atividades da comunidade",
 ];
 
 export function ComunidadeSection() {
@@ -41,6 +41,7 @@ export function ComunidadeSection() {
               name="nome"
               placeholder="Nome completo"
               required
+              autoComplete="name"
               className="border border-gold/20 bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/50 focus:outline-none"
             />
             <label className="sr-only" htmlFor="email">
@@ -52,6 +53,7 @@ export function ComunidadeSection() {
               name="email"
               placeholder="Email"
               required
+              autoComplete="email"
               className="border border-gold/20 bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/50 focus:outline-none"
             />
             <button type="submit" className="btn-primary w-full">

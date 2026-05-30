@@ -1,17 +1,9 @@
 [
-  {
-    "year": "1927",
-    "title": "Regimento de Cavalaria 4",
-    "text": "Criação do RC4 em Santa Margarida."
-  },
-  {
-    "year": "1993",
-    "title": "Extinção do regimento",
-    "text": "Reorganização do Exército e extinção formal do RC4."
-  },
-  {
-    "year": "Hoje",
-    "title": "O Carrista",
-    "text": "Comunidade Ex-RC4 e Quartel da Cavalaria."
-  }
+  { "year": "1762", "title": "Regimento de Mecklenburg", "text": "…" },
+  { "year": "1810", "title": "Batalha do Buçaco", "text": "…" },
+  { "year": "1812", "title": "Combate de Fuentes del Maestro", "text": "…" },
+  { "year": "1814", "title": "Viella", "text": "…" },
+  { "year": "1895", "title": "Coolela", "text": "…" },
+  { "year": "2006", "title": "Quartel da Cavalaria", "text": "…" },
+  { "year": "2024", "title": "Carros de Combate em Operações", "text": "…" }
 ]

@@ -9,9 +9,10 @@ import { EventCountdown } from "../countdown";
 
 type EventHeroProps = {
   event: EventData;
+  showRegistrationCta?: boolean;
 };
 
-export function EventHero({ event }: EventHeroProps) {
+export function EventHero({ event, showRegistrationCta = true }: EventHeroProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -25,19 +26,21 @@ export function EventHero({ event }: EventHeroProps) {
       ref={ref}
       className="event-hero relative flex min-h-[100dvh] items-end overflow-hidden pt-20"
     >
-      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-110">
-        <Image
-          src={event.heroImage}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-contain object-right-bottom opacity-[0.38] sm:opacity-[0.48]"
-        />
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/88 to-background/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-      <div className="absolute inset-0 military-map-overlay opacity-30" />
+      {event.heroImage && (
+        <motion.div style={{ y: bgY }} className="event-hero-visual absolute inset-0">
+          <Image
+            src={event.heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="event-hero-image object-contain object-right-bottom opacity-[0.82] sm:opacity-[0.9]"
+          />
+        </motion.div>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/58 to-background/12" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" />
+      <div className="absolute inset-0 military-map-overlay opacity-20" />
 
       <motion.div
         style={{ opacity }}
@@ -82,15 +85,17 @@ export function EventHero({ event }: EventHeroProps) {
           </span>
         </motion.div>
 
-        <motion.div
-          className="mt-10"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.28 }}
-        >
-          <p className="section-label mb-3">Contagem decrescente</p>
-          <EventCountdown targetDate={event.date} />
-        </motion.div>
+        {showRegistrationCta && (
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.28 }}
+          >
+            <p className="section-label mb-3">Contagem decrescente</p>
+            <EventCountdown targetDate={event.date} />
+          </motion.div>
+        )}
 
         <motion.div
           className="mt-10 flex flex-wrap gap-4"
@@ -98,12 +103,20 @@ export function EventHero({ event }: EventHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35 }}
         >
-          <a href="#inscricao" className="btn-primary">
-            {event.registration.cta}
-          </a>
-          <a href="#programa" className="btn-outline">
-            Ver programa
-          </a>
+          {showRegistrationCta ? (
+            <>
+              <a href="#inscricao" className="btn-primary">
+                {event.registration.cta}
+              </a>
+              <a href="#eixos" className="btn-outline">
+                Ver eixos e programa
+              </a>
+            </>
+          ) : (
+            <Link href="/eventos/workshop/2026" className="btn-primary">
+              Ver edição 2026
+            </Link>
+          )}
         </motion.div>
       </motion.div>
     </section>

@@ -1,11 +1,10 @@
 import { TacticalBackground } from "./components/tactical-background";
 import { SiteHeader } from "./components/site-header";
-import { EntrySection } from "./components/entry-section";
+import { EntrySectionLoader } from "./components/entry-section-loader";
 import { GritoSection } from "./components/grito-section";
 import { LemaSection } from "./components/lema-section";
 import { VideoPromoSection } from "./components/video-promo-section";
 import { EventosSection } from "./components/sections/eventos";
-import { WorkshopTeaserSection } from "./components/sections/workshop-teaser";
 import { HistoriaSection } from "./components/sections/historia";
 import { LojaSection } from "./components/sections/loja";
 import { ComunidadeSection } from "./components/sections/comunidade";
@@ -19,12 +18,11 @@ export default function Home() {
       <div className="relative z-10 flex min-h-full flex-col">
         <SiteHeader />
         <main>
-          <EntrySection />
+          <EntrySectionLoader />
           <GritoSection />
           <LemaSection />
           <VideoPromoSection />
           <EventosSection />
-          <WorkshopTeaserSection />
           <HistoriaSection />
           <LojaSection />
           <ComunidadeSection />

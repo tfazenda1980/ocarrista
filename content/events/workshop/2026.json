@@ -1,0 +1,310 @@
+{
+  "year": "2026",
+  "slug": "workshop",
+  "published": true,
+  "title": "Workshop de Carros de Combate",
+  "edition": "Workshop 2026 — 2.ª Edição",
+  "slogan": "Experiência, doutrina e inovação ao serviço do carrista moderno.",
+  "date": "2026-06-18T09:00:00+01:00",
+  "dateDisplay": "18 de Junho de 2026",
+  "location": "Quartel da Cavalaria · Santa Margarida",
+  "heroImage": "/images/workshop26.png",
+  "cardImage": "/images/workshop26.png",
+  "purpose": "Reunir carristas, especialistas e decisores num ambiente propício ao debate sobre a guerra moderna, quer pelo impacto da tecnologia nos Carros de Combate, quer pela necessária transformação do conhecimento em prática operacional.",
+  "objectives": [
+    "Analisar o impacto da guerra contemporânea nos Carros de Combate",
+    "Partilhar experiência de campo e lições aprendidas entre várias gerações de Carristas",
+    "Ligar a inovação tecnológica à doutrina, ao treino e à formação",
+    "Traduzir a evolução em ações práticas operacionais"
+  ],
+  "themes": [
+    {
+      "id": "guerra-atual",
+      "title": "A Guerra Atual",
+      "subtitle": "Lições da guerra atual",
+      "description": "Cenários operacionais, ameaças emergentes e implicações para a doutrina e o emprego de forças blindadas.",
+      "details": "Painéis sobre UAV, guerra electrónica, proteção balística, coordenação joint e lições de teatros recentes — com foco na decisão do comandante de carro e da unidade."
+    },
+    {
+      "id": "experiencia-pratica",
+      "title": "Experiência em Prática",
+      "subtitle": "Transformar conhecimento em mudança",
+      "description": "Workshops técnicos, estudos de caso e dinâmicas de equipa para converter experiência em procedimentos e competências.",
+      "details": "Sessões interactivas sobre manutenção, tiro, táticas de secção e pelotão, simulação e cultura de segurança operacional."
+    }
+  ],
+  "panels": [
+    {
+      "name": "Abertura",
+      "sessions": [
+        {
+          "time": "09:00",
+          "endTime": "09:10",
+          "duration": "10'",
+          "title": "Abertura",
+          "description": "Recepção e discurso. Orientação estratégica do Exército para o presente e futuro do CC Leopard 2A6.",
+          "highlight": true,
+          "kind": "session"
+        },
+        {
+          "time": "09:10",
+          "endTime": "09:25",
+          "duration": "15'",
+          "title": "Sessão inicial",
+          "description": "Evolução do papel do CC, impacto da guerra moderna, integração com tecnologia e necessidades de adaptação.",
+          "kind": "session"
+        }
+      ]
+    },
+    {
+      "name": "Painel 1 — Lições da guerra atual",
+      "axisId": "guerra-atual",
+      "sessions": [
+        {
+          "time": "09:30",
+          "endTime": "10:00",
+          "duration": "30'",
+          "title": "O campo de batalha transparente: drones e sensores",
+          "description": "Generalização dos drones, redução do efeito surpresa e impacto nas manobras.",
+          "speaker": "TCor Énio Chambel",
+          "kind": "session"
+        },
+        {
+          "time": "10:00",
+          "endTime": "10:30",
+          "duration": "30'",
+          "title": "Sobrevivência do CC: lições do combate moderno",
+          "description": "Análise de perdas reais e medidas táticas e técnicas de mitigação. Blindagem ou consciência situacional?",
+          "speaker": "Maj Teixeira Pinto",
+          "kind": "session"
+        },
+        {
+          "time": "10:30",
+          "endTime": "10:50",
+          "title": "Intervalo · coffee break",
+          "kind": "break"
+        },
+        {
+          "time": "10:50",
+          "endTime": "11:20",
+          "duration": "30'",
+          "title": "O papel do Master Gunner mudou",
+          "description": "Do especialista em tiro ao gestor de letalidade e consciência situacional.",
+          "speaker": "SMor Vítor Branco",
+          "kind": "session"
+        },
+        {
+          "time": "11:20",
+          "endTime": "11:45",
+          "duration": "25'",
+          "title": "Sessão de debate",
+          "description": "Conclusões do Painel 1.",
+          "kind": "session"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "sessions": [
+        {
+          "time": "12:30",
+          "endTime": "14:00",
+          "title": "Almoço",
+          "kind": "meal"
+        }
+      ]
+    },
+    {
+      "name": "Painel 2 — Transformar conhecimento em mudança",
+      "axisId": "experiencia-pratica",
+      "sessions": [
+        {
+          "time": "14:05",
+          "endTime": "14:35",
+          "duration": "30'",
+          "title": "FND Eslováquia e a Tríade do Carrista",
+          "description": "Condição física, proficiência técnica e engenho tático — o que mudou e o que precisa de mudar.",
+          "speaker": "Cap Marco Lopes · Ten João Leal",
+          "kind": "session"
+        },
+        {
+          "time": "14:35",
+          "endTime": "14:50",
+          "duration": "15'",
+          "title": "Manutenção do CC: alterações de paradigmas",
+          "description": "Alterações a requisitos e procedimentos de manutenção face aos conflitos recentes.",
+          "speaker": "TCor Sérgio Capelo",
+          "kind": "session"
+        },
+        {
+          "time": "14:50",
+          "endTime": "15:05",
+          "duration": "15'",
+          "title": "Simulação: o presente e o futuro",
+          "description": "Colaboração com Espanha nas TTP nacionais, projetos futuros e integração no treino e nas operações.",
+          "speaker": "TCor Pereira Coutinho",
+          "kind": "session"
+        },
+        {
+          "time": "15:05",
+          "endTime": "15:25",
+          "title": "Intervalo · coffee break",
+          "kind": "break"
+        },
+        {
+          "time": "15:25",
+          "endTime": "15:55",
+          "duration": "30'",
+          "title": "Consciência situacional e proteção passiva",
+          "description": "Câmaras de condução, vigilância 360º, controlo de procedimentos do MG, rede de camuflagem e capacete modular.",
+          "speaker": "SCh Nuno Gonçalves · SAj Alexandre Mendes · SAj Vítor Pereira · SAj Vilas Boas",
+          "kind": "session"
+        },
+        {
+          "time": "15:55",
+          "endTime": "16:20",
+          "duration": "25'",
+          "title": "Sessão de debate",
+          "description": "Conclusões do Painel 2.",
+          "kind": "session"
+        }
+      ]
+    },
+    {
+      "name": "Encerramento",
+      "sessions": [
+        {
+          "time": "16:20",
+          "endTime": "16:35",
+          "duration": "15'",
+          "title": "Considerações finais",
+          "description": "Síntese de orientações para o CC Leopard 2A6 — sessão interna de trabalho na semana seguinte.",
+          "kind": "session"
+        },
+        {
+          "time": "16:35",
+          "endTime": "16:50",
+          "duration": "15'",
+          "title": "Encerramento",
+          "description": "Reflexões finais e encerramento do Workshop.",
+          "highlight": true,
+          "kind": "session"
+        },
+        {
+          "time": "16:55",
+          "endTime": "17:00",
+          "title": "Foto de grupo",
+          "description": "Foto de grupo junto ao Leopard 2A6.",
+          "kind": "activity"
+        }
+      ]
+    }
+  ],
+  "spotlight": {
+    "time": "12:00",
+    "endTime": "12:30",
+    "duration": "30'",
+    "title": "Challenger O Carrista — Pista Final",
+    "description": "Prova de destreza técnica e física — pista final do Challenger com as guarnições de carristas.",
+    "kind": "activity"
+  },
+  "speakers": [
+    {
+      "id": "tcor-enio-chambel",
+      "name": "TCor Énio Chambel",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "tcor-pereira-coutinho",
+      "name": "TCor Pereira Coutinho",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "tcor-sergio-capelo",
+      "name": "TCor Sérgio Capelo",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "maj-teixeira-pinto",
+      "name": "Maj Teixeira Pinto",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "cap-marco-lopes",
+      "name": "Cap Marco Lopes",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "ten-joao-leal",
+      "name": "Ten João Leal",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "smor-vitor-branco",
+      "name": "SMor Vítor Branco",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "sch-nuno-goncalves",
+      "name": "SCh Nuno Gonçalves",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "saj-alexandre-mendes",
+      "name": "SAj Alexandre Mendes",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "saj-vitor-pereira",
+      "name": "SAj Vítor Pereira",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    },
+    {
+      "id": "saj-vilas-boas",
+      "name": "SAj Vilas Boas",
+      "role": "Orador",
+      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+    }
+  ],
+  "moderators": [
+    {
+      "id": "maj-tiago-ferreira",
+      "name": "Maj Tiago Ferreira",
+      "axisId": "guerra-atual"
+    },
+    {
+      "id": "maj-nuno-silva",
+      "name": "Maj Nuno Silva",
+      "axisId": "experiencia-pratica"
+    }
+  ],
+  "gallery": [
+    { "src": "/images/workshop26.png", "alt": "Workshop 2026 — identidade visual", "type": "image" }
+  ],
+  "registration": {
+    "enabled": true,
+    "cta": "Solicitar inscrição",
+    "note": "Áreas reservadas a convidados e membros serão disponibilizadas após confirmação."
+  },
+  "seo": {
+    "title": "Workshop 2026 — Carros de Combate | O Carrista",
+    "description": "Workshop profissional de carros de combate no Quartel da Cavalaria. Doutrina, inovação e experiência operacional — Santa Margarida, 2026."
+  },
+  "contacts": {
+    "email": "brigmec.gcc.secinf@exercito.pt",
+    "organizer": "O Carrista · QCav e Ex-RC4"
+  },
+  "legal": {
+    "terms": "/termos"
+  }
+}

@@ -24,16 +24,13 @@ export function EventFooter({ event }: { event: EventData }) {
           <div>
             <p className="section-label mb-3">Legal</p>
             <ul className="space-y-2 text-sm text-muted">
-              <li>
-                <Link href={event.legal?.privacy ?? "#"} className="hover:text-gold">
-                  Política de privacidade
-                </Link>
-              </li>
-              <li>
-                <Link href={event.legal?.terms ?? "#"} className="hover:text-gold">
-                  Termos e condições
-                </Link>
-              </li>
+              {event.legal?.terms && (
+                <li>
+                  <Link href={event.legal.terms} className="hover:text-gold">
+                    Termos e condições
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link href="/" className="hover:text-gold">
                   Voltar a O Carrista

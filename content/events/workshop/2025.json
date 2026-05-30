@@ -1,0 +1,30 @@
+{
+  "year": "2025",
+  "slug": "workshop",
+  "published": false,
+  "title": "Workshop de Carros de Combate",
+  "edition": "Workshop 2025 — 1.ª Edição",
+  "slogan": "A primeira edição do Workshop de Carros de Combate — O Carrista.",
+  "date": "2025-06-18T09:00:00+01:00",
+  "dateDisplay": "18 de Junho de 2025",
+  "location": "Quartel da Cavalaria · Santa Margarida",
+  "purpose": "Primeira edição do Workshop — arquivo histórico O Carrista.",
+  "objectives": [],
+  "themes": [],
+  "panels": [],
+  "speakers": [],
+  "gallery": [],
+  "registration": {
+    "enabled": false,
+    "cta": "Inscrições encerradas"
+  },
+  "placeholderMessage": "Arquivo da 1.ª edição (2025). O conteúdo completo será publicado em breve.",
+  "seo": {
+    "title": "Workshop 2025 — 1.ª Edição | O Carrista",
+    "description": "Primeira edição do Workshop de Carros de Combate — Quartel da Cavalaria, 2025."
+  },
+  "contacts": {
+    "email": "brigmec.gcc.secinf@exercito.pt",
+    "organizer": "O Carrista · QCav e Ex-RC4"
+  }
+}

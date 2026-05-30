@@ -58,7 +58,7 @@ export function EventRegistration({ event }: { event: EventData }) {
               <textarea
                 name="mensagem"
                 rows={3}
-                placeholder="Motivação ou questões"
+                placeholder="Necessidades ou Questões"
                 className="w-full resize-none border border-gold/20 bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted/50 focus:border-gold/50 focus:outline-none"
               />
               <button type="submit" className="btn-primary w-full">

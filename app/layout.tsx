@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "O Carrista",
   description:
-    "O Carrista — De Santa Margarida. Comunidade Ex-RC4: eventos anuais, história do Regimento de Cavalaria 4, Loja do Carrista e GesCO.",
+    "O Carrista — De Santa Margarida. Comunidade Ex-RC4: eventos anuais, história do Regimento de Cavalaria 4 e Loja do Carrista.",
 };
 
 export default function RootLayout({

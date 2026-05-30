@@ -31,10 +31,10 @@ export function EventCard({
             alt=""
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="event-card-bg object-contain object-right opacity-[0.22] transition-opacity duration-500 group-hover:opacity-[0.34]"
+            className="event-card-bg object-contain object-right opacity-[0.52] transition-opacity duration-500 group-hover:opacity-[0.68]"
             aria-hidden
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/92 to-surface/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/72 to-surface/25" />
         </div>
       )}
       <div className="relative z-10">

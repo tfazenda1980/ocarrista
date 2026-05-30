@@ -8,7 +8,7 @@ const events = [
     title: "Dia do Quartel da Cavalaria e do Ex-RC4",
     meta: "EDIÇÃO ANUAL · EFEMÉRIDE",
     description:
-      "Efeméride que evoca o combate entre cavalarias em Viella, África, onde 264 cavaleiros do RC 4 desenvolveram uma notável carga de Cavalaria sob o comando do Coronel John Campbell — homenagem, memória e convívio no quartel.",
+      "Efeméride que evoca o combate em Viella, onde 264 cavaleiros do RC 4 desenvolveram uma notável carga de Cavalaria sob o comando do Coronel John Campbell — homenagem, memória e convívio no quartel.",
     icon: <IconShield />,
   },
   {
@@ -20,11 +20,11 @@ const events = [
   },
   {
     title: "Workshop de Carros de Combate",
-    meta: "EDIÇÃO ANUAL · WORKSHOP 2026",
+    meta: "EDIÇÃO ANUAL · 2.ª EDIÇÃO 2026",
     description:
       "Sessões técnicas e demonstrações sobre viaturas blindadas, manutenção e doutrina — para entusiastas e profissionais.",
     icon: <IconCalendar />,
-    href: "/#workshop-2026",
+    href: "/eventos/workshop",
     backgroundImage: WORKSHOP_26_SRC,
   },
   {

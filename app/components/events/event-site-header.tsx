@@ -7,17 +7,17 @@ import { UnitCrest } from "../unit-crest";
 
 const anchorLinks = [
   { href: "#sobre", label: "Sobre" },
-  { href: "#temas", label: "Temas" },
-  { href: "#programa", label: "Programa" },
+  { href: "#eixos", label: "Eixos" },
   { href: "#oradores", label: "Oradores" },
   { href: "#inscricao", label: "Inscrição" },
 ];
 
 type EventSiteHeaderProps = {
   edition: string;
+  subtitle?: string;
 };
 
-export function EventSiteHeader({ edition }: EventSiteHeaderProps) {
+export function EventSiteHeader({ edition, subtitle }: EventSiteHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -44,7 +44,7 @@ export function EventSiteHeader({ edition }: EventSiteHeaderProps) {
               O Carrista
             </span>
             <span className="text-[0.55rem] tracking-[0.2em] text-gold-dim uppercase">
-              {edition}
+              {subtitle ?? edition}
             </span>
           </div>
         </Link>

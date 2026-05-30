@@ -10,8 +10,9 @@ const navLinks = [
   { href: "#historia", label: "História" },
   { href: "#loja", label: "Loja" },
   { href: "#comunidade", label: "Comunidade" },
-  { href: "#gesco", label: "GesCO" },
-];
+] as const;
+
+const gescoNavLabel = "GesCO";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -32,7 +33,7 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6">
+      <div className="flex h-16 w-full items-center justify-between pl-5 pr-4 sm:h-[4.5rem] sm:pl-8 sm:pr-6 md:pl-12 lg:pl-16 xl:pl-24">
         <a href="#" className="group flex items-center gap-3">
           <UnitCrest size="nav" className="transition-opacity group-hover:opacity-95" priority />
           <div className="flex flex-col">
@@ -50,12 +51,19 @@ export function SiteHeader() {
             <motion.a
               key={link.href}
               href={link.href}
-              className="font-display text-[0.7rem] tracking-[0.18em] text-muted uppercase transition-colors hover:text-gold"
+              className="font-display text-[0.7rem] tracking-[0.18em] text-gold/85 uppercase transition-colors hover:text-gold-bright"
               whileHover={{ y: -1 }}
             >
               {link.label}
             </motion.a>
           ))}
+          <motion.a
+            href="#gesco"
+            className="font-display text-[0.7rem] tracking-[0.18em] text-gold/85 uppercase transition-colors hover:text-gold-bright"
+            whileHover={{ y: -1 }}
+          >
+            {gescoNavLabel}
+          </motion.a>
         </nav>
 
         <button
@@ -76,19 +84,28 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-gold/10 bg-background/95 px-4 py-6 backdrop-blur-lg md:hidden">
+        <nav className="border-t border-gold/10 bg-background/95 py-6 pl-5 pr-4 text-left backdrop-blur-lg sm:pl-8 md:hidden md:pl-12 lg:pl-16 xl:pl-24">
           <ul className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="font-display text-sm tracking-[0.15em] text-foreground uppercase"
+                  className="font-display text-sm tracking-[0.15em] text-gold uppercase"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href="#gesco"
+                className="font-display text-sm tracking-[0.15em] text-gold uppercase"
+                onClick={() => setOpen(false)}
+              >
+                {gescoNavLabel}
+              </a>
+            </li>
           </ul>
         </nav>
       )}

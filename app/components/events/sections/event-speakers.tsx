@@ -18,7 +18,13 @@ function SpeakerInitials({ name }: { name: string }) {
   );
 }
 
-export function EventSpeakers({ event }: { event: EventData }) {
+export function EventSpeakers({
+  event,
+  hideModerators = false,
+}: {
+  event: EventData;
+  hideModerators?: boolean;
+}) {
   const [selected, setSelected] = useState<EventSpeaker | null>(null);
 
   return (
@@ -57,6 +63,28 @@ export function EventSpeakers({ event }: { event: EventData }) {
             </MotionReveal>
           ))}
         </div>
+
+        {!hideModerators && event.moderators && event.moderators.length > 0 && (
+          <MotionReveal className="mt-16">
+            <p className="section-label mb-3">Moderadores</p>
+            <h3 className="font-display mb-6 text-xl font-semibold tracking-wide text-foreground uppercase sm:text-2xl">
+              Condução dos painéis
+            </h3>
+            <ul className="flex flex-wrap gap-4">
+              {event.moderators.map((mod) => (
+                <li
+                  key={mod.id}
+                  className="event-speaker-card border border-gold/25 px-5 py-4"
+                >
+                  <p className="font-display text-base font-semibold tracking-wide text-foreground uppercase">
+                    {mod.name}
+                  </p>
+                  <p className="mt-1 text-sm text-gold">Moderador</p>
+                </li>
+              ))}
+            </ul>
+          </MotionReveal>
+        )}
       </div>
 
       <AnimatePresence>
