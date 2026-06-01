@@ -56,6 +56,11 @@ const DEFAULT_MARCOS: HistoriaMarco[] = [
     text: "31 de março de 1814 — 266 militares, Coronel John Campbell, na fase final da campanha.",
   },
   {
+    year: "1827",
+    title: "Guerras Liberais",
+    text: "Batalha de Coruche da Beira e combates das Pontes do Prado e da Barca.",
+  },
+  {
     year: "1895",
     title: "Coolela (Moçambique)",
     text: "7 de novembro de 1895 — elementos do RC4 no combate de Coolela; Capitão Mouzinho de Albuquerque.",
@@ -64,11 +69,6 @@ const DEFAULT_MARCOS: HistoriaMarco[] = [
     year: "1896",
     title: "Mujenga",
     text: "19 e 20 de outubro de 1896 — esquadrão do RC4, Alferes Augusto Reis.",
-  },
-  {
-    year: "1906",
-    title: "Mouzinho de Albuquerque",
-    text: "Referência da cavalaria portuguesa e patrono da Arma — memória homenageada na Marcha a Cavalo à Batalha.",
   },
   {
     year: "1915",
@@ -81,14 +81,54 @@ const DEFAULT_MARCOS: HistoriaMarco[] = [
     text: "20 a 24 de agosto de 1915 — 4.º Pelotão do 3.º Esquadrão do RC4, integrado em destacamento ao comando do Tenente Correia Torres.",
   },
   {
+    year: "1968–1975",
+    title: "TO Angola",
+    text: "Teatro de Operações em Angola — BCav 2854, 3845, 3862, 3883 e 8423/73; CCav 2720, 3377, 3418, 3419, 8450/72, 8451/72, 8453/72, 8454/73, 8455/73, 8456/73 e 8457/73.",
+  },
+  {
+    year: "1970–1975",
+    title: "TO Moçambique",
+    text: "Teatro de Operações em Moçambique — BCav 2923, 3837, 3878, 8420/72, 8421/73, 8422/73 e 8424/74; CCav 2722, 2766, 2787, 3320 e 1CCav/8420/72.",
+  },
+  {
+    year: "1970–1974",
+    title: "TO Guiné",
+    text: "Teatro de Operações na Guiné — CCav 2721, 3420, 3568 e CCav/8452/72.",
+  },
+  {
+    year: "1999–2013",
+    title: "FND — Kosovo",
+    text: "Forças Nacionais Destacadas — Comando Agr BRAVO (1999–2000); Agr DELTA (2000–2001); Agr INDIA (2012–2013).",
+  },
+  {
+    year: "2001–2006",
+    title: "FND — Bósnia-Herzegovina",
+    text: "Forças Nacionais Destacadas — ERec/Agr ECHO (2001); Cmd MNBG (2003–2004); Agr GOLF (2003–2004); 1.º Pelotão 2BIMec/SFOR (2004); GCC/BrigMec/SFOR (2006).",
+  },
+  {
     year: "2006",
     title: "Quartel da Cavalaria",
     text: "Casa da Arma em Santa Margarida — organização do Dia do Quartel, da Marcha a Cavalo à Batalha e das grandes atividades da comunidade O Carrista.",
   },
   {
+    year: "2013–2020",
+    title: "FND — Afeganistão",
+    text: "Forças Nacionais Destacadas — 7.º CN/ISAF (2013–2014); 4.ª QRF/RS (2019–2020).",
+  },
+  {
+    year: "2019–2020",
+    title: "FND — Iraque",
+    text: "Forças Nacionais Destacadas — 10.º CN/OIR (2019–2020).",
+  },
+  {
     year: "2024",
     title: "Carros de Combate em Operações",
     text: "Marco recente da capacidade operacional dos carristas — formação, emprego e experiência em operações com carros de combate.",
+  },
+  {
+    year: "2024–2026",
+    title: "FND — Eslováquia",
+    text: "Forças Nacionais Destacadas — 1.º FND/PelCC (2024–2025); 2.º FND/PelCC (2025); 3.º FND/SubAgr (2025–2026); 4.º FND/SubAgr (2026).",
   },
 ];
 
