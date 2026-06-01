@@ -10,12 +10,13 @@ import { LojaSection } from "./components/sections/loja";
 import { ComunidadeSection } from "./components/sections/comunidade";
 import { GescoSection } from "./components/sections/gesco";
 import { SiteFooter } from "./components/site-footer";
-import { canAccessLoja } from "./lib/auth/member-access";
+import { canAccessLoja, comunidadeView } from "./lib/auth/member-access";
 import { getSession } from "./lib/auth/session";
 
 export default async function Home() {
   const session = await getSession();
   const showLoja = canAccessLoja(session);
+  const comunidade = comunidadeView(session);
 
   return (
     <>
@@ -30,7 +31,7 @@ export default async function Home() {
           <EventosSection />
           <HistoriaSection />
           {showLoja && <LojaSection memberName={session.name} />}
-          <ComunidadeSection showLojaHint={!showLoja} />
+          <ComunidadeSection view={comunidade} memberName={session.name} />
           <GescoSection />
         </main>
         <SiteFooter />
