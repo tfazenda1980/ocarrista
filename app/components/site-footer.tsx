@@ -42,6 +42,12 @@ export function SiteFooter() {
             >
               GesCO
             </a>
+            <a
+              href="#admin"
+              className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
+            >
+              Admin
+            </a>
           </nav>
         </div>
 

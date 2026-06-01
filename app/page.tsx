@@ -9,6 +9,7 @@ import { HistoriaSection } from "./components/sections/historia";
 import { LojaSection } from "./components/sections/loja";
 import { ComunidadeSection } from "./components/sections/comunidade";
 import { GescoSection } from "./components/sections/gesco";
+import { AdminSection } from "./components/sections/admin";
 import { SiteFooter } from "./components/site-footer";
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
           <LojaSection />
           <ComunidadeSection />
           <GescoSection />
+          <AdminSection />
         </main>
         <SiteFooter />
       </div>

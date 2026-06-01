@@ -10,6 +10,7 @@ const navLinks = [
   { href: "#historia", label: "História" },
   { href: "#loja", label: "Loja" },
   { href: "#comunidade", label: "Comunidade" },
+  { href: "#admin", label: "Admin" },
 ] as const;
 
 const gescoNavLabel = "GesCO";
