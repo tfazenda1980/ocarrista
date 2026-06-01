@@ -2,7 +2,7 @@
 
 const links = [
   { href: "#admin", label: "Resumo" },
-  { href: "#admin-adesoes", label: "Adesões" },
+  { href: "/admin/membros", label: "Membros" },
   { href: "#admin-perguntas", label: "Perguntas workshop" },
 ] as const;
 

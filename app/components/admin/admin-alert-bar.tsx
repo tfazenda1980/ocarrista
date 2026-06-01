@@ -16,7 +16,7 @@ export function AdminAlertBar({ pendingCount }: AdminAlertBarProps) {
         </p>
         {pendingCount > 0 ? (
           <Link
-            href="#admin-adesoes"
+            href="/admin/membros?filtro=pending"
             className="font-display text-xs tracking-[0.12em] text-foreground uppercase hover:text-gold"
           >
             <span className="text-gold">{pendingCount}</span> adesão

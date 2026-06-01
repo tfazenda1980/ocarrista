@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function AdminAdesoesRedirectPage() {
-  redirect("/?section=admin-adesoes");
+  redirect("/admin/membros?filtro=pending");
 }

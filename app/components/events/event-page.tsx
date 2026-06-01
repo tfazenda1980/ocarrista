@@ -14,7 +14,7 @@ import { EventGallery } from "./sections/event-gallery";
 import { EventRegistration } from "./sections/event-registration";
 import { EventFooter } from "./sections/event-footer";
 import { EditionPlaceholder } from "./sections/edition-placeholder";
-import { EventArchivePdf } from "./sections/event-archive-pdf";
+import { EventArchiveEdition } from "./sections/event-archive-edition";
 import { StickyBackLink } from "../sticky-back-link";
 
 type EventPageProps = {
@@ -52,36 +52,33 @@ export function EventPageView({
           variant={showEditionBar ? "workshop" : "default"}
         />
         <main>
-          <EventHero event={event} showRegistrationCta={published} />
-          {published ? (
-            <>
-              <EventAbout event={event} />
-              {useAxesLayout ? (
-                <EventAxesSection event={event} />
-              ) : (
-                <>
-                  <EventProgram event={event} />
-                  <EventSpotlight event={event} />
-                </>
-              )}
-              <EventSpeakers event={event} hideModerators={useAxesLayout} />
-              <EventGallery event={event} />
-              <EventRegistration event={event} />
-            </>
+          {!published && event.archivePdf ? (
+            <EventArchiveEdition event={event} />
           ) : (
             <>
-              <EditionPlaceholder event={event} />
-              {event.archivePdf && (
-                <EventArchivePdf
-                  label={event.archivePdf.label}
-                  href={event.archivePdf.href}
-                  hint={event.archivePdf.hint}
-                />
+              <EventHero event={event} showRegistrationCta={published} />
+              {published ? (
+                <>
+                  <EventAbout event={event} />
+                  {useAxesLayout ? (
+                    <EventAxesSection event={event} />
+                  ) : (
+                    <>
+                      <EventProgram event={event} />
+                      <EventSpotlight event={event} />
+                    </>
+                  )}
+                  <EventSpeakers event={event} hideModerators={useAxesLayout} />
+                  <EventGallery event={event} />
+                  <EventRegistration event={event} />
+                </>
+              ) : (
+                <EditionPlaceholder event={event} />
               )}
             </>
           )}
         </main>
-        <EventFooter event={event} />
+        {published && <EventFooter event={event} />}
       </div>
     </>
   );

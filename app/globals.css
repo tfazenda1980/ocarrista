@@ -813,6 +813,17 @@ body {
   border-bottom-color: var(--gold);
 }
 
+/* Workshop arquivo — PDF logo abaixo da barra de anos */
+.event-archive-intro {
+  padding-top: 7.5rem;
+}
+
+@media (min-width: 640px) {
+  .event-archive-intro {
+    padding-top: 8.25rem;
+  }
+}
+
 /* Entrada — destaque de evento (teaser) */
 .entry-content-zone {
   text-align: left;

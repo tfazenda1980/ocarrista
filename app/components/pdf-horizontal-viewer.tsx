@@ -9,6 +9,7 @@ type PdfHorizontalViewerProps = {
   /** Cabeçalho sobre o visor (ex. «Galeria de Prémios»). */
   label?: string;
   hint?: string;
+  showDownloadFooter?: boolean;
 };
 
 type PdfDoc = import("pdfjs-dist").PDFDocumentProxy;
@@ -86,6 +87,7 @@ export function PdfHorizontalViewer({
   active,
   label = "História do RC4",
   hint = "Deslize para o lado para ver cada página",
+  showDownloadFooter = true,
 }: PdfHorizontalViewerProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [doc, setDoc] = useState<PdfDoc | null>(null);
@@ -183,11 +185,13 @@ export function PdfHorizontalViewer({
         </div>
       )}
 
-      <div className="flex justify-center gap-4 border-t border-gold/10 px-4 py-3">
-        <a href={baseUrl} download className="btn-outline px-4 py-2 text-[0.65rem]">
-          Descarregar PDF
-        </a>
-      </div>
+      {showDownloadFooter && (
+        <div className="flex justify-center gap-4 border-t border-gold/10 px-4 py-3">
+          <a href={baseUrl} download className="btn-outline px-4 py-2 text-[0.65rem]">
+            Descarregar PDF
+          </a>
+        </div>
+      )}
     </div>
   );
 }

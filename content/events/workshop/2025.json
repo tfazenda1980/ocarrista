@@ -18,18 +18,17 @@
     "enabled": false,
     "cta": "Inscrições encerradas"
   },
-  "placeholderMessage": "Arquivo da 1.ª edição (2025). Consulte abaixo o caderno integral do workshop.",
   "archivePdf": {
     "label": "Cadernos QCav — 1.º Workshop 2025",
     "href": "/eventos/workshop/2025/cadernos-qcav-workshop-2025.pdf",
-    "hint": "Deslize para folhear o caderno · descarregue o PDF no final"
+    "hint": "Deslize para folhear o caderno"
   },
   "seo": {
     "title": "Workshop 2025 — 1.ª Edição | O Carrista",
     "description": "Primeira edição do Workshop de Carros de Combate — Quartel da Cavalaria, 2025."
   },
   "contacts": {
-    "email": "brigmec.gcc.secinf@exercito.pt",
+    "email": "ocarrista.cc@gmail.com",
     "organizer": "O Carrista · QCav e Ex-RC4"
   }
 }

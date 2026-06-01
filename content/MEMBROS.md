@@ -60,8 +60,11 @@ sequenceDiagram
 
 ## URLs
 
-- `/admin/entrar` — administração
-- `/admin/adesoes` — autorizar membros
-- `/admin/perguntas` — apagar perguntas (workshop 2026)
+- `/entrar` — login unificado (admin ou membro)
+- `/admin/membros` — gestão de todos os membros (aprovar, editar, email, GesCO, eliminar)
+- `/admin/membros?filtro=pending` — só pedidos pendentes
+- `/admin/adesoes` — redireciona para `/admin/membros?filtro=pending`
+- `/#admin` — resumo na homepage (atalhos)
+- `/admin/perguntas` — redireciona para perguntas workshop na homepage
 - `/entrar` — membros aprovados
 - `/conta/definir-password?token=...` — primeiro acesso do membro

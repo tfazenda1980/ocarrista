@@ -39,7 +39,7 @@ export async function notifyAdminNewMember(params: {
     return { sent: false, reason: "email_nao_configurado" };
   }
 
-  const adminUrl = `${siteUrl()}/?section=admin-adesoes`;
+  const adminUrl = `${siteUrl()}/admin/membros?filtro=pending`;
 
   await resend.emails.send({
     from,
@@ -142,6 +142,50 @@ export async function notifyShopRequest(params: {
       <strong>Email:</strong> ${params.memberEmail}</p>
       ${noteBlock}
       <p>Responda ao membro por email para combinar entrega e valor.</p>
+    `,
+  });
+
+  return { sent: true };
+}
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+export async function sendAdminMessageToMember(params: {
+  memberName: string;
+  memberEmail: string;
+  subject: string;
+  message: string;
+}): Promise<{ sent: boolean; reason?: string }> {
+  const from = fromAddress();
+  const resend = resendClient();
+  const subject = params.subject.trim().slice(0, 200);
+  const body = params.message.trim();
+
+  if (!subject || !body) {
+    return { sent: false, reason: "mensagem_invalida" };
+  }
+
+  if (!from || !resend) {
+    console.info("[email] Mensagem admin (não enviado):", params.memberEmail, subject);
+    return { sent: false, reason: "email_nao_configurado" };
+  }
+
+  const htmlBody = escapeHtml(body).replace(/\n/g, "<br/>");
+
+  await resend.emails.send({
+    from,
+    to: params.memberEmail,
+    subject: `O Carrista — ${subject}`,
+    html: `
+      <p>Olá ${escapeHtml(params.memberName)},</p>
+      <div style="margin:1.25em 0;line-height:1.6">${htmlBody}</div>
+      <p style="color:#666;font-size:0.9em">Mensagem da administração O Carrista · <a href="${siteUrl()}">${siteUrl()}</a></p>
     `,
   });
 
