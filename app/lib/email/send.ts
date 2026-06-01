@@ -32,7 +32,7 @@ export async function notifyAdminNewMember(params: {
     return { sent: false, reason: "email_nao_configurado" };
   }
 
-  const adminUrl = `${siteUrl()}/admin/adesoes`;
+  const adminUrl = `${siteUrl()}/?section=admin-adesoes`;
 
   await resend.emails.send({
     from,

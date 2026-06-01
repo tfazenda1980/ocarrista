@@ -1,41 +1,29 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
 const links = [
-  { href: "/admin", label: "Resumo" },
-  { href: "/admin/adesoes", label: "Adesões" },
-  { href: "/admin/perguntas", label: "Perguntas workshop" },
-];
+  { href: "#admin", label: "Resumo" },
+  { href: "#admin-adesoes", label: "Adesões" },
+  { href: "#admin-perguntas", label: "Perguntas workshop" },
+] as const;
 
 export function AdminNav() {
-  const router = useRouter();
-
-  const logout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/entrar");
-    router.refresh();
-  };
-
   return (
-    <nav className="mb-10 flex flex-wrap gap-4 border-b border-gold/20 pb-4">
+    <nav
+      className="mb-10 flex flex-wrap gap-4 border-b border-gold/20 pb-4"
+      aria-label="Navegação do painel de administração"
+    >
       {links.map((l) => (
-        <Link
+        <a
           key={l.href}
           href={l.href}
           className="font-display text-xs tracking-[0.14em] text-gold/80 uppercase hover:text-gold"
         >
           {l.label}
-        </Link>
+        </a>
       ))}
-      <button
-        type="button"
-        onClick={logout}
-        className="ml-auto font-mono text-[0.65rem] text-muted hover:text-gold"
-      >
-        Sair
-      </button>
+      <span className="ml-auto font-mono text-[0.6rem] text-muted">
+        Use o menu superior para o resto do site · Sair para terminar sessão
+      </span>
     </nav>
   );
 }

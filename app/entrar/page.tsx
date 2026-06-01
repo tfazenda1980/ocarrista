@@ -9,7 +9,7 @@ export default async function EntrarPage() {
   const session = await getSession();
 
   if (session.role === "admin") {
-    redirect("/admin");
+    redirect("/?section=admin");
   }
   if (canAccessLoja(session)) {
     redirect("/?section=loja");

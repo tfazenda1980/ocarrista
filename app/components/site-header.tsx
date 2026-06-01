@@ -76,7 +76,7 @@ export function SiteHeader() {
           {session.authenticated ? (
             <>
               {session.role === "admin" && (
-                <motion.a href="/admin" className={navLinkClass} whileHover={{ y: -1 }}>
+                <motion.a href="#admin" className={navLinkClass} whileHover={{ y: -1 }}>
                   Admin
                 </motion.a>
               )}
@@ -152,13 +152,13 @@ export function SiteHeader() {
               {session.authenticated ? (
                 <div className="flex flex-col gap-3">
                   {session.role === "admin" && (
-                    <Link
-                      href="/admin"
+                    <a
+                      href="#admin"
                       className="font-display text-sm tracking-[0.15em] text-gold uppercase"
                       onClick={() => setOpen(false)}
                     >
                       Admin
-                    </Link>
+                    </a>
                   )}
                   <button
                     type="button"

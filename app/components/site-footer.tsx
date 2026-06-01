@@ -49,12 +49,12 @@ export function SiteFooter() {
             ))}
             {session.authenticated ? (
               session.role === "admin" ? (
-                <Link
-                  href="/admin"
+                <a
+                  href="#admin"
                   className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
                 >
                   Admin
-                </Link>
+                </a>
               ) : null
             ) : (
               <Link

@@ -146,15 +146,17 @@ function ComunidadeAdmin() {
         <IconShield />
       </div>
       <h3 className="font-display mb-2 text-2xl font-semibold tracking-wide uppercase">
-        Sessão de administração
+        Sessão de administrador
       </h3>
       <p className="mb-6 text-muted leading-relaxed">
-        Está autenticado como administrador. A gestão de adesões, moderação de
-        perguntas do workshop e restantes funções estão no painel de
-        administração — não precisa de solicitar adesão como visitante.
+        Pode continuar a navegar no site (Eventos, História, GesCO, etc.). O
+        painel de adesões e perguntas está na secção{" "}
+        <strong className="text-foreground">Administração</strong> abaixo — ou use
+        o aviso no topo e o link <strong className="text-foreground">Admin</strong>{" "}
+        no menu.
       </p>
-      <Link href="/admin" className="btn-primary inline-flex">
-        Abrir painel admin
+      <Link href="#admin" className="btn-primary inline-flex">
+        Ir ao painel
       </Link>
     </div>
   );
@@ -178,7 +180,7 @@ const shellCopy: Record<
   admin: {
     label: "Secção 04 · Comunidade",
     title: "Comunidade",
-    description: "Visão de visitante substituída — utilize o painel de administração.",
+    description: "Como administrador, utilize o painel na secção Administração (abaixo) para adesões e perguntas.",
   },
 };
 

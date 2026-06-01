@@ -32,7 +32,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     onSuccess?.();
 
     if (data.role === "admin") {
-      window.location.href = "/admin";
+      window.location.href = "/?section=admin";
       return;
     }
 

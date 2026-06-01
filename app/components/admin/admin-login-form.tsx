@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function AdminLoginForm() {
-  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,8 +19,7 @@ export function AdminLoginForm() {
       setError("Utilizador ou password incorretos.");
       return;
     }
-    router.push("/admin");
-    router.refresh();
+    window.location.href = "/?section=admin";
   };
 
   return (
