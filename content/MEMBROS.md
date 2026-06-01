@@ -20,7 +20,7 @@ sequenceDiagram
 
   M->>S: Formulário Comunidade
   S->>E: Email para ADMIN_NOTIFY_EMAIL
-  A->>S: /admin/adesoes → Autorizar
+  A->>S: Painel admin → Autorizar (opcional: acesso GesCO)
   S->>E: Email ao membro com link /conta/definir-password?token=...
   M->>S: Define password
   M->>S: /entrar
@@ -38,6 +38,7 @@ sequenceDiagram
 
 - Email com link único (7 dias) para `/conta/definir-password?token=...`
 - Depois entra em `/entrar` com email + password **escolhida por ele**
+- **GesCO:** só visível se o admin marcou «Autorizar acesso ao GesCO» ao aprovar (campo `gesco_access` na base de dados)
 
 ### Membro — recusado
 
@@ -46,7 +47,7 @@ sequenceDiagram
 ## Configuração Vercel
 
 1. **Neon Postgres** → `DATABASE_URL`
-2. Executar SQL em `scripts/init-db.sql` no SQL Editor Neon
+2. Executar SQL em `scripts/init-db.sql` no SQL Editor Neon (instalações antigas: também `scripts/migrate-gesco-access.sql`)
 3. **Resend** (emails) → `RESEND_API_KEY`, `EMAIL_FROM` (ex. `O Carrista <noreply@teudominio.pt>`)
 4. `ADMIN_NOTIFY_EMAIL` — quem recebe avisos de novas adesões
 5. `SITE_URL` — `https://teu-dominio.pt` (links nos emails)

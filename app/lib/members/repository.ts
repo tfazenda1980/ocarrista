@@ -64,6 +64,7 @@ export async function approveMemberForSetup(
   id: string,
   setupToken: string,
   expiresAt: Date,
+  gescoAccess: boolean,
 ): Promise<Member | null> {
   const sql = getSql();
   if (!sql) return null;
@@ -72,6 +73,7 @@ export async function approveMemberForSetup(
     SET status = 'approved',
         setup_token = ${setupToken},
         setup_token_expires = ${expiresAt.toISOString()},
+        gesco_access = ${gescoAccess},
         updated_at = NOW()
     WHERE id = ${id} AND status = 'pending'
     RETURNING *

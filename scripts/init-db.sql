@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS members (
   password_hash TEXT,
   setup_token TEXT,
   setup_token_expires TIMESTAMPTZ,
+  gesco_access BOOLEAN NOT NULL DEFAULT FALSE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

@@ -27,6 +27,7 @@ export async function POST(request: Request) {
     session.memberId = undefined;
     session.email = undefined;
     session.name = undefined;
+    session.gescoAccess = undefined;
     await session.save();
     return NextResponse.json({ ok: true, role: "admin" as const });
   }
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
   session.memberId = member.id;
   session.email = member.email;
   session.name = member.name;
+  session.gescoAccess = member.gesco_access === true;
   await session.save();
 
   return NextResponse.json({ ok: true, role: "user" as const });

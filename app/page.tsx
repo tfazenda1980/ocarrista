@@ -12,7 +12,7 @@ import { AdminSection } from "./components/sections/admin-section";
 import { ComunidadeSection } from "./components/sections/comunidade";
 import { GescoSection } from "./components/sections/gesco";
 import { SiteFooter } from "./components/site-footer";
-import { canAccessLoja, comunidadeView } from "./lib/auth/member-access";
+import { canAccessGesco, canAccessLoja, comunidadeView } from "./lib/auth/member-access";
 import { listMembersByStatus } from "./lib/members/repository";
 import { getSession } from "./lib/auth/session";
 
@@ -20,6 +20,7 @@ export default async function Home() {
   const session = await getSession();
   const isAdmin = session.role === "admin";
   const showLoja = canAccessLoja(session);
+  const showGesco = canAccessGesco(session);
   const comunidade = comunidadeView(session);
   const pendingCount = isAdmin ? (await listMembersByStatus("pending")).length : 0;
 
@@ -37,9 +38,13 @@ export default async function Home() {
           <EventosSection />
           <HistoriaSection />
           {showLoja && <LojaSection memberName={session.name} />}
-          <ComunidadeSection view={comunidade} memberName={session.name} />
+          <ComunidadeSection
+            view={comunidade}
+            memberName={session.name}
+            showGesco={showGesco}
+          />
           {isAdmin && <AdminSection pendingCount={pendingCount} />}
-          <GescoSection />
+          {showGesco && <GescoSection />}
         </main>
         <SiteFooter />
       </div>

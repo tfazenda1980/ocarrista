@@ -30,6 +30,7 @@ export async function POST(request: Request) {
   session.memberId = member.id;
   session.email = member.email;
   session.name = member.name;
+  session.gescoAccess = member.gesco_access === true;
   await session.save();
 
   return NextResponse.json({ ok: true });

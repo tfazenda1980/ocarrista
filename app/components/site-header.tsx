@@ -27,6 +27,7 @@ export function SiteHeader() {
   }, []);
 
   const showLoja = session.authenticated && session.role === "user";
+  const showGesco = session.authenticated && session.gescoAccess === true;
 
   const handleLogout = async () => {
     await logout();
@@ -70,9 +71,11 @@ export function SiteHeader() {
               Loja
             </motion.a>
           )}
-          <motion.a href="#gesco" className={navLinkClass} whileHover={{ y: -1 }}>
-            GesCO
-          </motion.a>
+          {showGesco && (
+            <motion.a href="#gesco" className={navLinkClass} whileHover={{ y: -1 }}>
+              GesCO
+            </motion.a>
+          )}
           {session.authenticated ? (
             <>
               {session.role === "admin" && (
@@ -139,15 +142,17 @@ export function SiteHeader() {
                 </a>
               </li>
             )}
-            <li>
-              <a
-                href="#gesco"
-                className="font-display text-sm tracking-[0.15em] text-gold uppercase"
-                onClick={() => setOpen(false)}
-              >
-                GesCO
-              </a>
-            </li>
+            {showGesco && (
+              <li>
+                <a
+                  href="#gesco"
+                  className="font-display text-sm tracking-[0.15em] text-gold uppercase"
+                  onClick={() => setOpen(false)}
+                >
+                  GesCO
+                </a>
+              </li>
+            )}
             <li className="border-t border-gold/10 pt-4">
               {session.authenticated ? (
                 <div className="flex flex-col gap-3">

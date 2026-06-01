@@ -4,12 +4,20 @@ import { approveMemberForSetup, findMemberById } from "@/app/lib/members/reposit
 import { notifyMemberApproved } from "@/app/lib/email/send";
 
 export async function POST(
-  _request: Request,
+  request: Request,
   context: { params: Promise<{ id: string }> },
 ) {
   const session = await getSession();
   if (session.role !== "admin") {
     return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
+  }
+
+  let gescoAccess = false;
+  try {
+    const body = (await request.json()) as { gescoAccess?: boolean };
+    gescoAccess = body.gescoAccess === true;
+  } catch {
+    /* corpo vazio — sem acesso GesCO */
   }
 
   const { id } = await context.params;
@@ -20,7 +28,7 @@ export async function POST(
 
   const token = crypto.randomUUID();
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  const updated = await approveMemberForSetup(id, token, expires);
+  const updated = await approveMemberForSetup(id, token, expires, gescoAccess);
   if (!updated) {
     return NextResponse.json({ error: "Não foi possível aprovar." }, { status: 500 });
   }
@@ -33,6 +41,7 @@ export async function POST(
 
   return NextResponse.json({
     ok: true,
+    gescoAccess: updated.gesco_access,
     emailSent: emailResult.sent,
     setupUrl: "setupUrl" in emailResult ? emailResult.setupUrl : undefined,
   });

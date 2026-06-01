@@ -7,13 +7,14 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
   const { session } = useAuthSession();
   const showLoja = session.authenticated && session.role === "user";
+  const showGesco = session.authenticated && session.gescoAccess === true;
 
   const links = [
     { href: "#eventos", label: "Eventos" },
     { href: "#historia", label: "História" },
     ...(showLoja ? [{ href: "#loja", label: "Loja" as const }] : []),
     { href: "#comunidade", label: "Comunidade" },
-    { href: "#gesco", label: "GesCO" },
+    ...(showGesco ? [{ href: "#gesco", label: "GesCO" as const }] : []),
   ];
 
   return (
@@ -31,10 +32,12 @@ export function SiteFooter() {
               Comunidade do QCav e Ex-RC4 — eventos, história
               {showLoja ? " e Loja do Carrista" : ""}.
             </p>
-            <p className="mt-2 max-w-sm text-xs text-muted/80">
-              GesCO: plataforma interna de Gestão de Competências Operacionais
-              (acesso restrito).
-            </p>
+            {showGesco && (
+              <p className="mt-2 max-w-sm text-xs text-muted/80">
+                GesCO: plataforma interna de Gestão de Competências Operacionais
+                (acesso autorizado).
+              </p>
+            )}
           </div>
 
           <nav className="flex flex-wrap gap-x-8 gap-y-3">

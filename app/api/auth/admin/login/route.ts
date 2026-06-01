@@ -20,6 +20,7 @@ export async function POST(request: Request) {
   session.memberId = undefined;
   session.email = undefined;
   session.name = undefined;
+  session.gescoAccess = undefined;
   await session.save();
 
   return NextResponse.json({ ok: true });

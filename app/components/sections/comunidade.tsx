@@ -15,6 +15,7 @@ const benefits = [
 type ComunidadeSectionProps = {
   view: ComunidadeView;
   memberName?: string;
+  showGesco?: boolean;
 };
 
 function ComunidadeGuest() {
@@ -92,7 +93,13 @@ function ComunidadeQuote() {
   );
 }
 
-function ComunidadeMember({ memberName }: { memberName?: string }) {
+function ComunidadeMember({
+  memberName,
+  showGesco,
+}: {
+  memberName?: string;
+  showGesco?: boolean;
+}) {
   const greeting = memberName?.trim() ? `Olá, ${memberName}` : "Sessão de membro";
 
   return (
@@ -112,6 +119,11 @@ function ComunidadeMember({ memberName }: { memberName?: string }) {
           <Link href="#loja" className="btn-primary">
             Ir à Loja
           </Link>
+          {showGesco && (
+            <Link href="#gesco" className="btn-outline">
+              GesCO
+            </Link>
+          )}
           <Link href="#eventos" className="btn-outline">
             Ver eventos
           </Link>
@@ -128,6 +140,12 @@ function ComunidadeMember({ memberName }: { memberName?: string }) {
             <span className="text-gold">✓</span>
             <span>Agenda anual de eventos no Quartel da Cavalaria</span>
           </li>
+          {showGesco && (
+            <li className="flex gap-3">
+              <span className="text-gold">✓</span>
+              <span>GesCO — plataforma de Gestão de Competências Operacionais</span>
+            </li>
+          )}
           <li className="flex gap-3">
             <span className="text-gold">✓</span>
             <span>Para sair, use <strong className="text-foreground">Sair</strong> no menu superior</span>
@@ -149,7 +167,7 @@ function ComunidadeAdmin() {
         Sessão de administrador
       </h3>
       <p className="mb-6 text-muted leading-relaxed">
-        Pode continuar a navegar no site (Eventos, História, GesCO, etc.). O
+        Pode continuar a navegar no site (Eventos, História, etc.). O
         painel de adesões e perguntas está na secção{" "}
         <strong className="text-foreground">Administração</strong> abaixo — ou use
         o aviso no topo e o link <strong className="text-foreground">Admin</strong>{" "}
@@ -184,7 +202,11 @@ const shellCopy: Record<
   },
 };
 
-export function ComunidadeSection({ view, memberName }: ComunidadeSectionProps) {
+export function ComunidadeSection({
+  view,
+  memberName,
+  showGesco,
+}: ComunidadeSectionProps) {
   const copy = shellCopy[view];
 
   return (
@@ -196,7 +218,9 @@ export function ComunidadeSection({ view, memberName }: ComunidadeSectionProps) 
       alt
     >
       {view === "guest" && <ComunidadeGuest />}
-      {view === "member" && <ComunidadeMember memberName={memberName} />}
+      {view === "member" && (
+        <ComunidadeMember memberName={memberName} showGesco={showGesco} />
+      )}
       {view === "admin" && <ComunidadeAdmin />}
     </SectionShell>
   );

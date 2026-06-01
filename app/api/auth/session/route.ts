@@ -13,5 +13,6 @@ export async function GET() {
     role: session.role,
     name: session.name ?? null,
     email: session.email ?? null,
+    gescoAccess: session.role === "user" ? session.gescoAccess === true : false,
   });
 }

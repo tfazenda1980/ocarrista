@@ -6,6 +6,8 @@ export type SessionData = {
   memberId?: string;
   email?: string;
   name?: string;
+  /** Membro aprovado com permissão explícita para ver GesCO. */
+  gescoAccess?: boolean;
 };
 
 const sessionOptions: SessionOptions = {

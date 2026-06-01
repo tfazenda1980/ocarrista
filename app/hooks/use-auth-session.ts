@@ -7,6 +7,7 @@ export type AuthSession = {
   role?: "admin" | "user";
   name?: string | null;
   email?: string | null;
+  gescoAccess?: boolean;
 };
 
 export function useAuthSession() {
