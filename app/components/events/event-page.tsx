@@ -14,6 +14,7 @@ import { EventGallery } from "./sections/event-gallery";
 import { EventRegistration } from "./sections/event-registration";
 import { EventFooter } from "./sections/event-footer";
 import { EditionPlaceholder } from "./sections/edition-placeholder";
+import { EventArchivePdf } from "./sections/event-archive-pdf";
 import { StickyBackLink } from "../sticky-back-link";
 
 type EventPageProps = {
@@ -68,7 +69,16 @@ export function EventPageView({
               <EventRegistration event={event} />
             </>
           ) : (
-            <EditionPlaceholder event={event} />
+            <>
+              <EditionPlaceholder event={event} />
+              {event.archivePdf && (
+                <EventArchivePdf
+                  label={event.archivePdf.label}
+                  href={event.archivePdf.href}
+                  hint={event.archivePdf.hint}
+                />
+              )}
+            </>
           )}
         </main>
         <EventFooter event={event} />

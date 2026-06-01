@@ -18,11 +18,18 @@ export function EditionPlaceholder({ event }: { event: EventData }) {
             {event.placeholderMessage ??
               "O conteúdo desta edição estará disponível em breve."}
           </p>
-          {event.year !== "2026" && (
-            <Link href="/eventos/workshop/2026" className="btn-primary mt-8 inline-flex">
-              Ver Workshop 2026
-            </Link>
-          )}
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            {event.archivePdf && (
+              <a href="#arquivo-pdf" className="btn-primary inline-flex">
+                Ver caderno do workshop
+              </a>
+            )}
+            {event.year !== "2026" && (
+              <Link href="/eventos/workshop/2026" className="btn-outline inline-flex">
+                Workshop 2026
+              </Link>
+            )}
+          </div>
         </MotionReveal>
       </div>
     </section>

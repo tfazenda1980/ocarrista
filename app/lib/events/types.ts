@@ -102,6 +102,12 @@ export type EventData = {
   legal?: {
     terms?: string;
   };
+  /** Documento PDF em largura total (ex. arquivo da edição 2025). */
+  archivePdf?: {
+    label: string;
+    href: string;
+    hint?: string;
+  };
 };
 
 export type EventListItem = {
