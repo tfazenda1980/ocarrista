@@ -54,7 +54,7 @@ sequenceDiagram
 7. Admin:
    - `ADMIN_USERNAME` — `Admin1762`
    - `ADMIN_PASSWORD` — (definir na Vercel; valor por defeito no código se omitir)
-   - `ADMIN_NOTIFY_EMAIL` — `secpessoalgcc@gmail.com`
+   - `ADMIN_NOTIFY_EMAIL` — `ocarrista.cc@gmail.com` (adesões e pedidos de loja)
 8. Redis (perguntas workshop) — como antes
 
 ## URLs

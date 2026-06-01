@@ -6,6 +6,9 @@ import { useInView } from "framer-motion";
 type PdfHorizontalViewerProps = {
   pdfUrl: string;
   active: boolean;
+  /** Cabeçalho sobre o visor (ex. «Galeria de Prémios»). */
+  label?: string;
+  hint?: string;
 };
 
 type PdfDoc = import("pdfjs-dist").PDFDocumentProxy;
@@ -78,7 +81,12 @@ function PdfPageSlide({
   );
 }
 
-export function PdfHorizontalViewer({ pdfUrl, active }: PdfHorizontalViewerProps) {
+export function PdfHorizontalViewer({
+  pdfUrl,
+  active,
+  label = "História do RC4",
+  hint = "Deslize para o lado para ver cada página",
+}: PdfHorizontalViewerProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [doc, setDoc] = useState<PdfDoc | null>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -142,11 +150,10 @@ export function PdfHorizontalViewer({ pdfUrl, active }: PdfHorizontalViewerProps
     <div className="pdf-horizontal-wrap">
       <div className="border-y border-gold/15 bg-surface/40 px-4 py-3 text-center sm:px-6">
         <p className="font-display text-xs tracking-[0.2em] text-gold uppercase">
-          História do RC4
+          {label}
         </p>
         <p className="mt-1 text-xs text-muted">
-          Deslize para o lado para ver cada página ·{" "}
-          {totalPages > 0 ? `${currentPage} / ${totalPages}` : "—"}
+          {hint} · {totalPages > 0 ? `${currentPage} / ${totalPages}` : "—"}
         </p>
       </div>
 

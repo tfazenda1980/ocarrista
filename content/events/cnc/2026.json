@@ -1,0 +1,108 @@
+{
+  "year": "2026",
+  "slug": "cnc",
+  "published": true,
+  "title": "Concurso Nacional Combinado",
+  "edition": "CNC 2026",
+  "slogan": "Ensino, Cross e Obstáculos — rigor técnico e tradição equestre no Quartel da Cavalaria.",
+  "rationale": "O Concurso Completo de Equitação (CCE) é a prova equestre que combina três disciplinas: Ensino (harmonia e precisão), Cross (resistência, terreno e obstáculos naturais) e Obstáculos (gymnastique sobre saltos). O Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria reúne atletas e cavaleiros em diferentes níveis — da iniciação ao preliminar. Este espaço contém a documentação oficial e divulgação útil, tais como ordens de entrada, croquis de percursos e os resultados alcançados.",
+  "date": "2026-09-15T08:00:00+01:00",
+  "dateDisplay": "Setembro de 2026",
+  "location": "Centro Hípico · Quartel da Cavalaria · Santa Margarida",
+  "heroImage": "/images/cnc.png",
+  "cardImage": "/images/cnc.png",
+  "seo": {
+    "title": "Concurso Nacional Combinado 2026 | O Carrista",
+    "description": "Prova equestre militar de Ensino, Cross e Obstáculos — programa, provas, documentos e informação útil para concorrentes."
+  },
+  "openingNote": {
+    "title": "Nota de Abertura",
+    "body": "Bem-vindos ao Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria. Consulte o programa geral, as subsecções de cada prova e a informação útil antes da chegada ao quartel.",
+    "pdf": {
+      "label": "Nota de Abertura (PDF)",
+      "href": null
+    }
+  },
+  "generalProgram": {
+    "title": "Programa geral",
+    "body": "O programa abrange a calendarização das fases de Ensino, Cross e Obstáculos por categoria, briefings de segurança, inspeções veterinárias e entrega de prémios. Os horários definitivos serão publicados em PDF assim que homologados pela organização.",
+    "pdf": {
+      "label": "Programa geral (PDF)",
+      "href": null
+    }
+  },
+  "disciplines": [
+    {
+      "id": "iniciacao",
+      "title": "CNC Iniciação",
+      "description": "Categoria de entrada ao concurso completo, com percursos e critérios adaptados a cavaleiros e cavalos em formação.",
+      "resources": {
+        "ordens": { "label": "Ordens de Entrada", "href": null },
+        "croquis": { "label": "Croquis", "href": null },
+        "resultados": { "label": "Resultados", "href": null }
+      }
+    },
+    {
+      "id": "preliminar",
+      "title": "CNC Preliminar",
+      "description": "Nível intermédio com exigência técnica acrescida nas três fases do CCE.",
+      "resources": {
+        "ordens": { "label": "Ordens de Entrada", "href": null },
+        "croquis": { "label": "Croquis", "href": null },
+        "resultados": { "label": "Resultados", "href": null }
+      }
+    },
+    {
+      "id": "open",
+      "title": "Provas Open",
+      "description": "Competição open para combinações diferentes, com percursos de vários graus de exigência.",
+      "resources": {
+        "ordens": { "label": "Ordens de Entrada", "href": null },
+        "croquis": { "label": "Croquis", "href": null },
+        "resultados": { "label": "Resultados", "href": null }
+      }
+    },
+    {
+      "id": "premios",
+      "title": "Galeria de Prémios",
+      "description": "Documento em largura total com cada prova apresentada e os respetivos prémios em fotografia.",
+      "galleryPdf": {
+        "label": "Galeria de Prémios (PDF)",
+        "href": null
+      }
+    }
+  ],
+  "usefulInfo": [
+    {
+      "id": "cmsm",
+      "title": "Planta do CMSM",
+      "description": "Planta geral do Centro Hípico Militar de Santa Margarida.",
+      "pdf": { "label": "Planta do CMSM (PDF)", "href": null }
+    },
+    {
+      "id": "qcav",
+      "title": "Planta do QCav",
+      "description": "Planta do Quartel da Cavalaria — acessos e áreas de apoio.",
+      "pdf": { "label": "Planta do QCav (PDF)", "href": null }
+    },
+    {
+      "id": "cavalariças",
+      "title": "Área das Cavalariças",
+      "description": "Localização das boxes, picadeiros e zona de preparação dos equinos.",
+      "pdf": { "label": "Área das Cavalariças (PDF)", "href": null }
+    },
+    {
+      "id": "alojamentos",
+      "title": "Alojamentos",
+      "description": "Informação sobre alojamento de cavaleiros e apoio logístico na área do quartel.",
+      "pdf": { "label": "Alojamentos (PDF)", "href": null }
+    }
+  ],
+  "contacts": {
+    "organizer": "Organização CNC — Quartel da Cavalaria",
+    "email": "ocarrista.cc@gmail.com",
+    "phone": "",
+    "notes": "Para questões de inscrição, documentação veterinária e horários de reconhecimento de pista."
+  },
+  "sponsors": []
+}

@@ -61,7 +61,7 @@ O que podes fazer em **~15 minutos** seguindo isto.
 | `UPSTASH_REDIS_REST_TOKEN` | Idem |
 | `RESEND_API_KEY` | Da Resend |
 | `EMAIL_FROM` | Ex. `O Carrista <noreply@teudominio.pt>` |
-| `ADMIN_NOTIFY_EMAIL` | `secpessoalgcc@gmail.com` |
+| `ADMIN_NOTIFY_EMAIL` | `ocarrista.cc@gmail.com` |
 | `ADMIN_USERNAME` | `Admin1762` |
 | `ADMIN_PASSWORD` | `Leopard2@6` (ou outra — **só na Vercel**, não no Git) |
 | `WORKSHOP_QA_PASSWORD` | `1762` (opcional; há default no código) |
@@ -75,7 +75,8 @@ Depois: **Deployments → Redeploy** (para carregar as novas vars).
 | Teste | URL / ação |
 |-------|------------|
 | Admin | `/admin/entrar` — `Admin1762` + password |
-| Adesões | Formulário Comunidade → email para `secpessoalgcc@gmail.com` → `/admin/adesoes` → Autorizar |
+| Adesões | Formulário Comunidade → email para `ocarrista.cc@gmail.com` → painel admin na homepage → Autorizar |
+| Loja | Pedido de membro → email para `ocarrista.cc@gmail.com` (mesmo `ADMIN_NOTIFY_EMAIL`) |
 | Membro | Link no email → definir password → `/entrar` |
 | Q&A workshop | `/eventos/workshop/2026/perguntas` — password `1762` |
 | Moderar Q&A | `/admin/perguntas` (com sessão admin) |

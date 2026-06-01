@@ -16,6 +16,21 @@ Configuração em `content/events/workshop/`:
 
 Registo de novas edições: adicionar `YYYY.json` e o ano em `series.json` → `app/lib/events/load-workshop.ts`.
 
+## Concurso Nacional Combinado (CNC)
+
+Configuração em `content/events/cnc/`:
+
+| Ficheiro | Função |
+|----------|--------|
+| `series.json` | Anos e ano por defeito |
+| `2026.json` | Nota de abertura, programa, provas (PDFs), informação útil, contactos, patrocinadores |
+
+**URLs:** `/eventos/cnc` → `/eventos/cnc/2026`
+
+PDFs para concorrentes: `public/eventos/cnc/2026/` (ver README nessa pasta). Actualizar `href` em `2026.json`.
+
+Patrocinadores: array `sponsors` com `name`, `logo`, `url`.
+
 ## Outros eventos
 
-Rotas genéricas em `/eventos/[slug]` quando existirem mais eventos além do Workshop.
+Rotas genéricas em `/eventos/[slug]` quando existirem mais eventos além do Workshop e CNC.

@@ -1,7 +1,7 @@
 import { SectionShell } from "../section-shell";
 import { EventCard } from "../events/event-card";
 import { IconCalendar, IconTarget, IconShield } from "../icons";
-import { WORKSHOP_26_SRC } from "../../lib/site-assets";
+import { CNC_SRC, WORKSHOP_26_SRC } from "../../lib/site-assets";
 
 const events = [
   {
@@ -12,11 +12,13 @@ const events = [
     icon: <IconShield />,
   },
   {
-    title: "Concurso Completo Combinado de Equitação",
+    title: "Concurso Nacional Combinado",
     meta: "EDIÇÃO ANUAL · ENSINO · CROSS · OBSTÁCULOS",
     description:
-      "Prova equestre militar composta por três fases: Ensino, Cross e Obstáculos — rigor técnico, tradição e espírito de corpo dos carristas.",
+      "Prova equestre de Concurso Completo (CCE): Ensino, Cross e Obstáculos — documentação, provas e informação para concorrentes no Centro Hípico.",
     icon: <IconTarget />,
+    href: "/eventos/cnc",
+    backgroundImage: CNC_SRC,
   },
   {
     title: "Workshop de Carros de Combate",

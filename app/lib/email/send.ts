@@ -1,5 +1,12 @@
 import { Resend } from "resend";
 
+/** Destino de adesões, pedidos de loja e avisos admin (sobreposto por ADMIN_NOTIFY_EMAIL). */
+export const DEFAULT_ADMIN_NOTIFY_EMAIL = "ocarrista.cc@gmail.com";
+
+function adminNotifyEmail(): string {
+  return process.env.ADMIN_NOTIFY_EMAIL?.trim() || DEFAULT_ADMIN_NOTIFY_EMAIL;
+}
+
 function siteUrl(): string {
   if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/$/, "");
   if (process.env.VERCEL_URL) {
@@ -23,12 +30,12 @@ export async function notifyAdminNewMember(params: {
   memberName: string;
   memberEmail: string;
 }): Promise<{ sent: boolean; reason?: string }> {
-  const to = process.env.ADMIN_NOTIFY_EMAIL?.trim() || "secpessoalgcc@gmail.com";
+  const to = adminNotifyEmail();
   const from = fromAddress();
   const resend = resendClient();
 
   if (!to || !from || !resend) {
-    console.info("[email] Nova adesão (email não enviado — falta RESEND/ADMIN_NOTIFY_EMAIL):", params);
+    console.info("[email] Nova adesão (email não enviado — falta RESEND/EMAIL_FROM):", params);
     return { sent: false, reason: "email_nao_configurado" };
   }
 
@@ -110,7 +117,7 @@ export async function notifyShopRequest(params: {
   productName: string;
   note?: string;
 }): Promise<{ sent: boolean; reason?: string }> {
-  const to = process.env.ADMIN_NOTIFY_EMAIL?.trim() || "secpessoalgcc@gmail.com";
+  const to = adminNotifyEmail();
   const from = fromAddress();
   const resend = resendClient();
 

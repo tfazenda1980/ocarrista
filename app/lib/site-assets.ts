@@ -6,6 +6,7 @@ export const LOGO_VERSION = "1";
 export const BRASAO_VERSION = "4";
 export const CASTELO_VERSION = "1";
 export const WORKSHOP_26_VERSION = "1";
+export const CNC_VERSION = "1";
 
 /** Logo O Carrista (navbar) — public/images/ocarrista.png */
 export const LOGO_SRC = `/images/ocarrista.png?v=${LOGO_VERSION}`;
@@ -17,6 +18,7 @@ export const BRASAO_ALT = "Brasão do Regimento de Cavalaria 4 — Ex-RC4";
 
 export const CASTELO_SRC = `/images/cc_castelo.png?v=${CASTELO_VERSION}`;
 export const WORKSHOP_26_SRC = `/images/workshop26.png?v=${WORKSHOP_26_VERSION}`;
+export const CNC_SRC = `/images/cnc.png?v=${CNC_VERSION}`;
 
 /** PDF para slideshow em ecrã completo — public/historia/slideshow.pdf */
 export const HISTORIA_SLIDESHOW_VERSION = "2";

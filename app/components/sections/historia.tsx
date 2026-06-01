@@ -91,7 +91,11 @@ export function HistoriaSection() {
         </div>
       </div>
 
-      <PdfHorizontalViewer pdfUrl={HISTORIA_SLIDESHOW_PDF} active={inView} />
+      <PdfHorizontalViewer
+        pdfUrl={HISTORIA_SLIDESHOW_PDF}
+        active={inView}
+        label="História do RC4"
+      />
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <Timeline marcos={marcos} />

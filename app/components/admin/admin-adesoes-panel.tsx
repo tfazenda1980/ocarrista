@@ -44,8 +44,10 @@ export function AdminAdesoesPanel() {
   return (
     <div>
       <p className="mb-6 text-sm text-muted">
-        Novos pedidos disparam email para <code className="text-gold">ADMIN_NOTIFY_EMAIL</code>{" "}
-        (se configurado). Aqui pode autorizar ou recusar; ao autorizar, o membro recebe email
+        Novos pedidos disparam email para{" "}
+        <code className="text-gold">ocarrista.cc@gmail.com</code> (
+        <code className="text-gold">ADMIN_NOTIFY_EMAIL</code> na Vercel). Aqui pode autorizar ou
+        recusar; ao autorizar, o membro recebe email
         com link para definir a password.
       </p>
       {error && <p className="mb-4 text-sm text-muted">{error}</p>}
