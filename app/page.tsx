@@ -1,4 +1,3 @@
-import { LandingWallpaper } from "./components/landing-wallpaper";
 import { TacticalBackground } from "./components/tactical-background";
 import { SiteHeader } from "./components/site-header";
 import { EntrySectionLoader } from "./components/entry-section-loader";
@@ -27,7 +26,6 @@ export default async function Home() {
   return (
     <>
       <TacticalBackground />
-      <LandingWallpaper />
       <div className="relative z-10 flex min-h-full flex-col">
         <SiteHeader />
         {isAdmin && <AdminAlertBar pendingCount={pendingCount} />}

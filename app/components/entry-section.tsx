@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { CNC_SRC } from "../lib/site-assets";
+import { CASTELO_SRC } from "../lib/site-assets";
 import type {
   WorkshopTeaserInfo,
   WorkshopUpcomingPreview,
@@ -28,7 +28,7 @@ export function EntrySection({
 
       <div className="pointer-events-none absolute inset-0 flex items-center justify-end">
         <Image
-          src={CNC_SRC}
+          src={CASTELO_SRC}
           alt=""
           width={1600}
           height={1200}
