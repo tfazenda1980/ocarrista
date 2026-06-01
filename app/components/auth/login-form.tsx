@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type LoginFormProps = {
@@ -9,7 +8,6 @@ type LoginFormProps = {
 };
 
 export function LoginForm({ onSuccess }: LoginFormProps) {
-  const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -34,11 +32,12 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     onSuccess?.();
 
     if (data.role === "admin") {
-      router.push("/admin");
-    } else {
-      router.push("/#loja");
+      window.location.href = "/admin";
+      return;
     }
-    router.refresh();
+
+    // Recarrega a homepage para a Loja existir no DOM (sessão de membro) e scroll ao topo da secção
+    window.location.href = "/?section=loja";
   };
 
   return (

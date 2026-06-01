@@ -65,7 +65,7 @@ export function HistoriaSection() {
   }, []);
 
   return (
-    <div ref={sectionRef}>
+    <div ref={sectionRef} className="scroll-mt-20">
       <SectionShell
         id="historia"
         label="Secção 02 · História"

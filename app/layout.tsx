@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow, Oswald, Geist_Mono } from "next/font/google";
+import { HashScrollManager } from "./components/hash-scroll-manager";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -36,6 +37,7 @@ export default function RootLayout({
       className={`${oswald.variable} ${barlow.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <HashScrollManager />
         {children}
       </body>
     </html>

@@ -12,7 +12,7 @@ export default async function EntrarPage() {
     redirect("/admin");
   }
   if (canAccessLoja(session)) {
-    redirect("/#loja");
+    redirect("/?section=loja");
   }
 
   return (
