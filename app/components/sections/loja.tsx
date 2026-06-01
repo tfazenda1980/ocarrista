@@ -1,38 +1,47 @@
 import { SectionShell } from "../section-shell";
 import { IconShop } from "../icons";
+import { LojaProductRequest } from "../loja/loja-product-request";
 
 const products = [
-  { name: "Coin GCC", price: "—", note: "Moeda comemorativa · GCC" },
-  { name: "Coin ERec", price: "—", note: "Moeda comemorativa · ERec" },
-  { name: "Galhardete GCC", price: "—", note: "Galhardete · GCC" },
-  { name: "Galhardete ERec", price: "—", note: "Galhardete · ERec" },
-  { name: "O Carrista", price: "—", note: "Artigo de identidade · comunidade" },
-  { name: "Crachá GCC", price: "—", note: "Crachá · GCC" },
-  { name: "Crachá ERec", price: "—", note: "Crachá · ERec" },
-  { name: "Velcro GCC", price: "—", note: "Patch velcro · GCC" },
-  { name: "Velcro ERec", price: "—", note: "Patch velcro · ERec" },
+  { name: "Coin GCC", note: "Moeda comemorativa · GCC" },
+  { name: "Coin ERec", note: "Moeda comemorativa · ERec" },
+  { name: "Galhardete GCC", note: "Galhardete · GCC" },
+  { name: "Galhardete ERec", note: "Galhardete · ERec" },
+  { name: "O Carrista", note: "Artigo de identidade · comunidade" },
+  { name: "Crachá GCC", note: "Crachá · GCC" },
+  { name: "Crachá ERec", note: "Crachá · ERec" },
+  { name: "Velcro GCC", note: "Patch velcro · GCC" },
+  { name: "Velcro ERec", note: "Patch velcro · ERec" },
 ];
 
-export function LojaSection() {
+type LojaSectionProps = {
+  memberName?: string;
+};
+
+export function LojaSection({ memberName }: LojaSectionProps) {
   return (
     <SectionShell
       id="loja"
       label="Secção 03 · Loja"
       title="Loja do Carrista"
-      description="Prendas, vestuário e artigos comemorativos exclusivos para membros da comunidade — identidade O Carrista e orgulho Ex-RC4."
+      description="Artigos exclusivos para membros. Não há pagamento no site — cada pedido é enviado por email à organização, que responde com os detalhes."
     >
       <div className="mb-8 flex flex-wrap items-center gap-3">
         <span className="border border-gold/30 bg-gold/10 px-3 py-1 font-mono text-[0.65rem] tracking-wider text-gold uppercase">
-          Acesso reservado a membros
+          Membro autorizado
         </span>
-        <p className="text-sm text-muted">
-          Aderir em{" "}
-          <a href="#comunidade" className="text-gold hover:underline">
-            Comunidade
-          </a>{" "}
-          para entrar como membro e comprar na loja.
-        </p>
+        {memberName && (
+          <p className="text-sm text-muted">
+            Sessão: <span className="text-foreground">{memberName}</span>
+          </p>
+        )}
       </div>
+
+      <p className="mb-10 max-w-3xl text-sm leading-relaxed text-muted">
+        Clique em <strong className="text-foreground">Solicitar</strong> no artigo pretendido.
+        A organização recebe o pedido por email (com o seu nome e email de membro) e
+        contacta-o para quantidade, entrega e pagamento — fora do site.
+      </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
@@ -47,37 +56,11 @@ export function LojaSection() {
               {product.name}
             </h3>
             <p className="mt-2 flex-1 text-sm text-muted">{product.note}</p>
-            <div className="mt-4 flex items-center justify-between border-t border-gold/10 pt-4">
-              <span className="font-display text-lg text-gold">{product.price}</span>
-              <a
-                href="#comunidade"
-                className="font-display text-[0.65rem] tracking-[0.15em] text-gold uppercase hover:underline"
-              >
-                Comprar →
-              </a>
+            <div className="mt-4 flex flex-col gap-3 border-t border-gold/10 pt-4">
+              <LojaProductRequest productName={product.name} />
             </div>
           </article>
         ))}
-      </div>
-
-      <div className="mt-12 flex flex-col items-start gap-4 border border-gold/15 bg-surface-elevated/80 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-        <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-gold/40 text-gold">
-            <IconShop />
-          </div>
-          <div>
-            <p className="font-display text-sm tracking-[0.15em] text-gold uppercase">
-              Loja online para membros
-            </p>
-            <p className="mt-1 max-w-lg text-muted">
-              Entre como membro na Comunidade para aceder ao catálogo completo,
-              encomendas e entregas.
-            </p>
-          </div>
-        </div>
-        <a href="#comunidade" className="btn-primary shrink-0">
-          Entrar na Comunidade
-        </a>
       </div>
     </SectionShell>
   );

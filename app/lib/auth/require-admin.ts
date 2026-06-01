@@ -4,7 +4,7 @@ import { getSession } from "./session";
 export async function requireAdminPage() {
   const session = await getSession();
   if (session.role !== "admin") {
-    redirect("/admin/entrar");
+    redirect("/entrar");
   }
   return session;
 }

@@ -11,7 +11,7 @@ export function AdminAdesoesPanel() {
   const load = useCallback(async () => {
     const res = await fetch("/api/admin/members");
     if (res.status === 401) {
-      window.location.href = "/admin/entrar";
+      window.location.href = "/entrar";
       return;
     }
     const data = (await res.json()) as { pending?: Member[]; error?: string };

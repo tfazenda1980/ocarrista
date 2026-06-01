@@ -1,5 +1,20 @@
+"use client";
+
+import Link from "next/link";
+import { useAuthSession } from "../hooks/use-auth-session";
+
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { session } = useAuthSession();
+  const showLoja = session.authenticated && session.role === "user";
+
+  const links = [
+    { href: "#eventos", label: "Eventos" },
+    { href: "#historia", label: "História" },
+    ...(showLoja ? [{ href: "#loja", label: "Loja" as const }] : []),
+    { href: "#comunidade", label: "Comunidade" },
+    { href: "#gesco", label: "GesCO" },
+  ];
 
   return (
     <footer className="relative border-t border-gold/15 bg-surface py-12 sm:py-16">
@@ -13,7 +28,8 @@ export function SiteFooter() {
               De Santa Margarida
             </p>
             <p className="mt-2 max-w-sm text-sm text-muted">
-              Comunidade do QCav e Ex-RC4 — eventos, história e Loja do Carrista.
+              Comunidade do QCav e Ex-RC4 — eventos, história
+              {showLoja ? " e Loja do Carrista" : ""}.
             </p>
             <p className="mt-2 max-w-sm text-xs text-muted/80">
               GesCO: plataforma interna de Gestão de Competências Operacionais
@@ -22,12 +38,7 @@ export function SiteFooter() {
           </div>
 
           <nav className="flex flex-wrap gap-x-8 gap-y-3">
-            {[
-              { href: "#eventos", label: "Eventos" },
-              { href: "#historia", label: "História" },
-              { href: "#loja", label: "Loja" },
-              { href: "#comunidade", label: "Comunidade" },
-            ].map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -36,18 +47,23 @@ export function SiteFooter() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#gesco"
-              className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
-            >
-              GesCO
-            </a>
-            <a
-              href="#admin"
-              className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
-            >
-              Admin
-            </a>
+            {session.authenticated ? (
+              session.role === "admin" ? (
+                <Link
+                  href="/admin"
+                  className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
+                >
+                  Admin
+                </Link>
+              ) : null
+            ) : (
+              <Link
+                href="/entrar"
+                className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
+              >
+                Login
+              </Link>
+            )}
           </nav>
         </div>
 

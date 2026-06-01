@@ -1,23 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { UnitCrest } from "./unit-crest";
+import { useAuthSession } from "../hooks/use-auth-session";
 
-const navLinks = [
+const mainNavLinks = [
   { href: "#eventos", label: "Eventos" },
   { href: "#historia", label: "História" },
-  { href: "#loja", label: "Loja" },
   { href: "#comunidade", label: "Comunidade" },
-  { href: "#admin", label: "Admin" },
 ] as const;
-
-const gescoNavLabel = "GesCO";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { session, logout, refresh } = useAuthSession();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -25,6 +25,18 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const showLoja = session.authenticated && session.role === "user";
+
+  const handleLogout = async () => {
+    await logout();
+    setOpen(false);
+    router.push("/");
+    router.refresh();
+  };
+
+  const navLinkClass =
+    "font-display text-[0.7rem] tracking-[0.18em] text-gold/85 uppercase transition-colors hover:text-gold-bright";
 
   return (
     <header
@@ -48,23 +60,41 @@ export function SiteHeader() {
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.href}
-              href={link.href}
-              className="font-display text-[0.7rem] tracking-[0.18em] text-gold/85 uppercase transition-colors hover:text-gold-bright"
-              whileHover={{ y: -1 }}
-            >
+          {mainNavLinks.map((link) => (
+            <motion.a key={link.href} href={link.href} className={navLinkClass} whileHover={{ y: -1 }}>
               {link.label}
             </motion.a>
           ))}
-          <motion.a
-            href="#gesco"
-            className="font-display text-[0.7rem] tracking-[0.18em] text-gold/85 uppercase transition-colors hover:text-gold-bright"
-            whileHover={{ y: -1 }}
-          >
-            {gescoNavLabel}
+          {showLoja && (
+            <motion.a href="#loja" className={navLinkClass} whileHover={{ y: -1 }}>
+              Loja
+            </motion.a>
+          )}
+          <motion.a href="#gesco" className={navLinkClass} whileHover={{ y: -1 }}>
+            GesCO
           </motion.a>
+          {session.authenticated ? (
+            <>
+              {session.role === "admin" && (
+                <motion.a href="/admin" className={navLinkClass} whileHover={{ y: -1 }}>
+                  Admin
+                </motion.a>
+              )}
+              <button
+                type="button"
+                onClick={handleLogout}
+                className={`${navLinkClass} ml-2 border-l border-gold/20 pl-8`}
+              >
+                Sair
+              </button>
+            </>
+          ) : (
+            <motion.div whileHover={{ y: -1 }} className="ml-2 border-l border-gold/20 pl-8">
+              <Link href="/entrar" className={navLinkClass}>
+                Login
+              </Link>
+            </motion.div>
+          )}
         </nav>
 
         <button
@@ -85,9 +115,9 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-gold/10 bg-background/95 py-6 pl-5 pr-4 text-left backdrop-blur-lg sm:pl-8 md:hidden md:pl-12 lg:pl-16 xl:pl-24">
+        <nav className="border-t border-gold/10 bg-background/95 py-6 pl-5 pr-4 text-left backdrop-blur-lg sm:pl-8 md:hidden">
           <ul className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+            {mainNavLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -98,14 +128,58 @@ export function SiteHeader() {
                 </a>
               </li>
             ))}
+            {showLoja && (
+              <li>
+                <a
+                  href="#loja"
+                  className="font-display text-sm tracking-[0.15em] text-gold uppercase"
+                  onClick={() => setOpen(false)}
+                >
+                  Loja
+                </a>
+              </li>
+            )}
             <li>
               <a
                 href="#gesco"
                 className="font-display text-sm tracking-[0.15em] text-gold uppercase"
                 onClick={() => setOpen(false)}
               >
-                {gescoNavLabel}
+                GesCO
               </a>
+            </li>
+            <li className="border-t border-gold/10 pt-4">
+              {session.authenticated ? (
+                <div className="flex flex-col gap-3">
+                  {session.role === "admin" && (
+                    <Link
+                      href="/admin"
+                      className="font-display text-sm tracking-[0.15em] text-gold uppercase"
+                      onClick={() => setOpen(false)}
+                    >
+                      Admin
+                    </Link>
+                  )}
+                  <button
+                    type="button"
+                    className="text-left font-display text-sm tracking-[0.15em] text-gold uppercase"
+                    onClick={handleLogout}
+                  >
+                    Sair
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/entrar"
+                  className="font-display text-sm tracking-[0.15em] text-gold uppercase"
+                  onClick={() => {
+                    setOpen(false);
+                    refresh();
+                  }}
+                >
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </nav>

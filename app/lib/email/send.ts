@@ -103,3 +103,40 @@ export async function notifyMemberRejected(params: {
 
   return { sent: true };
 }
+
+export async function notifyShopRequest(params: {
+  memberName: string;
+  memberEmail: string;
+  productName: string;
+  note?: string;
+}): Promise<{ sent: boolean; reason?: string }> {
+  const to = process.env.ADMIN_NOTIFY_EMAIL?.trim() || "secpessoalgcc@gmail.com";
+  const from = fromAddress();
+  const resend = resendClient();
+
+  if (!to || !from || !resend) {
+    console.info("[email] Pedido loja (não enviado):", params);
+    return { sent: false, reason: "email_nao_configurado" };
+  }
+
+  const noteBlock = params.note?.trim()
+    ? `<p><strong>Nota do membro:</strong> ${params.note.trim()}</p>`
+    : "";
+
+  await resend.emails.send({
+    from,
+    to,
+    replyTo: params.memberEmail,
+    subject: `O Carrista — Pedido Loja: ${params.productName}`,
+    html: `
+      <p>Pedido de artigo na Loja do Carrista (sem pagamento online).</p>
+      <p><strong>Artigo:</strong> ${params.productName}<br/>
+      <strong>Membro:</strong> ${params.memberName}<br/>
+      <strong>Email:</strong> ${params.memberEmail}</p>
+      ${noteBlock}
+      <p>Responda ao membro por email para combinar entrega e valor.</p>
+    `,
+  });
+
+  return { sent: true };
+}

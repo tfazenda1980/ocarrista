@@ -11,7 +11,7 @@ export function AdminQaPanel({ year }: { year: string }) {
   const load = useCallback(async () => {
     const res = await fetch(`/api/admin/workshop/${year}/qa?room=${room}`);
     if (res.status === 401) {
-      window.location.href = "/admin/entrar";
+      window.location.href = "/entrar";
       return;
     }
     const data = (await res.json()) as { questions?: QaQuestion[] };

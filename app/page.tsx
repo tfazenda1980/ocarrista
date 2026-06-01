@@ -9,10 +9,14 @@ import { HistoriaSection } from "./components/sections/historia";
 import { LojaSection } from "./components/sections/loja";
 import { ComunidadeSection } from "./components/sections/comunidade";
 import { GescoSection } from "./components/sections/gesco";
-import { AdminSection } from "./components/sections/admin";
 import { SiteFooter } from "./components/site-footer";
+import { canAccessLoja } from "./lib/auth/member-access";
+import { getSession } from "./lib/auth/session";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSession();
+  const showLoja = canAccessLoja(session);
+
   return (
     <>
       <TacticalBackground />
@@ -25,10 +29,9 @@ export default function Home() {
           <VideoPromoSection />
           <EventosSection />
           <HistoriaSection />
-          <LojaSection />
-          <ComunidadeSection />
+          {showLoja && <LojaSection memberName={session.name} />}
+          <ComunidadeSection showLojaHint={!showLoja} />
           <GescoSection />
-          <AdminSection />
         </main>
         <SiteFooter />
       </div>
