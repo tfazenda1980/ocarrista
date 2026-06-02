@@ -11,11 +11,12 @@ CREATE TABLE IF NOT EXISTS notification_sent (
 INSERT INTO notification_sent (kind, reference) VALUES
   ('loja_product', 'coin-gcc'),
   ('loja_product', 'coin-erec'),
-  ('loja_product', 'galhardete-gcc'),
+  ('loja_product', 'galhardete-qcav'),
   ('loja_product', 'galhardete-erec'),
-  ('loja_product', 'o-carrista'),
-  ('loja_product', 'cracha-gcc'),
-  ('loja_product', 'cracha-erec'),
   ('loja_product', 'velcro-gcc'),
-  ('loja_product', 'velcro-erec')
+  ('loja_product', 'velcro-erec'),
+  ('loja_product', 'gravata-qcav'),
+  ('loja_product', 'cracha-qcav'),
+  ('loja_product', 'caderno-gcc'),
+  ('loja_product', 'cc-farda')
 ON CONFLICT (kind, reference) DO NOTHING;

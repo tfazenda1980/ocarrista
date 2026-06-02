@@ -4,6 +4,7 @@ export type LojaProduct = {
   id: string;
   name: string;
   note: string;
+  image?: string;
 };
 
 export function getLojaProducts(): LojaProduct[] {

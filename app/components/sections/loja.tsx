@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionShell } from "../section-shell";
 import { IconShop } from "../icons";
 import { LojaProductRequest } from "../loja/loja-product-request";
@@ -40,8 +41,20 @@ export function LojaSection({ memberName }: LojaSectionProps) {
             key={product.id}
             className="card-tactical group flex flex-col p-6"
           >
-            <div className="mb-4 flex aspect-[4/3] items-center justify-center border border-gold/15 bg-background/60 transition-colors group-hover:border-gold/30">
-              <IconShop />
+            <div className="relative mb-4 aspect-[4/3] overflow-hidden border border-gold/15 bg-background/60 transition-colors group-hover:border-gold/30">
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-contain p-3"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center">
+                  <IconShop />
+                </div>
+              )}
             </div>
             <h3 className="font-display text-sm font-semibold tracking-wide text-foreground uppercase">
               {product.name}

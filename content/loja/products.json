@@ -1,13 +1,64 @@
 {
   "products": [
-    { "id": "coin-gcc", "name": "Coin GCC", "note": "Moeda comemorativa · GCC" },
-    { "id": "coin-erec", "name": "Coin ERec", "note": "Moeda comemorativa · ERec" },
-    { "id": "galhardete-gcc", "name": "Galhardete GCC", "note": "Galhardete · GCC" },
-    { "id": "galhardete-erec", "name": "Galhardete ERec", "note": "Galhardete · ERec" },
-    { "id": "o-carrista", "name": "O Carrista", "note": "Artigo de identidade · comunidade" },
-    { "id": "cracha-gcc", "name": "Crachá GCC", "note": "Crachá · GCC" },
-    { "id": "cracha-erec", "name": "Crachá ERec", "note": "Crachá · ERec" },
-    { "id": "velcro-gcc", "name": "Velcro GCC", "note": "Patch velcro · GCC" },
-    { "id": "velcro-erec", "name": "Velcro ERec", "note": "Patch velcro · ERec" }
+    {
+      "id": "coin-gcc",
+      "name": "Coin GCC",
+      "note": "Moeda comemorativa · GCC",
+      "image": "/images/coingcc.png"
+    },
+    {
+      "id": "coin-erec",
+      "name": "Coin ERec",
+      "note": "Moeda comemorativa · ERec",
+      "image": "/images/coinerec.png"
+    },
+    {
+      "id": "galhardete-qcav",
+      "name": "Galhardete QCav",
+      "note": "Galhardete · Quartel da Cavalaria",
+      "image": "/images/galhaqcav.png"
+    },
+    {
+      "id": "galhardete-erec",
+      "name": "Galhardete ERec",
+      "note": "Galhardete · ERec",
+      "image": "/images/galhaerec.png"
+    },
+    {
+      "id": "velcro-gcc",
+      "name": "Velcro GCC",
+      "note": "Patch velcro · GCC",
+      "image": "/images/velcrogcc.png"
+    },
+    {
+      "id": "velcro-erec",
+      "name": "Velcro ERec",
+      "note": "Patch velcro · ERec",
+      "image": "/images/velcroerec.png"
+    },
+    {
+      "id": "gravata-qcav",
+      "name": "Prendedor de Gravata QCav",
+      "note": "Prendedor de gravata · QCav",
+      "image": "/images/gravataqcav.png"
+    },
+    {
+      "id": "cracha-qcav",
+      "name": "Crachá QCav",
+      "note": "Crachá · Quartel da Cavalaria",
+      "image": "/images/crachaqcav.png"
+    },
+    {
+      "id": "caderno-gcc",
+      "name": "Caderno GCC",
+      "note": "Caderno · GCC",
+      "image": "/images/cadernogcc.png"
+    },
+    {
+      "id": "cc-farda",
+      "name": "CC Farda",
+      "note": "Carro de Combate · farda / identidade",
+      "image": "/images/ccqcav.png"
+    }
   ]
 }
