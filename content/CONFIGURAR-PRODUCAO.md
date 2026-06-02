@@ -65,8 +65,26 @@ O que podes fazer em **~15 minutos** seguindo isto.
 | `ADMIN_USERNAME` | `Admin1762` |
 | `ADMIN_PASSWORD` | `Leopard2@6` (ou outra — **só na Vercel**, não no Git) |
 | `WORKSHOP_QA_PASSWORD` | `1762` (opcional; há default no código) |
+| `CRON_SECRET` | String aleatória (Vercel Cron → alertas email a membros) |
 
 Depois: **Deployments → Redeploy** (para carregar as novas vars).
+
+### SQL adicional (notificações)
+
+No Neon, executar também `scripts/migrate-notifications.sql` (tabela `notification_sent` + artigos Loja já existentes marcados como notificados).
+
+### Alertas automáticos (membros aprovados)
+
+| Alerta | Quando |
+|--------|--------|
+| **Destaque de evento** | Entrada na janela de 3 semanas antes da data (Workshop, CNC, etc.) — uma vez por evento |
+| **Novo artigo Loja** | Novo `id` em `content/loja/products.json` após deploy — cron diário às 08:00 UTC |
+
+Cron: `GET /api/cron/notifications` (Vercel, com `CRON_SECRET`).
+
+### Sessão por inatividade
+
+Membros e administrador: **logout automático após 2 minutos** sem actividade no site (volta a visitante normal).
 
 ---
 

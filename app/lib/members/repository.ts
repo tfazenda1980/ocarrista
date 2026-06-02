@@ -51,6 +51,10 @@ export async function createPendingMember(
   return rowToMember(rows[0] as MemberRow);
 }
 
+export async function listApprovedMembers(): Promise<Member[]> {
+  return listMembersByStatus("approved");
+}
+
 export async function listMembersByStatus(status: MemberStatus): Promise<Member[]> {
   const sql = getSql();
   if (!sql) return [];

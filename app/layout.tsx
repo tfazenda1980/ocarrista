@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow, Oswald, Geist_Mono } from "next/font/google";
 import { HashScrollManager } from "./components/hash-scroll-manager";
+import { SessionInactivityGuard } from "./components/session-inactivity-guard";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -38,6 +39,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <HashScrollManager />
+        <SessionInactivityGuard />
         {children}
       </body>
     </html>

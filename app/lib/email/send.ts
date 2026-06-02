@@ -191,3 +191,95 @@ export async function sendAdminMessageToMember(params: {
 
   return { sent: true };
 }
+
+export type MemberEmailRecipient = {
+  name: string;
+  email: string;
+};
+
+async function sendEmailToMember(
+  recipient: MemberEmailRecipient,
+  subject: string,
+  html: string,
+): Promise<boolean> {
+  const from = fromAddress();
+  const resend = resendClient();
+  if (!from || !resend) return false;
+
+  await resend.emails.send({
+    from,
+    to: recipient.email,
+    subject: `O Carrista — ${subject}`,
+    html,
+  });
+  return true;
+}
+
+/** Envia o mesmo alerta a todos os membros aprovados (um email por membro). */
+export async function notifyApprovedMembersBulk(params: {
+  subject: string;
+  buildHtml: (memberName: string) => string;
+  recipients: MemberEmailRecipient[];
+}): Promise<{ sent: number; skipped: number; reason?: string }> {
+  const from = fromAddress();
+  const resend = resendClient();
+  if (!from || !resend) {
+    console.info("[email] Alerta membros (não enviado):", params.subject);
+    return { sent: 0, skipped: params.recipients.length, reason: "email_nao_configurado" };
+  }
+
+  let sent = 0;
+  for (const member of params.recipients) {
+    try {
+      const ok = await sendEmailToMember(
+        member,
+        params.subject,
+        params.buildHtml(member.name),
+      );
+      if (ok) sent += 1;
+    } catch (err) {
+      console.error("[email] Falha ao enviar para", member.email, err);
+    }
+  }
+
+  return {
+    sent,
+    skipped: params.recipients.length - sent,
+  };
+}
+
+export function buildEventHighlightEmailHtml(params: {
+  memberName: string;
+  edition: string;
+  title: string;
+  dateDisplay: string;
+  location: string;
+  daysRemaining: number;
+  eventUrl: string;
+}): string {
+  const dias = params.daysRemaining === 1 ? "1 dia" : `${params.daysRemaining} dias`;
+  return `
+    <p>Olá ${escapeHtml(params.memberName)},</p>
+    <p>O evento <strong>${escapeHtml(params.edition)}</strong> (${escapeHtml(params.title)}) entrou em <strong>destaque</strong> na página inicial do O Carrista — faltam <strong>${dias}</strong> para a data prevista.</p>
+    <p><strong>Data:</strong> ${escapeHtml(params.dateDisplay)}<br/>
+    <strong>Local:</strong> ${escapeHtml(params.location)}</p>
+    <p><a href="${params.eventUrl}">Ver o evento no site</a> · <a href="${siteUrl()}">${siteUrl()}</a></p>
+    <p style="color:#666;font-size:0.9em">Recebeu este aviso por ser membro da comunidade O Carrista.</p>
+  `;
+}
+
+export function buildLojaProductEmailHtml(params: {
+  memberName: string;
+  productName: string;
+  productNote: string;
+}): string {
+  return `
+    <p>Olá ${escapeHtml(params.memberName)},</p>
+    <p>Foi adicionado um novo artigo à <strong>Loja do Carrista</strong>:</p>
+    <p><strong>${escapeHtml(params.productName)}</strong><br/>
+    <span style="color:#666">${escapeHtml(params.productNote)}</span></p>
+    <p>Entre na sua conta e visite a secção Loja para solicitar o artigo por email (sem pagamento no site).</p>
+    <p><a href="${siteUrl()}/?section=loja">Abrir Loja</a></p>
+    <p style="color:#666;font-size:0.9em">Apenas para membros aprovados.</p>
+  `;
+}

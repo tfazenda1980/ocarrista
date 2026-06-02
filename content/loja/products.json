@@ -1,0 +1,13 @@
+{
+  "products": [
+    { "id": "coin-gcc", "name": "Coin GCC", "note": "Moeda comemorativa · GCC" },
+    { "id": "coin-erec", "name": "Coin ERec", "note": "Moeda comemorativa · ERec" },
+    { "id": "galhardete-gcc", "name": "Galhardete GCC", "note": "Galhardete · GCC" },
+    { "id": "galhardete-erec", "name": "Galhardete ERec", "note": "Galhardete · ERec" },
+    { "id": "o-carrista", "name": "O Carrista", "note": "Artigo de identidade · comunidade" },
+    { "id": "cracha-gcc", "name": "Crachá GCC", "note": "Crachá · GCC" },
+    { "id": "cracha-erec", "name": "Crachá ERec", "note": "Crachá · ERec" },
+    { "id": "velcro-gcc", "name": "Velcro GCC", "note": "Patch velcro · GCC" },
+    { "id": "velcro-erec", "name": "Velcro ERec", "note": "Patch velcro · ERec" }
+  ]
+}

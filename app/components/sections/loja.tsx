@@ -1,18 +1,9 @@
 import { SectionShell } from "../section-shell";
 import { IconShop } from "../icons";
 import { LojaProductRequest } from "../loja/loja-product-request";
+import { getLojaProducts } from "../../lib/loja/products";
 
-const products = [
-  { name: "Coin GCC", note: "Moeda comemorativa · GCC" },
-  { name: "Coin ERec", note: "Moeda comemorativa · ERec" },
-  { name: "Galhardete GCC", note: "Galhardete · GCC" },
-  { name: "Galhardete ERec", note: "Galhardete · ERec" },
-  { name: "O Carrista", note: "Artigo de identidade · comunidade" },
-  { name: "Crachá GCC", note: "Crachá · GCC" },
-  { name: "Crachá ERec", note: "Crachá · ERec" },
-  { name: "Velcro GCC", note: "Patch velcro · GCC" },
-  { name: "Velcro ERec", note: "Patch velcro · ERec" },
-];
+const products = getLojaProducts();
 
 type LojaSectionProps = {
   memberName?: string;
@@ -46,7 +37,7 @@ export function LojaSection({ memberName }: LojaSectionProps) {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <article
-            key={product.name}
+            key={product.id}
             className="card-tactical group flex flex-col p-6"
           >
             <div className="mb-4 flex aspect-[4/3] items-center justify-center border border-gold/15 bg-background/60 transition-colors group-hover:border-gold/30">
