@@ -467,6 +467,47 @@ body {
   }
 }
 
+/* Vista de caderno — páginas encostadas ao lombo */
+.pdf-book-spread {
+  gap: 0;
+  padding: 0 0.75rem;
+}
+
+.pdf-book-spine {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 2px;
+  margin: 0 -1px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(198, 164, 75, 0.35) 45%,
+    rgba(198, 164, 75, 0.35) 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  box-shadow:
+    -2px 0 6px rgba(0, 0, 0, 0.25),
+    2px 0 6px rgba(0, 0, 0, 0.25);
+}
+
+.pdf-book-page--left canvas,
+.pdf-book-page--left > div:first-child {
+  border-radius: 3px 0 0 3px;
+}
+
+.pdf-book-page--right canvas,
+.pdf-book-page--right > div:first-child {
+  border-radius: 0 3px 3px 0;
+}
+
+.pdf-book-page--left canvas {
+  box-shadow: 3px 0 10px -3px rgba(0, 0, 0, 0.4);
+}
+
+.pdf-book-page--right canvas {
+  box-shadow: -3px 0 10px -3px rgba(0, 0, 0, 0.4);
+}
+
 /* Plataforma de eventos — Workshop 2026 */
 .event-platform {
   --event-glow: rgba(198, 164, 75, 0.12);

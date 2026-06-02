@@ -42,10 +42,12 @@ function PdfPageCanvas({
   doc,
   pageNum,
   pageWidth,
+  className = "",
 }: {
   doc: PdfDoc;
   pageNum: number;
   pageWidth: number;
+  className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -89,7 +91,7 @@ function PdfPageCanvas({
   return (
     <div
       ref={ref}
-      className="flex shrink-0 items-center justify-center"
+      className={`flex shrink-0 items-center justify-center ${className}`.trim()}
       style={{ width: pageWidth }}
       aria-label={`Página ${pageNum}`}
     >
@@ -121,9 +123,8 @@ function PdfSpreadSlide({
   rightPage: number | null;
   isSpread: boolean;
 }) {
-  const gap = isSpread ? 24 : 0;
   const pageWidth = isSpread
-    ? Math.max(120, (slideWidth - gap - 32) / 2)
+    ? Math.max(120, (slideWidth - 24) / 2)
     : Math.max(120, slideWidth * 0.92);
 
   return (
@@ -132,13 +133,26 @@ function PdfSpreadSlide({
       style={{ width: slideWidth }}
     >
       <div
-        className={`flex w-full items-center justify-center px-2 sm:px-4 ${
-          isSpread ? "gap-4 sm:gap-6" : ""
+        className={`flex w-full items-center justify-center ${
+          isSpread ? "pdf-book-spread" : "px-2 sm:px-4"
         }`}
       >
-        <PdfPageCanvas doc={doc} pageNum={leftPage} pageWidth={pageWidth} />
+        <PdfPageCanvas
+          doc={doc}
+          pageNum={leftPage}
+          pageWidth={pageWidth}
+          className={isSpread ? "pdf-book-page pdf-book-page--left" : ""}
+        />
         {isSpread && rightPage !== null && (
-          <PdfPageCanvas doc={doc} pageNum={rightPage} pageWidth={pageWidth} />
+          <>
+            <div className="pdf-book-spine" aria-hidden />
+            <PdfPageCanvas
+              doc={doc}
+              pageNum={rightPage}
+              pageWidth={pageWidth}
+              className="pdf-book-page pdf-book-page--right"
+            />
+          </>
         )}
         {isSpread && rightPage === null && (
           <div
