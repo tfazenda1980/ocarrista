@@ -33,10 +33,14 @@ O que podes fazer em **~15 minutos** seguindo isto.
 
 ---
 
-## 3. Upstash Redis (perguntas workshop)
+## 3. Upstash Redis / Vercel KV (perguntas workshop)
 
-1. Vercel → **Storage** → **Upstash Redis** → Connect
-2. Confirma que aparecem `UPSTASH_REDIS_REST_URL` e `UPSTASH_REDIS_REST_TOKEN`
+1. Vercel → **Storage** → **Upstash Redis** ou **KV** → Connect ao projeto `ocarrista`
+2. **Não uses prefixo personalizado** no campo «Custom Environment Variable Prefix» (deixa vazio)
+3. Confirma em **Settings → Environment Variables** (Production) um destes pares:
+   - `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`, ou
+   - `KV_REST_API_URL` + `KV_REST_API_TOKEN` (comum ao ligar «upstash-kv» na Vercel)
+4. **Redeploy** obrigatório após ligar
 
 ---
 
@@ -57,8 +61,8 @@ O que podes fazer em **~15 minutos** seguindo isto.
 | `SITE_URL` | URL pública do site, **sem** barra final (ex. `https://ocarrista.pt`) |
 | `SESSION_SECRET` | String aleatória ≥ 32 chars (`openssl rand -base64 32`) |
 | `DATABASE_URL` | Preenchida pela integração Neon |
-| `UPSTASH_REDIS_REST_URL` | Preenchida pela integração Upstash |
-| `UPSTASH_REDIS_REST_TOKEN` | Idem |
+| `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` | Integração Upstash Redis, ou |
+| `KV_REST_API_URL` + `KV_REST_API_TOKEN` | Integração Vercel KV (o site aceita ambos) |
 | `RESEND_API_KEY` | Da Resend |
 | `EMAIL_FROM` | Ex. `O Carrista <noreply@teudominio.pt>` |
 | `ADMIN_NOTIFY_EMAIL` | `ocarrista.cc@gmail.com` |

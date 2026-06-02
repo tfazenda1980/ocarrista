@@ -1,7 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/app/lib/auth/session";
 import { isQaRoomId } from "@/app/lib/workshop-qa/rooms";
-import { deleteQuestion, listQuestions, storageMode } from "@/app/lib/workshop-qa/store";
+import {
+  deleteQuestion,
+  listQuestions,
+  redisEnvStatus,
+  storageMode,
+} from "@/app/lib/workshop-qa/store";
 
 export async function GET(
   request: NextRequest,
@@ -22,6 +27,7 @@ export async function GET(
   return NextResponse.json({
     questions: [...questions].sort((a, b) => a.createdAt - b.createdAt),
     storage: storageMode(),
+    redis: redisEnvStatus(),
   });
 }
 

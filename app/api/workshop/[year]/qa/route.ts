@@ -120,7 +120,7 @@ export async function POST(
     return NextResponse.json(
       {
         error:
-          "Armazenamento indisponível. Ligue Upstash Redis na Vercel e faça redeploy.",
+          "O envio de perguntas está temporariamente indisponível. Contacte a organização do workshop.",
       },
       { status: 503 },
     );

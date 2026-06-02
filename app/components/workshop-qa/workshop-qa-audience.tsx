@@ -167,8 +167,8 @@ export function WorkshopQaAudience({ year }: { year: string }) {
         <>
           {storage === "unavailable" && (
             <p className="mb-6 border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200/90">
-              As perguntas não ficam guardadas sem Redis na Vercel. Ligue Upstash Redis ao
-              projeto e faça redeploy.
+              O envio de perguntas está temporariamente indisponível. Por favor contacte a
+              organização do workshop.
             </p>
           )}
 

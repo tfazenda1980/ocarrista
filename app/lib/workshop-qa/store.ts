@@ -7,11 +7,57 @@ function storageKey(year: string, room: QaRoomId): string {
   return `workshop-qa:${year}:${room}`;
 }
 
+/** Vercel KV, Upstash Redis e prefixos personalizados usam nomes diferentes. */
+function getRedisCredentials(): { url: string; token: string } | null {
+  const pairs: [string, string][] = [
+    ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"],
+    ["KV_REST_API_URL", "KV_REST_API_TOKEN"],
+    ["STORAGE_REST_API_URL", "STORAGE_REST_API_TOKEN"],
+    ["STORAGE_URL", "STORAGE_TOKEN"],
+  ];
+
+  for (const [urlKey, tokenKey] of pairs) {
+    const url = process.env[urlKey]?.trim();
+    const token = process.env[tokenKey]?.trim();
+    if (url && token) return { url, token };
+  }
+
+  for (const [key, value] of Object.entries(process.env)) {
+    if (!key.endsWith("_REST_API_URL") || !value?.trim()) continue;
+    const prefix = key.slice(0, -"_REST_API_URL".length);
+    const token = process.env[`${prefix}_REST_API_TOKEN`]?.trim();
+    if (token) return { url: value.trim(), token };
+  }
+
+  return null;
+}
+
 function getRedis(): Redis | null {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  return new Redis({ url, token });
+  const creds = getRedisCredentials();
+  if (!creds) return null;
+  return new Redis(creds);
+}
+
+/** Para diagnóstico admin (sem expor segredos). */
+export function redisEnvStatus(): {
+  connected: boolean;
+  source: string | null;
+} {
+  const pairs: [string, string, string][] = [
+    ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN", "upstash"],
+    ["KV_REST_API_URL", "KV_REST_API_TOKEN", "vercel-kv"],
+    ["STORAGE_REST_API_URL", "STORAGE_REST_API_TOKEN", "storage-prefix"],
+    ["STORAGE_URL", "STORAGE_TOKEN", "storage-prefix"],
+  ];
+
+  for (const [urlKey, tokenKey, source] of pairs) {
+    const url = process.env[urlKey]?.trim();
+    const token = process.env[tokenKey]?.trim();
+    if (url && token) return { connected: true, source };
+    if (url || token) return { connected: false, source: `${source}-incomplete` };
+  }
+
+  return { connected: false, source: null };
 }
 
 /** Em produção (Vercel) é obrigatório; em local usa memória do servidor de dev. */
