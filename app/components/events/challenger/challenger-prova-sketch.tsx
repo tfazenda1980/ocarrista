@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import type { ChallengerProva } from "@/app/lib/challenger/types";
-import { getSketchKind, sketchLabel } from "@/app/lib/challenger/sketch";
+import { getSketchKind } from "@/app/lib/challenger/sketch";
 import { PdfHorizontalViewer } from "../../pdf-horizontal-viewer";
 
 export function ChallengerProvaSketch({ prova }: { prova: ChallengerProva }) {
@@ -13,17 +13,19 @@ export function ChallengerProvaSketch({ prova }: { prova: ChallengerProva }) {
   if (!prova.sketch_url) return null;
 
   const kind = getSketchKind(prova.sketch_mime, prova.sketch_url);
-  const label = sketchLabel(prova.sketch_mime, prova.sketch_label);
 
   if (kind === "pdf") {
     return (
-      <div ref={ref} className="-mx-4 mt-8 sm:-mx-6">
+      <div
+        ref={ref}
+        className="challenger-sketch-viewer mt-8 w-full"
+      >
         <PdfHorizontalViewer
           pdfUrl={prova.sketch_url}
           active={inView}
           label={prova.title}
           hint="Deslize ou use as setas para folhear o croqui"
-          showDownloadFooter
+          showDownloadFooter={false}
         />
       </div>
     );
@@ -31,41 +33,39 @@ export function ChallengerProvaSketch({ prova }: { prova: ChallengerProva }) {
 
   if (kind === "image") {
     return (
-      <figure ref={ref} className="mt-8">
-        <div className="overflow-hidden border border-gold/20 bg-surface/50">
+      <div
+        ref={ref}
+        className="challenger-sketch-viewer challenger-sketch-viewer--image mt-8"
+      >
+        <div className="challenger-sketch-frame">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={prova.sketch_url}
-            alt={label}
-            className="mx-auto max-h-[min(85vh,900px)] w-full object-contain"
+            alt={prova.title}
+            className="challenger-sketch-image"
             loading="lazy"
           />
         </div>
-        <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
-          <span>{sketchLabel(prova.sketch_mime, prova.sketch_label, prova.sketch_url)}</span>
-          <a
-            href={prova.sketch_url}
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-display tracking-[0.1em] text-gold uppercase hover:text-gold-bright"
-          >
-            Descarregar imagem →
-          </a>
-        </figcaption>
-      </figure>
+      </div>
     );
   }
 
-  return (
-    <a
-      href={prova.sketch_url}
-      download
-      target="_blank"
-      rel="noopener noreferrer"
-      className="mt-6 inline-flex border border-gold/30 px-4 py-2 font-display text-[0.65rem] tracking-[0.12em] text-gold uppercase transition-colors hover:border-gold/50 hover:bg-gold/5"
-    >
-      {label} →
-    </a>
-  );
+  const isPpt = /\.pptx?$/i.test(prova.sketch_url.split("?")[0]);
+  if (isPpt) {
+    return (
+      <div
+        ref={ref}
+        className="challenger-sketch-viewer challenger-sketch-viewer--embed mt-8"
+      >
+        <iframe
+          title={prova.title}
+          src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(prova.sketch_url)}`}
+          className="challenger-sketch-embed"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
+
+  return null;
 }

@@ -4,19 +4,19 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { CASTELO_SRC } from "../lib/site-assets";
 import type {
-  WorkshopTeaserInfo,
-  WorkshopUpcomingPreview,
-} from "../lib/events/workshop-teaser";
+  EntryTeaserInfo,
+  EntryUpcomingPreview,
+} from "../lib/events/entry-teaser";
 import { EntryEventTeaser } from "./entry-event-teaser";
 
 type EntrySectionProps = {
-  workshopTeaser: WorkshopTeaserInfo | null;
-  workshopPreview: WorkshopUpcomingPreview | null;
+  teasers: EntryTeaserInfo[];
+  preview: EntryUpcomingPreview | null;
 };
 
 export function EntrySection({
-  workshopTeaser,
-  workshopPreview,
+  teasers,
+  preview,
 }: EntrySectionProps) {
   return (
     <section
@@ -72,10 +72,14 @@ export function EntrySection({
             confiança entre quem serviu e quem continua este legado.
           </motion.p>
 
-          <EntryEventTeaser
-            teaser={workshopTeaser}
-            preview={workshopPreview}
-          />
+          <div className="space-y-3">
+            {teasers.map((teaser, index) => (
+              <EntryEventTeaser key={teaser.key} teaser={teaser} delay={0.28 + index * 0.06} />
+            ))}
+            {teasers.length === 0 && (
+              <EntryEventTeaser preview={preview} delay={0.28} />
+            )}
+          </div>
         </div>
       </div>
 

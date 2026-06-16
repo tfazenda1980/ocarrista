@@ -4,23 +4,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type {
-  WorkshopTeaserInfo,
-  WorkshopUpcomingPreview,
-} from "../lib/events/workshop-teaser";
+  EntryTeaserInfo,
+  EntryUpcomingPreview,
+} from "../lib/events/entry-teaser";
 
-type EntryEventTeaserProps = {
-  teaser: WorkshopTeaserInfo | null;
-  preview: WorkshopUpcomingPreview | null;
-};
+type EntryEventTeaserProps =
+  | { teaser: EntryTeaserInfo; preview?: null; delay?: number }
+  | { teaser?: null; preview: EntryUpcomingPreview | null; delay?: number };
 
-export function EntryEventTeaser({ teaser, preview }: EntryEventTeaserProps) {
+export function EntryEventTeaser({ teaser, preview, delay = 0.28 }: EntryEventTeaserProps) {
   if (teaser) {
     return (
       <motion.div
-        className="entry-teaser-active relative mt-5 w-full max-w-xl text-left"
+        className="entry-teaser-active relative w-full max-w-xl text-left"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         <Link
           href={teaser.href}
@@ -35,7 +34,7 @@ export function EntryEventTeaser({ teaser, preview }: EntryEventTeaserProps) {
               {teaser.edition}
             </p>
             <p className="font-display text-xs font-semibold tracking-wide text-foreground/95 uppercase sm:text-sm">
-              Workshop de Carros de Combate
+              {teaser.title}
             </p>
             <p className="mt-1 text-[0.65rem] leading-snug text-muted sm:text-xs">
               {teaser.dateDisplay} · {teaser.location}
@@ -61,10 +60,10 @@ export function EntryEventTeaser({ teaser, preview }: EntryEventTeaserProps) {
   if (preview) {
     return (
       <motion.div
-        className="entry-teaser-placeholder relative mt-5 w-full max-w-xl text-left"
+        className="entry-teaser-placeholder relative w-full max-w-xl text-left"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.28 }}
+        transition={{ duration: 0.7, delay }}
       >
         <div className="entry-teaser-placeholder-inner border border-gold/18 bg-background/45 px-3.5 py-2.5 text-left sm:px-4 sm:py-3">
           <div className="absolute inset-0 entry-teaser-placeholder-shine" aria-hidden />
@@ -72,6 +71,9 @@ export function EntryEventTeaser({ teaser, preview }: EntryEventTeaserProps) {
             <p className="section-label mb-1 text-[0.5rem]">Próximo destaque</p>
             <p className="font-display text-sm font-semibold tracking-wide text-gold/90 uppercase sm:text-base">
               {preview.edition}
+            </p>
+            <p className="mt-0.5 font-display text-[0.65rem] font-medium tracking-wide text-foreground/90 uppercase sm:text-xs">
+              {preview.title}
             </p>
             <p className="mt-0.5 text-[0.65rem] text-muted sm:text-xs">
               {preview.dateDisplay} · {preview.location}
@@ -82,10 +84,10 @@ export function EntryEventTeaser({ teaser, preview }: EntryEventTeaserProps) {
                 ` Daqui a ${preview.daysUntilTeaser} ${preview.daysUntilTeaser === 1 ? "dia" : "dias"}.`}
             </p>
             <Link
-              href="/eventos/workshop"
+              href={preview.href}
               className="mt-1.5 inline-block font-display text-[0.55rem] tracking-[0.16em] text-gold uppercase hover:underline"
             >
-              Workshop anual →
+              Ver evento →
             </Link>
           </div>
         </div>

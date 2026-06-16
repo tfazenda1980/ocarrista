@@ -1,4 +1,5 @@
 import { getCncEdition, getCncSeries } from "./load-cnc";
+import { getChallengerEdition, getChallengerSeries } from "./load-challenger";
 import { getWorkshopEdition, getWorkshopSeries } from "./load-workshop";
 
 /** Janela de destaque na entrada: três semanas antes do evento (igual ao teaser). */
@@ -12,7 +13,9 @@ export type EventHighlightCandidate = {
   dateDisplay: string;
   location: string;
   href: string;
+  cardImage: string;
   daysRemaining: number;
+  eventTime: number;
 };
 
 function inHighlightWindow(eventIsoDate: string, now = Date.now()): number | null {
@@ -31,7 +34,7 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
   const workshopSeries = getWorkshopSeries();
   for (const year of workshopSeries.years) {
     const edition = getWorkshopEdition(year);
-    if (!edition || edition.published === false) continue;
+    if (!edition || edition.published === false || !edition.cardImage) continue;
     const days = inHighlightWindow(edition.date, now);
     if (days === null) continue;
     out.push({
@@ -41,14 +44,16 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
       dateDisplay: edition.dateDisplay,
       location: edition.location,
       href: `/eventos/workshop/${year}`,
+      cardImage: edition.cardImage,
       daysRemaining: days,
+      eventTime: new Date(edition.date).getTime(),
     });
   }
 
   const cncSeries = getCncSeries();
   for (const year of cncSeries.years) {
     const edition = getCncEdition(year);
-    if (!edition || edition.published === false) continue;
+    if (!edition || edition.published === false || !edition.cardImage) continue;
     const days = inHighlightWindow(edition.date, now);
     if (days === null) continue;
     out.push({
@@ -58,9 +63,30 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
       dateDisplay: edition.dateDisplay,
       location: edition.location,
       href: `/eventos/cnc/${year}`,
+      cardImage: edition.cardImage,
       daysRemaining: days,
+      eventTime: new Date(edition.date).getTime(),
     });
   }
 
-  return out;
+  const challengerSeries = getChallengerSeries();
+  for (const year of challengerSeries.years) {
+    const edition = getChallengerEdition(year);
+    if (!edition || edition.published === false || !edition.cardImage) continue;
+    const days = inHighlightWindow(edition.date, now);
+    if (days === null) continue;
+    out.push({
+      key: `challenger:${year}`,
+      title: edition.title,
+      edition: edition.edition,
+      dateDisplay: edition.dateDisplay,
+      location: edition.location,
+      href: `/eventos/challenger/${year}`,
+      cardImage: edition.cardImage,
+      daysRemaining: days,
+      eventTime: new Date(edition.date).getTime(),
+    });
+  }
+
+  return out.sort((a, b) => a.eventTime - b.eventTime);
 }

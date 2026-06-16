@@ -24,22 +24,23 @@ export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
           <div className="space-y-12">
             {provas.map((prova, i) => (
               <MotionReveal key={prova.id} delay={i * 0.05}>
-                <article className="card-tactical p-6 sm:p-8">
-                  <h3 className="font-display text-xl font-semibold tracking-wide text-foreground uppercase sm:text-2xl">
-                    {prova.title}
-                  </h3>
-                  {prova.description && (
-                    <p className="mt-3 max-w-3xl text-sm text-muted sm:text-base">
-                      {prova.description}
-                    </p>
-                  )}
-                  {prova.sketch_url ? (
-                    <ChallengerProvaSketch prova={prova} />
-                  ) : (
-                    <p className="mt-6 text-[0.7rem] text-muted">
-                      Croqui / briefing — documento em breve
-                    </p>
-                  )}
+                <article>
+                  <div className="card-tactical p-6 sm:p-8">
+                    <h3 className="font-display text-xl font-semibold tracking-wide text-foreground uppercase sm:text-2xl">
+                      {prova.title}
+                    </h3>
+                    {prova.description && (
+                      <p className="mt-3 max-w-3xl text-sm text-muted sm:text-base">
+                        {prova.description}
+                      </p>
+                    )}
+                    {!prova.sketch_url && (
+                      <p className="mt-6 text-[0.7rem] text-muted">
+                        Croqui / briefing — documento em breve
+                      </p>
+                    )}
+                  </div>
+                  {prova.sketch_url && <ChallengerProvaSketch prova={prova} />}
                 </article>
               </MotionReveal>
             ))}

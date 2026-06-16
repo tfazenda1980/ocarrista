@@ -1,19 +1,12 @@
 import {
-  getUpcomingWorkshopPreview,
-  getWorkshopTeaserForHomepage,
-} from "../lib/events/workshop-teaser";
+  getEntryTeasersForHomepage,
+  getUpcomingEventPreview,
+} from "../lib/events/entry-teaser";
 import { EntrySection } from "./entry-section";
 
 export function EntrySectionLoader() {
-  const workshopTeaser = getWorkshopTeaserForHomepage();
-  const workshopPreview = workshopTeaser
-    ? null
-    : getUpcomingWorkshopPreview();
+  const teasers = getEntryTeasersForHomepage();
+  const preview = teasers.length > 0 ? null : getUpcomingEventPreview();
 
-  return (
-    <EntrySection
-      workshopTeaser={workshopTeaser}
-      workshopPreview={workshopPreview}
-    />
-  );
+  return <EntrySection teasers={teasers} preview={preview} />;
 }

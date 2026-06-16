@@ -78,7 +78,7 @@ O que podes fazer em **~15 minutos** seguindo isto.
 ## 5b. Challenger (provas, guarnições, classificação)
 
 1. Neon → SQL Editor → executar `scripts/migrate-challenger.sql`
-2. (Opcional) Vercel → **Storage** → **Blob** → ligar ao projeto → `BLOB_READ_WRITE_TOKEN`
+2. Vercel → **Storage** → **Blob** (público) → ligar ao projeto → confirma `BLOB_STORE_ID`
 3. Admin → `/admin/challenger/2026` — provas, guarnições (4 elementos), pontuações
 4. Página pública → `/eventos/challenger/2026`
 
