@@ -115,7 +115,12 @@ export async function PATCH(
     if (form.has("sort_order")) {
       fields.sort_order = Number(form.get("sort_order") ?? 0);
     }
-    if (form.has("sketch_url")) {
+    if (form.get("clear_sketch") === "1") {
+      fields.sketch_url = null;
+      fields.sketch_label = null;
+      fields.sketch_mime = null;
+    }
+    if (form.has("sketch_url") && form.get("clear_sketch") !== "1") {
       fields.sketch_url = String(form.get("sketch_url") ?? "") || null;
     }
 
@@ -155,13 +160,23 @@ export async function PATCH(
     sketch_url?: string | null;
     sketch_label?: string | null;
     sketch_mime?: string | null;
+    clear_sketch?: boolean;
   };
 
   if (!data.id) {
     return NextResponse.json({ error: "ID em falta." }, { status: 400 });
   }
 
-  const prova = await updateProva(data.id, data);
+  const fields: Parameters<typeof updateProva>[1] = { ...data };
+  if (data.clear_sketch) {
+    fields.sketch_url = null;
+    fields.sketch_label = null;
+    fields.sketch_mime = null;
+  }
+  delete (fields as { id?: string }).id;
+  delete (fields as { clear_sketch?: boolean }).clear_sketch;
+
+  const prova = await updateProva(data.id, fields);
   if (!prova) {
     return NextResponse.json({ error: "Prova não encontrada." }, { status: 404 });
   }

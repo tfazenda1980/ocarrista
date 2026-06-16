@@ -2,16 +2,7 @@
 
 import { MotionReveal } from "../../motion-reveal";
 import type { ChallengerProva } from "@/app/lib/challenger/types";
-
-function sketchLabel(mime: string | null, label: string | null): string {
-  if (label) return label;
-  if (!mime) return "Documento";
-  if (mime.includes("pdf")) return "Croqui / briefing (PDF)";
-  if (mime.includes("presentation") || mime.includes("powerpoint")) {
-    return "Croqui / briefing (PPT)";
-  }
-  return "Croqui / briefing";
-}
+import { ChallengerProvaSketch } from "./challenger-prova-sketch";
 
 export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
   return (
@@ -30,7 +21,7 @@ export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
             As provas e respetivos croquis serão publicados em breve pela organização.
           </p>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-12">
             {provas.map((prova, i) => (
               <MotionReveal key={prova.id} delay={i * 0.05}>
                 <article className="card-tactical p-6 sm:p-8">
@@ -43,15 +34,7 @@ export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
                     </p>
                   )}
                   {prova.sketch_url ? (
-                    <a
-                      href={prova.sketch_url}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex border border-gold/30 px-4 py-2 font-display text-[0.65rem] tracking-[0.12em] text-gold uppercase transition-colors hover:border-gold/50 hover:bg-gold/5"
-                    >
-                      {sketchLabel(prova.sketch_mime, prova.sketch_label)} →
-                    </a>
+                    <ChallengerProvaSketch prova={prova} />
                   ) : (
                     <p className="mt-6 text-[0.7rem] text-muted">
                       Croqui / briefing — documento em breve

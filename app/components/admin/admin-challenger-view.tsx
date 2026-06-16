@@ -10,6 +10,7 @@ import type {
   ChallengerSettings,
   ChallengerStanding,
 } from "@/app/lib/challenger/types";
+import { CHALLENGER_SKETCH_ACCEPT, sketchLabel } from "@/app/lib/challenger/sketch";
 
 type Tab = "provas" | "crews" | "scores" | "publish";
 
@@ -36,6 +37,11 @@ export function AdminChallengerView({ year }: { year: string }) {
 
   const [provaDraft, setProvaDraft] = useState({ title: "", description: "" });
   const [provaFile, setProvaFile] = useState<File | null>(null);
+
+  const [editingProvaId, setEditingProvaId] = useState<string | null>(null);
+  const [editProvaDraft, setEditProvaDraft] = useState({ title: "", description: "" });
+  const [editProvaFile, setEditProvaFile] = useState<File | null>(null);
+  const [clearEditSketch, setClearEditSketch] = useState(false);
 
   const [crewDraft, setCrewDraft] = useState({
     name: "",
@@ -105,25 +111,55 @@ export function AdminChallengerView({ year }: { year: string }) {
     setBusy(false);
   };
 
-  const uploadSketch = async (provaId: string, file: File) => {
+  const removeProva = async (id: string) => {
+    if (!confirm("Eliminar esta prova?")) return;
     setBusy(true);
+    await fetch(`/api/admin/challenger/${year}/provas?id=${id}`, { method: "DELETE" });
+    if (editingProvaId === id) setEditingProvaId(null);
+    await load();
+    setBusy(false);
+  };
+
+  const startEditProva = (prova: ChallengerProva) => {
+    setEditingProvaId(prova.id);
+    setEditProvaDraft({
+      title: prova.title,
+      description: prova.description ?? "",
+    });
+    setEditProvaFile(null);
+    setClearEditSketch(false);
+    setFeedback("");
+  };
+
+  const cancelEditProva = () => {
+    setEditingProvaId(null);
+    setEditProvaFile(null);
+    setClearEditSketch(false);
+  };
+
+  const saveProvaEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingProvaId || !editProvaDraft.title.trim()) return;
+    setBusy(true);
+    setFeedback("");
+
     const form = new FormData();
-    form.set("id", provaId);
-    form.set("sketch", file);
+    form.set("id", editingProvaId);
+    form.set("title", editProvaDraft.title);
+    form.set("description", editProvaDraft.description);
+    if (clearEditSketch) form.set("clear_sketch", "1");
+    if (editProvaFile) form.set("sketch", editProvaFile);
+
     const res = await fetch(`/api/admin/challenger/${year}/provas`, {
       method: "PATCH",
       body: form,
     });
     const json = (await res.json()) as { error?: string };
-    setFeedback(res.ok ? "Croqui actualizado." : (json.error ?? "Erro no upload."));
-    await load();
-    setBusy(false);
-  };
-
-  const removeProva = async (id: string) => {
-    if (!confirm("Eliminar esta prova?")) return;
-    setBusy(true);
-    await fetch(`/api/admin/challenger/${year}/provas?id=${id}`, { method: "DELETE" });
+    if (!res.ok) setFeedback(json.error ?? "Erro ao guardar prova.");
+    else {
+      setFeedback("Prova actualizada.");
+      cancelEditProva();
+    }
     await load();
     setBusy(false);
   };
@@ -285,11 +321,11 @@ export function AdminChallengerView({ year }: { year: string }) {
             />
             <div>
               <label className="mb-2 block text-xs text-muted">
-                Croqui / briefing (PDF ou PPT)
+                Croqui / briefing (PDF, PPT ou imagem)
               </label>
               <input
                 type="file"
-                accept=".pdf,.ppt,.pptx,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                accept={CHALLENGER_SKETCH_ACCEPT}
                 onChange={(e) => setProvaFile(e.target.files?.[0] ?? null)}
                 className="text-sm text-muted"
               />
@@ -300,51 +336,128 @@ export function AdminChallengerView({ year }: { year: string }) {
           </form>
 
           <div className="space-y-4">
-            {(data?.provas ?? []).map((prova) => (
-              <div key={prova.id} className="card-tactical p-6">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <h4 className="font-display text-lg text-foreground">{prova.title}</h4>
-                    {prova.description && (
-                      <p className="mt-2 text-sm text-muted">{prova.description}</p>
-                    )}
-                    {prova.sketch_url ? (
+            {(data?.provas ?? []).map((prova) =>
+              editingProvaId === prova.id ? (
+                <form
+                  key={prova.id}
+                  onSubmit={saveProvaEdit}
+                  className="card-tactical space-y-4 border border-gold/40 p-6"
+                >
+                  <h4 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+                    Editar prova
+                  </h4>
+                  <input
+                    value={editProvaDraft.title}
+                    onChange={(e) =>
+                      setEditProvaDraft((d) => ({ ...d, title: e.target.value }))
+                    }
+                    placeholder="Nome da prova"
+                    className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+                    required
+                  />
+                  <textarea
+                    value={editProvaDraft.description}
+                    onChange={(e) =>
+                      setEditProvaDraft((d) => ({ ...d, description: e.target.value }))
+                    }
+                    placeholder="Descrição (opcional)"
+                    rows={3}
+                    className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+                  />
+                  {prova.sketch_url && !clearEditSketch && (
+                    <p className="text-xs text-muted">
+                      Ficheiro actual:{" "}
                       <a
                         href={prova.sketch_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-3 inline-block text-xs text-gold"
+                        className="text-gold hover:underline"
                       >
-                        {prova.sketch_label ?? "Documento"} →
+                        {sketchLabel(prova.sketch_mime, prova.sketch_label, prova.sketch_url)}
                       </a>
-                    ) : (
-                      <p className="mt-3 text-xs text-muted">Sem croqui</p>
-                    )}
+                    </p>
+                  )}
+                  <div>
+                    <label className="mb-2 block text-xs text-muted">
+                      Substituir croqui (PDF, PPT ou imagem)
+                    </label>
+                    <input
+                      type="file"
+                      accept={CHALLENGER_SKETCH_ACCEPT}
+                      onChange={(e) => {
+                        setEditProvaFile(e.target.files?.[0] ?? null);
+                        if (e.target.files?.[0]) setClearEditSketch(false);
+                      }}
+                      className="text-sm text-muted"
+                    />
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[0.65rem] text-muted">
-                      Substituir croqui
+                  {prova.sketch_url && (
+                    <label className="flex items-center gap-2 text-xs text-muted">
                       <input
-                        type="file"
-                        accept=".pdf,.ppt,.pptx"
-                        className="mt-1 block text-xs"
+                        type="checkbox"
+                        checked={clearEditSketch}
                         onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) uploadSketch(prova.id, file);
+                          setClearEditSketch(e.target.checked);
+                          if (e.target.checked) setEditProvaFile(null);
                         }}
                       />
+                      Remover ficheiro actual
                     </label>
+                  )}
+                  <div className="flex flex-wrap gap-3">
+                    <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+                      Guardar alterações
+                    </button>
                     <button
                       type="button"
-                      onClick={() => removeProva(prova.id)}
-                      className="text-xs text-red-400/90 hover:text-red-300"
+                      onClick={cancelEditProva}
+                      className="btn-outline px-4 py-2 text-xs"
                     >
-                      Eliminar
+                      Cancelar
                     </button>
                   </div>
+                </form>
+              ) : (
+                <div key={prova.id} className="card-tactical p-6">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                      <h4 className="font-display text-lg text-foreground">{prova.title}</h4>
+                      {prova.description && (
+                        <p className="mt-2 text-sm text-muted">{prova.description}</p>
+                      )}
+                      {prova.sketch_url ? (
+                        <a
+                          href={prova.sketch_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-block text-xs text-gold"
+                        >
+                          {sketchLabel(prova.sketch_mime, prova.sketch_label, prova.sketch_url)} →
+                        </a>
+                      ) : (
+                        <p className="mt-3 text-xs text-muted">Sem croqui</p>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <button
+                        type="button"
+                        onClick={() => startEditProva(prova)}
+                        className="btn-outline px-3 py-1.5 text-[0.65rem]"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => removeProva(prova.id)}
+                        className="text-xs text-red-400/90 hover:text-red-300"
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         </div>
       )}
