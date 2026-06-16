@@ -5,17 +5,14 @@ import { getChallengerLiveData } from "@/app/lib/challenger/repository";
 import {
   getChallengerEdition,
   getChallengerSeries,
-  getChallengerYearsForStaticParams,
   isChallengerYearValid,
 } from "@/app/lib/events/load-challenger";
+
+export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: Promise<{ year: string }>;
 };
-
-export async function generateStaticParams() {
-  return getChallengerYearsForStaticParams();
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { year } = await params;

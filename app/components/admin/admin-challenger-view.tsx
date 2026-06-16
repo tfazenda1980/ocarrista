@@ -64,7 +64,11 @@ export function AdminChallengerView({ year }: { year: string }) {
       return;
     }
     setData(json);
-    setError(json.configured ? "" : "Base de dados não configurada (DATABASE_URL).");
+    setError(
+      json.configured
+        ? ""
+        : "Base de dados em falta ou tabelas do Challenger não criadas. Execute scripts/migrate-challenger.sql no Neon.",
+    );
   }, [year]);
 
   useEffect(() => {

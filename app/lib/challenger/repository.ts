@@ -349,69 +349,67 @@ export async function deleteScore(id: string): Promise<boolean> {
 }
 
 export async function getChallengerLiveData(year: string): Promise<ChallengerLiveData> {
-  if (!dbConfigured()) {
-    return {
-      configured: false,
-      settings: null,
-      provas: [],
-      crews: [],
-      provisional: [],
-      final: [],
-    };
-  }
-
-  const [settings, provas, crews, scores] = await Promise.all([
-    getChallengerSettings(year),
-    listProvas(year),
-    listCrews(year, true),
-    listScores(year),
-  ]);
-
-  return {
-    configured: true,
-    settings,
-    provas,
-    crews,
-    provisional: computeStandings(crews, provas, scores, "provisional"),
-    final: computeStandings(crews, provas, scores, "final"),
+  const empty: ChallengerLiveData = {
+    configured: false,
+    settings: null,
+    provas: [],
+    crews: [],
+    provisional: [],
+    final: [],
   };
+  if (!dbConfigured()) return empty;
+
+  try {
+    const [settings, provas, crews, scores] = await Promise.all([
+      getChallengerSettings(year),
+      listProvas(year),
+      listCrews(year, true),
+      listScores(year),
+    ]);
+
+    return {
+      configured: true,
+      settings,
+      provas,
+      crews,
+      provisional: computeStandings(crews, provas, scores, "provisional"),
+      final: computeStandings(crews, provas, scores, "final"),
+    };
+  } catch {
+    return empty;
+  }
 }
 
 export async function getChallengerAdminData(year: string): Promise<ChallengerLiveData> {
-  if (!dbConfigured()) {
-    return {
-      configured: false,
-      settings: null,
-      provas: [],
-      crews: [],
-      provisional: [],
-      final: [],
-    };
-  }
-
-  const [settings, provas, crews, scores] = await Promise.all([
-    getChallengerSettings(year),
-    listProvas(year),
-    listCrews(year, false),
-    listScores(year),
-  ]);
-
-  return {
-    configured: true,
-    settings,
-    provas,
-    crews,
-    provisional: computeStandings(
-      crews.filter((c) => c.active),
-      provas,
-      scores,
-      "provisional",
-    ),
-    final: computeStandings(
-      crews.filter((c) => c.active),
-      provas,
-      scores,
-      "final",
-    ),
+  const empty: ChallengerLiveData = {
+    configured: false,
+    settings: null,
+    provas: [],
+    crews: [],
+    provisional: [],
+    final: [],
   };
+  if (!dbConfigured()) return empty;
+
+  try {
+    const [settings, provas, crews, scores] = await Promise.all([
+      getChallengerSettings(year),
+      listProvas(year),
+      listCrews(year, false),
+      listScores(year),
+    ]);
+
+    const activeCrews = crews.filter((c) => c.active);
+
+    return {
+      configured: true,
+      settings,
+      provas,
+      crews,
+      provisional: computeStandings(activeCrews, provas, scores, "provisional"),
+      final: computeStandings(activeCrews, provas, scores, "final"),
+    };
+  } catch {
+    return empty;
+  }
 }
