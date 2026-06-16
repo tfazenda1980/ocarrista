@@ -19,6 +19,18 @@ function rowNumber(value: unknown): number {
   return 0;
 }
 
+function emptyImportSettings(): Pick<
+  ChallengerSettings,
+  "draft_imported_at" | "draft_filename" | "provisional_published_at" | "final_published_at"
+> {
+  return {
+    draft_imported_at: null,
+    draft_filename: null,
+    provisional_published_at: null,
+    final_published_at: null,
+  };
+}
+
 export async function ensureChallengerSettings(year: string): Promise<void> {
   const sql = getSql();
   if (!sql) return;
@@ -35,17 +47,32 @@ export async function getChallengerSettings(
   const sql = getSql();
   if (!sql) return null;
   await ensureChallengerSettings(year);
-  const rows = await sql`
-    SELECT year, provisional_visible, final_visible,
-           draft_imported_at::text, draft_filename,
-           provisional_published_at::text, final_published_at::text,
-           updated_at::text
-    FROM challenger_settings
-    WHERE year = ${year}
-    LIMIT 1
-  `;
-  const row = rows[0] as ChallengerSettings | undefined;
-  return row ?? null;
+
+  try {
+    const rows = await sql`
+      SELECT year, provisional_visible, final_visible,
+             draft_imported_at::text, draft_filename,
+             provisional_published_at::text, final_published_at::text,
+             updated_at::text
+      FROM challenger_settings
+      WHERE year = ${year}
+      LIMIT 1
+    `;
+    const row = rows[0] as ChallengerSettings | undefined;
+    return row ?? null;
+  } catch {
+    const rows = await sql`
+      SELECT year, provisional_visible, final_visible, updated_at::text
+      FROM challenger_settings
+      WHERE year = ${year}
+      LIMIT 1
+    `;
+    const row = rows[0] as Omit<
+      ChallengerSettings,
+      "draft_imported_at" | "draft_filename" | "provisional_published_at" | "final_published_at"
+    > | undefined;
+    return row ? { ...row, ...emptyImportSettings() } : null;
+  }
 }
 
 export async function updateChallengerSettings(
@@ -67,12 +94,14 @@ export async function updateChallengerSettings(
         final_visible = ${finalVisible},
         updated_at = NOW()
     WHERE year = ${year}
-    RETURNING year, provisional_visible, final_visible,
-              draft_imported_at::text, draft_filename,
-              provisional_published_at::text, final_published_at::text,
-              updated_at::text
+    RETURNING year, provisional_visible, final_visible, updated_at::text
   `;
-  return (rows[0] as ChallengerSettings) ?? null;
+  const row = rows[0] as Omit<
+    ChallengerSettings,
+    "draft_imported_at" | "draft_filename" | "provisional_published_at" | "final_published_at"
+  > | undefined;
+  if (!row) return null;
+  return { ...row, ...emptyImportSettings() };
 }
 
 export async function listProvas(year: string): Promise<ChallengerProva[]> {
@@ -359,53 +388,65 @@ export async function deleteScore(id: string): Promise<boolean> {
 export async function listCrewResults(year: string): Promise<ChallengerCrewResult[]> {
   const sql = getSql();
   if (!sql) return [];
-  const rows = await sql`
-    SELECT year, crew_id, phase, start_time, end_time, gross_time,
-           penalty_points, penalty_time_min, final_time, rank,
-           updated_at::text
-    FROM challenger_crew_results
-    WHERE year = ${year}
-  `;
-  return (rows as ChallengerCrewResult[]).map((row) => ({
-    ...row,
-    penalty_points: row.penalty_points != null ? rowNumber(row.penalty_points) : null,
-    penalty_time_min: row.penalty_time_min != null ? rowNumber(row.penalty_time_min) : null,
-    rank: row.rank != null ? Number(row.rank) : null,
-  }));
+  try {
+    const rows = await sql`
+      SELECT year, crew_id, phase, start_time, end_time, gross_time,
+             penalty_points, penalty_time_min, final_time, rank,
+             updated_at::text
+      FROM challenger_crew_results
+      WHERE year = ${year}
+    `;
+    return (rows as ChallengerCrewResult[]).map((row) => ({
+      ...row,
+      penalty_points: row.penalty_points != null ? rowNumber(row.penalty_points) : null,
+      penalty_time_min: row.penalty_time_min != null ? rowNumber(row.penalty_time_min) : null,
+      rank: row.rank != null ? Number(row.rank) : null,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export async function listCrewResultsDraft(year: string): Promise<ChallengerCrewResult[]> {
   const sql = getSql();
   if (!sql) return [];
-  const rows = await sql`
-    SELECT year, crew_id, phase, start_time, end_time, gross_time,
-           penalty_points, penalty_time_min, final_time, rank,
-           updated_at::text
-    FROM challenger_crew_results_draft
-    WHERE year = ${year}
-  `;
-  return (rows as ChallengerCrewResult[]).map((row) => ({
-    ...row,
-    penalty_points: row.penalty_points != null ? rowNumber(row.penalty_points) : null,
-    penalty_time_min: row.penalty_time_min != null ? rowNumber(row.penalty_time_min) : null,
-    rank: row.rank != null ? Number(row.rank) : null,
-  }));
+  try {
+    const rows = await sql`
+      SELECT year, crew_id, phase, start_time, end_time, gross_time,
+             penalty_points, penalty_time_min, final_time, rank,
+             updated_at::text
+      FROM challenger_crew_results_draft
+      WHERE year = ${year}
+    `;
+    return (rows as ChallengerCrewResult[]).map((row) => ({
+      ...row,
+      penalty_points: row.penalty_points != null ? rowNumber(row.penalty_points) : null,
+      penalty_time_min: row.penalty_time_min != null ? rowNumber(row.penalty_time_min) : null,
+      rank: row.rank != null ? Number(row.rank) : null,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export async function listScoresDraft(year: string): Promise<ChallengerScore[]> {
   const sql = getSql();
   if (!sql) return [];
-  const rows = await sql`
-    SELECT id, year, crew_id, prova_id, label, points, kind, phase, notes,
-           created_at::text, updated_at::text
-    FROM challenger_scores_draft
-    WHERE year = ${year}
-    ORDER BY created_at ASC
-  `;
-  return (rows as ChallengerScore[]).map((row) => ({
-    ...row,
-    points: rowNumber(row.points),
-  }));
+  try {
+    const rows = await sql`
+      SELECT id, year, crew_id, prova_id, label, points, kind, phase, notes,
+             created_at::text, updated_at::text
+      FROM challenger_scores_draft
+      WHERE year = ${year}
+      ORDER BY created_at ASC
+    `;
+    return (rows as ChallengerScore[]).map((row) => ({
+      ...row,
+      points: rowNumber(row.points),
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export async function saveImportDraft(

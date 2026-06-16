@@ -81,7 +81,7 @@ export function AdminChallengerView({ year }: { year: string }) {
     setError(
       json.configured
         ? ""
-        : "Base de dados em falta ou tabelas do Challenger não criadas. Execute scripts/migrate-challenger.sql no Neon.",
+        : "Base de dados em falta ou tabelas do Challenger não criadas. Execute scripts/migrate-challenger.sql e scripts/migrate-challenger-import.sql no Neon.",
     );
   }, [year]);
 
