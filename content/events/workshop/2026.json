@@ -66,7 +66,7 @@
           "duration": "30'",
           "title": "O campo de batalha transparente: drones e sensores",
           "description": "Generalização dos drones, redução do efeito surpresa e impacto nas manobras.",
-          "speaker": "TCor Énio Chambel",
+          "speaker": "Maj Nuno Silva",
           "kind": "session"
         },
         {
@@ -201,8 +201,8 @@
   },
   "speakers": [
     {
-      "id": "tcor-enio-chambel",
-      "name": "TCor Énio Chambel",
+      "id": "maj-nuno-silva",
+      "name": "Maj Nuno Silva",
       "role": "Orador",
       "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
     },
