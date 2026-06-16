@@ -688,8 +688,9 @@ export function AdminChallengerView({ year }: { year: string }) {
           </label>
           <p className="text-xs text-muted">
             Execute <code className="text-gold">scripts/migrate-challenger.sql</code> no Neon
-            antes da primeira utilização. Para upload de croquis, configure{" "}
-            <code className="text-gold">BLOB_READ_WRITE_TOKEN</code> na Vercel (Storage → Blob).
+            antes da primeira utilização. Para upload de croquis, ligue um store{" "}
+            <strong>Blob público</strong> na Vercel — basta{" "}
+            <code className="text-gold">BLOB_STORE_ID</code> (OIDC; não precisa de token manual).
           </p>
         </div>
       )}

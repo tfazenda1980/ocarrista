@@ -70,7 +70,8 @@ O que podes fazer em **~15 minutos** seguindo isto.
 | `ADMIN_PASSWORD` | `Leopard2@6` (ou outra — **só na Vercel**, não no Git) |
 | `WORKSHOP_QA_PASSWORD` | `1762` (opcional; há default no código) |
 | `CRON_SECRET` | String aleatória (Vercel Cron → alertas email a membros) |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob — upload de croquis PDF/PPT no Challenger (opcional) |
+| `BLOB_STORE_ID` | Vercel Blob (OIDC) — ligar store ao projeto; upload de croquis |
+| `BLOB_READ_WRITE_TOKEN` | Opcional — só se o store usar token clássico ou desenvolvimento local |
 
 ---
 
