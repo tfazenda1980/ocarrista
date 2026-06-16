@@ -508,6 +508,29 @@ body {
   box-shadow: -3px 0 10px -3px rgba(0, 0, 0, 0.4);
 }
 
+/* Challenger — classificação com scroll horizontal */
+.challenger-standings-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: rgba(198, 164, 75, 0.45) transparent;
+}
+
+.challenger-standings-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.challenger-standings-scroll::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgba(198, 164, 75, 0.45);
+}
+
+.challenger-standings-scroll table tbody tr:hover td {
+  background-color: rgba(198, 164, 75, 0.04);
+}
+
+.challenger-standings-scroll table tbody tr:hover td[class*="sticky"] {
+  background-color: rgb(22, 27, 34);
+}
+
 /* Challenger — croquis centrados no ecrã, sem download */
 .challenger-sketch-viewer {
   display: flex;
