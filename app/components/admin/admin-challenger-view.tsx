@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type {
   ChallengerCrew,
   ChallengerImportMeta,
@@ -65,6 +65,8 @@ export function AdminChallengerView({ year }: { year: string }) {
 
   const [importFile, setImportFile] = useState<File | null>(null);
   const [importWarnings, setImportWarnings] = useState<string[]>([]);
+  const [importing, setImporting] = useState(false);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     const res = await fetch(`/api/admin/challenger/${year}`);
@@ -260,39 +262,65 @@ export function AdminChallengerView({ year }: { year: string }) {
     setBusy(false);
   };
 
-  const uploadExcel = async (e: React.FormEvent) => {
+  const uploadExcel = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!importFile) return;
+    const file = importInputRef.current?.files?.[0] ?? importFile;
+    if (!file) {
+      setFeedback("Seleccione um ficheiro Excel (.xlsx).");
+      return;
+    }
+
+    setImporting(true);
     setBusy(true);
     setFeedback("");
     setImportWarnings([]);
 
-    const form = new FormData();
-    form.set("file", importFile);
+    try {
+      const form = new FormData();
+      form.set("file", file);
 
-    const res = await fetch(`/api/admin/challenger/${year}/import`, {
-      method: "POST",
-      body: form,
-    });
-    const json = (await res.json()) as {
-      error?: string;
-      errors?: string[];
-      warnings?: string[];
-      teams?: number;
-    };
+      const res = await fetch(`/api/admin/challenger/${year}/import`, {
+        method: "POST",
+        body: form,
+      });
 
-    if (!res.ok) {
-      setFeedback(json.errors?.[0] ?? json.error ?? "Erro ao importar.");
-      setImportWarnings(json.warnings ?? []);
-    } else {
+      const raw = await res.text();
+      let json: {
+        error?: string;
+        errors?: string[];
+        warnings?: string[];
+        teams?: number;
+      } = {};
+      try {
+        json = raw ? (JSON.parse(raw) as typeof json) : {};
+      } catch {
+        setFeedback(
+          res.ok
+            ? "Importação concluída, mas a resposta do servidor foi inválida."
+            : `Erro ao importar (${res.status}). Tente novamente.`,
+        );
+        return;
+      }
+
+      if (!res.ok) {
+        setFeedback(json.errors?.[0] ?? json.error ?? "Erro ao importar.");
+        setImportWarnings(json.warnings ?? []);
+        return;
+      }
+
       setFeedback(
         `Excel importado para rascunho (${json.teams ?? 0} equipas). Revise e publique quando estiver correcto.`,
       );
       setImportWarnings(json.warnings ?? []);
       setImportFile(null);
+      if (importInputRef.current) importInputRef.current.value = "";
+    } catch {
+      setFeedback("Erro de rede ao importar. Verifique a ligação e tente novamente.");
+    } finally {
+      setImporting(false);
+      setBusy(false);
+      await load();
     }
-    await load();
-    setBusy(false);
   };
 
   const publishPhase = async (phase: ChallengerPhase) => {
@@ -312,19 +340,31 @@ export function AdminChallengerView({ year }: { year: string }) {
     }
     setBusy(true);
     setFeedback("");
-    const res = await fetch(`/api/admin/challenger/${year}/import/publish`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phase, makeVisible: true }),
-    });
-    const json = (await res.json()) as { error?: string };
-    setFeedback(
-      res.ok
-        ? `Classificação ${label} publicada e visível no site.`
-        : (json.error ?? "Erro ao publicar."),
-    );
-    await load();
-    setBusy(false);
+    try {
+      const res = await fetch(`/api/admin/challenger/${year}/import/publish`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phase, makeVisible: true }),
+      });
+      const raw = await res.text();
+      let json: { error?: string } = {};
+      try {
+        json = raw ? (JSON.parse(raw) as typeof json) : {};
+      } catch {
+        setFeedback(`Erro ao publicar (${res.status}).`);
+        return;
+      }
+      setFeedback(
+        res.ok
+          ? `Classificação ${label} publicada e visível no site.`
+          : (json.error ?? "Erro ao publicar."),
+      );
+    } catch {
+      setFeedback("Erro de rede ao publicar.");
+    } finally {
+      setBusy(false);
+      await load();
+    }
   };
 
   const draftChangeMap = useMemo(() => {
@@ -770,20 +810,31 @@ export function AdminChallengerView({ year }: { year: string }) {
               Células vazias mantêm os valores do rascunho anterior.
             </p>
             <input
+              ref={importInputRef}
+              name="excel"
               type="file"
-              accept=".xlsx,.xls"
+              accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
               onChange={(e) => setImportFile(e.target.files?.[0] ?? null)}
               className="text-sm text-muted"
               required
             />
+            {importFile && (
+              <p className="text-xs text-muted">
+                Ficheiro seleccionado: <span className="text-foreground">{importFile.name}</span>
+              </p>
+            )}
             {data?.importMeta?.importedAt && (
               <p className="text-xs text-muted">
                 Último import: {data.importMeta.filename ?? "—"} ·{" "}
                 {new Date(data.importMeta.importedAt).toLocaleString("pt-PT")}
               </p>
             )}
-            <button type="submit" disabled={busy || !importFile} className="btn-primary px-4 py-2 text-xs">
-              Importar para rascunho
+            <button
+              type="submit"
+              disabled={importing}
+              className="btn-primary px-4 py-2 text-xs"
+            >
+              {importing ? "A importar…" : "Importar para rascunho"}
             </button>
           </form>
 

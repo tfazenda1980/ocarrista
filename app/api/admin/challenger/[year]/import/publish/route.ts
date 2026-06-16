@@ -6,6 +6,8 @@ import {
   publishChallengerPhase,
 } from "@/app/lib/challenger/repository";
 
+export const runtime = "nodejs";
+
 export async function POST(
   request: NextRequest,
   context: { params: Promise<{ year: string }> },

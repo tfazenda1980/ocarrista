@@ -12,6 +12,7 @@ import type {
   ChallengerSettings,
 } from "./types";
 import type { DraftCrewResultInput, DraftScoreInput } from "./import-scores";
+import { ensureChallengerImportSchema } from "./import-schema";
 
 function rowNumber(value: unknown): number {
   if (typeof value === "number") return value;
@@ -457,10 +458,19 @@ export async function saveImportDraft(
 ): Promise<void> {
   const sql = getSql();
   if (!sql) throw new Error("DATABASE_URL em falta");
+
+  await ensureChallengerImportSchema();
   await ensureChallengerSettings(year);
 
-  await sql`DELETE FROM challenger_scores_draft WHERE year = ${year}`;
-  await sql`DELETE FROM challenger_crew_results_draft WHERE year = ${year}`;
+  try {
+    await sql`DELETE FROM challenger_scores_draft WHERE year = ${year}`;
+    await sql`DELETE FROM challenger_crew_results_draft WHERE year = ${year}`;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(
+      `Não foi possível preparar o rascunho de importação: ${message}`,
+    );
+  }
 
   for (const score of scores) {
     await sql`
@@ -517,6 +527,8 @@ export async function publishChallengerPhase(
 ): Promise<ChallengerSettings | null> {
   const sql = getSql();
   if (!sql) throw new Error("DATABASE_URL em falta");
+
+  await ensureChallengerImportSchema();
 
   const draftScores = await listScoresDraft(year);
   const draftResults = await listCrewResultsDraft(year);
