@@ -1,7 +1,7 @@
 import { SectionShell } from "../section-shell";
 import { EventCard } from "../events/event-card";
 import { IconCalendar, IconTarget, IconShield } from "../icons";
-import { CNC_SRC, WORKSHOP_26_SRC } from "../../lib/site-assets";
+import { CNC_SRC, CHALLENGER_SRC, WORKSHOP_26_SRC } from "../../lib/site-assets";
 
 const events = [
   {
@@ -56,6 +56,8 @@ const events = [
     description:
       "Prova de destreza técnica e física para as guarnições de carristas — superação, precisão e espírito de equipa em ambiente competitivo.",
     icon: <IconTarget />,
+    href: "/eventos/challenger",
+    backgroundImage: CHALLENGER_SRC,
   },
 ];
 

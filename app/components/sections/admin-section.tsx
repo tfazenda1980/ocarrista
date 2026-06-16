@@ -52,6 +52,17 @@ export function AdminSection({ pendingCount }: AdminSectionProps) {
           </div>
           <div className="card-tactical p-6 sm:col-span-2 lg:col-span-1">
             <p className="font-display text-sm font-semibold tracking-wide text-foreground uppercase">
+              Challenger 2026
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              Provas, guarnições inscritas e classificação.
+            </p>
+            <Link href="/admin/challenger/2026" className="btn-outline mt-4 inline-flex text-xs">
+              Gerir Challenger
+            </Link>
+          </div>
+          <div className="card-tactical p-6 sm:col-span-2 lg:col-span-1">
+            <p className="font-display text-sm font-semibold tracking-wide text-foreground uppercase">
               Workshop {workshopYear}
             </p>
             <p className="mt-2 text-sm text-muted">

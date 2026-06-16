@@ -1,0 +1,22 @@
+{
+  "year": "2026",
+  "slug": "challenger",
+  "published": true,
+  "title": "Challenger O Carrista",
+  "edition": "Challenger 2026",
+  "slogan": "Destreza técnica, física e espírito de equipa — a pista final das guarnições de carristas.",
+  "purpose": "O Challenger O Carrista é a prova anual de destreza técnica e física para guarnições de Carros de Combate. Reúne equipas de quatro elementos que enfrentam uma sequência de provas cronometradas e avaliadas, com critérios de precisão, velocidade, trabalho em equipa e rigor operacional. Este espaço reúne o regulamento das provas, os croquis e briefings, a lista de guarnições inscritas e as classificações provisórias e finais à medida que a organização as publica.",
+  "date": "2026-06-18T12:00:00+01:00",
+  "dateDisplay": "18 de Junho de 2026",
+  "location": "Quartel da Cavalaria · Santa Margarida",
+  "heroImage": "/images/challenger.png",
+  "cardImage": "/images/challenger.png",
+  "seo": {
+    "title": "Challenger O Carrista 2026 | O Carrista",
+    "description": "Prova de destreza técnica e física para guarnições de carristas — provas, inscrições e classificação."
+  },
+  "contacts": {
+    "email": "ocarrista.cc@gmail.com",
+    "organizer": "O Carrista · QCav e Ex-RC4"
+  }
+}

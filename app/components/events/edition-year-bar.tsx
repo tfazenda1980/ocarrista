@@ -7,18 +7,20 @@ type EditionYearBarProps = {
   years: string[];
   activeYear: string;
   basePath?: string;
+  ariaLabel?: string;
 };
 
 export function EditionYearBar({
   years,
   activeYear,
   basePath = "/eventos/workshop",
+  ariaLabel = "Edições do evento",
 }: EditionYearBarProps) {
   const pathname = usePathname();
 
   return (
     <nav
-      aria-label="Edições do Workshop"
+      aria-label={ariaLabel}
       className="edition-year-bar sticky top-16 z-40 border-b border-gold/35 bg-background/95 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 sm:gap-2 sm:px-6">

@@ -1,0 +1,581 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
+import type {
+  ChallengerCrew,
+  ChallengerPhase,
+  ChallengerProva,
+  ChallengerScore,
+  ChallengerScoreKind,
+  ChallengerSettings,
+  ChallengerStanding,
+} from "@/app/lib/challenger/types";
+
+type Tab = "provas" | "crews" | "scores" | "publish";
+
+type AdminPayload = {
+  configured: boolean;
+  settings: ChallengerSettings | null;
+  provas: ChallengerProva[];
+  crews: ChallengerCrew[];
+  scores: ChallengerScore[];
+  provisional: ChallengerStanding[];
+  final: ChallengerStanding[];
+  error?: string;
+};
+
+const emptyMembers = () =>
+  [1, 2, 3, 4].map((position) => ({ position, name: "", role: "" }));
+
+export function AdminChallengerView({ year }: { year: string }) {
+  const [tab, setTab] = useState<Tab>("provas");
+  const [data, setData] = useState<AdminPayload | null>(null);
+  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const [provaDraft, setProvaDraft] = useState({ title: "", description: "" });
+  const [provaFile, setProvaFile] = useState<File | null>(null);
+
+  const [crewDraft, setCrewDraft] = useState({
+    name: "",
+    members: emptyMembers(),
+  });
+
+  const [scoreDraft, setScoreDraft] = useState({
+    crew_id: "",
+    prova_id: "",
+    points: "",
+    kind: "prova" as ChallengerScoreKind,
+    phase: "provisional" as ChallengerPhase,
+    label: "",
+    notes: "",
+  });
+
+  const load = useCallback(async () => {
+    const res = await fetch(`/api/admin/challenger/${year}`);
+    if (res.status === 401) {
+      window.location.href = "/entrar";
+      return;
+    }
+    const json = (await res.json()) as AdminPayload;
+    if (!res.ok) {
+      setError(json.error ?? "Erro ao carregar dados.");
+      return;
+    }
+    setData(json);
+    setError(json.configured ? "" : "Base de dados não configurada (DATABASE_URL).");
+  }, [year]);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  const activeCrews = useMemo(
+    () => data?.crews.filter((c) => c.active) ?? [],
+    [data?.crews],
+  );
+
+  const addProva = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!provaDraft.title.trim()) return;
+    setBusy(true);
+    setFeedback("");
+    const form = new FormData();
+    form.set("title", provaDraft.title);
+    form.set("description", provaDraft.description);
+    if (provaFile) form.set("sketch", provaFile);
+
+    const res = await fetch(`/api/admin/challenger/${year}/provas`, {
+      method: "POST",
+      body: form,
+    });
+    const json = (await res.json()) as { error?: string };
+    if (!res.ok) setFeedback(json.error ?? "Erro ao criar prova.");
+    else {
+      setFeedback("Prova criada.");
+      setProvaDraft({ title: "", description: "" });
+      setProvaFile(null);
+    }
+    await load();
+    setBusy(false);
+  };
+
+  const uploadSketch = async (provaId: string, file: File) => {
+    setBusy(true);
+    const form = new FormData();
+    form.set("id", provaId);
+    form.set("sketch", file);
+    const res = await fetch(`/api/admin/challenger/${year}/provas`, {
+      method: "PATCH",
+      body: form,
+    });
+    const json = (await res.json()) as { error?: string };
+    setFeedback(res.ok ? "Croqui actualizado." : (json.error ?? "Erro no upload."));
+    await load();
+    setBusy(false);
+  };
+
+  const removeProva = async (id: string) => {
+    if (!confirm("Eliminar esta prova?")) return;
+    setBusy(true);
+    await fetch(`/api/admin/challenger/${year}/provas?id=${id}`, { method: "DELETE" });
+    await load();
+    setBusy(false);
+  };
+
+  const addCrew = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    setFeedback("");
+    const res = await fetch(`/api/admin/challenger/${year}/crews`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(crewDraft),
+    });
+    const json = (await res.json()) as { error?: string };
+    if (!res.ok) setFeedback(json.error ?? "Erro ao inscrever guarnição.");
+    else {
+      setFeedback("Guarnição inscrita.");
+      setCrewDraft({ name: "", members: emptyMembers() });
+    }
+    await load();
+    setBusy(false);
+  };
+
+  const toggleCrewActive = async (crew: ChallengerCrew) => {
+    setBusy(true);
+    await fetch(`/api/admin/challenger/${year}/crews`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: crew.id, active: !crew.active }),
+    });
+    await load();
+    setBusy(false);
+  };
+
+  const removeCrew = async (id: string) => {
+    if (!confirm("Eliminar esta guarnição?")) return;
+    setBusy(true);
+    await fetch(`/api/admin/challenger/${year}/crews?id=${id}`, { method: "DELETE" });
+    await load();
+    setBusy(false);
+  };
+
+  const addScore = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    setFeedback("");
+    const res = await fetch(`/api/admin/challenger/${year}/scores`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        crew_id: scoreDraft.crew_id,
+        prova_id: scoreDraft.kind === "prova" ? scoreDraft.prova_id || null : null,
+        points: Number(scoreDraft.points),
+        kind: scoreDraft.kind,
+        phase: scoreDraft.phase,
+        label: scoreDraft.label,
+        notes: scoreDraft.notes || null,
+      }),
+    });
+    const json = (await res.json()) as { error?: string };
+    if (!res.ok) setFeedback(json.error ?? "Erro ao registar pontuação.");
+    else {
+      setFeedback("Pontuação registada.");
+      setScoreDraft((s) => ({ ...s, points: "", label: "", notes: "" }));
+    }
+    await load();
+    setBusy(false);
+  };
+
+  const removeScore = async (id: string) => {
+    setBusy(true);
+    await fetch(`/api/admin/challenger/${year}/scores?id=${id}`, { method: "DELETE" });
+    await load();
+    setBusy(false);
+  };
+
+  const updatePublish = async (fields: {
+    provisional_visible?: boolean;
+    final_visible?: boolean;
+  }) => {
+    setBusy(true);
+    const res = await fetch(`/api/admin/challenger/${year}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(fields),
+    });
+    const json = (await res.json()) as { error?: string };
+    setFeedback(res.ok ? "Publicação actualizada." : (json.error ?? "Erro."));
+    await load();
+    setBusy(false);
+  };
+
+  const tabs: { id: Tab; label: string }[] = [
+    { id: "provas", label: "Provas" },
+    { id: "crews", label: "Guarnições" },
+    { id: "scores", label: "Pontuação" },
+    { id: "publish", label: "Publicação" },
+  ];
+
+  return (
+    <div>
+      <div className="mb-8 flex flex-wrap gap-3">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTab(t.id)}
+            className={`px-4 py-2 font-display text-xs tracking-[0.12em] uppercase ${
+              tab === t.id
+                ? "bg-gold text-background"
+                : "border border-gold/30 text-gold hover:bg-gold/10"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+        <a
+          href={`/eventos/challenger/${year}`}
+          className="ml-auto font-display text-xs tracking-[0.12em] text-gold uppercase hover:text-gold-bright"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver página pública →
+        </a>
+      </div>
+
+      {error && (
+        <p className="mb-6 border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200/90">
+          {error}
+        </p>
+      )}
+      {feedback && (
+        <p className="mb-6 border border-gold/30 bg-gold/10 px-4 py-3 text-sm text-gold">
+          {feedback}
+        </p>
+      )}
+
+      {tab === "provas" && (
+        <div className="space-y-10">
+          <form onSubmit={addProva} className="card-tactical space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Nova prova
+            </h3>
+            <input
+              value={provaDraft.title}
+              onChange={(e) => setProvaDraft((d) => ({ ...d, title: e.target.value }))}
+              placeholder="Nome da prova"
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+              required
+            />
+            <textarea
+              value={provaDraft.description}
+              onChange={(e) =>
+                setProvaDraft((d) => ({ ...d, description: e.target.value }))
+              }
+              placeholder="Descrição (opcional)"
+              rows={3}
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+            />
+            <div>
+              <label className="mb-2 block text-xs text-muted">
+                Croqui / briefing (PDF ou PPT)
+              </label>
+              <input
+                type="file"
+                accept=".pdf,.ppt,.pptx,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                onChange={(e) => setProvaFile(e.target.files?.[0] ?? null)}
+                className="text-sm text-muted"
+              />
+            </div>
+            <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+              Adicionar prova
+            </button>
+          </form>
+
+          <div className="space-y-4">
+            {(data?.provas ?? []).map((prova) => (
+              <div key={prova.id} className="card-tactical p-6">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h4 className="font-display text-lg text-foreground">{prova.title}</h4>
+                    {prova.description && (
+                      <p className="mt-2 text-sm text-muted">{prova.description}</p>
+                    )}
+                    {prova.sketch_url ? (
+                      <a
+                        href={prova.sketch_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-block text-xs text-gold"
+                      >
+                        {prova.sketch_label ?? "Documento"} →
+                      </a>
+                    ) : (
+                      <p className="mt-3 text-xs text-muted">Sem croqui</p>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[0.65rem] text-muted">
+                      Substituir croqui
+                      <input
+                        type="file"
+                        accept=".pdf,.ppt,.pptx"
+                        className="mt-1 block text-xs"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) uploadSketch(prova.id, file);
+                        }}
+                      />
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => removeProva(prova.id)}
+                      className="text-xs text-red-400/90 hover:text-red-300"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tab === "crews" && (
+        <div className="space-y-10">
+          <form onSubmit={addCrew} className="card-tactical space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Inscrever guarnição ({activeCrews.length} activas)
+            </h3>
+            <input
+              value={crewDraft.name}
+              onChange={(e) => setCrewDraft((d) => ({ ...d, name: e.target.value }))}
+              placeholder="Nome da guarnição"
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+              required
+            />
+            <div className="grid gap-3 sm:grid-cols-2">
+              {crewDraft.members.map((m, i) => (
+                <div key={m.position} className="space-y-2">
+                  <input
+                    value={m.name}
+                    onChange={(e) => {
+                      const members = [...crewDraft.members];
+                      members[i] = { ...members[i], name: e.target.value };
+                      setCrewDraft((d) => ({ ...d, members }));
+                    }}
+                    placeholder={`Elemento ${m.position} — nome`}
+                    className="w-full border border-gold/20 bg-background/80 px-3 py-2 text-sm"
+                    required
+                  />
+                  <input
+                    value={m.role}
+                    onChange={(e) => {
+                      const members = [...crewDraft.members];
+                      members[i] = { ...members[i], role: e.target.value };
+                      setCrewDraft((d) => ({ ...d, members }));
+                    }}
+                    placeholder="Função (opcional)"
+                    className="w-full border border-gold/20 bg-background/80 px-3 py-2 text-sm"
+                  />
+                </div>
+              ))}
+            </div>
+            <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+              Inscrever guarnição
+            </button>
+          </form>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {(data?.crews ?? []).map((crew) => (
+              <div
+                key={crew.id}
+                className={`card-tactical p-6 ${!crew.active ? "opacity-60" : ""}`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h4 className="font-display text-lg text-gold">{crew.name}</h4>
+                  <span className="font-mono text-[0.6rem] text-muted">
+                    {crew.active ? "Activa" : "Inactiva"}
+                  </span>
+                </div>
+                <ul className="mt-4 space-y-1 text-sm">
+                  {crew.members.map((m) => (
+                    <li key={m.id}>
+                      {m.name}
+                      {m.role ? ` · ${m.role}` : ""}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => toggleCrewActive(crew)}
+                    className="btn-outline px-3 py-1.5 text-[0.65rem]"
+                  >
+                    {crew.active ? "Desactivar" : "Reactivar"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => removeCrew(crew.id)}
+                    className="text-[0.65rem] text-red-400/90"
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tab === "scores" && (
+        <div className="space-y-10">
+          <form onSubmit={addScore} className="card-tactical grid gap-4 p-6 sm:grid-cols-2">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase sm:col-span-2">
+              Registar pontuação ou penalização
+            </h3>
+            <select
+              value={scoreDraft.crew_id}
+              onChange={(e) => setScoreDraft((s) => ({ ...s, crew_id: e.target.value }))}
+              className="border border-gold/20 bg-background/80 px-3 py-2 text-sm"
+              required
+            >
+              <option value="">Guarnição</option>
+              {activeCrews.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <select
+              value={scoreDraft.kind}
+              onChange={(e) =>
+                setScoreDraft((s) => ({
+                  ...s,
+                  kind: e.target.value as ChallengerScoreKind,
+                }))
+              }
+              className="border border-gold/20 bg-background/80 px-3 py-2 text-sm"
+            >
+              <option value="prova">Pontos de prova</option>
+              <option value="penalty">Penalização</option>
+              <option value="bonus">Bónus</option>
+            </select>
+            {scoreDraft.kind === "prova" && (
+              <select
+                value={scoreDraft.prova_id}
+                onChange={(e) => setScoreDraft((s) => ({ ...s, prova_id: e.target.value }))}
+                className="border border-gold/20 bg-background/80 px-3 py-2 text-sm sm:col-span-2"
+                required
+              >
+                <option value="">Prova</option>
+                {(data?.provas ?? []).map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.title}
+                  </option>
+                ))}
+              </select>
+            )}
+            <input
+              type="number"
+              step="0.01"
+              value={scoreDraft.points}
+              onChange={(e) => setScoreDraft((s) => ({ ...s, points: e.target.value }))}
+              placeholder="Pontos (negativo para penalização)"
+              className="border border-gold/20 bg-background/80 px-3 py-2 text-sm"
+              required
+            />
+            <select
+              value={scoreDraft.phase}
+              onChange={(e) =>
+                setScoreDraft((s) => ({
+                  ...s,
+                  phase: e.target.value as ChallengerPhase,
+                }))
+              }
+              className="border border-gold/20 bg-background/80 px-3 py-2 text-sm"
+            >
+              <option value="provisional">Provisória</option>
+              <option value="final">Final</option>
+            </select>
+            <input
+              value={scoreDraft.label}
+              onChange={(e) => setScoreDraft((s) => ({ ...s, label: e.target.value }))}
+              placeholder="Nota / motivo (opcional)"
+              className="border border-gold/20 bg-background/80 px-3 py-2 text-sm sm:col-span-2"
+            />
+            <button
+              type="submit"
+              disabled={busy}
+              className="btn-primary px-4 py-2 text-xs sm:col-span-2"
+            >
+              Registar
+            </button>
+          </form>
+
+          <div className="space-y-2">
+            {(data?.scores ?? []).map((score) => {
+              const crew = data?.crews.find((c) => c.id === score.crew_id);
+              const prova = data?.provas.find((p) => p.id === score.prova_id);
+              return (
+                <div
+                  key={score.id}
+                  className="flex flex-wrap items-center justify-between gap-3 border border-gold/15 px-4 py-3 text-sm"
+                >
+                  <span>
+                    <strong>{crew?.name ?? "?"}</strong> · {score.kind} · {score.phase}
+                    {prova ? ` · ${prova.title}` : ""} ·{" "}
+                    <span className="font-mono text-gold">{score.points}</span>
+                    {score.label ? ` — ${score.label}` : ""}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => removeScore(score.id)}
+                    className="text-xs text-red-400/90"
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {tab === "publish" && (
+        <div className="card-tactical max-w-lg space-y-6 p-6">
+          <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+            Visibilidade das classificações
+          </h3>
+          <label className="flex items-center gap-3 text-sm">
+            <input
+              type="checkbox"
+              checked={data?.settings?.provisional_visible ?? true}
+              onChange={(e) => updatePublish({ provisional_visible: e.target.checked })}
+              disabled={busy}
+            />
+            Mostrar classificação provisória no site
+          </label>
+          <label className="flex items-center gap-3 text-sm">
+            <input
+              type="checkbox"
+              checked={data?.settings?.final_visible ?? false}
+              onChange={(e) => updatePublish({ final_visible: e.target.checked })}
+              disabled={busy}
+            />
+            Mostrar classificação final no site
+          </label>
+          <p className="text-xs text-muted">
+            Execute <code className="text-gold">scripts/migrate-challenger.sql</code> no Neon
+            antes da primeira utilização. Para upload de croquis, configure{" "}
+            <code className="text-gold">BLOB_READ_WRITE_TOKEN</code> na Vercel (Storage → Blob).
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}

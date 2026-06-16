@@ -70,6 +70,16 @@ O que podes fazer em **~15 minutos** seguindo isto.
 | `ADMIN_PASSWORD` | `Leopard2@6` (ou outra — **só na Vercel**, não no Git) |
 | `WORKSHOP_QA_PASSWORD` | `1762` (opcional; há default no código) |
 | `CRON_SECRET` | String aleatória (Vercel Cron → alertas email a membros) |
+| `BLOB_READ_WRITE_TOKEN` | Vercel Blob — upload de croquis PDF/PPT no Challenger (opcional) |
+
+---
+
+## 5b. Challenger (provas, guarnições, classificação)
+
+1. Neon → SQL Editor → executar `scripts/migrate-challenger.sql`
+2. (Opcional) Vercel → **Storage** → **Blob** → ligar ao projeto → `BLOB_READ_WRITE_TOKEN`
+3. Admin → `/admin/challenger/2026` — provas, guarnições (4 elementos), pontuações
+4. Página pública → `/eventos/challenger/2026`
 
 Depois: **Deployments → Redeploy** (para carregar as novas vars).
 
