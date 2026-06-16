@@ -1,4 +1,5 @@
 import type { EventData, WorkshopSeries } from "./types";
+import { enrichWorkshopEvent } from "./workshop-people";
 import series from "../../../content/events/workshop/series.json";
 import edition2026 from "../../../content/events/workshop/2026.json";
 import edition2025 from "../../../content/events/workshop/2025.json";
@@ -14,7 +15,9 @@ export function getWorkshopSeries(): WorkshopSeries {
 }
 
 export function getWorkshopEdition(year: string): EventData | null {
-  return editions[year] ?? null;
+  const edition = editions[year];
+  if (!edition) return null;
+  return enrichWorkshopEvent(edition);
 }
 
 export function getWorkshopYearsForStaticParams() {

@@ -203,68 +203,125 @@
     {
       "id": "maj-nuno-silva",
       "name": "Maj Nuno Silva",
-      "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "fullName": "Nuno Oliveira da Silva",
+      "role": "Major de Cavalaria · Orador e Moderador",
+      "image": "/eventos/workshop/2026/oradores/maj-nuno-silva.jpg",
+      "bio": "Orador na sessão sobre drones e sensores. Moderador do Painel 2 — Experiência em Prática.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "Major de Cavalaria com experiência em carros de combate e operações. Participa no Workshop 2026 como orador e moderador do eixo «Experiência em Prática»."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «O campo de batalha transparente: drones e sensores» (Painel 1)",
+            "Moderador — Painel 2 «Experiência em Prática» / «Transformar conhecimento em mudança»"
+          ]
+        }
+      ]
     },
     {
       "id": "tcor-pereira-coutinho",
       "name": "TCor Pereira Coutinho",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "tcor-sergio-capelo",
       "name": "TCor Sérgio Capelo",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "maj-teixeira-pinto",
       "name": "Maj Teixeira Pinto",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "cap-marco-lopes",
       "name": "Cap Marco Lopes",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "ten-joao-leal",
       "name": "Ten João Leal",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "smor-vitor-branco",
       "name": "SMor Vítor Branco",
-      "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "fullName": "Victor Manuel Duarte Branco",
+      "role": "Sargento-Mor de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/smor-vitor-branco.png",
+      "bio": "39 anos de serviço. Sargento-Mor do Exército desde janeiro de 2024 — percurso em carros de combate, NATO e comando de sargentos.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "Nasceu a 19 de dezembro de 1974, em Mirandela. Conta com 39 anos de serviço e foi promovido a Sargento-Mor de Cavalaria em 26 de outubro de 2023."
+        },
+        {
+          "title": "Formação e cursos",
+          "items": [
+            "Curso de Cavalaria, Escola de Sargentos do Exército",
+            "Master Gunner — carro de combate M60A3 TTS (EUA)",
+            "Master Gunner, Video Training Equipment e Turret Training Equipment — Leopard 2A6 (Países Baixos)",
+            "NATO NCO's Orientation Course — NATO School (Alemanha)",
+            "NATO NCO's Intermediate Leadership Course — Swiss Armed Forces College (Suíça)",
+            "NATO NCO's Advanced Course — Swiss Armed Forces College (Suíça)"
+          ]
+        },
+        {
+          "title": "Comando",
+          "items": [
+            "Sargento de Pelotão de Carros de Combate no Grupo de Carros de Combate da Brigada Mecanizada"
+          ]
+        },
+        {
+          "title": "Estado-Maior e funções de destaque",
+          "items": [
+            "Grupo de Carros de Combate da Brigada Mecanizada — Sargento Ajudante de Operações, Sargento de Informações, Sargento de Logística e Ajudante de Comandante de Esquadrão",
+            "Quartel-General da Brigada Mecanizada — Sargento Ajudante de Operações da Secção de Operações",
+            "Grupo de Aviação Ligeira do Exército — Sargento de Operações, Informações e Segurança",
+            "Quartel-General da Brigada de Reação Rápida — Sargento de Informações",
+            "Regimento de Pára-Quedistas — Sargento de Pessoal",
+            "Regimento de Lanceiros n.º 2 — Sargento de Operações, Informações e Segurança; Chefe do Centro de Gestão; Chefe do Posto de Controlo de Material Classificado; Ajudante do Comandante do Grupo de Comando e Serviços",
+            "Agrupamento Sanitário — Ajudante do Comandante",
+            "Estado-Maior do Exército — Sargento Ajudante no Departamento de Gestão Estratégica do Gabinete de Gestão da Informação e do Conhecimento"
+          ]
+        },
+        {
+          "title": "Cargo atual",
+          "body": "Desde 18 de janeiro de 2024 exerce funções como Sargento-Mor do Exército."
+        }
+      ]
     },
     {
       "id": "sch-nuno-goncalves",
       "name": "SCh Nuno Gonçalves",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "saj-alexandre-mendes",
       "name": "SAj Alexandre Mendes",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "saj-vitor-pereira",
       "name": "SAj Vítor Pereira",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     },
     {
       "id": "saj-vilas-boas",
       "name": "SAj Vilas Boas",
       "role": "Orador",
-      "bio": "Orador confirmado — Workshop de Carros de Combate 2026."
+      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     }
   ],
   "moderators": [

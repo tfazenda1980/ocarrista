@@ -33,12 +33,21 @@ export type EventPanel = {
   sessions: EventSession[];
 };
 
+export type EventSpeakerBioSection = {
+  title: string;
+  body?: string;
+  items?: string[];
+};
+
 export type EventSpeaker = {
   id: string;
   name: string;
+  /** Nome completo (ex. perfil oficial) */
+  fullName?: string;
   role: string;
   bio: string;
   bioLong?: string;
+  bioSections?: EventSpeakerBioSection[];
   image?: string;
   /** Eixo do painel em que participa */
   axisId?: string;
@@ -48,6 +57,12 @@ export type EventModerator = {
   id: string;
   name: string;
   axisId?: string;
+  fullName?: string;
+  role?: string;
+  bio?: string;
+  bioLong?: string;
+  bioSections?: EventSpeakerBioSection[];
+  image?: string;
 };
 
 export type EventGalleryItem = {

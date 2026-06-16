@@ -10,6 +10,7 @@ import { EventAxesSection } from "./sections/event-axes-section";
 import { EventSpotlight } from "./sections/event-spotlight";
 import { EventProgram } from "./sections/event-program";
 import { EventSpeakers } from "./sections/event-speakers";
+import { EventPersonProfileHost } from "./sections/event-person-profile-host";
 import { EventGallery } from "./sections/event-gallery";
 import { EventRegistration } from "./sections/event-registration";
 import { EventFooter } from "./sections/event-footer";
@@ -55,7 +56,7 @@ export function EventPageView({
           {!published && event.archivePdf ? (
             <EventArchiveEdition event={event} />
           ) : (
-            <>
+            <EventPersonProfileHost event={event}>
               <EventHero event={event} showRegistrationCta={published} />
               {published ? (
                 <>
@@ -75,7 +76,7 @@ export function EventPageView({
               ) : (
                 <EditionPlaceholder event={event} />
               )}
-            </>
+            </EventPersonProfileHost>
           )}
         </main>
         {published && <EventFooter event={event} />}

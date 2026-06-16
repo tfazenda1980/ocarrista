@@ -16,6 +16,16 @@ Configuração em `content/events/workshop/`:
 
 Registo de novas edições: adicionar `YYYY.json` e o ano em `series.json` → `app/lib/events/load-workshop.ts`.
 
+### Oradores e moderadores (fotos + bios)
+
+| Recurso | Local |
+|---------|--------|
+| Fotos | `public/eventos/workshop/2026/oradores/{id}.jpg` — deteção automática |
+| Dados | `content/events/workshop/2026.json` → `speakers` e `moderators` |
+| Guia | `public/eventos/workshop/2026/oradores/README.md` |
+
+Perfil ao clicar: `fullName`, `bio` (cartão), `bioSections` (modal). Ver entradas de `smor-vitor-branco` e `maj-nuno-silva` como modelo.
+
 ## Concurso Nacional Combinado (CNC)
 
 Configuração em `content/events/cnc/`:

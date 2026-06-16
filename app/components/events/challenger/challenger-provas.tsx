@@ -16,16 +16,20 @@ export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
           <div className="gold-line mb-10 w-24" />
         </MotionReveal>
 
-        {provas.length === 0 ? (
+        {provas.length === 0 && (
           <p className="text-sm text-muted">
             As provas e respetivos croquis serão publicados em breve pela organização.
           </p>
-        ) : (
-          <div className="space-y-12">
-            {provas.map((prova, i) => (
-              <MotionReveal key={prova.id} delay={i * 0.05}>
-                <article>
-                  <div className="card-tactical p-6 sm:p-8">
+        )}
+      </div>
+
+      {provas.length > 0 && (
+        <div className="space-y-12">
+          {provas.map((prova, i) => (
+            <MotionReveal key={prova.id} delay={i * 0.05}>
+              <div>
+                <div className="mx-auto max-w-6xl px-4 sm:px-6">
+                  <article className="card-tactical p-6 sm:p-8">
                     <h3 className="font-display text-xl font-semibold tracking-wide text-foreground uppercase sm:text-2xl">
                       {prova.title}
                     </h3>
@@ -39,14 +43,14 @@ export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
                         Croqui / briefing — documento em breve
                       </p>
                     )}
-                  </div>
-                  {prova.sketch_url && <ChallengerProvaSketch prova={prova} />}
-                </article>
-              </MotionReveal>
-            ))}
-          </div>
-        )}
-      </div>
+                  </article>
+                </div>
+                {prova.sketch_url && <ChallengerProvaSketch prova={prova} />}
+              </div>
+            </MotionReveal>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

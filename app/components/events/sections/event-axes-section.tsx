@@ -2,9 +2,10 @@
 
 import { MotionReveal } from "../../motion-reveal";
 import { IconShield, IconTarget } from "../../icons";
-import type { EventData, EventPanel, EventTheme } from "../../../lib/events/types";
+import type { EventData, EventPanel, EventTheme, EventModerator } from "../../../lib/events/types";
 import { EventProgramItem } from "./event-program-item";
 import { EventSpotlight } from "./event-spotlight";
+import { EventAxisModerator } from "./event-axis-moderator";
 
 const axisIcons = [<IconShield key="s" />, <IconTarget key="t" />];
 
@@ -35,13 +36,15 @@ function AxisTrack({
   index,
   speakers,
   eventYear,
+  event,
 }: {
   theme: EventTheme;
   panel: EventPanel | undefined;
-  moderator?: { name: string };
+  moderator?: EventModerator;
   index: number;
   speakers: EventData["speakers"];
   eventYear: string;
+  event: EventData;
 }) {
   return (
     <div className="event-axis-track">
@@ -61,12 +64,7 @@ function AxisTrack({
       </div>
 
       {moderator && (
-        <div className="event-axis-moderator mt-8">
-          <p className="section-label mb-2">Moderador</p>
-          <p className="font-display text-base font-semibold tracking-wide text-gold uppercase">
-            {moderator.name}
-          </p>
-        </div>
+        <EventAxisModerator event={event} moderator={moderator} />
       )}
 
       {panel && (
@@ -150,6 +148,7 @@ export function EventAxesSection({ event }: { event: EventData }) {
               index={0}
               speakers={event.speakers}
               eventYear={event.year}
+              event={event}
             />
           </MotionReveal>
         )}
@@ -178,6 +177,7 @@ export function EventAxesSection({ event }: { event: EventData }) {
               index={1}
               speakers={event.speakers}
               eventYear={event.year}
+              event={event}
             />
           </MotionReveal>
         )}

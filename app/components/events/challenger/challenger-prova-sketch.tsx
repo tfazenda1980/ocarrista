@@ -16,10 +16,7 @@ export function ChallengerProvaSketch({ prova }: { prova: ChallengerProva }) {
 
   if (kind === "pdf") {
     return (
-      <div
-        ref={ref}
-        className="challenger-sketch-viewer mt-8 w-full"
-      >
+      <div ref={ref} className="challenger-sketch-viewer challenger-sketch-viewer--pdf">
         <PdfHorizontalViewer
           pdfUrl={prova.sketch_url}
           active={inView}
@@ -33,10 +30,7 @@ export function ChallengerProvaSketch({ prova }: { prova: ChallengerProva }) {
 
   if (kind === "image") {
     return (
-      <div
-        ref={ref}
-        className="challenger-sketch-viewer challenger-sketch-viewer--image mt-8"
-      >
+      <div ref={ref} className="challenger-sketch-viewer challenger-sketch-viewer--image">
         <div className="challenger-sketch-frame">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -53,10 +47,7 @@ export function ChallengerProvaSketch({ prova }: { prova: ChallengerProva }) {
   const isPpt = /\.pptx?$/i.test(prova.sketch_url.split("?")[0]);
   if (isPpt) {
     return (
-      <div
-        ref={ref}
-        className="challenger-sketch-viewer challenger-sketch-viewer--embed mt-8"
-      >
+      <div ref={ref} className="challenger-sketch-viewer challenger-sketch-viewer--embed">
         <iframe
           title={prova.title}
           src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(prova.sketch_url)}`}
