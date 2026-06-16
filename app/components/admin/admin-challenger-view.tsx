@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type {
   ChallengerCrew,
+  ChallengerImportMeta,
   ChallengerPhase,
   ChallengerProva,
   ChallengerScore,
@@ -11,8 +12,9 @@ import type {
   ChallengerStanding,
 } from "@/app/lib/challenger/types";
 import { CHALLENGER_SKETCH_ACCEPT, sketchLabel } from "@/app/lib/challenger/sketch";
+import { StandingsTable } from "../events/challenger/challenger-classification";
 
-type Tab = "provas" | "crews" | "scores" | "publish";
+type Tab = "provas" | "crews" | "scores" | "import" | "publish";
 
 type AdminPayload = {
   configured: boolean;
@@ -22,6 +24,9 @@ type AdminPayload = {
   scores: ChallengerScore[];
   provisional: ChallengerStanding[];
   final: ChallengerStanding[];
+  draftProvisional?: ChallengerStanding[];
+  draftFinal?: ChallengerStanding[];
+  importMeta?: ChallengerImportMeta;
   error?: string;
 };
 
@@ -57,6 +62,9 @@ export function AdminChallengerView({ year }: { year: string }) {
     label: "",
     notes: "",
   });
+
+  const [importFile, setImportFile] = useState<File | null>(null);
+  const [importWarnings, setImportWarnings] = useState<string[]>([]);
 
   const load = useCallback(async () => {
     const res = await fetch(`/api/admin/challenger/${year}`);
@@ -252,10 +260,97 @@ export function AdminChallengerView({ year }: { year: string }) {
     setBusy(false);
   };
 
+  const uploadExcel = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!importFile) return;
+    setBusy(true);
+    setFeedback("");
+    setImportWarnings([]);
+
+    const form = new FormData();
+    form.set("file", importFile);
+
+    const res = await fetch(`/api/admin/challenger/${year}/import`, {
+      method: "POST",
+      body: form,
+    });
+    const json = (await res.json()) as {
+      error?: string;
+      errors?: string[];
+      warnings?: string[];
+      teams?: number;
+    };
+
+    if (!res.ok) {
+      setFeedback(json.errors?.[0] ?? json.error ?? "Erro ao importar.");
+      setImportWarnings(json.warnings ?? []);
+    } else {
+      setFeedback(
+        `Excel importado para rascunho (${json.teams ?? 0} equipas). Revise e publique quando estiver correcto.`,
+      );
+      setImportWarnings(json.warnings ?? []);
+      setImportFile(null);
+    }
+    await load();
+    setBusy(false);
+  };
+
+  const publishPhase = async (phase: ChallengerPhase) => {
+    const label = phase === "provisional" ? "provisória" : "final";
+    const draft =
+      phase === "provisional" ? data?.draftProvisional : data?.draftFinal;
+    if (!draft?.length) {
+      setFeedback(`Não há rascunho ${label} para publicar.`);
+      return;
+    }
+    if (
+      !confirm(
+        `Publicar classificação ${label} no site?\n\n${draft.length} equipas no rascunho.\nOs visitantes verão estes dados.`,
+      )
+    ) {
+      return;
+    }
+    setBusy(true);
+    setFeedback("");
+    const res = await fetch(`/api/admin/challenger/${year}/import/publish`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phase, makeVisible: true }),
+    });
+    const json = (await res.json()) as { error?: string };
+    setFeedback(
+      res.ok
+        ? `Classificação ${label} publicada e visível no site.`
+        : (json.error ?? "Erro ao publicar."),
+    );
+    await load();
+    setBusy(false);
+  };
+
+  const draftChangeMap = useMemo(() => {
+    const map = new Map<string, string[]>();
+    const published = data?.provisional ?? [];
+    const draft = data?.draftProvisional ?? [];
+    for (const row of draft) {
+      const prev = published.find((p) => p.crewId === row.crewId);
+      if (!prev) {
+        map.set(row.crewId, ["nova"]);
+        continue;
+      }
+      const changes: string[] = [];
+      if (prev.rank !== row.rank) changes.push("posição");
+      if (prev.finalTime !== row.finalTime) changes.push("tempo");
+      if (prev.total !== row.total) changes.push("pontos");
+      if (changes.length) map.set(row.crewId, changes);
+    }
+    return map;
+  }, [data?.draftProvisional, data?.provisional]);
+
   const tabs: { id: Tab; label: string }[] = [
     { id: "provas", label: "Provas" },
     { id: "crews", label: "Guarnições" },
-    { id: "scores", label: "Pontuação" },
+    { id: "scores", label: "Pontuação manual" },
+    { id: "import", label: "Importar Excel" },
     { id: "publish", label: "Publicação" },
   ];
 
@@ -663,11 +758,101 @@ export function AdminChallengerView({ year }: { year: string }) {
         </div>
       )}
 
+      {tab === "import" && (
+        <div className="space-y-10">
+          <form onSubmit={uploadExcel} className="card-tactical max-w-2xl space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Importar classificação (Folha2)
+            </h3>
+            <p className="text-sm text-muted">
+              Carregue o Excel à medida que as provas decorrem. Os dados ficam em{" "}
+              <strong className="text-foreground">rascunho</strong> até confirmar a publicação.
+              Células vazias mantêm os valores do rascunho anterior.
+            </p>
+            <input
+              type="file"
+              accept=".xlsx,.xls"
+              onChange={(e) => setImportFile(e.target.files?.[0] ?? null)}
+              className="text-sm text-muted"
+              required
+            />
+            {data?.importMeta?.importedAt && (
+              <p className="text-xs text-muted">
+                Último import: {data.importMeta.filename ?? "—"} ·{" "}
+                {new Date(data.importMeta.importedAt).toLocaleString("pt-PT")}
+              </p>
+            )}
+            <button type="submit" disabled={busy || !importFile} className="btn-primary px-4 py-2 text-xs">
+              Importar para rascunho
+            </button>
+          </form>
+
+          {importWarnings.length > 0 && (
+            <div className="border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200/90">
+              <p className="mb-2 font-medium">Avisos do import:</p>
+              <ul className="list-inside list-disc space-y-1 text-xs">
+                {importWarnings.map((w) => (
+                  <li key={w}>{w}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className="flex flex-wrap gap-4">
+            <button
+              type="button"
+              disabled={busy || !(data?.draftProvisional?.length)}
+              onClick={() => publishPhase("provisional")}
+              className="btn-primary px-4 py-2 text-xs"
+            >
+              Publicar classificação provisória
+            </button>
+            <button
+              type="button"
+              disabled={busy || !(data?.draftFinal?.length)}
+              onClick={() => publishPhase("final")}
+              className="btn-outline px-4 py-2 text-xs"
+            >
+              Publicar classificação final
+            </button>
+          </div>
+
+          {(data?.draftProvisional?.length ?? 0) > 0 && (
+            <StandingsTable
+              title="Pré-visualização — rascunho provisório"
+              standings={data?.draftProvisional ?? []}
+              provas={data?.provas ?? []}
+              highlightChanges={draftChangeMap}
+            />
+          )}
+
+          {(data?.draftFinal?.length ?? 0) > 0 && (
+            <StandingsTable
+              title="Pré-visualização — rascunho final"
+              standings={data?.draftFinal ?? []}
+              provas={data?.provas ?? []}
+            />
+          )}
+
+          {(data?.provisional?.length ?? 0) > 0 && (
+            <StandingsTable
+              title="Publicado no site — provisória"
+              standings={data?.provisional ?? []}
+              provas={data?.provas ?? []}
+            />
+          )}
+        </div>
+      )}
+
       {tab === "publish" && (
         <div className="card-tactical max-w-lg space-y-6 p-6">
           <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
             Visibilidade das classificações
           </h3>
+          <p className="text-sm text-muted">
+            Os dados só chegam ao site após importar o Excel e clicar em «Publicar» na tab
+            Importar Excel. Use estes interruptores para ocultar temporariamente sem apagar dados.
+          </p>
           <label className="flex items-center gap-3 text-sm">
             <input
               type="checkbox"
@@ -687,7 +872,8 @@ export function AdminChallengerView({ year }: { year: string }) {
             Mostrar classificação final no site
           </label>
           <p className="text-xs text-muted">
-            Execute <code className="text-gold">scripts/migrate-challenger.sql</code> no Neon
+            Execute <code className="text-gold">scripts/migrate-challenger.sql</code> e{" "}
+            <code className="text-gold">scripts/migrate-challenger-import.sql</code> no Neon
             antes da primeira utilização. Para upload de croquis, ligue um store{" "}
             <strong>Blob público</strong> na Vercel — basta{" "}
             <code className="text-gold">BLOB_STORE_ID</code> (OIDC; não precisa de token manual).

@@ -3,6 +3,7 @@ import { computeStandings } from "./standings";
 import type {
   ChallengerCrew,
   ChallengerCrewMember,
+  ChallengerCrewResult,
   ChallengerLiveData,
   ChallengerPhase,
   ChallengerProva,
@@ -10,6 +11,7 @@ import type {
   ChallengerScoreKind,
   ChallengerSettings,
 } from "./types";
+import type { DraftCrewResultInput, DraftScoreInput } from "./import-scores";
 
 function rowNumber(value: unknown): number {
   if (typeof value === "number") return value;
@@ -34,7 +36,10 @@ export async function getChallengerSettings(
   if (!sql) return null;
   await ensureChallengerSettings(year);
   const rows = await sql`
-    SELECT year, provisional_visible, final_visible, updated_at::text
+    SELECT year, provisional_visible, final_visible,
+           draft_imported_at::text, draft_filename,
+           provisional_published_at::text, final_published_at::text,
+           updated_at::text
     FROM challenger_settings
     WHERE year = ${year}
     LIMIT 1
@@ -62,7 +67,10 @@ export async function updateChallengerSettings(
         final_visible = ${finalVisible},
         updated_at = NOW()
     WHERE year = ${year}
-    RETURNING year, provisional_visible, final_visible, updated_at::text
+    RETURNING year, provisional_visible, final_visible,
+              draft_imported_at::text, draft_filename,
+              provisional_published_at::text, final_published_at::text,
+              updated_at::text
   `;
   return (rows[0] as ChallengerSettings) ?? null;
 }
@@ -348,6 +356,218 @@ export async function deleteScore(id: string): Promise<boolean> {
   return rows.length > 0;
 }
 
+export async function listCrewResults(year: string): Promise<ChallengerCrewResult[]> {
+  const sql = getSql();
+  if (!sql) return [];
+  const rows = await sql`
+    SELECT year, crew_id, phase, start_time, end_time, gross_time,
+           penalty_points, penalty_time_min, final_time, rank,
+           updated_at::text
+    FROM challenger_crew_results
+    WHERE year = ${year}
+  `;
+  return (rows as ChallengerCrewResult[]).map((row) => ({
+    ...row,
+    penalty_points: row.penalty_points != null ? rowNumber(row.penalty_points) : null,
+    penalty_time_min: row.penalty_time_min != null ? rowNumber(row.penalty_time_min) : null,
+    rank: row.rank != null ? Number(row.rank) : null,
+  }));
+}
+
+export async function listCrewResultsDraft(year: string): Promise<ChallengerCrewResult[]> {
+  const sql = getSql();
+  if (!sql) return [];
+  const rows = await sql`
+    SELECT year, crew_id, phase, start_time, end_time, gross_time,
+           penalty_points, penalty_time_min, final_time, rank,
+           updated_at::text
+    FROM challenger_crew_results_draft
+    WHERE year = ${year}
+  `;
+  return (rows as ChallengerCrewResult[]).map((row) => ({
+    ...row,
+    penalty_points: row.penalty_points != null ? rowNumber(row.penalty_points) : null,
+    penalty_time_min: row.penalty_time_min != null ? rowNumber(row.penalty_time_min) : null,
+    rank: row.rank != null ? Number(row.rank) : null,
+  }));
+}
+
+export async function listScoresDraft(year: string): Promise<ChallengerScore[]> {
+  const sql = getSql();
+  if (!sql) return [];
+  const rows = await sql`
+    SELECT id, year, crew_id, prova_id, label, points, kind, phase, notes,
+           created_at::text, updated_at::text
+    FROM challenger_scores_draft
+    WHERE year = ${year}
+    ORDER BY created_at ASC
+  `;
+  return (rows as ChallengerScore[]).map((row) => ({
+    ...row,
+    points: rowNumber(row.points),
+  }));
+}
+
+export async function saveImportDraft(
+  year: string,
+  filename: string,
+  scores: DraftScoreInput[],
+  crewResults: DraftCrewResultInput[],
+): Promise<void> {
+  const sql = getSql();
+  if (!sql) throw new Error("DATABASE_URL em falta");
+  await ensureChallengerSettings(year);
+
+  await sql`DELETE FROM challenger_scores_draft WHERE year = ${year}`;
+  await sql`DELETE FROM challenger_crew_results_draft WHERE year = ${year}`;
+
+  for (const score of scores) {
+    await sql`
+      INSERT INTO challenger_scores_draft (
+        id, year, crew_id, prova_id, label, points, kind, phase
+      )
+      VALUES (
+        ${crypto.randomUUID()},
+        ${year},
+        ${score.crew_id},
+        ${score.prova_id},
+        ${score.label},
+        ${score.points},
+        ${score.kind},
+        ${score.phase}
+      )
+    `;
+  }
+
+  for (const result of crewResults) {
+    await sql`
+      INSERT INTO challenger_crew_results_draft (
+        year, crew_id, phase, start_time, end_time, gross_time,
+        penalty_points, penalty_time_min, final_time, rank
+      )
+      VALUES (
+        ${year},
+        ${result.crew_id},
+        ${result.phase},
+        ${result.start_time},
+        ${result.end_time},
+        ${result.gross_time},
+        ${result.penalty_points},
+        ${result.penalty_time_min},
+        ${result.final_time},
+        ${result.rank}
+      )
+    `;
+  }
+
+  await sql`
+    UPDATE challenger_settings
+    SET draft_imported_at = NOW(),
+        draft_filename = ${filename},
+        updated_at = NOW()
+    WHERE year = ${year}
+  `;
+}
+
+export async function publishChallengerPhase(
+  year: string,
+  phase: ChallengerPhase,
+  options?: { makeVisible?: boolean },
+): Promise<ChallengerSettings | null> {
+  const sql = getSql();
+  if (!sql) throw new Error("DATABASE_URL em falta");
+
+  const draftScores = await listScoresDraft(year);
+  const draftResults = await listCrewResultsDraft(year);
+  const phaseScores = draftScores.filter((s) => s.phase === phase);
+  const phaseResults = draftResults.filter((r) => r.phase === phase);
+
+  if (phaseScores.length === 0 && phaseResults.length === 0) {
+    throw new Error("Não há dados em rascunho para esta fase.");
+  }
+
+  await sql`DELETE FROM challenger_scores WHERE year = ${year} AND phase = ${phase}`;
+  await sql`DELETE FROM challenger_crew_results WHERE year = ${year} AND phase = ${phase}`;
+
+  for (const score of phaseScores) {
+    await sql`
+      INSERT INTO challenger_scores (
+        id, year, crew_id, prova_id, label, points, kind, phase, notes
+      )
+      VALUES (
+        ${crypto.randomUUID()},
+        ${year},
+        ${score.crew_id},
+        ${score.prova_id},
+        ${score.label},
+        ${score.points},
+        ${score.kind},
+        ${phase},
+        ${score.notes}
+      )
+    `;
+  }
+
+  for (const result of phaseResults) {
+    await sql`
+      INSERT INTO challenger_crew_results (
+        year, crew_id, phase, start_time, end_time, gross_time,
+        penalty_points, penalty_time_min, final_time, rank
+      )
+      VALUES (
+        ${year},
+        ${result.crew_id},
+        ${phase},
+        ${result.start_time},
+        ${result.end_time},
+        ${result.gross_time},
+        ${result.penalty_points},
+        ${result.penalty_time_min},
+        ${result.final_time},
+        ${result.rank}
+      )
+    `;
+  }
+
+  const current = await getChallengerSettings(year);
+  if (!current) throw new Error("Definições não encontradas");
+
+  const provisionalVisible =
+    options?.makeVisible && phase === "provisional"
+      ? true
+      : current.provisional_visible;
+  const finalVisible =
+    options?.makeVisible && phase === "final" ? true : current.final_visible;
+
+  const rows =
+    phase === "provisional"
+      ? await sql`
+          UPDATE challenger_settings
+          SET provisional_visible = ${provisionalVisible},
+              final_visible = ${finalVisible},
+              provisional_published_at = NOW(),
+              updated_at = NOW()
+          WHERE year = ${year}
+          RETURNING year, provisional_visible, final_visible,
+                    draft_imported_at::text, draft_filename,
+                    provisional_published_at::text, final_published_at::text,
+                    updated_at::text
+        `
+      : await sql`
+          UPDATE challenger_settings
+          SET provisional_visible = ${provisionalVisible},
+              final_visible = ${finalVisible},
+              final_published_at = NOW(),
+              updated_at = NOW()
+          WHERE year = ${year}
+          RETURNING year, provisional_visible, final_visible,
+                    draft_imported_at::text, draft_filename,
+                    provisional_published_at::text, final_published_at::text,
+                    updated_at::text
+        `;
+  return (rows[0] as ChallengerSettings) ?? null;
+}
+
 export async function getChallengerLiveData(year: string): Promise<ChallengerLiveData> {
   const empty: ChallengerLiveData = {
     configured: false,
@@ -360,11 +580,12 @@ export async function getChallengerLiveData(year: string): Promise<ChallengerLiv
   if (!dbConfigured()) return empty;
 
   try {
-    const [settings, provas, crews, scores] = await Promise.all([
+    const [settings, provas, crews, scores, crewResults] = await Promise.all([
       getChallengerSettings(year),
       listProvas(year),
       listCrews(year, true),
       listScores(year),
+      listCrewResults(year),
     ]);
 
     return {
@@ -372,8 +593,8 @@ export async function getChallengerLiveData(year: string): Promise<ChallengerLiv
       settings,
       provas,
       crews,
-      provisional: computeStandings(crews, provas, scores, "provisional"),
-      final: computeStandings(crews, provas, scores, "final"),
+      provisional: computeStandings(crews, provas, scores, "provisional", crewResults),
+      final: computeStandings(crews, provas, scores, "final", crewResults),
     };
   } catch {
     return empty;
@@ -392,11 +613,22 @@ export async function getChallengerAdminData(year: string): Promise<ChallengerLi
   if (!dbConfigured()) return empty;
 
   try {
-    const [settings, provas, crews, scores] = await Promise.all([
+    const [
+      settings,
+      provas,
+      crews,
+      scores,
+      crewResults,
+      draftScores,
+      draftCrewResults,
+    ] = await Promise.all([
       getChallengerSettings(year),
       listProvas(year),
       listCrews(year, false),
       listScores(year),
+      listCrewResults(year),
+      listScoresDraft(year),
+      listCrewResultsDraft(year),
     ]);
 
     const activeCrews = crews.filter((c) => c.active);
@@ -406,8 +638,28 @@ export async function getChallengerAdminData(year: string): Promise<ChallengerLi
       settings,
       provas,
       crews,
-      provisional: computeStandings(activeCrews, provas, scores, "provisional"),
-      final: computeStandings(activeCrews, provas, scores, "final"),
+      provisional: computeStandings(activeCrews, provas, scores, "provisional", crewResults),
+      final: computeStandings(activeCrews, provas, scores, "final", crewResults),
+      draftProvisional: computeStandings(
+        activeCrews,
+        provas,
+        draftScores,
+        "provisional",
+        draftCrewResults,
+      ),
+      draftFinal: computeStandings(
+        activeCrews,
+        provas,
+        draftScores,
+        "final",
+        draftCrewResults,
+      ),
+      importMeta: {
+        importedAt: settings?.draft_imported_at ?? null,
+        filename: settings?.draft_filename ?? null,
+        provisionalPublishedAt: settings?.provisional_published_at ?? null,
+        finalPublishedAt: settings?.final_published_at ?? null,
+      },
     };
   } catch {
     return empty;

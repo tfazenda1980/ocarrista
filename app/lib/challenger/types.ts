@@ -6,6 +6,24 @@ export type ChallengerSettings = {
   year: string;
   provisional_visible: boolean;
   final_visible: boolean;
+  draft_imported_at: string | null;
+  draft_filename: string | null;
+  provisional_published_at: string | null;
+  final_published_at: string | null;
+  updated_at: string;
+};
+
+export type ChallengerCrewResult = {
+  year: string;
+  crew_id: string;
+  phase: ChallengerPhase;
+  start_time: string | null;
+  end_time: string | null;
+  gross_time: string | null;
+  penalty_points: number | null;
+  penalty_time_min: number | null;
+  final_time: string | null;
+  rank: number | null;
   updated_at: string;
 };
 
@@ -62,8 +80,21 @@ export type ChallengerStanding = {
   total: number;
   rank: number;
   provaPoints: Record<string, number>;
+  provaPenalties: Record<string, number>;
   penalties: number;
   bonuses: number;
+  startTime: string | null;
+  endTime: string | null;
+  grossTime: string | null;
+  penaltyTimeMin: number | null;
+  finalTime: string | null;
+};
+
+export type ChallengerImportMeta = {
+  importedAt: string | null;
+  filename: string | null;
+  provisionalPublishedAt: string | null;
+  finalPublishedAt: string | null;
 };
 
 export type ChallengerLiveData = {
@@ -73,4 +104,7 @@ export type ChallengerLiveData = {
   crews: ChallengerCrew[];
   provisional: ChallengerStanding[];
   final: ChallengerStanding[];
+  draftProvisional?: ChallengerStanding[];
+  draftFinal?: ChallengerStanding[];
+  importMeta?: ChallengerImportMeta;
 };
