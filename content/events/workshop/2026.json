@@ -90,7 +90,7 @@
           "duration": "30'",
           "title": "O papel do Master Gunner mudou",
           "description": "Do especialista em tiro ao gestor de letalidade e consciência situacional.",
-          "speaker": "SMor Vítor Branco",
+          "speaker": "SMor Victor Branco",
           "kind": "session"
         },
         {
@@ -147,7 +147,7 @@
           "duration": "30'",
           "title": "Consciência situacional e proteção passiva",
           "description": "Câmaras de condução, vigilância 360º, controlo de procedimentos do MG, rede de camuflagem e capacete modular.",
-          "speaker": "SCh Nuno Gonçalves · SAj Alexandre Mendes · SAj Vítor Pereira · SAj Vilas Boas",
+          "speaker": "SAj Alexandre Mendes · 1SARG Fábio Cabral",
           "kind": "session"
         },
         {
@@ -203,14 +203,22 @@
     {
       "id": "maj-nuno-silva",
       "name": "Maj Nuno Silva",
-      "fullName": "Nuno Oliveira da Silva",
+      "fullName": "Nuno Miguel de Melo Oliveira da Silva",
       "role": "Major de Cavalaria · Orador e Moderador",
       "image": "/eventos/workshop/2026/oradores/maj-nuno-silva.jpg",
-      "bio": "Orador na sessão sobre drones e sensores. Moderador do Painel 2 — Experiência em Prática.",
+      "bio": "36 anos, 18 de serviço. Oficial de Operações do Grupo de Carros de Combate — Leopard 2 A6, ECC VJTF22 e instrutor de cursos.",
       "bioSections": [
         {
           "title": "Percurso",
-          "body": "Major de Cavalaria com experiência em carros de combate e operações. Participa no Workshop 2026 como orador e moderador do eixo «Experiência em Prática»."
+          "body": "O Maj Cav Nuno Miguel de Melo Oliveira da Silva tem 36 anos de idade e 18 anos de serviço, tendo sido promovido ao atual posto em 1 de outubro de 2025."
+        },
+        {
+          "title": "Grupo de Carros de Combate",
+          "body": "Em outubro de 2013, após o término do Curso de Cavalaria da Academia Militar, o Maj Cav Oliveira da Silva foi colocado no Grupo de Carros de Combate da Brigada Mecanizada, onde desde essa data frequentou o curso de Chefe de Carro de Combate Leopard 2 A6, o que lhe permitiu desempenhar várias funções relacionadas com este sistema de armas, nomeadamente: Comandante do 2.º Pelotão do 1.º Esquadrão de Carros de Combate, 2.º Comandante do 2.º Esquadrão de Carros de Combate, Comandante do 1.º Esquadrão de Carros de Combate e Comandante do Esquadrão de Carros de Combate da Very High Readiness Joint Task Force 22 (ECC VJTF22). Atualmente desempenha as funções de Oficial de Operações do Grupo de Carros de Combate."
+        },
+        {
+          "title": "Instrução e exercícios",
+          "body": "Durante o seu percurso militar, foi diversas vezes diretor e instrutor de cursos Leopard, participou em vários exercícios de simulação no Reino de Espanha, bem como participou em diversos ciclos de treino operacionais, dos quais destaca-se o ciclo de treino associado à Full Operational Capability do Grupo de Carros de Combate, a sua participação no exercício Trident Juncture, bem como o período de aprontamento e manutenção da prontidão do ECC VJTF22."
         },
         {
           "title": "No Workshop 2026",
@@ -253,73 +261,83 @@
     },
     {
       "id": "smor-vitor-branco",
-      "name": "SMor Vítor Branco",
+      "name": "SMor Victor Branco",
       "fullName": "Victor Manuel Duarte Branco",
       "role": "Sargento-Mor de Cavalaria · Orador",
       "image": "/eventos/workshop/2026/oradores/smor-vitor-branco.png",
-      "bio": "39 anos de serviço. Sargento-Mor do Exército desde janeiro de 2024 — percurso em carros de combate, NATO e comando de sargentos.",
+      "bio": "39 anos de serviço. Sargento-Mor de Cavalaria desde dezembro de 2023 e Sargento-Mor do Exército desde janeiro de 2024.",
       "bioSections": [
         {
           "title": "Percurso",
-          "body": "Nasceu a 19 de dezembro de 1974, em Mirandela. Conta com 39 anos de serviço e foi promovido a Sargento-Mor de Cavalaria em 26 de outubro de 2023."
+          "body": "O Sargento-Mor de Cavalaria, Victor Manuel Duarte Branco nasceu a 19 de dezembro de 1968 em Mirandela, tem 39 anos de serviço e foi promovido ao atual posto em 26 de dezembro de 2023."
         },
         {
           "title": "Formação e cursos",
+          "body": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
           "items": [
-            "Curso de Cavalaria, Escola de Sargentos do Exército",
-            "Master Gunner — carro de combate M60A3 TTS (EUA)",
-            "Master Gunner, Video Training Equipment e Turret Training Equipment — Leopard 2A6 (Países Baixos)",
-            "NATO NCO's Orientation Course — NATO School (Alemanha)",
-            "NATO NCO's Intermediate Leadership Course — Swiss Armed Forces College (Suíça)",
-            "NATO NCO's Advanced Course — Swiss Armed Forces College (Suíça)"
+            "Master Gunner do Carro Combate M60A3 TTS, nos Estados Unidos da América",
+            "Master Gunner, Video Training Equipment e Turret Training Equipment do Carro Combate Leopard 2A6, nos Países Baixos",
+            "NATO NCO's Orientation Course na NATO School, na Alemanha",
+            "NATO NCO's Intermediate Leadership Course no Swiss Armed Forces College, na Suíça",
+            "NATO NCO's Advanced Course no Swiss Armed Forces College, na Suíça"
           ]
         },
         {
-          "title": "Comando",
+          "title": "De Comando",
           "items": [
-            "Sargento de Pelotão de Carros de Combate no Grupo de Carros de Combate da Brigada Mecanizada"
+            "Grupo de Carros de Combate da Brigada Mecanizada — Sargento de Pelotão de Carros de Combate"
           ]
         },
         {
-          "title": "Estado-Maior e funções de destaque",
-          "items": [
-            "Grupo de Carros de Combate da Brigada Mecanizada — Sargento Ajudante de Operações, Sargento de Informações, Sargento de Logística e Ajudante de Comandante de Esquadrão",
-            "Quartel-General da Brigada Mecanizada — Sargento Ajudante de Operações da Secção de Operações",
-            "Grupo de Aviação Ligeira do Exército — Sargento de Operações, Informações e Segurança",
-            "Quartel-General da Brigada de Reação Rápida — Sargento de Informações",
-            "Regimento de Pára-Quedistas — Sargento de Pessoal",
-            "Regimento de Lanceiros n.º 2 — Sargento de Operações, Informações e Segurança; Chefe do Centro de Gestão; Chefe do Posto de Controlo de Material Classificado; Ajudante do Comandante do Grupo de Comando e Serviços",
-            "Agrupamento Sanitário — Ajudante do Comandante",
-            "Estado-Maior do Exército — Sargento Ajudante no Departamento de Gestão Estratégica do Gabinete de Gestão da Informação e do Conhecimento"
-          ]
+          "title": "De Estado-Maior",
+          "body": "No Grupo de Carros de Combate da Brigada Mecanizada como Sargento de Operações, Sargento de Informações, Sargento de Logística e Adjunto de Comandante de Esquadrão de Carros de Combate. No quartel-general da Brigada Mecanizada como Sargento Adjunto das Operações da Secção de Operações. No Grupo de Aviação Ligeira do Exército como Sargento de Operações, Informações e Segurança. No quartel-general da Brigada de Reação Rápida como Sargento de Informações. No Regimento de Paraquedistas como Sargento de Pessoal. No Regimento de Lanceiros N.º 2 como Sargento de Operações, Informações e Segurança, Chefe do Centro de Gestão Documental, Chefe do Posto de Controlo de Matérias Classificadas e Adjunto do Comandante do Grupo de Comando e Serviços. No Agrupamento Sanitário como Adjunto do Comandante do Agrupamento Sanitário. No Estado-Maior do Exército como Sargento Adjunto da Repartição de Gestão Estratégica do Gabinete de Gestão da Informação e do Conhecimento."
         },
         {
           "title": "Cargo atual",
-          "body": "Desde 18 de janeiro de 2024 exerce funções como Sargento-Mor do Exército."
+          "body": "Desde 18 de janeiro de 2024 desempenha as funções de Sargento-Mor do Exército."
         }
       ]
     },
     {
-      "id": "sch-nuno-goncalves",
-      "name": "SCh Nuno Gonçalves",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
-    },
-    {
       "id": "saj-alexandre-mendes",
       "name": "SAj Alexandre Mendes",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "Alexandre Miguel Faustino Mendes",
+      "role": "Sargento-Ajudante de Cavalaria · Orador",
+      "bio": "26 anos de serviço. Sargento de Operações do GCC — três missões no estrangeiro (Kosovo, Afeganistão e Eslováquia).",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Sargento-Ajudante de Cavalaria, Alexandre Miguel Faustino Mendes nasceu a 12 de novembro de 1979 em Caldas da Rainha, tem 26 anos de serviço e foi promovido ao atual posto em 16 de maio de 2022."
+        },
+        {
+          "title": "Formação e cursos",
+          "body": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+          "items": [
+            "Curso de Chefe de CC Leopard 2A6",
+            "Curso de Instrutor Avançado de Tiro (Master Gunner) CC Leopard 2A6"
+          ]
+        },
+        {
+          "title": "De Comando",
+          "body": "No Grupo de Carros de Combate: Chefe de CC Leopard 2A6 e Sargento de Pelotão de Carros de Combate dos diversos esquadrões de CC do GCC."
+        },
+        {
+          "title": "De Estado-Maior",
+          "body": "No Grupo de Carros de Combate: Master Gunner, Sargento de Informações, Sargento de Pessoal e Adjunto do Comandante de Esquadrão de Carros de Combate."
+        },
+        {
+          "title": "Cargo atual",
+          "body": "Desde 12 de fevereiro de 2026 desempenha as funções de Sargento de Operações do GCC."
+        },
+        {
+          "title": "Missões no estrangeiro",
+          "body": "Cumpriu três missões no estrangeiro, no âmbito das Forças Nacionais Destacadas: como Comandante de Secção do 2.º Pelotão da BTROOP do Agrupamento India/KFOR no Kosovo; como Sargento de Pelotão do Pelotão Mobile da 2.ª FND QRF/RS no Afeganistão; e como Adjunto do Comandante/Master Gunner da 2.ª FND Pel CC/MNBG na Eslováquia."
+        }
+      ]
     },
     {
-      "id": "saj-vitor-pereira",
-      "name": "SAj Vítor Pereira",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
-    },
-    {
-      "id": "saj-vilas-boas",
-      "name": "SAj Vilas Boas",
+      "id": "1sarg-fabio-cabral",
+      "name": "1SARG Fábio Cabral",
       "role": "Orador",
       "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
     }
@@ -328,7 +346,48 @@
     {
       "id": "maj-tiago-ferreira",
       "name": "Maj Tiago Ferreira",
-      "axisId": "guerra-atual"
+      "fullName": "Tiago Filipe dos Santos Ferreira",
+      "role": "Major de Cavalaria · Moderador",
+      "axisId": "guerra-atual",
+      "bio": "Cerca de 20 anos de serviço. Ex-GCC e docente na Escola de Sargentos — moderador do Painel 1 «A Guerra Atual».",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Major Tiago Filipe dos Santos Ferreira nasceu em Avanca, concelho de Estarreja, em 23 de março de 1985. Ingressou na Academia Militar em 2005, tendo concluído o Curso de Cavalaria em outubro de 2011, data a partir da qual passou a integrar os quadros do Grupo de Carros de Combate. Foi promovido ao atual posto em 1 de janeiro de 2024."
+        },
+        {
+          "title": "Formação",
+          "body": "Para além do Curso de Cavalaria da Academia Militar e dos cursos de promoção inerentes à carreira, destacam-se, entre outros:",
+          "items": [
+            "Curso de Chefe de Carros Leopard 2 A6",
+            "Curso de Defesa Nuclear, Biológica e Química (NBQ)",
+            "Curso de Operações de Apoio à Paz",
+            "Curso de Lições Aprendidas — Nível 2"
+          ]
+        },
+        {
+          "title": "Funções em Unidades",
+          "items": [
+            "Grupo de Carros de Combate (2011–2020) — Comandante de Pelotão de Carros de Combate Leopard 2 A6, 2.º Comandante do 2.º Esquadrão de Carros de Combate (2ECC), Comandante do 1.º Esquadrão de Carros de Combate (1ECC), Oficial de Pessoal, Oficial de Informações e Oficial de Operações",
+            "Escola de Sargentos do Exército (2020–2023) — docente em Unidades Curriculares dos Cursos Técnicos Superiores Profissionais em Tecnologias Militares Terrestres e Comandante da 1.ª Companhia de Alunos",
+            "Desde setembro de 2023 — Repartição de Treino e Doutrina do Estado-Maior da Brigada Mecanizada"
+          ]
+        },
+        {
+          "title": "Plano operacional",
+          "body": "Participou numa missão no estrangeiro entre 2017 e 2018, integrando o 6.º Contingente Nacional / Força Nacional Destacada / Operation Inherent Resolve (6.º CN/FND/OIR), onde desempenhou as funções de Chief Trainer da Equipa de Formação da 2.ª Companhia de Manobra."
+        },
+        {
+          "title": "Distinções e vida pessoal",
+          "body": "Da sua folha de serviços constam seis louvores e sete condecorações. É casado e pai de um filho."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Moderador — Painel 1 «A Guerra Atual» / «Lições da guerra atual»"
+          ]
+        }
+      ]
     },
     {
       "id": "maj-nuno-silva",

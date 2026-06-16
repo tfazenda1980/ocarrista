@@ -31,7 +31,7 @@ export function EventSpeakers({
         <MotionReveal>
           <p className="section-label mb-3">04 · Oradores</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Vozes de referência
+            As vozes do Workshop
           </h2>
           <div className="gold-line mb-12 w-24" />
         </MotionReveal>

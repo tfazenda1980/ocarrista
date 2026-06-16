@@ -17,17 +17,15 @@ Não é obrigatório editar o JSON só para a foto: se o ficheiro existir nesta 
 | id | Nome | Foto | Bio no JSON |
 |----|------|------|-------------|
 | `maj-nuno-silva` | Maj Nuno Silva | ✓ | ✓ (orador + moderador) |
-| `smor-vitor-branco` | SMor Vítor Branco | ✓ | ✓ |
+| `smor-vitor-branco` | SMor Victor Branco | ✓ | ✓ |
 | `tcor-pereira-coutinho` | TCor Pereira Coutinho | pendente | pendente |
 | `tcor-sergio-capelo` | TCor Sérgio Capelo | pendente | pendente |
 | `maj-teixeira-pinto` | Maj Teixeira Pinto | pendente | pendente |
 | `cap-marco-lopes` | Cap Marco Lopes | pendente | pendente |
 | `ten-joao-leal` | Ten João Leal | pendente | pendente |
-| `sch-nuno-goncalves` | SCh Nuno Gonçalves | pendente | pendente |
-| `saj-alexandre-mendes` | SAj Alexandre Mendes | pendente | pendente |
-| `saj-vitor-pereira` | SAj Vítor Pereira | pendente | pendente |
-| `saj-vilas-boas` | SAj Vilas Boas | pendente | pendente |
-| `maj-tiago-ferreira` | Maj Tiago Ferreira (moderador) | pendente | pendente |
+| `saj-alexandre-mendes` | SAj Alexandre Mendes | pendente | ✓ |
+| `1sarg-fabio-cabral` | 1SARG Fábio Cabral | pendente | pendente |
+| `maj-tiago-ferreira` | Maj Tiago Ferreira (moderador) | pendente | ✓ |
 
 ## Bio completa (JSON)
 
