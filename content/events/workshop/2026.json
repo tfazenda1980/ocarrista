@@ -232,32 +232,219 @@
     {
       "id": "tcor-pereira-coutinho",
       "name": "TCor Pereira Coutinho",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "António Xavier Mendes Rocha Pereira Coutinho",
+      "role": "Tenente-Coronel de Infantaria (Comando) · Orador",
+      "image": "/eventos/workshop/2026/oradores/tcor-pereira-coutinho.png",
+      "bio": "Chefe do CCTSC — ex-comandante no Afeganistão e percurso em Comandos, formação e planeamento militar.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Tenente-Coronel de Infantaria «Comando» António Xavier Mendes Rocha Pereira Coutinho nasceu em Évora, a 16 de janeiro de 1982. Ingressou na Academia Militar em 2000, tendo sido promovido ao atual posto em 20 de dezembro de 2023."
+        },
+        {
+          "title": "Formação",
+          "body": "É licenciado em Ciências Militares — Infantaria pela Academia Militar, tendo concluído em 2005 o Tirocínio e em 2010 o Curso de Promoção a Capitão na extinta Escola Prática de Infantaria. Está habilitado com o Curso de Promoção a Oficial Superior (2015/16), o Curso Avançado de Planeamento Militar Terrestre (2019) e o Curso de Estado-Maior Conjunto (2019/20), ministrados pelo Instituto Universitário Militar."
+        },
+        {
+          "title": "Cursos de especialização",
+          "body": "Possui ainda cursos de especialização, destacando-se:",
+          "items": [
+            "Curso de Comandos (2006)",
+            "Curso de Defesa Nuclear, Biológica, Química e Radiológica (2007)",
+            "Counter-IED Train the Trainers Course (2007)"
+          ]
+        },
+        {
+          "title": "Ensino e formação militar",
+          "body": "Na área do Ensino e Formação Militar, é qualificado em Análise de Trabalho, Desenho Curricular e Gestão da Formação, tendo frequentado ainda os cursos NATO M7-135 — Global Programming Analysis, M7-136 — Systems Approach to Training e S7-126 — E-Learning Instructional Design, na NATO School Oberammergau."
+        },
+        {
+          "title": "De Comando",
+          "body": "Ao longo da carreira desempenhou funções de comando no Centro de Tropas Comando, onde foi Comandante de Grupo de Instrução, Comandante de Grupo de Combate na 1.ª Companhia de Comandos, 2.º Comandante da 1.ª Companhia de Comandos e Comandante do 1.º Grupo de Combate de Comandos na missão QRF/FND/ISAF, no Teatro de Operações do Afeganistão (2008). No Comando de Instrução e Doutrina comandou a Companhia de Comando e Serviços."
+        },
+        {
+          "title": "De Estado-Maior",
+          "body": "Desempenhou funções de Estado-Maior como Ajudante-de-Campo de Sua Excelência o Chefe do Estado-Maior do Exército, Adjunto na Repartição de Estudos e Planeamento do Comando de Instrução e Doutrina e, posteriormente, na Direção de Formação do Comando do Pessoal, onde exerceu funções de Oficial Adjunto, Oficial de Estudos e Chefe da Secção de Estudos, Planeamento e Organização. Chefiou ainda a Repartição de Tecnologias Educativas e Qualificação, tendo conduzido, enquanto representante do Exército, o processo de reconhecimento da qualificação de Nível 4 — Técnico Militar Terrestre, no âmbito do alinhamento com o Sistema Nacional de Qualificações."
+        },
+        {
+          "title": "Cargo actual",
+          "body": "Actualmente exerce funções como Chefe do Centro de Capacitação Tática, Simulação e Certificação (CCTSC). Reside em Évora e é pai de duas filhas."
+        },
+        {
+          "title": "Distinções",
+          "body": "Da sua folha de serviços constam diversos louvores e condecorações."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «Simulação: o presente e o futuro» (Painel 2)"
+          ]
+        }
+      ]
     },
     {
       "id": "tcor-sergio-capelo",
       "name": "TCor Sérgio Capelo",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "Sérgio Miguel Capelo",
+      "role": "Tenente-Coronel de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/tcor-sergio-capelo.png",
+      "bio": "25 anos de serviço. Comandante do Batalhão de Apoio de Serviços da BrigMec — ex-comandante no Kosovo e no Iraque.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Tenente-Coronel de Cavalaria Sérgio Miguel Capelo nasceu em 1980, no distrito da Guarda. Tem 25 anos de serviço e foi promovido ao atual posto em 2023."
+        },
+        {
+          "title": "Formação",
+          "body": "É licenciado em Ciências Militares, na especialidade de Cavalaria, pela Academia Militar. Está habilitado com o Curso de Promoção a Capitão e o Curso de Promoção a Oficial Superior. Possui ainda outros cursos militares, de destacar:",
+          "items": [
+            "Curso de Segurança Militar",
+            "Curso de Chefe de Carro de Combate Leopard 2A6",
+            "Curso de Defesa Nuclear, Biológica e Química",
+            "Curso de Formadores de Sistema Lança Míssil TOW2",
+            "Curso de Vigilância do Campo de Batalha",
+            "Curso de Proteção Ambiental"
+          ]
+        },
+        {
+          "title": "Carreira",
+          "body": "Ao longo da sua carreira prestou serviço no Esquadrão de Reconhecimento da Brigada Mecanizada, Escola Prática de Cavalaria, Grupo de Carros de Combate da Brigada Mecanizada e Quartel-General da Brigada Mecanizada, desempenhando nestas unidades funções de Comando, Formador e Director de Curso, e de Estado-Maior."
+        },
+        {
+          "title": "De Comando",
+          "body": "No âmbito das funções de Comando destacam-se os cargos de Comandante do 3.º Pelotão de Reconhecimento, do Esquadrão de Reconhecimento da Brigada Mecanizada, Comandante do Esquadrão de Formação da Escola Prática de Cavalaria, Comandante do Esquadrão de Comando e Serviços do Grupo de Carros de Combate, Comandante do Esquadrão de Apoio do Agrupamento India no teatro de operações do Kosovo, Comandante do Esquadrão de Reconhecimento da Brigada Mecanizada e Comandante da 10.ª Força Nacional Destacada no teatro de operações do Iraque."
+        },
+        {
+          "title": "De Estado-Maior",
+          "body": "No âmbito das funções de Estado-Maior destacam-se os cargos desempenhados nas secções de Estado-Maior do Quartel-General da Brigada Mecanizada: Adjunto e Chefe da Secção Logística (G4), Adjunto e Chefe da Secção de Treino e Doutrina (G7), Chefe da Secção de Operações (G3) e Oficial Preboste na área da Polícia do Exército."
+        },
+        {
+          "title": "Formador e director de curso",
+          "body": "No âmbito da formação destacam-se os cargos de Formador e Director de Curso dos vários quadros da Arma de Cavalaria e do Exército Português."
+        },
+        {
+          "title": "Cargo actual",
+          "body": "Actualmente é o Comandante do Batalhão de Apoio de Serviços da Brigada Mecanizada do Exército Português."
+        },
+        {
+          "title": "Experiência logística e internacional",
+          "body": "A nível logístico, destaca-se a sua participação, no planeamento, coordenação, sincronização e supervisão, do Apoio Logístico a uma unidade de escalão brigada, de exercícios nacionais e internacionais (com a participação de vários países), dos quais se destacam os da série BETA (realizados em Espanha), TAURUS e ORION (estes, realizados em Portugal), e certificação e projeção de forças, no âmbito da NATO (Forças Nacionais Destacadas para a Área de Atuação da Eslováquia) e da União Europeia (European Union Battle Group 25-2/26-1), compromissos internacionais assumidos por Portugal."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «Manutenção do CC: alterações de paradigmas» (Painel 2)"
+          ]
+        }
+      ]
     },
     {
       "id": "maj-teixeira-pinto",
       "name": "Maj Teixeira Pinto",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "Luís Teixeira Pinto",
+      "role": "Major de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/maj-teixeira-pinto.png",
+      "bio": "Ex-comandante de esquadrão no RCav3 e pelotão HUMINT no Agrupamento ISTAR — três comissões no Iraque, Mali e República Centro-Africana.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Major de Cavalaria Luís Teixeira Pinto entrou para a Academia Militar em 2004, tendo passado ao quadro permanente em 2010."
+        },
+        {
+          "title": "Regimento de Cavalaria 3",
+          "body": "Colocado no Regimento de Cavalaria 3 em Estremoz, desempenhou funções em subalterno como Comandante de Pelotão de Reconhecimento e 2.º Comandante de Esquadrão de Reconhecimento e, em Capitão, como Comandante de Esquadrão de Reconhecimento durante a VJTF da eNRF 2018, entre 2017 e 2020."
+        },
+        {
+          "title": "Agrupamento ISTAR",
+          "body": "Entre 2020 e 2024, como Capitão e Major, desempenhou funções ligadas às Informações no Agrupamento ISTAR, em particular como Comandante do Pelotão HUMINT."
+        },
+        {
+          "title": "Missões no estrangeiro",
+          "body": "Para além das funções em território nacional, cumpriu três comissões de serviço nos teatros de operações do Iraque (2015–16), Mali (2020–21) e República Centro-Africana (2023)."
+        },
+        {
+          "title": "Cargo actual",
+          "body": "Após o término do Curso de Estado-Maior Conjunto em 2025, foi colocado no Estado-Maior do Exército, desempenhando actualmente as funções de coordenador de área na Repartição de Capacidades da Divisão de Planeamento Militar Terrestre."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «Sobrevivência do CC: lições do combate moderno» (Painel 1)"
+          ]
+        }
+      ]
     },
     {
       "id": "cap-marco-lopes",
       "name": "Cap Marco Lopes",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "Marco Aurélio Viana Lopes",
+      "role": "Capitão de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/cap-marco-lopes.png",
+      "bio": "14 anos de serviço. Ex-comandante de esquadrão no GCC e nas FND na Eslováquia — Mestrado Integrado em Ciências Militares (Cavalaria).",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Capitão de Cavalaria Marco Aurélio Viana Lopes é natural de Corroios, concelho do Seixal, tem 32 anos de idade e 14 anos de serviço. Foi promovido ao atual posto em 4 de outubro de 2023."
+        },
+        {
+          "title": "Formação",
+          "body": "Está habilitado com o Mestrado Integrado em Ciências Militares, na especialidade de Cavalaria. Para além dos cursos de carreira, possui diversas qualificações militares complementares, das quais se destacam:",
+          "items": [
+            "Curso de Chefe de Carro de Combate Leopard 2A6",
+            "Curso de Chefe de Viatura VBR Pandur II 8x8"
+          ]
+        },
+        {
+          "title": "Grupo de Carros de Combate",
+          "body": "Após a conclusão do curso na Academia Militar, em outubro de 2017, foi colocado no Grupo de Carros de Combate da Brigada Mecanizada, onde tem desempenhado diversas funções, designadamente as de Comandante de Pelotão, 2.º Comandante de Esquadrão e Comandante do 1.º Esquadrão de Carros de Combate. Em acumulação de funções, exerceu igualmente o cargo de 2.º Comandante do Esquadrão de Carros de Combate do Agrupamento Mecanizado VJTF/eNRF 2022."
+        },
+        {
+          "title": "Missões no estrangeiro",
+          "body": "Desempenhou as funções de Comandante de Esquadrão dos Pelotões de Carros de Combate da 1.ª e 2.ª Forças Nacionais Destacadas integradas no Multinational Battlegroup Slovakia, durante os respetivos períodos de aprontamento. Recentemente, exerceu as funções de Comandante do Subagrupamento da 3.ª FND/SubAgr(-)/MNBG SVK, constituindo a primeira força portuguesa de escalão companhia projetada para a Área de Operações da Eslováquia no âmbito daquela missão."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «FND Eslováquia e a Tríade do Carrista» (Painel 2)"
+          ]
+        }
+      ]
     },
     {
       "id": "ten-joao-leal",
       "name": "Ten João Leal",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "João Pedro Simão de Castro Leal",
+      "role": "Tenente de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/ten-joao-leal.png",
+      "bio": "9 anos de serviço. 2.º Comandante do Esquadrão de Reconhecimento da BrigMec — ex-comandante de pelotão na 3.ª FND na Eslováquia.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Tenente de Cavalaria João Pedro Simão de Castro Leal é natural de Tomar, tem 28 anos de idade e conta com 9 anos de serviço. Foi promovido ao atual posto em 1 de outubro de 2023."
+        },
+        {
+          "title": "Formação",
+          "body": "Está habilitado com o Mestrado Integrado em Ciências Militares, na especialidade de Cavalaria. Possui ainda outros cursos de qualificação, de entre os quais se destaca o Curso de Chefe de Carro de Combate Leopard 2A6."
+        },
+        {
+          "title": "Carreira",
+          "body": "Após a conclusão do curso na Academia Militar, em outubro de 2021, foi colocado no Grupo de Carros de Combate e posteriormente no Esquadrão de Reconhecimento da Brigada Mecanizada."
+        },
+        {
+          "title": "Missão na Eslováquia",
+          "body": "Foi o Comandante de Pelotão de Carros de Combate da 3.ª Força Nacional Destacada/SubAgrupamento do Multinational Battlegroup Slovakia entre agosto de 2025 e fevereiro de 2026."
+        },
+        {
+          "title": "Cargo actual",
+          "body": "Actualmente exerce as funções de 2.º Comandante do Esquadrão de Reconhecimento da Brigada Mecanizada."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «FND Eslováquia e a Tríade do Carrista» (Painel 2)"
+          ]
+        }
+      ]
     },
     {
       "id": "smor-vitor-branco",
@@ -303,6 +490,7 @@
       "name": "SAj Alexandre Mendes",
       "fullName": "Alexandre Miguel Faustino Mendes",
       "role": "Sargento-Ajudante de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/saj-alexandre-mendes.png",
       "bio": "26 anos de serviço. Sargento de Operações do GCC — três missões no estrangeiro (Kosovo, Afeganistão e Eslováquia).",
       "bioSections": [
         {
@@ -338,8 +526,46 @@
     {
       "id": "1sarg-fabio-cabral",
       "name": "1SARG Fábio Cabral",
-      "role": "Orador",
-      "bio": "Perfil em breve — Workshop de Carros de Combate 2026."
+      "fullName": "Fábio Alexandre Tavares Cabral",
+      "role": "Primeiro Sargento de Cavalaria · Orador",
+      "image": "/eventos/workshop/2026/oradores/1sarg-fabio-cabral.png",
+      "bio": "13 anos de serviço. Sargento de Reabastecimentos do ERec/BrigMec — Chefe de CC e Master Driver Leopard 2A6.",
+      "bioSections": [
+        {
+          "title": "Percurso",
+          "body": "O Primeiro Sargento de Cavalaria, Fábio Alexandre Tavares Cabral nasceu a 17 de julho de 1995 na Guarda, tem 13 anos de serviço e foi promovido ao atual posto em 1 de outubro de 2022."
+        },
+        {
+          "title": "Formação e cursos",
+          "body": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+          "items": [
+            "Curso de Chefe de CC Leopard 2A6",
+            "Curso de Formador de Condução (Master Driver) CC Leopard 2A6"
+          ]
+        },
+        {
+          "title": "De Comando",
+          "body": "No GCC/ERec: Chefe de CC Leopard 2A6 e Sargento de Pelotão de Carros de Combate do 1.º ECC do GCC; Comandante e Sargento de Pelotão da Secção de Reabastecimentos do ECS/GCC."
+        },
+        {
+          "title": "De Estado-Maior",
+          "body": "Formador de Condução e Sargento de Justiça do GCC."
+        },
+        {
+          "title": "Cargo actual",
+          "body": "Desde 1 de outubro de 2025 desempenha as funções de Sargento de Reabastecimentos do ERec/BrigMec."
+        },
+        {
+          "title": "Missões no estrangeiro",
+          "body": "Cumpriu uma missão no estrangeiro, no âmbito das Forças Nacionais Destacadas, como Chefe de CC Leopard 2 A6 da 2.ª FND Pel CC/MNBG na Eslováquia."
+        },
+        {
+          "title": "No Workshop 2026",
+          "items": [
+            "Orador — sessão «Consciência situacional e proteção passiva» (Painel 2)"
+          ]
+        }
+      ]
     }
   ],
   "moderators": [
@@ -349,6 +575,7 @@
       "fullName": "Tiago Filipe dos Santos Ferreira",
       "role": "Major de Cavalaria · Moderador",
       "axisId": "guerra-atual",
+      "image": "/eventos/workshop/2026/oradores/maj-tiago-ferreira.png",
       "bio": "Cerca de 20 anos de serviço. Ex-GCC e docente na Escola de Sargentos — moderador do Painel 1 «A Guerra Atual».",
       "bioSections": [
         {

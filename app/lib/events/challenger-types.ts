@@ -14,6 +14,8 @@ export type ChallengerEventData = {
   slogan: string;
   purpose: string;
   date: string;
+  /** Último dia do evento; se faltar, usa o dia de `date`. */
+  endDate?: string;
   dateDisplay: string;
   location: string;
   heroImage: string;

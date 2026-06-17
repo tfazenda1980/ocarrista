@@ -87,6 +87,8 @@ export type EventData = {
   edition: string;
   slogan: string;
   date: string;
+  /** Último dia do evento; se faltar, usa o dia de `date`. */
+  endDate?: string;
   dateDisplay: string;
   location: string;
   heroImage?: string;
