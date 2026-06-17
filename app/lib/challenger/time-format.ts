@@ -36,6 +36,17 @@ export function formatMinutes(value: unknown): number | null {
   return Number.isNaN(n) ? null : n;
 }
 
+/** Serial Excel (fração de 24h) → minutos decimais (coluna «Tempo de Penalização»). */
+export function excelSerialToMinutes(value: unknown): number | null {
+  if (value === "" || value == null) return null;
+  const n = Number(value);
+  if (Number.isNaN(n)) return null;
+  if (n > 0 && n < 1) {
+    return Math.round(n * 24 * 60 * 100) / 100;
+  }
+  return n;
+}
+
 /** Segundos para ordenar tempos «H:MM» ou «H:MM:SS». */
 export function parseTimeToSeconds(time: string | null | undefined): number | null {
   if (!time) return null;

@@ -12,6 +12,7 @@ import type {
   ChallengerStanding,
 } from "@/app/lib/challenger/types";
 import { CHALLENGER_SKETCH_ACCEPT, sketchLabel } from "@/app/lib/challenger/sketch";
+import { FOLHA2_MODEL_PATH } from "@/app/lib/challenger/import-template";
 import { StandingsTable } from "../events/challenger/challenger-classification";
 
 type Tab = "provas" | "crews" | "scores" | "import" | "publish";
@@ -808,6 +809,17 @@ export function AdminChallengerView({ year }: { year: string }) {
               Carregue o Excel à medida que as provas decorrem. Os dados ficam em{" "}
               <strong className="text-foreground">rascunho</strong> até confirmar a publicação.
               Células vazias mantêm os valores do rascunho anterior.
+            </p>
+            <p className="text-xs text-muted">
+              Formato obrigatório: folha <strong className="text-foreground">Folha2</strong>,
+              coluna A vazia, cabeçalhos na linha 4, equipas a partir da linha 5 (coluna B).{" "}
+              <a
+                href={FOLHA2_MODEL_PATH}
+                download
+                className="text-gold underline-offset-2 hover:underline"
+              >
+                Descarregar modelo Excel
+              </a>
             </p>
             <input
               ref={importInputRef}
