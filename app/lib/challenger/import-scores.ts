@@ -5,25 +5,50 @@ import { excelSerialToClock, excelSerialToDuration, formatMinutes } from "./time
 export const STATION_KEYS = ["1.1", "1.2", "1.3", "1.4", "2", "3", "4"] as const;
 export type StationKey = (typeof STATION_KEYS)[number];
 
-/** Colunas de «Pontos obtidos» na Folha2 (0-indexed). */
-const STATION_POINT_COLS = [4, 6, 8, 10, 12, 14, 16];
-/** Colunas de «Penalização» por estação. */
-const STATION_PENALTY_COLS = [5, 7, 9, 11, 13, 15, 17];
+/** Deslocamentos relativos à coluna «Equipa» na Folha2. */
+const CREW_COL_OFFSETS = {
+  start: 1,
+  end: 2,
+  gross: 3,
+  stationPoints: [4, 6, 8, 10, 12, 14, 16],
+  stationPenalties: [5, 7, 9, 11, 13, 15, 17],
+  penaltyPoints: 18,
+  penaltyTimeMin: 19,
+  provFinalTime: 20,
+  provRank: 21,
+  finalTempo: 22,
+  finalPenalty: 23,
+  finalTime: 24,
+  finalRank: 25,
+} as const;
 
-const COL_CREW = 0;
-const COL_START = 1;
-const COL_END = 2;
-const COL_GROSS = 3;
-const COL_PENALTY_POINTS = 18;
-const COL_PENALTY_TIME_MIN = 19;
-const COL_PROV_FINAL_TIME = 20;
-const COL_PROV_RANK = 21;
-const COL_FINAL_TEMPO = 22;
-const COL_FINAL_PENALTY = 23;
-const COL_FINAL_TIME = 24;
-const COL_FINAL_RANK = 25;
+const DEFAULT_DATA_START_ROW = 4;
+const DEFAULT_COL_CREW = 0;
 
-const DATA_START_ROW = 4;
+type Folha2Layout = {
+  dataStartRow: number;
+  colCrew: number;
+};
+
+function colAt(layout: Folha2Layout, offset: number): number {
+  return layout.colCrew + offset;
+}
+
+function detectFolha2Layout(grid: unknown[][]): Folha2Layout {
+  for (let r = 0; r < Math.min(15, grid.length); r++) {
+    const row = grid[r];
+    if (!Array.isArray(row)) continue;
+    for (let c = 0; c < row.length; c++) {
+      const label = String(row[c] ?? "")
+        .trim()
+        .toLowerCase();
+      if (label.startsWith("equipa")) {
+        return { dataStartRow: r + 1, colCrew: c };
+      }
+    }
+  }
+  return { dataStartRow: DEFAULT_DATA_START_ROW, colCrew: DEFAULT_COL_CREW };
+}
 
 export type ParsedStationScore = {
   key: StationKey;
@@ -79,46 +104,57 @@ function toInt(value: unknown): number | null {
   return Math.round(n);
 }
 
-function parseStationScores(row: unknown[]): ParsedStationScore[] {
+function parseStationScores(row: unknown[], layout: Folha2Layout): ParsedStationScore[] {
   return STATION_KEYS.map((key, i) => ({
     key,
-    points: toNumber(cell(row, STATION_POINT_COLS[i])),
-    penalty: toNumber(cell(row, STATION_PENALTY_COLS[i])),
+    points: toNumber(cell(row, colAt(layout, CREW_COL_OFFSETS.stationPoints[i]))),
+    penalty: toNumber(cell(row, colAt(layout, CREW_COL_OFFSETS.stationPenalties[i]))),
   }));
 }
 
-function parseProvisionalPhase(row: unknown[]): ParsedCrewPhase {
+function parseProvisionalPhase(row: unknown[], layout: Folha2Layout): ParsedCrewPhase {
   return {
-    startTime: hasValue(cell(row, COL_START)) ? excelSerialToClock(cell(row, COL_START)) : null,
-    endTime: hasValue(cell(row, COL_END)) ? excelSerialToClock(cell(row, COL_END)) : null,
-    grossTime: hasValue(cell(row, COL_GROSS)) ? excelSerialToDuration(cell(row, COL_GROSS)) : null,
-    stations: parseStationScores(row),
-    penaltyPoints: toNumber(cell(row, COL_PENALTY_POINTS)),
-    penaltyTimeMin: formatMinutes(cell(row, COL_PENALTY_TIME_MIN)),
-    finalTime: hasValue(cell(row, COL_PROV_FINAL_TIME))
-      ? excelSerialToDuration(cell(row, COL_PROV_FINAL_TIME))
+    startTime: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.start)))
+      ? excelSerialToClock(cell(row, colAt(layout, CREW_COL_OFFSETS.start)))
       : null,
-    rank: toInt(cell(row, COL_PROV_RANK)),
+    endTime: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.end)))
+      ? excelSerialToClock(cell(row, colAt(layout, CREW_COL_OFFSETS.end)))
+      : null,
+    grossTime: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.gross)))
+      ? excelSerialToDuration(cell(row, colAt(layout, CREW_COL_OFFSETS.gross)))
+      : null,
+    stations: parseStationScores(row, layout),
+    penaltyPoints: toNumber(cell(row, colAt(layout, CREW_COL_OFFSETS.penaltyPoints))),
+    penaltyTimeMin: formatMinutes(cell(row, colAt(layout, CREW_COL_OFFSETS.penaltyTimeMin))),
+    finalTime: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.provFinalTime)))
+      ? excelSerialToDuration(cell(row, colAt(layout, CREW_COL_OFFSETS.provFinalTime)))
+      : null,
+    rank: toInt(cell(row, colAt(layout, CREW_COL_OFFSETS.provRank))),
   };
 }
 
-function parseFinalPhase(row: unknown[]): ParsedCrewRow["final"] {
+function parseFinalPhase(row: unknown[], layout: Folha2Layout): ParsedCrewRow["final"] {
   return {
-    trackTime: hasValue(cell(row, COL_FINAL_TEMPO))
-      ? excelSerialToDuration(cell(row, COL_FINAL_TEMPO))
+    trackTime: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.finalTempo)))
+      ? excelSerialToDuration(cell(row, colAt(layout, CREW_COL_OFFSETS.finalTempo)))
       : null,
-    trackPenalty: hasValue(cell(row, COL_FINAL_PENALTY))
-      ? String(cell(row, COL_FINAL_PENALTY))
+    trackPenalty: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.finalPenalty)))
+      ? String(cell(row, colAt(layout, CREW_COL_OFFSETS.finalPenalty)))
       : null,
-    finalTime: hasValue(cell(row, COL_FINAL_TIME))
-      ? excelSerialToDuration(cell(row, COL_FINAL_TIME))
+    finalTime: hasValue(cell(row, colAt(layout, CREW_COL_OFFSETS.finalTime)))
+      ? excelSerialToDuration(cell(row, colAt(layout, CREW_COL_OFFSETS.finalTime)))
       : null,
-    rank: toInt(cell(row, COL_FINAL_RANK)),
+    rank: toInt(cell(row, colAt(layout, CREW_COL_OFFSETS.finalRank))),
   };
 }
 
 function normalizeName(name: string): string {
-  return name.trim().toLowerCase().replace(/\s+/g, " ");
+  return name
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/\s+/g, " ");
 }
 
 export function findCrewByName(crews: ChallengerCrew[], name: string): ChallengerCrew | null {
@@ -157,18 +193,19 @@ export function parseChallengerExcel(buffer: Buffer): ImportParseResult {
 
   const sheet = workbook.Sheets[sheetName];
   const grid = XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, defval: "" });
+  const layout = detectFolha2Layout(grid);
 
   const rows: ParsedCrewRow[] = [];
 
-  for (let i = DATA_START_ROW; i < grid.length; i++) {
+  for (let i = layout.dataStartRow; i < grid.length; i++) {
     const row = grid[i];
     if (!Array.isArray(row)) continue;
 
-    const crewName = String(cell(row, COL_CREW)).trim();
+    const crewName = String(cell(row, layout.colCrew)).trim();
     if (!crewName) continue;
 
-    const provisional = parseProvisionalPhase(row);
-    const final = parseFinalPhase(row);
+    const provisional = parseProvisionalPhase(row, layout);
+    const final = parseFinalPhase(row, layout);
 
     const hasAnyData =
       provisional.stations.some((s) => s.points != null || s.penalty != null) ||
