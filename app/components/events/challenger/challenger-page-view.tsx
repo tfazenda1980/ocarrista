@@ -53,8 +53,7 @@ export function ChallengerPageView({
           <ChallengerCrews crews={live.crews} />
           <ChallengerClassification
             provas={live.provas}
-            provisional={live.provisional}
-            final={live.final}
+            standings={live.classification}
             showProvisional={live.settings?.provisional_visible ?? true}
             showFinal={live.settings?.final_visible ?? false}
           />

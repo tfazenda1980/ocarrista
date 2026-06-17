@@ -86,7 +86,18 @@ export type ChallengerStanding = {
   startTime: string | null;
   endTime: string | null;
   grossTime: string | null;
+  /** Pontos penalização (classificação provisória). */
+  penaltyPoints: number | null;
   penaltyTimeMin: number | null;
+  /** Tempo final das provas (classificação provisória). */
+  provisionalFinalTime: string | null;
+  /** Tempo na pista Carrista (col. X). */
+  trackTime: string | null;
+  /** Penalização na pista (col. Y). */
+  trackPenalty: number | null;
+  /** Tempo total do Challenger — ordenação final (col. Z). */
+  challengerFinalTime: string | null;
+  /** Compat: tempo final relevante para ordenação / legado. */
   finalTime: string | null;
 };
 
@@ -102,8 +113,13 @@ export type ChallengerLiveData = {
   settings: ChallengerSettings | null;
   provas: ChallengerProva[];
   crews: ChallengerCrew[];
+  /** Tabela unificada para o site (provas + provisória + pista + final). */
+  classification: ChallengerStanding[];
+  /** @deprecated Usar `classification`. Mantido para publicação por fase. */
   provisional: ChallengerStanding[];
+  /** @deprecated Usar `classification`. */
   final: ChallengerStanding[];
+  draftClassification?: ChallengerStanding[];
   draftProvisional?: ChallengerStanding[];
   draftFinal?: ChallengerStanding[];
   importMeta?: ChallengerImportMeta;

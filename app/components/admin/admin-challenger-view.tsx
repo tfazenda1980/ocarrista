@@ -23,8 +23,10 @@ type AdminPayload = {
   provas: ChallengerProva[];
   crews: ChallengerCrew[];
   scores: ChallengerScore[];
+  classification: ChallengerStanding[];
   provisional: ChallengerStanding[];
   final: ChallengerStanding[];
+  draftClassification?: ChallengerStanding[];
   draftProvisional?: ChallengerStanding[];
   draftFinal?: ChallengerStanding[];
   importMeta?: ChallengerImportMeta;
@@ -370,8 +372,8 @@ export function AdminChallengerView({ year }: { year: string }) {
 
   const draftChangeMap = useMemo(() => {
     const map = new Map<string, string[]>();
-    const published = data?.provisional ?? [];
-    const draft = data?.draftProvisional ?? [];
+    const published = data?.classification ?? [];
+    const draft = data?.draftClassification ?? [];
     for (const row of draft) {
       const prev = published.find((p) => p.crewId === row.crewId);
       if (!prev) {
@@ -380,12 +382,29 @@ export function AdminChallengerView({ year }: { year: string }) {
       }
       const changes: string[] = [];
       if (prev.rank !== row.rank) changes.push("posição");
-      if (prev.finalTime !== row.finalTime) changes.push("tempo");
+      if (prev.provisionalFinalTime !== row.provisionalFinalTime) changes.push("tempo prov.");
+      if (prev.challengerFinalTime !== row.challengerFinalTime) changes.push("tempo final");
       if (prev.total !== row.total) changes.push("pontos");
       if (changes.length) map.set(row.crewId, changes);
     }
     return map;
-  }, [data?.draftProvisional, data?.provisional]);
+  }, [data?.draftClassification, data?.classification]);
+
+  const draftShowsFinal = useMemo(
+    () =>
+      (data?.draftClassification ?? []).some(
+        (r) => r.challengerFinalTime != null || r.trackTime != null,
+      ),
+    [data?.draftClassification],
+  );
+
+  const publishedShowsFinal = useMemo(
+    () =>
+      (data?.classification ?? []).some(
+        (r) => r.challengerFinalTime != null || r.trackTime != null,
+      ),
+    [data?.classification],
+  );
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "provas", label: "Provas" },
@@ -880,28 +899,26 @@ export function AdminChallengerView({ year }: { year: string }) {
             </button>
           </div>
 
-          {(data?.draftProvisional?.length ?? 0) > 0 && (
+          {(data?.draftClassification?.length ?? 0) > 0 && (
             <StandingsTable
-              title="Pré-visualização — rascunho provisório"
-              standings={data?.draftProvisional ?? []}
+              title="Pré-visualização — rascunho"
+              standings={data?.draftClassification ?? []}
               provas={data?.provas ?? []}
               highlightChanges={draftChangeMap}
+              showProvisionalColumns
+              showFinalColumns={draftShowsFinal}
             />
           )}
 
-          {(data?.draftFinal?.length ?? 0) > 0 && (
+          {(data?.classification?.length ?? 0) > 0 && (
             <StandingsTable
-              title="Pré-visualização — rascunho final"
-              standings={data?.draftFinal ?? []}
+              title="Publicado no site"
+              standings={data?.classification ?? []}
               provas={data?.provas ?? []}
-            />
-          )}
-
-          {(data?.provisional?.length ?? 0) > 0 && (
-            <StandingsTable
-              title="Publicado no site — provisória"
-              standings={data?.provisional ?? []}
-              provas={data?.provas ?? []}
+              showProvisionalColumns={data?.settings?.provisional_visible ?? true}
+              showFinalColumns={
+                (data?.settings?.final_visible ?? false) && publishedShowsFinal
+              }
             />
           )}
         </div>

@@ -1,5 +1,5 @@
 import { getSql, dbConfigured } from "../db/client";
-import { computeStandings } from "./standings";
+import { computeDisplayStandings, computeStandings } from "./standings";
 import type {
   ChallengerCrew,
   ChallengerCrewMember,
@@ -627,6 +627,7 @@ export async function getChallengerLiveData(year: string): Promise<ChallengerLiv
     settings: null,
     provas: [],
     crews: [],
+    classification: [],
     provisional: [],
     final: [],
   };
@@ -646,6 +647,7 @@ export async function getChallengerLiveData(year: string): Promise<ChallengerLiv
       settings,
       provas,
       crews,
+      classification: computeDisplayStandings(crews, provas, scores, crewResults),
       provisional: computeStandings(crews, provas, scores, "provisional", crewResults),
       final: computeStandings(crews, provas, scores, "final", crewResults),
     };
@@ -660,6 +662,7 @@ export async function getChallengerAdminData(year: string): Promise<ChallengerLi
     settings: null,
     provas: [],
     crews: [],
+    classification: [],
     provisional: [],
     final: [],
   };
@@ -691,8 +694,15 @@ export async function getChallengerAdminData(year: string): Promise<ChallengerLi
       settings,
       provas,
       crews,
+      classification: computeDisplayStandings(activeCrews, provas, scores, crewResults),
       provisional: computeStandings(activeCrews, provas, scores, "provisional", crewResults),
       final: computeStandings(activeCrews, provas, scores, "final", crewResults),
+      draftClassification: computeDisplayStandings(
+        activeCrews,
+        provas,
+        draftScores,
+        draftCrewResults,
+      ),
       draftProvisional: computeStandings(
         activeCrews,
         provas,
