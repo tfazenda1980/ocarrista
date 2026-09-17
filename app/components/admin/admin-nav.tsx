@@ -4,6 +4,7 @@ const links = [
   { href: "#admin", label: "Resumo" },
   { href: "/admin/membros", label: "Membros" },
   { href: "/admin/challenger/2026", label: "Challenger" },
+  { href: "/admin/cnc/2026", label: "CNC" },
   { href: "#admin-perguntas", label: "Perguntas workshop" },
 ] as const;
 

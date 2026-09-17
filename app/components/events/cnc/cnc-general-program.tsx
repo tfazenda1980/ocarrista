@@ -3,6 +3,7 @@
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
+import { CncDocumentPreview } from "./cnc-document-preview";
 
 export function CncGeneralProgram({ event }: { event: CncEventData }) {
   const { generalProgram } = event;
@@ -27,6 +28,13 @@ export function CncGeneralProgram({ event }: { event: CncEventData }) {
             </MotionReveal>
           )}
         </div>
+        {generalProgram.pdf?.href && (
+          <MotionReveal delay={0.16}>
+            <div className="mt-10">
+              <CncDocumentPreview resource={generalProgram.pdf} hint="Programa geral" />
+            </div>
+          </MotionReveal>
+        )}
       </div>
     </section>
   );

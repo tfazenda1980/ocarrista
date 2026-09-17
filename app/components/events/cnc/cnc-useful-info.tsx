@@ -3,6 +3,7 @@
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
+import { CncDocumentPreview } from "./cnc-document-preview";
 
 export function CncUsefulInfo({ event }: { event: CncEventData }) {
   return (
@@ -27,6 +28,11 @@ export function CncUsefulInfo({ event }: { event: CncEventData }) {
                   <p className="mb-4 text-sm text-muted">{item.description}</p>
                 )}
                 <CncPdfSlot resource={item.pdf} />
+                {item.pdf.href ? (
+                  <div className="mt-4">
+                    <CncDocumentPreview resource={item.pdf} hint={item.title} />
+                  </div>
+                ) : null}
               </div>
             </MotionReveal>
           ))}

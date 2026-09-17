@@ -3,6 +3,7 @@
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
+import { CncDocumentPreview } from "./cnc-document-preview";
 
 export function CncOpeningNote({ event }: { event: CncEventData }) {
   const { openingNote } = event;
@@ -27,6 +28,13 @@ export function CncOpeningNote({ event }: { event: CncEventData }) {
             </MotionReveal>
           )}
         </div>
+        {openingNote.pdf?.href && (
+          <MotionReveal delay={0.16}>
+            <div className="mt-10">
+              <CncDocumentPreview resource={openingNote.pdf} hint="Nota de abertura" />
+            </div>
+          </MotionReveal>
+        )}
       </div>
     </section>
   );

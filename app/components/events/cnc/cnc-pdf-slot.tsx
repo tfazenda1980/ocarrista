@@ -1,8 +1,19 @@
 import type { CncPdfResource } from "@/app/lib/events/cnc-types";
+import { getSketchKind } from "@/app/lib/challenger/sketch";
 
 type CncPdfSlotProps = {
   resource: CncPdfResource;
 };
+
+function actionLabel(resource: CncPdfResource): string {
+  const kind = getSketchKind(resource.mime ?? null, resource.href);
+  if (kind === "image") return "Ver desenho →";
+  if (kind === "pdf") return "Descarregar PDF →";
+  if (resource.mime?.includes("presentation") || resource.mime?.includes("powerpoint")) {
+    return "Descarregar PPT →";
+  }
+  return "Descarregar documento →";
+}
 
 export function CncPdfSlot({ resource }: CncPdfSlotProps) {
   const available = Boolean(resource.href);
@@ -11,7 +22,6 @@ export function CncPdfSlot({ resource }: CncPdfSlotProps) {
     return (
       <a
         href={resource.href}
-        download
         target="_blank"
         rel="noopener noreferrer"
         className="card-tactical flex min-h-[5.5rem] flex-col justify-center border-gold/30 p-4 transition-colors hover:border-gold/50 hover:bg-gold/5"
@@ -19,7 +29,7 @@ export function CncPdfSlot({ resource }: CncPdfSlotProps) {
         <span className="font-display text-xs tracking-[0.12em] text-gold uppercase">
           {resource.label}
         </span>
-        <span className="mt-2 text-[0.7rem] text-muted">Descarregar PDF →</span>
+        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource)}</span>
       </a>
     );
   }
@@ -32,7 +42,7 @@ export function CncPdfSlot({ resource }: CncPdfSlotProps) {
       <span className="font-display text-xs tracking-[0.12em] text-gold/70 uppercase">
         {resource.label}
       </span>
-      <span className="mt-2 text-[0.7rem] text-muted">PDF em breve</span>
+      <span className="mt-2 text-[0.7rem] text-muted">Documento em breve</span>
     </div>
   );
 }

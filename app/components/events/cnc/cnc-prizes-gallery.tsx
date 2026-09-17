@@ -1,18 +1,14 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
 import type { CncPdfResource } from "@/app/lib/events/cnc-types";
-import { PdfHorizontalViewer } from "../../pdf-horizontal-viewer";
+import { CncDocumentPreview } from "./cnc-document-preview";
+import { getSketchKind } from "@/app/lib/challenger/sketch";
 
 type CncPrizesGalleryProps = {
   galleryPdf: CncPdfResource;
 };
 
 export function CncPrizesGallery({ galleryPdf }: CncPrizesGalleryProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.08, once: true });
-
   if (!galleryPdf.href) {
     return (
       <div className="video-bleed">
@@ -28,14 +24,11 @@ export function CncPrizesGallery({ galleryPdf }: CncPrizesGalleryProps) {
     );
   }
 
-  return (
-    <div ref={ref} className="-mx-4 sm:-mx-6">
-      <PdfHorizontalViewer
-        pdfUrl={galleryPdf.href}
-        active={inView}
-        label={galleryPdf.label}
-        hint="Deslize para ver cada prova e os respetivos prémios"
-      />
-    </div>
-  );
+  const kind = getSketchKind(galleryPdf.mime ?? null, galleryPdf.href);
+  const hint =
+    kind === "image"
+      ? "Galeria de prémios"
+      : "Deslize para ver cada prova e os respetivos prémios";
+
+  return <CncDocumentPreview resource={galleryPdf} hint={hint} />;
 }

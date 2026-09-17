@@ -1,7 +1,9 @@
 export type CncPdfResource = {
   label: string;
-  /** Caminho público, ex. /eventos/cnc/2026/iniciacao/ordens.pdf */
+  /** Caminho público ou URL Blob, ex. /eventos/cnc/2026/iniciacao/ordens.pdf */
   href: string | null;
+  mime?: string | null;
+  filename?: string | null;
 };
 
 export type CncDisciplineResources = {

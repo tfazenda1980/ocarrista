@@ -15,7 +15,7 @@ export function AdminSection({ pendingCount }: AdminSectionProps) {
       id="admin"
       label="Secção · Administração"
       title="Painel de administração"
-      description="Atalhos de administração — membros e workshop. A gestão completa de membros está numa página dedicada."
+      description="Atalhos de administração — membros, Challenger, CNC e workshop. A gestão completa de membros está numa página dedicada."
       alt
     >
       <AdminNav />
@@ -52,13 +52,13 @@ export function AdminSection({ pendingCount }: AdminSectionProps) {
           </div>
           <div className="card-tactical p-6 sm:col-span-2 lg:col-span-1">
             <p className="font-display text-sm font-semibold tracking-wide text-foreground uppercase">
-              Challenger 2026
+              CNC 2026
             </p>
             <p className="mt-2 text-sm text-muted">
-              Provas, guarnições inscritas e classificação.
+              Programa, provas, croquis, PDFs e informação útil para concorrentes.
             </p>
-            <Link href="/admin/challenger/2026" className="btn-outline mt-4 inline-flex text-xs">
-              Gerir Challenger
+            <Link href="/admin/cnc/2026" className="btn-outline mt-4 inline-flex text-xs">
+              Gerir CNC
             </Link>
           </div>
           <div className="card-tactical p-6 sm:col-span-2 lg:col-span-1">
