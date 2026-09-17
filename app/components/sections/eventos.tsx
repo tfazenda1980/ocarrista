@@ -13,9 +13,9 @@ const events = [
   },
   {
     title: "Concurso Nacional Combinado",
-    meta: "EDIÇÃO ANUAL · ENSINO · CROSS · OBSTÁCULOS",
+    meta: "25 E 26 SET 2026 · ENSINO · CROSS · OBSTÁCULOS",
     description:
-      "Prova equestre de Concurso Completo (CCE): Ensino, Cross e Obstáculos — documentação, provas e informação para concorrentes no Centro Hípico.",
+      "Prova equestre de Concurso Completo (CCE): Ensino, Cross e Obstáculos — 25 e 26 de Setembro no Centro Hípico do Quartel da Cavalaria.",
     icon: <IconTarget />,
     href: "/eventos/cnc",
     backgroundImage: CNC_SRC,

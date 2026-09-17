@@ -6,14 +6,15 @@
   "edition": "CNC 2026",
   "slogan": "Ensino, Cross e Obstáculos — rigor técnico e tradição equestre no Quartel da Cavalaria.",
   "rationale": "O Concurso Completo de Equitação (CCE) é a prova equestre que combina três disciplinas: Ensino (harmonia e precisão), Cross (resistência, terreno e obstáculos naturais) e Obstáculos (gymnastique sobre saltos). O Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria reúne atletas e cavaleiros em diferentes níveis — da iniciação ao preliminar. Este espaço contém a documentação oficial e divulgação útil, tais como ordens de entrada, croquis de percursos e os resultados alcançados.",
-  "date": "2026-09-15T08:00:00+01:00",
-  "dateDisplay": "Setembro de 2026",
+  "date": "2026-09-25T08:00:00+01:00",
+  "endDate": "2026-09-26T18:00:00+01:00",
+  "dateDisplay": "25 e 26 de Setembro de 2026",
   "location": "Centro Hípico · Quartel da Cavalaria · Santa Margarida",
   "heroImage": "/images/cnc.png",
   "cardImage": "/images/cnc.png",
   "seo": {
     "title": "Concurso Nacional Combinado 2026 | O Carrista",
-    "description": "Prova equestre militar de Ensino, Cross e Obstáculos — programa, provas, documentos e informação útil para concorrentes."
+    "description": "Concurso Nacional Combinado 2026, 25 e 26 de Setembro, no Quartel da Cavalaria — Ensino, Cross e Obstáculos, programa, provas e informação útil para concorrentes."
   },
   "openingNote": {
     "title": "Nota de Abertura",
