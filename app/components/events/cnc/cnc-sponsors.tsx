@@ -10,7 +10,7 @@ export function CncSponsors({ event }: { event: CncEventData }) {
     <section id="patrocinadores" className="event-section scroll-mt-24 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">07 · Patrocinadores</p>
+          <p className="section-label mb-3">10 · Patrocinadores</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
             Patrocinadores
           </h2>

@@ -20,6 +20,14 @@ export function generalProgramSlot(): string {
   return "general_program";
 }
 
+export function regulationSlot(): string {
+  return "regulation";
+}
+
+export function gallerySlot(id: string): string {
+  return `gallery:${id}`;
+}
+
 export function usefulSlot(id: string): string {
   return `useful:${id}`;
 }

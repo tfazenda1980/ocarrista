@@ -1,11 +1,34 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CncDiscipline, CncEventData, CncSponsor, CncUsefulInfoItem } from "@/app/lib/events/cnc-types";
+import type {
+  CncDiscipline,
+  CncEventData,
+  CncGalleryPhoto,
+  CncNotice,
+  CncSponsor,
+  CncUsefulInfoItem,
+} from "@/app/lib/events/cnc-types";
 import { CNC_FILE_ACCEPT, CNC_IMAGE_ACCEPT } from "@/app/lib/cnc/upload";
-import { disciplineSlot, generalProgramSlot, openingNoteSlot, sponsorSlot, usefulSlot } from "@/app/lib/cnc/slots";
+import { cncMessageKindLabel, type CncMessage } from "@/app/lib/cnc/messages";
+import {
+  disciplineSlot,
+  generalProgramSlot,
+  openingNoteSlot,
+  regulationSlot,
+  sponsorSlot,
+  usefulSlot,
+} from "@/app/lib/cnc/slots";
 
-type Tab = "conteudo" | "provas" | "info" | "patrocinadores" | "contactos";
+type Tab =
+  | "conteudo"
+  | "avisos"
+  | "provas"
+  | "galeria"
+  | "info"
+  | "patrocinadores"
+  | "contactos"
+  | "mensagens";
 
 type AdminPayload = {
   configured?: boolean;
@@ -36,6 +59,8 @@ export function AdminCncView({ year }: { year: string }) {
   const [openingBody, setOpeningBody] = useState("");
   const [programTitle, setProgramTitle] = useState("");
   const [programBody, setProgramBody] = useState("");
+  const [regulationTitle, setRegulationTitle] = useState("");
+  const [regulationBody, setRegulationBody] = useState("");
   const [organizer, setOrganizer] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -48,6 +73,9 @@ export function AdminCncView({ year }: { year: string }) {
   const [newInfoDescription, setNewInfoDescription] = useState("");
   const [newSponsorName, setNewSponsorName] = useState("");
   const [newSponsorUrl, setNewSponsorUrl] = useState("");
+  const [newNotice, setNewNotice] = useState("");
+  const [newPhotoCaption, setNewPhotoCaption] = useState("");
+  const [messages, setMessages] = useState<CncMessage[]>([]);
 
   const applyEvent = useCallback((next: CncEventData) => {
     setEvent(next);
@@ -55,6 +83,8 @@ export function AdminCncView({ year }: { year: string }) {
     setOpeningBody(next.openingNote.body);
     setProgramTitle(next.generalProgram.title);
     setProgramBody(next.generalProgram.body);
+    setRegulationTitle(next.regulation?.title ?? "Regulamento");
+    setRegulationBody(next.regulation?.body ?? "");
     setOrganizer(next.contacts.organizer);
     setEmail(next.contacts.email);
     setPhone(next.contacts.phone ?? "");
@@ -103,9 +133,11 @@ export function AdminCncView({ year }: { year: string }) {
           opening_note_body: openingBody,
           general_program_title: programTitle,
           general_program_body: programBody,
+          regulation_title: regulationTitle,
+          regulation_body: regulationBody,
         }),
       });
-      if (await handleJson(res)) setFeedback("Nota de abertura e programa guardados.");
+      if (await handleJson(res)) setFeedback("Nota, programa e regulamento guardados.");
     } finally {
       setBusy(false);
     }
@@ -348,12 +380,170 @@ export function AdminCncView({ year }: { year: string }) {
     }
   };
 
+  const publishNotice = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/notices`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: newNotice }),
+      });
+      if (await handleJson(res)) {
+        setNewNotice("");
+        setFeedback("Aviso publicado na página pública.");
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const toggleNotice = async (notice: CncNotice) => {
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/notices`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: notice.id, active: !notice.active }),
+      });
+      if (await handleJson(res)) {
+        setFeedback(notice.active ? "Aviso retirado da página pública." : "Aviso reactivado.");
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const deleteNotice = async (id: string) => {
+    if (!confirm("Eliminar este aviso?")) return;
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/notices?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      if (await handleJson(res)) setFeedback("Aviso eliminado.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const addGalleryPhoto = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formEl = e.currentTarget;
+    const fileInput = formEl.elements.namedItem("photo") as HTMLInputElement | null;
+    const file = fileInput?.files?.[0];
+    if (!file) {
+      setError("Escolha uma fotografia.");
+      return;
+    }
+    setBusy(true);
+    setFeedback("");
+    try {
+      const form = new FormData();
+      form.set("caption", newPhotoCaption);
+      form.set("file", file);
+      const res = await fetch(`/api/admin/cnc/${year}/gallery`, { method: "POST", body: form });
+      if (await handleJson(res)) {
+        setNewPhotoCaption("");
+        formEl.reset();
+        setFeedback("Fotografia publicada na galeria.");
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveGalleryCaption = async (photo: CncGalleryPhoto, caption: string) => {
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/gallery`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: photo.id, caption }),
+      });
+      if (await handleJson(res)) setFeedback("Legenda actualizada.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const deleteGalleryPhoto = async (id: string) => {
+    if (!confirm("Eliminar esta fotografia da galeria?")) return;
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/gallery?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      if (await handleJson(res)) setFeedback("Fotografia eliminada.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const moveGalleryPhoto = async (id: string, move: "up" | "down") => {
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/gallery`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, move }),
+      });
+      if (await handleJson(res)) setFeedback("Ordem da galeria actualizada.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const loadMessages = useCallback(async () => {
+    const res = await fetch(`/api/admin/cnc/${year}/messages`);
+    const json = (await res.json()) as { messages?: CncMessage[]; error?: string };
+    if (!res.ok) {
+      setError(json.error ?? "Não foi possível carregar as mensagens.");
+      return;
+    }
+    setMessages(json.messages ?? []);
+  }, [year]);
+
+  useEffect(() => {
+    if (tab === "mensagens") void loadMessages();
+  }, [tab, loadMessages]);
+
+  const deleteMessage = async (id: string) => {
+    if (!confirm("Eliminar esta mensagem?")) return;
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/messages?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      const json = (await res.json()) as { messages?: CncMessage[]; error?: string };
+      if (!res.ok) {
+        setError(json.error ?? "Erro.");
+        return;
+      }
+      setError("");
+      setMessages(json.messages ?? []);
+      setFeedback("Mensagem eliminada.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const tabs: { id: Tab; label: string }[] = [
-    { id: "conteudo", label: "Nota e programa" },
+    { id: "conteudo", label: "Nota, programa e regulamento" },
+    { id: "avisos", label: "Avisos do dia" },
     { id: "provas", label: "Provas e croquis" },
+    { id: "galeria", label: "Galeria fotográfica" },
     { id: "info", label: "Informação útil" },
     { id: "patrocinadores", label: "Patrocinadores" },
     { id: "contactos", label: "Contactos" },
+    { id: "mensagens", label: "Fale connosco" },
   ];
 
   return (
@@ -392,8 +582,9 @@ export function AdminCncView({ year }: { year: string }) {
       )}
       {configured && (
         <p className="mb-6 text-sm text-muted">
-          Tudo o que guardar ou carregar aqui (textos, PDFs, croquis, informação útil e
-          patrocinadores) passa a ser o que o público e os concorrentes vêem em{" "}
+          Tudo o que guardar ou carregar aqui (textos, PDFs, croquis, regulamento, galeria,
+          avisos, informação útil e patrocinadores) passa a ser o que o público e os
+          concorrentes vêem em{" "}
           <a href={`/eventos/cnc/${year}`} className="text-gold hover:underline" target="_blank" rel="noopener noreferrer">
             /eventos/cnc/{year}
           </a>
@@ -480,10 +671,146 @@ export function AdminCncView({ year }: { year: string }) {
             />
           </div>
 
+          <div className="card-tactical space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Regulamento
+            </h3>
+            <p className="text-sm text-muted">
+              Área pública com o regulamento oficial. Carregue o PDF homologado para o
+              público o consultar e descarregar.
+            </p>
+            <input
+              value={regulationTitle}
+              onChange={(e) => setRegulationTitle(e.target.value)}
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+              required
+            />
+            <textarea
+              value={regulationBody}
+              onChange={(e) => setRegulationBody(e.target.value)}
+              rows={5}
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+            />
+            <AssetUploader
+              label={event.regulation?.pdf?.label ?? "Regulamento (PDF)"}
+              href={event.regulation?.pdf?.href}
+              filename={event.regulation?.pdf?.filename}
+              disabled={busy}
+              onUpload={(file) =>
+                uploadSlot(regulationSlot(), file, event.regulation?.pdf?.label ?? "Regulamento (PDF)")
+              }
+              onClear={() =>
+                uploadSlot(regulationSlot(), null, event.regulation?.pdf?.label ?? "Regulamento (PDF)", true)
+              }
+            />
+          </div>
+
           <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
             Guardar textos
           </button>
         </form>
+      )}
+
+      {tab === "avisos" && event && (
+        <div className="space-y-8">
+          <form onSubmit={publishNotice} className="card-tactical space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Novo aviso do dia
+            </h3>
+            <p className="text-sm text-muted">
+              Aparece no topo da página pública (atrasos, alterações de pista, horários). Não
+              substitui o programa geral.
+            </p>
+            <textarea
+              value={newNotice}
+              onChange={(e) => setNewNotice(e.target.value)}
+              rows={4}
+              placeholder="Ex. O reconhecimento da pista de obstáculos atrasou 15 minutos."
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+              required
+            />
+            <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+              Publicar aviso
+            </button>
+          </form>
+
+          {(event.notices ?? []).length === 0 ? (
+            <p className="text-sm text-muted">Ainda não há avisos nesta edição.</p>
+          ) : (
+            <ul className="space-y-4">
+              {(event.notices ?? []).map((notice) => (
+                <li key={notice.id} className="card-tactical space-y-3 p-6">
+                  <p className="text-sm leading-relaxed text-foreground">{notice.body}</p>
+                  <p className="text-xs text-muted">
+                    {notice.active ? "Visível no site" : "Retirado"} ·{" "}
+                    {new Date(notice.createdAt).toLocaleString("pt-PT")}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => toggleNotice(notice)}
+                      className="btn-outline px-3 py-1.5 text-xs"
+                    >
+                      {notice.active ? "Retirar do site" : "Reactivar"}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => deleteNotice(notice.id)}
+                      className="btn-outline px-3 py-1.5 text-xs"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
+      {tab === "galeria" && event && (
+        <div className="space-y-10">
+          <form onSubmit={addGalleryPhoto} className="card-tactical space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Nova fotografia
+            </h3>
+            <p className="text-sm text-muted">
+              Publica imediatamente na Galeria Fotográfica da página do CNC.
+            </p>
+            <input
+              value={newPhotoCaption}
+              onChange={(e) => setNewPhotoCaption(e.target.value)}
+              placeholder="Legenda (opcional)"
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+            />
+            <input
+              name="photo"
+              type="file"
+              accept={CNC_IMAGE_ACCEPT}
+              disabled={busy}
+              className="text-sm text-muted"
+              required
+            />
+            <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+              Publicar fotografia
+            </button>
+          </form>
+
+          {(event.photoGallery ?? []).map((photo, index) => (
+            <GalleryEditor
+              key={photo.id}
+              photo={photo}
+              busy={busy}
+              canMoveUp={index > 0}
+              canMoveDown={index < (event.photoGallery?.length ?? 0) - 1}
+              onSave={saveGalleryCaption}
+              onDelete={() => deleteGalleryPhoto(photo.id)}
+              onMove={(dir) => moveGalleryPhoto(photo.id, dir)}
+            />
+          ))}
+        </div>
       )}
 
       {tab === "provas" && event && (
@@ -660,6 +987,44 @@ export function AdminCncView({ year }: { year: string }) {
             Guardar contactos
           </button>
         </form>
+      )}
+
+      {tab === "mensagens" && (
+        <div className="space-y-4">
+          <p className="text-sm text-muted">
+            Mensagens enviadas pelo público em «Fale connosco» (esclarecimentos, questões de
+            prova e sugestões).
+          </p>
+          {messages.length === 0 ? (
+            <p className="text-sm text-muted">Ainda não há mensagens.</p>
+          ) : (
+            messages.map((message) => (
+              <article key={message.id} className="card-tactical space-y-2 p-6">
+                <p className="font-display text-xs tracking-[0.12em] text-gold uppercase">
+                  {cncMessageKindLabel(message.kind)}
+                </p>
+                <p className="text-sm text-foreground">
+                  {message.name} · {message.email}
+                </p>
+                {message.provaId && (
+                  <p className="text-xs text-muted">Prova: {message.provaId}</p>
+                )}
+                <p className="text-sm leading-relaxed text-muted">{message.body}</p>
+                <p className="text-xs text-muted">
+                  {new Date(message.createdAt).toLocaleString("pt-PT")}
+                </p>
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() => deleteMessage(message.id)}
+                  className="btn-outline px-3 py-1.5 text-xs"
+                >
+                  Eliminar
+                </button>
+              </article>
+            ))
+          )}
+        </div>
       )}
     </div>
   );
@@ -1001,6 +1366,66 @@ function SponsorEditor({
       />
       <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
         Guardar patrocinador
+      </button>
+    </form>
+  );
+}
+
+function GalleryEditor({
+  photo,
+  busy,
+  canMoveUp,
+  canMoveDown,
+  onSave,
+  onDelete,
+  onMove,
+}: {
+  photo: CncGalleryPhoto;
+  busy: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
+  onSave: (photo: CncGalleryPhoto, caption: string) => void;
+  onDelete: () => void;
+  onMove: (direction: "up" | "down") => void;
+}) {
+  const [caption, setCaption] = useState(photo.alt === "Fotografia do CNC" ? "" : photo.alt);
+
+  useEffect(() => {
+    setCaption(photo.alt === "Fotografia do CNC" ? "" : photo.alt);
+  }, [photo.alt]);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSave(photo, caption);
+      }}
+      className="card-tactical space-y-4 p-6"
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <h3 className="font-display text-lg text-foreground">Fotografia</h3>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" onClick={() => onMove("up")} disabled={busy || !canMoveUp} className="btn-outline px-3 py-1.5 text-xs">
+            Subir
+          </button>
+          <button type="button" onClick={() => onMove("down")} disabled={busy || !canMoveDown} className="btn-outline px-3 py-1.5 text-xs">
+            Descer
+          </button>
+          <button type="button" onClick={onDelete} disabled={busy} className="btn-outline px-3 py-1.5 text-xs">
+            Eliminar
+          </button>
+        </div>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={photo.src} alt="" className="max-h-56 w-auto border border-gold/20 object-contain" />
+      <input
+        value={caption}
+        onChange={(e) => setCaption(e.target.value)}
+        placeholder="Legenda"
+        className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+      />
+      <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+        Guardar legenda
       </button>
     </form>
   );

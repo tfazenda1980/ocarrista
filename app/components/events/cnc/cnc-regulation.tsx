@@ -1,0 +1,45 @@
+"use client";
+
+import { MotionReveal } from "../../motion-reveal";
+import type { CncEventData } from "@/app/lib/events/cnc-types";
+import { CncPdfSlot } from "./cnc-pdf-slot";
+import { CncDocumentPreview } from "./cnc-document-preview";
+
+export function CncRegulation({ event }: { event: CncEventData }) {
+  const regulation = event.regulation ?? {
+    title: "Regulamento",
+    body: "O regulamento oficial desta edição será publicado nesta área.",
+    pdf: null,
+  };
+
+  return (
+    <section id="regulamento" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <MotionReveal>
+          <p className="section-label mb-3">04 · {regulation.title}</p>
+          <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
+            {regulation.title}
+          </h2>
+          <div className="gold-line mb-10 w-24" />
+        </MotionReveal>
+        <div className="grid gap-8 lg:grid-cols-[1fr_minmax(12rem,16rem)]">
+          <MotionReveal delay={0.08}>
+            <p className="max-w-3xl leading-relaxed text-muted">{regulation.body}</p>
+          </MotionReveal>
+          {regulation.pdf && (
+            <MotionReveal delay={0.12}>
+              <CncPdfSlot resource={regulation.pdf} />
+            </MotionReveal>
+          )}
+        </div>
+        {regulation.pdf?.href && (
+          <MotionReveal delay={0.16}>
+            <div className="mt-10">
+              <CncDocumentPreview resource={regulation.pdf} hint="Regulamento oficial" />
+            </div>
+          </MotionReveal>
+        )}
+      </div>
+    </section>
+  );
+}

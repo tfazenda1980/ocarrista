@@ -36,6 +36,19 @@ export type CncSponsor = {
   url: string;
 };
 
+export type CncNotice = {
+  id: string;
+  body: string;
+  active: boolean;
+  createdAt: string;
+};
+
+export type CncGalleryPhoto = {
+  id: string;
+  src: string;
+  alt: string;
+};
+
 export type CncSeries = {
   slug: string;
   title: string;
@@ -69,6 +82,11 @@ export type CncEventData = {
     body: string;
     pdf: CncPdfResource | null;
   };
+  regulation: {
+    title: string;
+    body: string;
+    pdf: CncPdfResource | null;
+  };
   disciplines: CncDiscipline[];
   usefulInfo: CncUsefulInfoItem[];
   contacts: {
@@ -78,4 +96,7 @@ export type CncEventData = {
     notes?: string;
   };
   sponsors: CncSponsor[];
+  photoGallery: CncGalleryPhoto[];
+  /** Avisos do dia publicados pela organização. */
+  notices: CncNotice[];
 };

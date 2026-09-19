@@ -10,7 +10,7 @@ export function CncDisciplines({ event }: { event: CncEventData }) {
     <section id="provas" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">04 · Provas</p>
+          <p className="section-label mb-3">05 · Provas</p>
           <h2 className="display-heading mb-4 text-3xl font-semibold sm:text-4xl">
             Provas e documentação
           </h2>

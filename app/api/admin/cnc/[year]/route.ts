@@ -53,6 +53,8 @@ export async function PATCH(
     opening_note_body?: string;
     general_program_title?: string;
     general_program_body?: string;
+    regulation_title?: string;
+    regulation_body?: string;
     organizer?: string;
     email?: string;
     phone?: string;

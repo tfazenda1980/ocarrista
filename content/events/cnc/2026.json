@@ -18,7 +18,7 @@
   },
   "openingNote": {
     "title": "Nota de Abertura",
-    "body": "É sempre um grande privilégio e motivo de orgulho contar com a visita e a participação de todos. Ano após ano, esta comunhão em torno do Cavalo serve como fonte de inspiração e dá força para que o legado equestre militar continue a ser trilhado. Em nome do Exmo. Comandante da Brigada Mecanizada e do Comandante do Quartel da Cavalaria, saudamos todos os que nos apoiaram na realização deste evento, todos os concorrentes e todos os visitantes, esperando que o XVII Concurso Nacional Combinado de Equitação supere todas as vossas expectativas.",
+    "body": "É sempre um grande privilégio e motivo de orgulho contar com a visita e a participação de todos. Ano após ano, esta comunhão em torno do Cavalo serve como fonte de inspiração e dá força para que o legado equestre militar continue a ser trilhado. Em nome do Exmo. Comandante da Brigada Mecanizada e do Comandante do Quartel da Cavalaria, saudamos todos os que nos apoiaram na realização deste evento, todos os concorrentes e todos os visitantes, esperando que o XVIII Concurso Nacional Combinado de Equitação supere todas as vossas expectativas.",
     "pdf": {
       "label": "Nota de Abertura (PDF)",
       "href": null
@@ -32,6 +32,16 @@
       "href": null
     }
   },
+  "regulation": {
+    "title": "Regulamento",
+    "body": "O regulamento oficial desta edição do Concurso Nacional Combinado será publicado nesta área. Consulte o PDF assim que a organização o homologar.",
+    "pdf": {
+      "label": "Regulamento (PDF)",
+      "href": null
+    }
+  },
+  "photoGallery": [],
+  "notices": [],
   "disciplines": [
     {
       "id": "iniciacao",

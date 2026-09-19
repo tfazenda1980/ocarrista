@@ -9,9 +9,12 @@ const anchorLinks = [
   { href: "#sobre", label: "Sobre" },
   { href: "#nota-abertura", label: "Nota" },
   { href: "#programa", label: "Programa" },
+  { href: "#regulamento", label: "Regulamento" },
   { href: "#provas", label: "Provas" },
+  { href: "#galeria", label: "Galeria" },
   { href: "#informacao", label: "Informação" },
   { href: "#contactos", label: "Contactos" },
+  { href: "#fale-connosco", label: "Fale connosco" },
   { href: "#patrocinadores", label: "Patrocínios" },
 ] as const;
 
@@ -51,7 +54,7 @@ export function CncSiteHeader({ edition }: CncSiteHeaderProps) {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-4 xl:flex">
+        <nav className="hidden items-center gap-3 2xl:flex">
           {anchorLinks.map((link) => (
             <motion.a
               key={link.href}
@@ -66,7 +69,7 @@ export function CncSiteHeader({ edition }: CncSiteHeaderProps) {
 
         <button
           type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20 xl:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20 2xl:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
@@ -77,7 +80,7 @@ export function CncSiteHeader({ edition }: CncSiteHeaderProps) {
       </div>
 
       {open && (
-        <nav className="border-t border-gold/10 bg-background/95 px-4 py-4 xl:hidden">
+        <nav className="border-t border-gold/10 bg-background/95 px-4 py-4 2xl:hidden">
           <ul className="flex flex-col gap-3">
             {anchorLinks.map((link) => (
               <li key={link.href}>

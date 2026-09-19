@@ -11,8 +11,13 @@ CREATE TABLE IF NOT EXISTS cnc_editions (
   email TEXT,
   phone TEXT,
   notes TEXT,
+  regulation_title TEXT,
+  regulation_body TEXT,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+ALTER TABLE cnc_editions ADD COLUMN IF NOT EXISTS regulation_title TEXT;
+ALTER TABLE cnc_editions ADD COLUMN IF NOT EXISTS regulation_body TEXT;
 
 CREATE TABLE IF NOT EXISTS cnc_disciplines (
   id TEXT PRIMARY KEY,
@@ -64,3 +69,37 @@ CREATE TABLE IF NOT EXISTS cnc_sponsors (
 );
 
 CREATE INDEX IF NOT EXISTS idx_cnc_sponsors_year ON cnc_sponsors (year, sort_order);
+
+CREATE TABLE IF NOT EXISTS cnc_messages (
+  id TEXT PRIMARY KEY,
+  year TEXT NOT NULL,
+  kind TEXT NOT NULL CHECK (kind IN ('contact', 'prova', 'suggestion')),
+  prova_id TEXT,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_cnc_messages_year ON cnc_messages (year, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS cnc_notices (
+  id TEXT PRIMARY KEY,
+  year TEXT NOT NULL,
+  body TEXT NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_cnc_notices_year ON cnc_notices (year, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS cnc_gallery (
+  id TEXT PRIMARY KEY,
+  year TEXT NOT NULL,
+  caption TEXT NOT NULL DEFAULT '',
+  sort_order INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_cnc_gallery_year ON cnc_gallery (year, sort_order);

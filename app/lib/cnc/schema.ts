@@ -20,9 +20,13 @@ export async function ensureCncSchema(): Promise<void> {
       email TEXT,
       phone TEXT,
       notes TEXT,
+      regulation_title TEXT,
+      regulation_body TEXT,
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `;
+  await sql`ALTER TABLE cnc_editions ADD COLUMN IF NOT EXISTS regulation_title TEXT`;
+  await sql`ALTER TABLE cnc_editions ADD COLUMN IF NOT EXISTS regulation_body TEXT`;
 
   await sql`
     CREATE TABLE IF NOT EXISTS cnc_disciplines (
@@ -90,6 +94,52 @@ export async function ensureCncSchema(): Promise<void> {
   await sql`
     CREATE INDEX IF NOT EXISTS idx_cnc_sponsors_year
       ON cnc_sponsors (year, sort_order)
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS cnc_messages (
+      id TEXT PRIMARY KEY,
+      year TEXT NOT NULL,
+      kind TEXT NOT NULL CHECK (kind IN ('contact', 'prova', 'suggestion')),
+      prova_id TEXT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      body TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
+  await sql`
+    CREATE INDEX IF NOT EXISTS idx_cnc_messages_year
+      ON cnc_messages (year, created_at DESC)
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS cnc_notices (
+      id TEXT PRIMARY KEY,
+      year TEXT NOT NULL,
+      body TEXT NOT NULL,
+      active BOOLEAN NOT NULL DEFAULT TRUE,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
+  await sql`
+    CREATE INDEX IF NOT EXISTS idx_cnc_notices_year
+      ON cnc_notices (year, created_at DESC)
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS cnc_gallery (
+      id TEXT PRIMARY KEY,
+      year TEXT NOT NULL,
+      caption TEXT NOT NULL DEFAULT '',
+      sort_order INT NOT NULL DEFAULT 0,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
+  await sql`
+    CREATE INDEX IF NOT EXISTS idx_cnc_gallery_year
+      ON cnc_gallery (year, sort_order)
   `;
 
   schemaReady = true;

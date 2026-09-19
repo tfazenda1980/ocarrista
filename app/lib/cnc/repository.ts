@@ -3,16 +3,21 @@ import { getCncEdition } from "../events/load-cnc";
 import type {
   CncDiscipline,
   CncEventData,
+  CncGalleryPhoto,
+  CncNotice,
   CncSponsor,
   CncUsefulInfoItem,
 } from "../events/cnc-types";
 import { ensureCncSchema } from "./schema";
 import type { CncAsset, CncDisciplineKind } from "./slots";
+import type { CncMessage, CncMessageKind } from "./messages";
 import {
   disciplineSlot,
   emptyResource,
+  gallerySlot,
   generalProgramSlot,
   openingNoteSlot,
+  regulationSlot,
   slugifyId,
   sponsorSlot,
   usefulSlot,
@@ -28,6 +33,8 @@ type EditionRow = {
   email: string | null;
   phone: string | null;
   notes: string | null;
+  regulation_title: string | null;
+  regulation_body: string | null;
 };
 
 type DisciplineRow = {
@@ -55,6 +62,21 @@ type SponsorRow = {
   sort_order: number;
 };
 
+type GalleryRow = {
+  id: string;
+  year: string;
+  caption: string;
+  sort_order: number;
+};
+
+type NoticeRow = {
+  id: string;
+  year: string;
+  body: string;
+  active: boolean;
+  created_at: string;
+};
+
 function asNumber(value: unknown): number {
   const n = Number(value);
   return Number.isFinite(n) ? n : 0;
@@ -74,14 +96,20 @@ export async function seedCncYear(year: string): Promise<void> {
 
   const existing = await sql`SELECT year FROM cnc_editions WHERE year = ${year} LIMIT 1`;
   if (existing.length > 0) {
-    await sql`
-      UPDATE cnc_editions
-      SET
-        opening_note_body = ${base.openingNote.body},
-        updated_at = NOW()
-      WHERE year = ${year}
-        AND opening_note_body = ${"Bem-vindos ao Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria. Consulte o programa geral, as subsecções de cada prova e a informação útil antes da chegada ao quartel."}
-    `;
+    const previousOpeningNotes = [
+      "Bem-vindos ao Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria. Consulte o programa geral, as subsecções de cada prova e a informação útil antes da chegada ao quartel.",
+      "É sempre um grande privilégio e motivo de orgulho contar com a visita e a participação de todos. Ano após ano, esta comunhão em torno do Cavalo serve como fonte de inspiração e dá força para que o legado equestre militar continue a ser trilhado. Em nome do Exmo. Comandante da Brigada Mecanizada e do Comandante do Quartel da Cavalaria, saudamos todos os que nos apoiaram na realização deste evento, todos os concorrentes e todos os visitantes, esperando que o XVII Concurso Nacional Combinado de Equitação supere todas as vossas expectativas.",
+    ];
+    for (const previous of previousOpeningNotes) {
+      await sql`
+        UPDATE cnc_editions
+        SET
+          opening_note_body = ${base.openingNote.body},
+          updated_at = NOW()
+        WHERE year = ${year}
+          AND opening_note_body = ${previous}
+      `;
+    }
     return;
   }
 
@@ -89,7 +117,8 @@ export async function seedCncYear(year: string): Promise<void> {
     INSERT INTO cnc_editions (
       year, opening_note_title, opening_note_body,
       general_program_title, general_program_body,
-      organizer, email, phone, notes
+      organizer, email, phone, notes,
+      regulation_title, regulation_body
     )
     VALUES (
       ${year},
@@ -100,7 +129,9 @@ export async function seedCncYear(year: string): Promise<void> {
       ${base.contacts.organizer},
       ${base.contacts.email},
       ${base.contacts.phone ?? ""},
-      ${base.contacts.notes ?? ""}
+      ${base.contacts.notes ?? ""},
+      ${base.regulation.title},
+      ${base.regulation.body}
     )
   `;
 
@@ -264,11 +295,12 @@ export async function getCncLiveEdition(
   try {
     await seedCncYear(year);
     const sql = await sqlClient();
-    const [editionRows, disciplineRows, usefulRows, sponsorRows, assets] = await Promise.all([
+    const [editionRows, disciplineRows, usefulRows, sponsorRows, galleryRows, noticeRows, assets] = await Promise.all([
       sql`
         SELECT year, opening_note_title, opening_note_body,
                general_program_title, general_program_body,
-               organizer, email, phone, notes
+               organizer, email, phone, notes,
+               regulation_title, regulation_body
         FROM cnc_editions
         WHERE year = ${year}
         LIMIT 1
@@ -290,6 +322,18 @@ export async function getCncLiveEdition(
         FROM cnc_sponsors
         WHERE year = ${year}
         ORDER BY sort_order ASC, name ASC
+      `,
+      sql`
+        SELECT id, year, caption, sort_order
+        FROM cnc_gallery
+        WHERE year = ${year}
+        ORDER BY sort_order ASC, created_at ASC
+      `,
+      sql`
+        SELECT id, year, body, active, created_at::text
+        FROM cnc_notices
+        WHERE year = ${year}
+        ORDER BY created_at DESC
       `,
       listAssets(year),
     ]);
@@ -322,6 +366,29 @@ export async function getCncLiveEdition(
         fallbackSponsors.get(row.id),
       ),
     );
+    const photoGallery = (galleryRows as GalleryRow[])
+      .map((row) => {
+        const src = assetsBySlot.get(gallerySlot(row.id))?.url;
+        if (!src) return null;
+        return {
+          id: row.id,
+          src,
+          alt: row.caption || "Fotografia do CNC",
+        } satisfies CncGalleryPhoto;
+      })
+      .filter((photo): photo is CncGalleryPhoto => photo !== null);
+    const notices = (noticeRows as NoticeRow[]).map((row) => ({
+      id: row.id,
+      body: row.body,
+      active: Boolean(row.active),
+      createdAt: row.created_at,
+    }));
+
+    const regulationBase = base.regulation ?? {
+      title: "Regulamento",
+      body: "",
+      pdf: { label: "Regulamento (PDF)", href: null },
+    };
 
     return {
       ...base,
@@ -343,9 +410,20 @@ export async function getCncLiveEdition(
           base.generalProgram.pdf,
         ),
       },
+      regulation: {
+        title: edition?.regulation_title || regulationBase.title,
+        body: edition?.regulation_body || regulationBase.body,
+        pdf: emptyResource(
+          regulationBase.pdf?.label ?? "Regulamento (PDF)",
+          assetsBySlot.get(regulationSlot()),
+          regulationBase.pdf,
+        ),
+      },
       disciplines: disciplines.length > 0 ? disciplines : base.disciplines,
       usefulInfo: usefulInfo.length > 0 ? usefulInfo : base.usefulInfo,
       sponsors,
+      photoGallery,
+      notices,
       contacts: {
         organizer: edition?.organizer || base.contacts.organizer,
         email: edition?.email || base.contacts.email,
@@ -367,6 +445,8 @@ export async function updateCncContent(
     opening_note_body?: string;
     general_program_title?: string;
     general_program_body?: string;
+    regulation_title?: string;
+    regulation_body?: string;
     organizer?: string;
     email?: string;
     phone?: string;
@@ -385,6 +465,8 @@ export async function updateCncContent(
       opening_note_body = ${fields.opening_note_body ?? current.openingNote.body},
       general_program_title = ${fields.general_program_title ?? current.generalProgram.title},
       general_program_body = ${fields.general_program_body ?? current.generalProgram.body},
+      regulation_title = ${fields.regulation_title ?? current.regulation.title},
+      regulation_body = ${fields.regulation_body ?? current.regulation.body},
       organizer = ${fields.organizer ?? current.contacts.organizer},
       email = ${fields.email ?? current.contacts.email},
       phone = ${fields.phone ?? current.contacts.phone ?? ""},
@@ -682,5 +764,184 @@ export async function reorderCncSponsor(
   reordered.splice(swapWith, 0, moved);
   for (const [i, row] of reordered.entries()) {
     await sql`UPDATE cnc_sponsors SET sort_order = ${i}, updated_at = NOW() WHERE id = ${row.id}`;
+  }
+}
+
+type MessageRow = {
+  id: string;
+  year: string;
+  kind: CncMessageKind;
+  prova_id: string | null;
+  name: string;
+  email: string;
+  body: string;
+  created_at: string;
+};
+
+function messageFromRow(row: MessageRow): CncMessage {
+  return {
+    id: row.id,
+    year: row.year,
+    kind: row.kind,
+    provaId: row.prova_id,
+    name: row.name,
+    email: row.email,
+    body: row.body,
+    createdAt: row.created_at,
+  };
+}
+
+export async function createCncMessage(
+  year: string,
+  data: {
+    kind: CncMessageKind;
+    provaId?: string | null;
+    name: string;
+    email: string;
+    body: string;
+  },
+): Promise<CncMessage> {
+  const sql = await sqlClient();
+  const id = crypto.randomUUID();
+  const rows = await sql`
+    INSERT INTO cnc_messages (id, year, kind, prova_id, name, email, body)
+    VALUES (
+      ${id},
+      ${year},
+      ${data.kind},
+      ${data.kind === "prova" ? data.provaId || null : null},
+      ${data.name.trim()},
+      ${data.email.trim().toLowerCase()},
+      ${data.body.trim()}
+    )
+    RETURNING id, year, kind, prova_id, name, email, body, created_at::text
+  `;
+  return messageFromRow(rows[0] as MessageRow);
+}
+
+export async function listCncMessages(year: string): Promise<CncMessage[]> {
+  const sql = await sqlClient();
+  const rows = await sql`
+    SELECT id, year, kind, prova_id, name, email, body, created_at::text
+    FROM cnc_messages
+    WHERE year = ${year}
+    ORDER BY created_at DESC
+  `;
+  return (rows as MessageRow[]).map(messageFromRow);
+}
+
+export async function deleteCncMessage(year: string, id: string): Promise<void> {
+  const sql = await sqlClient();
+  await sql`DELETE FROM cnc_messages WHERE id = ${id} AND year = ${year}`;
+}
+
+export async function createCncNotice(year: string, body: string): Promise<CncNotice> {
+  await seedCncYear(year);
+  const sql = await sqlClient();
+  const id = crypto.randomUUID();
+  const rows = await sql`
+    INSERT INTO cnc_notices (id, year, body, active)
+    VALUES (${id}, ${year}, ${body.trim()}, TRUE)
+    RETURNING id, year, body, active, created_at::text
+  `;
+  const row = rows[0] as NoticeRow;
+  return {
+    id: row.id,
+    body: row.body,
+    active: Boolean(row.active),
+    createdAt: row.created_at,
+  };
+}
+
+export async function setCncNoticeActive(
+  year: string,
+  id: string,
+  active: boolean,
+): Promise<void> {
+  const sql = await sqlClient();
+  await sql`
+    UPDATE cnc_notices
+    SET active = ${active}
+    WHERE id = ${id} AND year = ${year}
+  `;
+}
+
+export async function deleteCncNotice(year: string, id: string): Promise<void> {
+  const sql = await sqlClient();
+  await sql`DELETE FROM cnc_notices WHERE id = ${id} AND year = ${year}`;
+}
+
+export async function createCncGalleryPhoto(
+  year: string,
+  data: { caption?: string; url: string; mime?: string | null; filename?: string | null },
+): Promise<void> {
+  await seedCncYear(year);
+  const sql = await sqlClient();
+  const id = crypto.randomUUID();
+  const maxRows = await sql`
+    SELECT COALESCE(MAX(sort_order), -1) AS max FROM cnc_gallery WHERE year = ${year}
+  `;
+  const sort = asNumber((maxRows[0] as { max: unknown })?.max) + 1;
+  await sql`
+    INSERT INTO cnc_gallery (id, year, caption, sort_order)
+    VALUES (${id}, ${year}, ${data.caption?.trim() ?? ""}, ${sort})
+  `;
+  await upsertCncAsset(year, gallerySlot(id), {
+    label: data.caption?.trim() || "Fotografia",
+    url: data.url,
+    mime: data.mime ?? null,
+    filename: data.filename ?? null,
+  });
+}
+
+export async function updateCncGalleryPhoto(
+  id: string,
+  fields: { caption?: string },
+): Promise<void> {
+  const sql = await sqlClient();
+  const currentRows = await sql`
+    SELECT id, year, caption, sort_order FROM cnc_gallery WHERE id = ${id} LIMIT 1
+  `;
+  const current = currentRows[0] as GalleryRow | undefined;
+  if (!current) throw new Error("Fotografia não encontrada.");
+  const caption = fields.caption === undefined ? current.caption : fields.caption.trim();
+  await sql`
+    UPDATE cnc_gallery
+    SET caption = ${caption}, updated_at = NOW()
+    WHERE id = ${id}
+  `;
+  await sql`
+    UPDATE cnc_assets
+    SET label = ${caption || "Fotografia"}, updated_at = NOW()
+    WHERE year = ${current.year} AND slot = ${gallerySlot(id)}
+  `;
+}
+
+export async function deleteCncGalleryPhoto(year: string, id: string): Promise<void> {
+  const sql = await sqlClient();
+  await sql`DELETE FROM cnc_gallery WHERE id = ${id} AND year = ${year}`;
+  await sql`DELETE FROM cnc_assets WHERE year = ${year} AND slot = ${gallerySlot(id)}`;
+}
+
+export async function reorderCncGalleryPhoto(
+  year: string,
+  id: string,
+  direction: "up" | "down",
+): Promise<void> {
+  const sql = await sqlClient();
+  const rows = (await sql`
+    SELECT id, sort_order FROM cnc_gallery
+    WHERE year = ${year}
+    ORDER BY sort_order ASC, created_at ASC
+  `) as { id: string; sort_order: number }[];
+  const index = rows.findIndex((row) => row.id === id);
+  const swapWith = direction === "up" ? index - 1 : index + 1;
+  if (index < 0 || swapWith < 0 || swapWith >= rows.length) return;
+
+  const reordered = [...rows];
+  const [moved] = reordered.splice(index, 1);
+  reordered.splice(swapWith, 0, moved);
+  for (const [i, row] of reordered.entries()) {
+    await sql`UPDATE cnc_gallery SET sort_order = ${i}, updated_at = NOW() WHERE id = ${row.id}`;
   }
 }

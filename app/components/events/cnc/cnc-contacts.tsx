@@ -11,7 +11,7 @@ export function CncContacts({ event }: { event: CncEventData }) {
     <section id="contactos" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">06 · Contactos</p>
+          <p className="section-label mb-3">08 · Contactos</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
             Contactos
           </h2>
