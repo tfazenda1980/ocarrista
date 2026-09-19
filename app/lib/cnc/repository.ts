@@ -3,6 +3,7 @@ import { getCncEdition } from "../events/load-cnc";
 import type {
   CncDiscipline,
   CncEventData,
+  CncSponsor,
   CncUsefulInfoItem,
 } from "../events/cnc-types";
 import { ensureCncSchema } from "./schema";
@@ -13,6 +14,7 @@ import {
   generalProgramSlot,
   openingNoteSlot,
   slugifyId,
+  sponsorSlot,
   usefulSlot,
 } from "./slots";
 
@@ -45,6 +47,14 @@ type UsefulRow = {
   sort_order: number;
 };
 
+type SponsorRow = {
+  id: string;
+  year: string;
+  name: string;
+  url: string;
+  sort_order: number;
+};
+
 function asNumber(value: unknown): number {
   const n = Number(value);
   return Number.isFinite(n) ? n : 0;
@@ -63,7 +73,17 @@ export async function seedCncYear(year: string): Promise<void> {
   const sql = await sqlClient();
 
   const existing = await sql`SELECT year FROM cnc_editions WHERE year = ${year} LIMIT 1`;
-  if (existing.length > 0) return;
+  if (existing.length > 0) {
+    await sql`
+      UPDATE cnc_editions
+      SET
+        opening_note_body = ${base.openingNote.body},
+        updated_at = NOW()
+      WHERE year = ${year}
+        AND opening_note_body = ${"Bem-vindos ao Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria. Consulte o programa geral, as subsecções de cada prova e a informação útil antes da chegada ao quartel."}
+    `;
+    return;
+  }
 
   await sql`
     INSERT INTO cnc_editions (
@@ -111,6 +131,36 @@ export async function seedCncYear(year: string): Promise<void> {
       )
       ON CONFLICT (id) DO NOTHING
     `;
+  }
+
+  for (const [index, sponsor] of base.sponsors.entries()) {
+    const id = sponsor.id || slugifyId(sponsor.name);
+    await sql`
+      INSERT INTO cnc_sponsors (id, year, name, url, sort_order)
+      VALUES (
+        ${id},
+        ${year},
+        ${sponsor.name},
+        ${sponsor.url ?? ""},
+        ${index}
+      )
+      ON CONFLICT (id) DO NOTHING
+    `;
+    if (sponsor.logo) {
+      await sql`
+        INSERT INTO cnc_assets (id, year, slot, label, url, mime, filename)
+        VALUES (
+          ${crypto.randomUUID()},
+          ${year},
+          ${sponsorSlot(id)},
+          ${sponsor.name},
+          ${sponsor.logo},
+          ${null},
+          ${null}
+        )
+        ON CONFLICT (year, slot) DO NOTHING
+      `;
+    }
   }
 }
 
@@ -187,6 +237,19 @@ function usefulFromRow(
   };
 }
 
+function sponsorFromRow(
+  row: SponsorRow,
+  assets: Map<string, CncAsset>,
+  fallback?: CncSponsor,
+): CncSponsor {
+  return {
+    id: row.id,
+    name: row.name,
+    url: row.url || fallback?.url || "",
+    logo: assets.get(sponsorSlot(row.id))?.url || fallback?.logo || "",
+  };
+}
+
 export async function getCncLiveEdition(
   year: string,
   options?: { strict?: boolean },
@@ -201,7 +264,7 @@ export async function getCncLiveEdition(
   try {
     await seedCncYear(year);
     const sql = await sqlClient();
-    const [editionRows, disciplineRows, usefulRows, assets] = await Promise.all([
+    const [editionRows, disciplineRows, usefulRows, sponsorRows, assets] = await Promise.all([
       sql`
         SELECT year, opening_note_title, opening_note_body,
                general_program_title, general_program_body,
@@ -222,6 +285,12 @@ export async function getCncLiveEdition(
         WHERE year = ${year}
         ORDER BY sort_order ASC, title ASC
       `,
+      sql`
+        SELECT id, year, name, url, sort_order
+        FROM cnc_sponsors
+        WHERE year = ${year}
+        ORDER BY sort_order ASC, name ASC
+      `,
       listAssets(year),
     ]);
 
@@ -229,6 +298,9 @@ export async function getCncLiveEdition(
     const assetsBySlot = assetMap(assets);
     const fallbackDiscipline = new Map(base.disciplines.map((d) => [d.id, d]));
     const fallbackUseful = new Map(base.usefulInfo.map((item) => [item.id, item]));
+    const fallbackSponsors = new Map(
+      base.sponsors.map((sponsor) => [sponsor.id || slugifyId(sponsor.name), sponsor]),
+    );
     const disciplines = (disciplineRows as DisciplineRow[]).map((row) =>
       disciplineFromRow(
         { ...row, sort_order: asNumber(row.sort_order), kind: row.kind },
@@ -241,6 +313,13 @@ export async function getCncLiveEdition(
         { ...row, sort_order: asNumber(row.sort_order) },
         assetsBySlot,
         fallbackUseful.get(row.id),
+      ),
+    );
+    const sponsors = (sponsorRows as SponsorRow[]).map((row) =>
+      sponsorFromRow(
+        { ...row, sort_order: asNumber(row.sort_order) },
+        assetsBySlot,
+        fallbackSponsors.get(row.id),
       ),
     );
 
@@ -266,6 +345,7 @@ export async function getCncLiveEdition(
       },
       disciplines: disciplines.length > 0 ? disciplines : base.disciplines,
       usefulInfo: usefulInfo.length > 0 ? usefulInfo : base.usefulInfo,
+      sponsors,
       contacts: {
         organizer: edition?.organizer || base.contacts.organizer,
         email: edition?.email || base.contacts.email,
@@ -514,5 +594,93 @@ export async function reorderCncUsefulInfo(
   reordered.splice(swapWith, 0, moved);
   for (const [i, row] of reordered.entries()) {
     await sql`UPDATE cnc_useful_info SET sort_order = ${i}, updated_at = NOW() WHERE id = ${row.id}`;
+  }
+}
+
+function normalizeSponsorUrl(url: string | undefined): string {
+  const trimmed = url?.trim() ?? "";
+  if (!trimmed) return "";
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
+export async function createCncSponsor(
+  year: string,
+  data: { name: string; url?: string },
+): Promise<void> {
+  await seedCncYear(year);
+  const sql = await sqlClient();
+  const baseId = slugifyId(data.name);
+  let id = baseId;
+  for (let i = 2; i < 20; i++) {
+    const clash = await sql`SELECT id FROM cnc_sponsors WHERE id = ${id} LIMIT 1`;
+    if (clash.length === 0) break;
+    id = `${baseId}-${i}`;
+  }
+  const maxRows = await sql`
+    SELECT COALESCE(MAX(sort_order), -1) AS max FROM cnc_sponsors WHERE year = ${year}
+  `;
+  const sort = asNumber((maxRows[0] as { max: unknown })?.max) + 1;
+  await sql`
+    INSERT INTO cnc_sponsors (id, year, name, url, sort_order)
+    VALUES (
+      ${id},
+      ${year},
+      ${data.name.trim()},
+      ${normalizeSponsorUrl(data.url)},
+      ${sort}
+    )
+  `;
+}
+
+export async function updateCncSponsor(
+  id: string,
+  fields: { name?: string; url?: string; sort_order?: number },
+): Promise<void> {
+  const sql = await sqlClient();
+  const currentRows = await sql`
+    SELECT id, year, name, url, sort_order
+    FROM cnc_sponsors WHERE id = ${id} LIMIT 1
+  `;
+  const current = currentRows[0] as SponsorRow | undefined;
+  if (!current) throw new Error("Patrocinador não encontrado.");
+
+  await sql`
+    UPDATE cnc_sponsors
+    SET
+      name = ${fields.name ?? current.name},
+      url = ${fields.url === undefined ? current.url : normalizeSponsorUrl(fields.url)},
+      sort_order = ${fields.sort_order ?? current.sort_order},
+      updated_at = NOW()
+    WHERE id = ${id}
+  `;
+}
+
+export async function deleteCncSponsor(year: string, id: string): Promise<void> {
+  const sql = await sqlClient();
+  await sql`DELETE FROM cnc_sponsors WHERE id = ${id} AND year = ${year}`;
+  await sql`DELETE FROM cnc_assets WHERE year = ${year} AND slot = ${sponsorSlot(id)}`;
+}
+
+export async function reorderCncSponsor(
+  year: string,
+  id: string,
+  direction: "up" | "down",
+): Promise<void> {
+  const sql = await sqlClient();
+  const rows = (await sql`
+    SELECT id, sort_order FROM cnc_sponsors
+    WHERE year = ${year}
+    ORDER BY sort_order ASC, name ASC
+  `) as { id: string; sort_order: number }[];
+  const index = rows.findIndex((row) => row.id === id);
+  const swapWith = direction === "up" ? index - 1 : index + 1;
+  if (index < 0 || swapWith < 0 || swapWith >= rows.length) return;
+
+  const reordered = [...rows];
+  const [moved] = reordered.splice(index, 1);
+  reordered.splice(swapWith, 0, moved);
+  for (const [i, row] of reordered.entries()) {
+    await sql`UPDATE cnc_sponsors SET sort_order = ${i}, updated_at = NOW() WHERE id = ${row.id}`;
   }
 }

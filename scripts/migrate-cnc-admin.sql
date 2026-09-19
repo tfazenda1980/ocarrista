@@ -52,3 +52,15 @@ CREATE TABLE IF NOT EXISTS cnc_assets (
 );
 
 CREATE INDEX IF NOT EXISTS idx_cnc_assets_year ON cnc_assets (year, slot);
+
+CREATE TABLE IF NOT EXISTS cnc_sponsors (
+  id TEXT PRIMARY KEY,
+  year TEXT NOT NULL,
+  name TEXT NOT NULL,
+  url TEXT NOT NULL DEFAULT '',
+  sort_order INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_cnc_sponsors_year ON cnc_sponsors (year, sort_order);

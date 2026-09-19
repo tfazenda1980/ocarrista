@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 
 export function CncSponsors({ event }: { event: CncEventData }) {
-  const { sponsors } = event;
+  const sponsors = event.sponsors.filter((sponsor) => sponsor.logo);
 
   return (
     <section id="patrocinadores" className="event-section scroll-mt-24 py-20 sm:py-28">
@@ -21,34 +20,42 @@ export function CncSponsors({ event }: { event: CncEventData }) {
         {sponsors.length === 0 ? (
           <MotionReveal delay={0.08}>
             <p className="max-w-xl text-muted">
-              Os patrocinadores desta edição serão publicados em breve. Para integrar o seu
-              logótipo, adicione entradas em{" "}
-              <code className="text-gold/90">content/events/cnc/{event.year}.json</code>{" "}
-              (campo <code className="text-gold/90">sponsors</code>).
+              Os patrocinadores desta edição serão publicados em breve.
             </p>
           </MotionReveal>
         ) : (
           <ul className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-            {sponsors.map((sponsor, index) => (
-              <MotionReveal key={sponsor.name} delay={index * 0.04}>
-                <li>
-                  <a
-                    href={sponsor.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="card-tactical flex aspect-[3/2] items-center justify-center p-6 transition-colors hover:border-gold/40 hover:bg-gold/5"
-                  >
-                    <Image
-                      src={sponsor.logo}
-                      alt={sponsor.name}
-                      width={200}
-                      height={80}
-                      className="max-h-16 w-auto object-contain opacity-90 transition-opacity hover:opacity-100"
-                    />
-                  </a>
-                </li>
-              </MotionReveal>
-            ))}
+            {sponsors.map((sponsor, index) => {
+              const card = (
+                <div className="card-tactical flex aspect-[3/2] items-center justify-center p-6 transition-colors hover:border-gold/40 hover:bg-gold/5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    className="max-h-16 w-auto object-contain opacity-90 transition-opacity hover:opacity-100"
+                  />
+                </div>
+              );
+
+              return (
+                <MotionReveal key={sponsor.id || sponsor.name} delay={index * 0.04}>
+                  <li>
+                    {sponsor.url ? (
+                      <a
+                        href={sponsor.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={sponsor.name}
+                      >
+                        {card}
+                      </a>
+                    ) : (
+                      card
+                    )}
+                  </li>
+                </MotionReveal>
+              );
+            })}
           </ul>
         )}
       </div>

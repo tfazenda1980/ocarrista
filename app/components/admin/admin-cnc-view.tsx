@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CncDiscipline, CncEventData, CncUsefulInfoItem } from "@/app/lib/events/cnc-types";
-import { CNC_FILE_ACCEPT } from "@/app/lib/cnc/upload";
-import { disciplineSlot, generalProgramSlot, openingNoteSlot, usefulSlot } from "@/app/lib/cnc/slots";
+import type { CncDiscipline, CncEventData, CncSponsor, CncUsefulInfoItem } from "@/app/lib/events/cnc-types";
+import { CNC_FILE_ACCEPT, CNC_IMAGE_ACCEPT } from "@/app/lib/cnc/upload";
+import { disciplineSlot, generalProgramSlot, openingNoteSlot, sponsorSlot, usefulSlot } from "@/app/lib/cnc/slots";
 
-type Tab = "conteudo" | "provas" | "info" | "contactos";
+type Tab = "conteudo" | "provas" | "info" | "patrocinadores" | "contactos";
 
 type AdminPayload = {
   configured?: boolean;
@@ -46,6 +46,8 @@ export function AdminCncView({ year }: { year: string }) {
   const [newProvaKind, setNewProvaKind] = useState<"resources" | "gallery">("resources");
   const [newInfoTitle, setNewInfoTitle] = useState("");
   const [newInfoDescription, setNewInfoDescription] = useState("");
+  const [newSponsorName, setNewSponsorName] = useState("");
+  const [newSponsorUrl, setNewSponsorUrl] = useState("");
 
   const applyEvent = useCallback((next: CncEventData) => {
     setEvent(next);
@@ -282,10 +284,75 @@ export function AdminCncView({ year }: { year: string }) {
     }
   };
 
+  const addSponsor = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/sponsors`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newSponsorName, url: newSponsorUrl }),
+      });
+      if (await handleJson(res)) {
+        setNewSponsorName("");
+        setNewSponsorUrl("");
+        setFeedback("Patrocinador adicionado. Carregue o logótipo.");
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveSponsor = async (sponsor: CncSponsor, name: string, url: string) => {
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/sponsors`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: sponsor.id, name, url }),
+      });
+      if (await handleJson(res)) setFeedback("Patrocinador actualizado.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const deleteSponsor = async (id: string) => {
+    if (!confirm("Eliminar este patrocinador?")) return;
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/sponsors?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      if (await handleJson(res)) setFeedback("Patrocinador eliminado.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const moveSponsor = async (id: string, move: "up" | "down") => {
+    setBusy(true);
+    setFeedback("");
+    try {
+      const res = await fetch(`/api/admin/cnc/${year}/sponsors`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, move }),
+      });
+      if (await handleJson(res)) setFeedback("Ordem dos patrocinadores actualizada.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const tabs: { id: Tab; label: string }[] = [
     { id: "conteudo", label: "Nota e programa" },
     { id: "provas", label: "Provas e croquis" },
     { id: "info", label: "Informação útil" },
+    { id: "patrocinadores", label: "Patrocinadores" },
     { id: "contactos", label: "Contactos" },
   ];
 
@@ -325,8 +392,8 @@ export function AdminCncView({ year }: { year: string }) {
       )}
       {configured && (
         <p className="mb-6 text-sm text-muted">
-          Tudo o que guardar ou carregar aqui (textos, PDFs, croquis em desenho, PPT e informação
-          útil) passa a ser o que o público e os concorrentes vêem em{" "}
+          Tudo o que guardar ou carregar aqui (textos, PDFs, croquis, informação útil e
+          patrocinadores) passa a ser o que o público e os concorrentes vêem em{" "}
           <a href={`/eventos/cnc/${year}`} className="text-gold hover:underline" target="_blank" rel="noopener noreferrer">
             /eventos/cnc/{year}
           </a>
@@ -506,6 +573,51 @@ export function AdminCncView({ year }: { year: string }) {
               onMove={(dir) => moveUseful(item.id, dir)}
               onUpload={(file) => uploadSlot(usefulSlot(item.id), file, item.pdf.label)}
               onClear={() => uploadSlot(usefulSlot(item.id), null, item.pdf.label, true)}
+            />
+          ))}
+        </div>
+      )}
+
+      {tab === "patrocinadores" && event && (
+        <div className="space-y-10">
+          <form onSubmit={addSponsor} className="card-tactical space-y-4 p-6">
+            <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
+              Novo patrocinador
+            </h3>
+            <p className="text-sm text-muted">
+              Aparece na secção Patrocinadores da página pública, com logótipo. O sítio web é
+              opcional.
+            </p>
+            <input
+              value={newSponsorName}
+              onChange={(e) => setNewSponsorName(e.target.value)}
+              placeholder="Nome do patrocinador"
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+              required
+            />
+            <input
+              value={newSponsorUrl}
+              onChange={(e) => setNewSponsorUrl(e.target.value)}
+              placeholder="https://www.exemplo.pt (opcional)"
+              className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+            />
+            <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+              Adicionar
+            </button>
+          </form>
+
+          {event.sponsors.map((sponsor, index) => (
+            <SponsorEditor
+              key={sponsor.id}
+              sponsor={sponsor}
+              busy={busy}
+              canMoveUp={index > 0}
+              canMoveDown={index < event.sponsors.length - 1}
+              onSave={saveSponsor}
+              onDelete={() => deleteSponsor(sponsor.id)}
+              onMove={(dir) => moveSponsor(sponsor.id, dir)}
+              onUpload={(file) => uploadSlot(sponsorSlot(sponsor.id), file, sponsor.name)}
+              onClear={() => uploadSlot(sponsorSlot(sponsor.id), null, sponsor.name, true)}
             />
           ))}
         </div>
@@ -809,6 +921,86 @@ function UsefulEditor({
       />
       <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
         Guardar item
+      </button>
+    </form>
+  );
+}
+
+function SponsorEditor({
+  sponsor,
+  busy,
+  canMoveUp,
+  canMoveDown,
+  onSave,
+  onDelete,
+  onMove,
+  onUpload,
+  onClear,
+}: {
+  sponsor: CncSponsor;
+  busy: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
+  onSave: (sponsor: CncSponsor, name: string, url: string) => void;
+  onDelete: () => void;
+  onMove: (direction: "up" | "down") => void;
+  onUpload: (file: File) => void;
+  onClear: () => void;
+}) {
+  const [name, setName] = useState(sponsor.name);
+  const [url, setUrl] = useState(sponsor.url);
+
+  useEffect(() => {
+    setName(sponsor.name);
+    setUrl(sponsor.url);
+  }, [sponsor.name, sponsor.url]);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSave(sponsor, name, url);
+      }}
+      className="card-tactical space-y-4 p-6"
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <h3 className="font-display text-lg text-foreground">{sponsor.name}</h3>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" onClick={() => onMove("up")} disabled={busy || !canMoveUp} className="btn-outline px-3 py-1.5 text-xs">
+            Subir
+          </button>
+          <button type="button" onClick={() => onMove("down")} disabled={busy || !canMoveDown} className="btn-outline px-3 py-1.5 text-xs">
+            Descer
+          </button>
+          <button type="button" onClick={onDelete} disabled={busy} className="btn-outline px-3 py-1.5 text-xs">
+            Eliminar
+          </button>
+        </div>
+      </div>
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+        required
+      />
+      <input
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        placeholder="https://www.exemplo.pt (opcional)"
+        className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+      />
+      <AssetUploader
+        label="Logótipo"
+        href={sponsor.logo || null}
+        filename={sponsor.logo ? "Logótipo actual" : null}
+        disabled={busy}
+        accept={CNC_IMAGE_ACCEPT}
+        hint="PNG, JPG, WebP ou SVG"
+        onUpload={onUpload}
+        onClear={onClear}
+      />
+      <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
+        Guardar patrocinador
       </button>
     </form>
   );

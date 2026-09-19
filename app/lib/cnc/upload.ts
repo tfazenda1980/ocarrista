@@ -3,6 +3,9 @@ import { hasBlobStorage } from "../challenger/upload";
 
 export { hasBlobStorage };
 
+export const CNC_IMAGE_ACCEPT =
+  ".png,.jpg,.jpeg,.webp,.gif,.svg,image/png,image/jpeg,image/webp,image/gif,image/svg+xml";
+
 export const CNC_FILE_ACCEPT =
   ".pdf,.ppt,.pptx,.png,.jpg,.jpeg,.webp,.gif,image/*,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation";
 

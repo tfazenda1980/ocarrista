@@ -24,6 +24,10 @@ export function usefulSlot(id: string): string {
   return `useful:${id}`;
 }
 
+export function sponsorSlot(id: string): string {
+  return `sponsor:${id}`;
+}
+
 export function disciplineSlot(
   id: string,
   kind: "ordens" | "croquis" | "resultados" | "gallery",

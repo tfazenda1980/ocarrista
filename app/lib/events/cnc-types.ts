@@ -30,6 +30,7 @@ export type CncUsefulInfoItem = {
 };
 
 export type CncSponsor = {
+  id: string;
   name: string;
   logo: string;
   url: string;

@@ -13,7 +13,7 @@ export default async function AdminCncPage({ params }: PageProps) {
   return (
     <AdminPageShell
       title={`CNC ${year}`}
-      description="Gerir nota de abertura, programa, provas, croquis, PDFs, informação útil e contactos apresentados ao público e aos concorrentes."
+      description="Gerir nota de abertura, programa, provas, croquis, PDFs, informação útil, patrocinadores e contactos apresentados ao público e aos concorrentes."
     >
       <AdminCncView year={year} />
     </AdminPageShell>
