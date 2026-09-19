@@ -17,6 +17,7 @@ import { CncContacts } from "./cnc-contacts";
 import { CncTalkToUs } from "./cnc-talk-to-us";
 import { CncSponsors } from "./cnc-sponsors";
 import { CncFooter } from "./cnc-footer";
+import { CncDayNotices } from "./cnc-day-notices";
 
 type CncPageViewProps = {
   event: CncEventData;
@@ -32,6 +33,8 @@ export function CncPageView({
   seriesTitle,
 }: CncPageViewProps) {
   const showEditionBar = seriesYears && activeYear && seriesYears.length > 1;
+  const activeNotices = (event.notices ?? []).filter((notice) => notice.active);
+  const hasNotices = activeNotices.length > 0;
 
   return (
     <>
@@ -45,11 +48,18 @@ export function CncPageView({
             basePath="/eventos/cnc"
           />
         )}
-        <StickyBackLink
-          href="/#eventos"
-          label="Agenda O Carrista"
-          variant={showEditionBar ? "workshop" : "default"}
-        />
+        {hasNotices ? (
+          <div className="fixed inset-x-0 top-16 z-[45] sm:top-[4.25rem]">
+            <CncDayNotices notices={activeNotices} />
+            <StickyBackLink href="/#eventos" label="Agenda O Carrista" variant="stacked" />
+          </div>
+        ) : (
+          <StickyBackLink
+            href="/#eventos"
+            label="Agenda O Carrista"
+            variant={showEditionBar ? "workshop" : "default"}
+          />
+        )}
         <main>
           <CncHero event={event} />
           <CncAbout event={event} />

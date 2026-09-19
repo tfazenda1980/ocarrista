@@ -1,8 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { dbConfigured } from "@/app/lib/db/client";
 import { isCncYearValid } from "@/app/lib/events/load-cnc";
-import { isCncMessageKind } from "@/app/lib/cnc/messages";
+import { isCncMessageKind, cncMessageKindLabel } from "@/app/lib/cnc/messages";
 import { createCncMessage } from "@/app/lib/cnc/repository";
+import { notifyAdminCncMessage } from "@/app/lib/email/send";
 
 export const runtime = "nodejs";
 
@@ -64,6 +65,18 @@ export async function POST(
 
   try {
     await createCncMessage(year, { kind, provaId, name, email, body: message });
+    try {
+      await notifyAdminCncMessage({
+        year,
+        kindLabel: cncMessageKindLabel(kind),
+        provaId,
+        name,
+        email,
+        body: message,
+      });
+    } catch (err) {
+      console.error("[cnc] notifyAdminCncMessage", err);
+    }
     return NextResponse.json({
       ok: true,
       message: "Mensagem recebida. A organização responderá quando possível.",

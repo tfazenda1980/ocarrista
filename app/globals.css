@@ -954,6 +954,14 @@ body {
   top: 7.75rem;
 }
 
+/* Por baixo da barra de avisos — não sobrepõe o texto */
+.back-nav-fixed--stacked {
+  position: relative;
+  top: auto;
+  z-index: auto;
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
 @media (min-width: 640px) {
   .back-nav-fixed {
     left: 1.25rem;
@@ -964,6 +972,10 @@ body {
 
   .back-nav-fixed--workshop {
     top: 8.25rem;
+  }
+
+  .back-nav-fixed--stacked {
+    margin-left: 1.25rem;
   }
 }
 

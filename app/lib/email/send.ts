@@ -192,6 +192,47 @@ export async function sendAdminMessageToMember(params: {
   return { sent: true };
 }
 
+export async function notifyAdminCncMessage(params: {
+  year: string;
+  kindLabel: string;
+  provaId?: string | null;
+  name: string;
+  email: string;
+  body: string;
+}): Promise<{ sent: boolean; reason?: string }> {
+  const to = adminNotifyEmail();
+  const from = fromAddress();
+  const resend = resendClient();
+
+  if (!to || !from || !resend) {
+    console.info("[email] CNC Fale connosco (não enviado):", params);
+    return { sent: false, reason: "email_nao_configurado" };
+  }
+
+  const adminUrl = `${siteUrl()}/admin/cnc/${encodeURIComponent(params.year)}`;
+  const provaLine = params.provaId
+    ? `<br/><strong>Prova:</strong> ${escapeHtml(params.provaId)}`
+    : "";
+  const htmlBody = escapeHtml(params.body).replace(/\n/g, "<br/>");
+
+  await resend.emails.send({
+    from,
+    to,
+    replyTo: params.email,
+    subject: `CNC ${params.year} — Fale connosco: ${params.kindLabel}`,
+    html: `
+      <p>Nova mensagem no CNC ${escapeHtml(params.year)} («Fale connosco»).</p>
+      <p><strong>Tipo:</strong> ${escapeHtml(params.kindLabel)}${provaLine}<br/>
+      <strong>Nome:</strong> ${escapeHtml(params.name)}<br/>
+      <strong>Email:</strong> ${escapeHtml(params.email)}</p>
+      <div style="margin:1.25em 0;line-height:1.6">${htmlBody}</div>
+      <p><a href="${adminUrl}">Ver no painel CNC</a>. Responda a este email para contactar o remetente.</p>
+    `,
+  });
+
+  return { sent: true };
+}
+
 export type MemberEmailRecipient = {
   name: string;
   email: string;
