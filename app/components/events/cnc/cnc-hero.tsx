@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { EventCountdown } from "../countdown";
+import { CncDayNotices } from "./cnc-day-notices";
 
 type CncHeroProps = {
   event: CncEventData;
@@ -84,6 +85,17 @@ export function CncHero({ event }: CncHeroProps) {
           <p className="section-label mb-3">Contagem decrescente</p>
           <EventCountdown targetDate={event.date} />
         </motion.div>
+
+        {(event.notices ?? []).some((notice) => notice.active) && (
+          <motion.div
+            className="mt-8"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.32 }}
+          >
+            <CncDayNotices notices={event.notices} />
+          </motion.div>
+        )}
 
         <motion.div
           className="mt-10 flex flex-wrap gap-4"

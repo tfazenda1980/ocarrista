@@ -7,17 +7,18 @@ export function CncDayNotices({ notices }: { notices: CncNotice[] }) {
   if (active.length === 0) return null;
 
   return (
-    <div className="sticky top-16 z-40 border-b border-amber-500/35 bg-amber-950/90 backdrop-blur-md sm:top-[4.25rem]">
-      <div className="mx-auto max-w-6xl space-y-3 px-4 py-3 sm:px-6">
-        {active.map((notice) => (
-          <p key={notice.id} className="text-sm leading-relaxed text-amber-50">
-            <span className="mr-2 font-display text-[0.65rem] tracking-[0.16em] text-amber-200 uppercase">
-              Aviso do dia
-            </span>
-            {notice.body}
+    <div className="max-w-2xl space-y-3" role="status" aria-live="polite">
+      {active.map((notice) => (
+        <div
+          key={notice.id}
+          className="border-2 border-gold-bright bg-gold px-4 py-3 text-background shadow-[0_0_28px_rgba(223,190,106,0.55)] sm:px-5 sm:py-4"
+        >
+          <p className="font-display text-[0.7rem] tracking-[0.18em] text-background/80 uppercase">
+            Aviso importante
           </p>
-        ))}
-      </div>
+          <p className="mt-1 text-base font-semibold leading-snug sm:text-lg">{notice.body}</p>
+        </div>
+      ))}
     </div>
   );
 }

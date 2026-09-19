@@ -17,7 +17,6 @@ import { CncContacts } from "./cnc-contacts";
 import { CncTalkToUs } from "./cnc-talk-to-us";
 import { CncSponsors } from "./cnc-sponsors";
 import { CncFooter } from "./cnc-footer";
-import { CncDayNotices } from "./cnc-day-notices";
 
 type CncPageViewProps = {
   event: CncEventData;
@@ -39,7 +38,6 @@ export function CncPageView({
       <TacticalBackground />
       <div className="event-platform relative z-10 flex min-h-full flex-col">
         <CncSiteHeader edition={event.edition} />
-        <CncDayNotices notices={event.notices ?? []} />
         {showEditionBar && (
           <EditionYearBar
             years={seriesYears}
