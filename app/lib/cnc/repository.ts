@@ -2,6 +2,7 @@ import { getSql, dbConfigured } from "../db/client";
 import { getCncEdition } from "../events/load-cnc";
 import type {
   CncDiscipline,
+  CncDisciplineSection,
   CncEventData,
   CncGalleryPhoto,
   CncNotice,
@@ -11,6 +12,7 @@ import type {
 import { ensureCncSchema } from "./schema";
 import type { CncAsset, CncDisciplineKind } from "./slots";
 import type { CncMessage, CncMessageKind } from "./messages";
+import { cncLayoutSectionsForParent } from "./layout";
 import {
   disciplineSlot,
   emptyResource,
@@ -44,6 +46,7 @@ type DisciplineRow = {
   description: string | null;
   sort_order: number;
   kind: CncDisciplineKind;
+  parent_id: string | null;
 };
 
 type UsefulRow = {
@@ -137,17 +140,33 @@ export async function seedCncYear(year: string): Promise<void> {
 
   for (const [index, discipline] of base.disciplines.entries()) {
     await sql`
-      INSERT INTO cnc_disciplines (id, year, title, description, sort_order, kind)
+      INSERT INTO cnc_disciplines (id, year, title, description, sort_order, kind, parent_id)
       VALUES (
         ${discipline.id},
         ${year},
         ${discipline.title},
         ${discipline.description ?? null},
         ${index},
-        ${discipline.galleryPdf ? "gallery" : "resources"}
+        ${discipline.galleryPdf ? "gallery" : discipline.sections?.length ? "grouped" : "resources"},
+        ${null}
       )
       ON CONFLICT (id) DO NOTHING
     `;
+    for (const [sectionIndex, section] of (discipline.sections ?? []).entries()) {
+      await sql`
+        INSERT INTO cnc_disciplines (id, year, title, description, sort_order, kind, parent_id)
+        VALUES (
+          ${section.id},
+          ${year},
+          ${section.title},
+          ${null},
+          ${sectionIndex},
+          ${section.resultados && !section.resources ? "resultados" : "resources"},
+          ${discipline.id}
+        )
+        ON CONFLICT (id) DO NOTHING
+      `;
+    }
   }
 
   for (const [index, item] of base.usefulInfo.entries()) {
@@ -251,6 +270,125 @@ function disciplineFromRow(
   };
 }
 
+function sectionFromRow(
+  row: DisciplineRow,
+  assets: Map<string, CncAsset>,
+  fallback?: CncDisciplineSection,
+): CncDisciplineSection {
+  if (row.kind === "resultados") {
+    return {
+      id: row.id,
+      title: row.title,
+      resultados: emptyResource(
+        fallback?.resultados?.label ?? "Resultados finais",
+        assets.get(disciplineSlot(row.id, "resultados")),
+        fallback?.resultados,
+      ),
+    };
+  }
+
+  return {
+    id: row.id,
+    title: row.title,
+    resources: {
+      ordens: emptyResource(
+        "Ordens de Entrada",
+        assets.get(disciplineSlot(row.id, "ordens")),
+        fallback?.resources?.ordens,
+      ),
+      croquis: emptyResource(
+        "Croquis",
+        assets.get(disciplineSlot(row.id, "croquis")),
+        fallback?.resources?.croquis,
+      ),
+      resultados: emptyResource(
+        "Resultados",
+        assets.get(disciplineSlot(row.id, "resultados")),
+        fallback?.resources?.resultados,
+      ),
+    },
+  };
+}
+
+function assembleDisciplines(
+  rows: DisciplineRow[],
+  assets: Map<string, CncAsset>,
+  fallback: Map<string, CncDiscipline>,
+): CncDiscipline[] {
+  const childrenByParent = new Map<string, DisciplineRow[]>();
+  const tops: DisciplineRow[] = [];
+
+  for (const row of rows) {
+    if (row.parent_id) {
+      const list = childrenByParent.get(row.parent_id) ?? [];
+      list.push(row);
+      childrenByParent.set(row.parent_id, list);
+    } else {
+      tops.push(row);
+    }
+  }
+
+  return tops.map((row) => {
+    const kids = childrenByParent.get(row.id) ?? [];
+    const parentFallback = fallback.get(row.id);
+    if (row.kind === "gallery") {
+      return disciplineFromRow(row, assets, parentFallback);
+    }
+    if (kids.length > 0 || row.kind === "grouped") {
+      const sectionFallback = new Map((parentFallback?.sections ?? []).map((section) => [section.id, section]));
+      return {
+        id: row.id,
+        title: row.title,
+        description: row.description ?? parentFallback?.description,
+        sections: kids.map((child) =>
+          sectionFromRow(
+            { ...child, sort_order: asNumber(child.sort_order) },
+            assets,
+            sectionFallback.get(child.id),
+          ),
+        ),
+      };
+    }
+    return disciplineFromRow(row, assets, parentFallback);
+  });
+}
+
+async function ensureCncCompetitionStructure(year: string): Promise<void> {
+  const sql = await sqlClient();
+  await sql`DELETE FROM cnc_useful_info WHERE year = ${year} AND id = 'alojamentos'`;
+  await sql`DELETE FROM cnc_assets WHERE year = ${year} AND slot = ${usefulSlot("alojamentos")}`;
+
+  for (const parentId of ["iniciacao", "preliminar", "open"] as const) {
+    const sections = cncLayoutSectionsForParent(parentId);
+    if (!sections) continue;
+    await sql`
+      UPDATE cnc_disciplines
+      SET kind = 'grouped', updated_at = NOW()
+      WHERE id = ${parentId} AND year = ${year}
+    `;
+    for (const [index, section] of sections.entries()) {
+      await sql`
+        INSERT INTO cnc_disciplines (id, year, title, description, sort_order, kind, parent_id)
+        VALUES (
+          ${section.id},
+          ${year},
+          ${section.title},
+          ${null},
+          ${index},
+          ${section.kind},
+          ${parentId}
+        )
+        ON CONFLICT (id) DO UPDATE SET
+          parent_id = EXCLUDED.parent_id,
+          kind = EXCLUDED.kind,
+          title = EXCLUDED.title,
+          sort_order = EXCLUDED.sort_order,
+          updated_at = NOW()
+      `;
+    }
+  }
+}
+
 function usefulFromRow(
   row: UsefulRow,
   assets: Map<string, CncAsset>,
@@ -294,6 +432,7 @@ export async function getCncLiveEdition(
 
   try {
     await seedCncYear(year);
+    await ensureCncCompetitionStructure(year);
     const sql = await sqlClient();
     const [editionRows, disciplineRows, usefulRows, sponsorRows, galleryRows, noticeRows, assets] = await Promise.all([
       sql`
@@ -306,7 +445,7 @@ export async function getCncLiveEdition(
         LIMIT 1
       `,
       sql`
-        SELECT id, year, title, description, sort_order, kind
+        SELECT id, year, title, description, sort_order, kind, parent_id
         FROM cnc_disciplines
         WHERE year = ${year}
         ORDER BY sort_order ASC, title ASC
@@ -345,12 +484,14 @@ export async function getCncLiveEdition(
     const fallbackSponsors = new Map(
       base.sponsors.map((sponsor) => [sponsor.id || slugifyId(sponsor.name), sponsor]),
     );
-    const disciplines = (disciplineRows as DisciplineRow[]).map((row) =>
-      disciplineFromRow(
-        { ...row, sort_order: asNumber(row.sort_order), kind: row.kind },
-        assetsBySlot,
-        fallbackDiscipline.get(row.id),
-      ),
+    const disciplines = assembleDisciplines(
+      (disciplineRows as DisciplineRow[]).map((row) => ({
+        ...row,
+        sort_order: asNumber(row.sort_order),
+        parent_id: row.parent_id ?? null,
+      })),
+      assetsBySlot,
+      fallbackDiscipline,
     );
     const usefulInfo = (usefulRows as UsefulRow[]).map((row) =>
       usefulFromRow(
@@ -529,18 +670,20 @@ export async function createCncDiscipline(
     id = `${baseId}-${i}`;
   }
   const maxRows = await sql`
-    SELECT COALESCE(MAX(sort_order), -1) AS max FROM cnc_disciplines WHERE year = ${year}
+    SELECT COALESCE(MAX(sort_order), -1) AS max FROM cnc_disciplines
+    WHERE year = ${year} AND parent_id IS NULL
   `;
   const sort = asNumber((maxRows[0] as { max: unknown })?.max) + 1;
   await sql`
-    INSERT INTO cnc_disciplines (id, year, title, description, sort_order, kind)
+    INSERT INTO cnc_disciplines (id, year, title, description, sort_order, kind, parent_id)
     VALUES (
       ${id},
       ${year},
       ${data.title.trim()},
       ${data.description?.trim() || null},
       ${sort},
-      ${data.kind ?? "resources"}
+      ${data.kind ?? "resources"},
+      ${null}
     )
   `;
 }
@@ -551,7 +694,7 @@ export async function updateCncDiscipline(
 ): Promise<void> {
   const sql = await sqlClient();
   const currentRows = await sql`
-    SELECT id, year, title, description, sort_order, kind
+    SELECT id, year, title, description, sort_order, kind, parent_id
     FROM cnc_disciplines WHERE id = ${id} LIMIT 1
   `;
   const current = currentRows[0] as DisciplineRow | undefined;
@@ -571,6 +714,13 @@ export async function updateCncDiscipline(
 
 export async function deleteCncDiscipline(year: string, id: string): Promise<void> {
   const sql = await sqlClient();
+  const children = (await sql`
+    SELECT id FROM cnc_disciplines WHERE year = ${year} AND parent_id = ${id}
+  `) as { id: string }[];
+  for (const child of children) {
+    await sql`DELETE FROM cnc_assets WHERE year = ${year} AND slot LIKE ${`discipline:${child.id}:%`}`;
+  }
+  await sql`DELETE FROM cnc_disciplines WHERE year = ${year} AND parent_id = ${id}`;
   await sql`DELETE FROM cnc_disciplines WHERE id = ${id} AND year = ${year}`;
   await sql`DELETE FROM cnc_assets WHERE year = ${year} AND slot LIKE ${`discipline:${id}:%`}`;
 }
@@ -583,7 +733,7 @@ export async function reorderCncDiscipline(
   const sql = await sqlClient();
   const rows = (await sql`
     SELECT id, sort_order FROM cnc_disciplines
-    WHERE year = ${year}
+    WHERE year = ${year} AND parent_id IS NULL
     ORDER BY sort_order ASC, title ASC
   `) as { id: string; sort_order: number }[];
   const index = rows.findIndex((row) => row.id === id);

@@ -47,31 +47,122 @@
       "id": "iniciacao",
       "title": "CNC Iniciação",
       "description": "Categoria de entrada ao concurso completo, com percursos e critérios adaptados a cavaleiros e cavalos em formação.",
-      "resources": {
-        "ordens": { "label": "Ordens de Entrada", "href": null },
-        "croquis": { "label": "Croquis", "href": null },
-        "resultados": { "label": "Resultados", "href": null }
-      }
+      "sections": [
+        {
+          "id": "iniciacao-ensino",
+          "title": "Ensino",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "iniciacao-cross",
+          "title": "Cross",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "iniciacao-obstaculos",
+          "title": "Obstáculos",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "iniciacao-finais",
+          "title": "Resultados finais",
+          "resultados": { "label": "Resultados finais", "href": null }
+        }
+      ]
     },
     {
       "id": "preliminar",
       "title": "CNC Preliminar",
       "description": "Nível intermédio com exigência técnica acrescida nas três fases do CCE.",
-      "resources": {
-        "ordens": { "label": "Ordens de Entrada", "href": null },
-        "croquis": { "label": "Croquis", "href": null },
-        "resultados": { "label": "Resultados", "href": null }
-      }
+      "sections": [
+        {
+          "id": "preliminar-ensino",
+          "title": "Ensino",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "preliminar-cross",
+          "title": "Cross",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "preliminar-obstaculos",
+          "title": "Obstáculos",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "preliminar-finais",
+          "title": "Resultados finais",
+          "resultados": { "label": "Resultados finais", "href": null }
+        }
+      ]
     },
     {
       "id": "open",
       "title": "Provas Open",
-      "description": "Competição open para combinações diferentes, com percursos de vários graus de exigência.",
-      "resources": {
-        "ordens": { "label": "Ordens de Entrada", "href": null },
-        "croquis": { "label": "Croquis", "href": null },
-        "resultados": { "label": "Resultados", "href": null }
-      }
+      "description": "Competição open por altura de obstáculos, com ordens de entrada, croquis e resultados em cada prova.",
+      "sections": [
+        {
+          "id": "open-050",
+          "title": "Prova Open 0,50m",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "open-090",
+          "title": "Prova Open 0,90m",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "open-100",
+          "title": "Prova Open 1,00m",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        },
+        {
+          "id": "open-110",
+          "title": "Prova Open 1,10m",
+          "resources": {
+            "ordens": { "label": "Ordens de Entrada", "href": null },
+            "croquis": { "label": "Croquis", "href": null },
+            "resultados": { "label": "Resultados", "href": null }
+          }
+        }
+      ]
     },
     {
       "id": "premios",
@@ -101,12 +192,6 @@
       "title": "Área das Cavalariças",
       "description": "Localização das boxes, picadeiros e zona de preparação dos equinos.",
       "pdf": { "label": "Área das Cavalariças (PDF)", "href": null }
-    },
-    {
-      "id": "alojamentos",
-      "title": "Alojamentos",
-      "description": "Informação sobre alojamento de cavaleiros e apoio logístico na área do quartel.",
-      "pdf": { "label": "Alojamentos (PDF)", "href": null }
     }
   ],
   "contacts": {

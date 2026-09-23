@@ -25,10 +25,17 @@ CREATE TABLE IF NOT EXISTS cnc_disciplines (
   title TEXT NOT NULL,
   description TEXT,
   sort_order INT NOT NULL DEFAULT 0,
-  kind TEXT NOT NULL DEFAULT 'resources' CHECK (kind IN ('resources', 'gallery')),
+  kind TEXT NOT NULL DEFAULT 'resources' CHECK (kind IN ('resources', 'gallery', 'grouped', 'resultados')),
+  parent_id TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+ALTER TABLE cnc_disciplines ADD COLUMN IF NOT EXISTS parent_id TEXT;
+ALTER TABLE cnc_disciplines DROP CONSTRAINT IF EXISTS cnc_disciplines_kind_check;
+ALTER TABLE cnc_disciplines
+  ADD CONSTRAINT cnc_disciplines_kind_check
+  CHECK (kind IN ('resources', 'gallery', 'grouped', 'resultados'));
 
 CREATE INDEX IF NOT EXISTS idx_cnc_disciplines_year ON cnc_disciplines (year, sort_order);
 

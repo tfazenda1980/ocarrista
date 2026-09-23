@@ -3,6 +3,8 @@
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfGroup } from "./cnc-pdf-group";
+import { CncPdfSlot } from "./cnc-pdf-slot";
+import { CncDocumentPreview } from "./cnc-document-preview";
 import { CncPrizesGallery } from "./cnc-prizes-gallery";
 
 export function CncDisciplines({ event }: { event: CncEventData }) {
@@ -15,7 +17,7 @@ export function CncDisciplines({ event }: { event: CncEventData }) {
             Provas e documentação
           </h2>
           <p className="mb-10 max-w-2xl text-muted">
-            Em cada subsecção competitiva encontram ordens de entrada, croquis e resultados.
+            Em cada categoria encontram subsetores com ordens de entrada, croquis e resultados.
             A galeria de prémios é um documento em largura total com fotografias por prova.
           </p>
           <div className="gold-line mb-12 w-24" />
@@ -54,6 +56,29 @@ export function CncDisciplines({ event }: { event: CncEventData }) {
                 )}
                 {discipline.galleryPdf ? (
                   <CncPrizesGallery galleryPdf={discipline.galleryPdf} />
+                ) : discipline.sections?.length ? (
+                  <div className="space-y-10">
+                    {discipline.sections.map((section) => (
+                      <div key={section.id} id={`prova-${section.id}`} className="scroll-mt-28">
+                        <h4 className="font-display mb-4 text-sm font-semibold tracking-[0.14em] text-gold uppercase">
+                          {section.title}
+                        </h4>
+                        {section.resources ? (
+                          <CncPdfGroup resources={section.resources} />
+                        ) : section.resultados ? (
+                          <div className="max-w-sm space-y-6">
+                            <CncPdfSlot resource={section.resultados} />
+                            {section.resultados.href ? (
+                              <CncDocumentPreview
+                                resource={section.resultados}
+                                hint="Resultados finais"
+                              />
+                            ) : null}
+                          </div>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
                 ) : discipline.resources ? (
                   <CncPdfGroup resources={discipline.resources} />
                 ) : null}

@@ -1,6 +1,6 @@
 import type { CncDiscipline, CncPdfResource } from "../events/cnc-types";
 
-export type CncDisciplineKind = "resources" | "gallery";
+export type CncDisciplineKind = "resources" | "gallery" | "grouped" | "resultados";
 
 export type CncAsset = {
   id: string;
@@ -67,6 +67,16 @@ export function emptyResource(
 export function resourceSlotsForDiscipline(discipline: CncDiscipline): string[] {
   if (discipline.galleryPdf) {
     return [disciplineSlot(discipline.id, "gallery")];
+  }
+  if (discipline.sections?.length) {
+    return discipline.sections.flatMap((section) => {
+      if (section.resultados) return [disciplineSlot(section.id, "resultados")];
+      return [
+        disciplineSlot(section.id, "ordens"),
+        disciplineSlot(section.id, "croquis"),
+        disciplineSlot(section.id, "resultados"),
+      ];
+    });
   }
   return [
     disciplineSlot(discipline.id, "ordens"),

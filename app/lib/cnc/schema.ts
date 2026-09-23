@@ -36,11 +36,23 @@ export async function ensureCncSchema(): Promise<void> {
       description TEXT,
       sort_order INT NOT NULL DEFAULT 0,
       kind TEXT NOT NULL DEFAULT 'resources'
-        CHECK (kind IN ('resources', 'gallery')),
+        CHECK (kind IN ('resources', 'gallery', 'grouped', 'resultados')),
+      parent_id TEXT,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `;
+  await sql`ALTER TABLE cnc_disciplines ADD COLUMN IF NOT EXISTS parent_id TEXT`;
+  try {
+    await sql`ALTER TABLE cnc_disciplines DROP CONSTRAINT IF EXISTS cnc_disciplines_kind_check`;
+    await sql`
+      ALTER TABLE cnc_disciplines
+        ADD CONSTRAINT cnc_disciplines_kind_check
+        CHECK (kind IN ('resources', 'gallery', 'grouped', 'resultados'))
+    `;
+  } catch (err) {
+    console.warn("[cnc] actualização da restrição kind", err);
+  }
   await sql`
     CREATE INDEX IF NOT EXISTS idx_cnc_disciplines_year
       ON cnc_disciplines (year, sort_order)

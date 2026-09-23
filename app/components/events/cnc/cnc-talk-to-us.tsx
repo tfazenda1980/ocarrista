@@ -4,10 +4,12 @@ import { useState } from "react";
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CNC_MESSAGE_KINDS, type CncMessageKind } from "@/app/lib/cnc/messages";
+import { cncProvaSelectOptions } from "@/app/lib/cnc/layout";
 
 export function CncTalkToUs({ event }: { event: CncEventData }) {
+  const provaOptions = cncProvaSelectOptions(event.disciplines);
   const [kind, setKind] = useState<CncMessageKind>("contact");
-  const [provaId, setProvaId] = useState(event.disciplines[0]?.id ?? "");
+  const [provaId, setProvaId] = useState(provaOptions[0]?.id ?? "");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -92,9 +94,9 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
                   className="mt-2 w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm text-foreground normal-case"
                   required
                 >
-                  {event.disciplines.map((discipline) => (
-                    <option key={discipline.id} value={discipline.id}>
-                      {discipline.title}
+                  {provaOptions.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.label}
                     </option>
                   ))}
                 </select>

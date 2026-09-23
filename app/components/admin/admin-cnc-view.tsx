@@ -214,7 +214,11 @@ export function AdminCncView({ year }: { year: string }) {
           id: discipline.id,
           title,
           description,
-          kind: discipline.galleryPdf ? "gallery" : "resources",
+          kind: discipline.galleryPdf
+            ? "gallery"
+            : discipline.sections?.length
+              ? "grouped"
+              : "resources",
         }),
       });
       if (await handleJson(res)) setFeedback("Prova actualizada.");
@@ -912,8 +916,8 @@ export function AdminCncView({ year }: { year: string }) {
               Novo patrocinador
             </h3>
             <p className="text-sm text-muted">
-              Aparece na secção Patrocinadores da página pública, com logótipo. O sítio web é
-              opcional.
+              Aparece na secção Patrocinadores da página pública, num quadrado uniforme. O
+              sítio web é opcional. Prefira PNG com fundo transparente.
             </p>
             <input
               value={newSponsorName}
@@ -1039,6 +1043,7 @@ function AssetUploader({
   hint = "PDF, imagem ou PPT",
   onUpload,
   onClear,
+  squarePreview = false,
 }: {
   label: string;
   href?: string | null;
@@ -1048,6 +1053,7 @@ function AssetUploader({
   hint?: string;
   onUpload: (file: File) => void;
   onClear: () => void;
+  squarePreview?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
@@ -1075,9 +1081,16 @@ function AssetUploader({
           </button>
         )}
       </div>
-      {href && /\.(png|jpe?g|webp|gif|avif)$/i.test(href.split("?")[0]) && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={href} alt="" className="mt-3 max-h-40 w-auto border border-gold/20 object-contain" />
+      {href && /\.(png|jpe?g|webp|gif|avif|svg)$/i.test(href.split("?")[0]) && (
+        squarePreview ? (
+          <div className="mt-3 aspect-square w-40 border border-gold/20 bg-background/60 p-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={href} alt="" className="h-full w-full object-contain" />
+          </div>
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={href} alt="" className="mt-3 max-h-40 w-auto border border-gold/20 object-contain" />
+        )
       )}
     </div>
   );
@@ -1160,6 +1173,74 @@ function DisciplineEditor({
             onClear(disciplineSlot(discipline.id, "gallery"), discipline.galleryPdf?.label ?? "Galeria")
           }
         />
+      ) : discipline.sections?.length ? (
+        <div className="space-y-6">
+          {discipline.sections.map((section) => (
+            <div key={section.id} className="space-y-4 border border-gold/15 p-4">
+              <h4 className="font-display text-sm tracking-[0.12em] text-gold uppercase">
+                {section.title}
+              </h4>
+              {section.resources ? (
+                <div className="grid gap-6 sm:grid-cols-3">
+                  <AssetUploader
+                    label={section.resources.ordens.label}
+                    href={section.resources.ordens.href}
+                    filename={section.resources.ordens.filename}
+                    disabled={busy}
+                    onUpload={(file) =>
+                      onUpload(disciplineSlot(section.id, "ordens"), file, section.resources?.ordens.label ?? "")
+                    }
+                    onClear={() =>
+                      onClear(disciplineSlot(section.id, "ordens"), section.resources?.ordens.label ?? "")
+                    }
+                  />
+                  <AssetUploader
+                    label={section.resources.croquis.label}
+                    href={section.resources.croquis.href}
+                    filename={section.resources.croquis.filename}
+                    disabled={busy}
+                    hint="Croqui: PDF, desenho (imagem) ou PPT"
+                    onUpload={(file) =>
+                      onUpload(disciplineSlot(section.id, "croquis"), file, section.resources?.croquis.label ?? "")
+                    }
+                    onClear={() =>
+                      onClear(disciplineSlot(section.id, "croquis"), section.resources?.croquis.label ?? "")
+                    }
+                  />
+                  <AssetUploader
+                    label={section.resources.resultados.label}
+                    href={section.resources.resultados.href}
+                    filename={section.resources.resultados.filename}
+                    disabled={busy}
+                    onUpload={(file) =>
+                      onUpload(
+                        disciplineSlot(section.id, "resultados"),
+                        file,
+                        section.resources?.resultados.label ?? "",
+                      )
+                    }
+                    onClear={() =>
+                      onClear(disciplineSlot(section.id, "resultados"), section.resources?.resultados.label ?? "")
+                    }
+                  />
+                </div>
+              ) : section.resultados ? (
+                <AssetUploader
+                  label={section.resultados.label}
+                  href={section.resultados.href}
+                  filename={section.resultados.filename}
+                  disabled={busy}
+                  onUpload={(file) =>
+                    onUpload(disciplineSlot(section.id, "resultados"), file, section.resultados?.label ?? "")
+                  }
+                  onClear={() =>
+                    onClear(disciplineSlot(section.id, "resultados"), section.resultados?.label ?? "")
+                  }
+                />
+              ) : null}
+            </div>
+          ))}
+        </div>
       ) : discipline.resources ? (
         <div className="grid gap-6 sm:grid-cols-3">
           <AssetUploader
@@ -1360,7 +1441,8 @@ function SponsorEditor({
         filename={sponsor.logo ? "Logótipo actual" : null}
         disabled={busy}
         accept={CNC_IMAGE_ACCEPT}
-        hint="PNG, JPG, WebP ou SVG"
+        hint="PNG, JPG, WebP ou SVG — apresentado num quadrado uniforme"
+        squarePreview
         onUpload={onUpload}
         onClear={onClear}
       />

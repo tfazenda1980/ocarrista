@@ -24,36 +24,39 @@ export function CncSponsors({ event }: { event: CncEventData }) {
             </p>
           </MotionReveal>
         ) : (
-          <ul className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
             {sponsors.map((sponsor, index) => {
               const card = (
-                <div className="card-tactical flex aspect-[3/2] items-center justify-center p-6 transition-colors hover:border-gold/40 hover:bg-gold/5">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={sponsor.logo}
-                    alt={sponsor.name}
-                    className="max-h-16 w-auto object-contain opacity-90 transition-opacity hover:opacity-100"
-                  />
+                <div className="card-tactical aspect-square overflow-hidden transition-colors hover:border-gold/40 hover:bg-gold/5">
+                  <div className="flex h-full w-full items-center justify-center p-5">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={sponsor.logo}
+                      alt={sponsor.name}
+                      className="h-full w-full object-contain opacity-90 transition-opacity group-hover:opacity-100"
+                    />
+                  </div>
                 </div>
               );
 
               return (
-                <MotionReveal key={sponsor.id || sponsor.name} delay={index * 0.04}>
-                  <li>
+                <li key={sponsor.id || sponsor.name} className="h-full">
+                  <MotionReveal delay={index * 0.04} className="h-full">
                     {sponsor.url ? (
                       <a
                         href={sponsor.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={sponsor.name}
+                        className="group block h-full"
                       >
                         {card}
                       </a>
                     ) : (
-                      card
+                      <div className="group h-full">{card}</div>
                     )}
-                  </li>
-                </MotionReveal>
+                  </MotionReveal>
+                </li>
               );
             })}
           </ul>

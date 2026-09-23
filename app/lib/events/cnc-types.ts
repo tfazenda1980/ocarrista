@@ -12,11 +12,22 @@ export type CncDisciplineResources = {
   resultados: CncPdfResource;
 };
 
+export type CncDisciplineSection = {
+  id: string;
+  title: string;
+  /** Ordens, croquis e resultados da fase ou prova. */
+  resources?: CncDisciplineResources;
+  /** Um único documento (ex. resultados finais). */
+  resultados?: CncPdfResource;
+};
+
 export type CncDiscipline = {
   id: string;
   title: string;
   description?: string;
-  /** Ordens, croquis e resultados (provas competitivas). */
+  /** Subsetores (Ensino/Cross/Obstáculos, provas Open, etc.). */
+  sections?: CncDisciplineSection[];
+  /** Ordens, croquis e resultados (provas competitivas sem subsetores). */
   resources?: CncDisciplineResources;
   /** PDF em largura total — galeria fotográfica de prémios por prova. */
   galleryPdf?: CncPdfResource;
