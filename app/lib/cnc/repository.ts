@@ -12,7 +12,7 @@ import type {
 import { ensureCncSchema } from "./schema";
 import type { CncAsset, CncDisciplineKind } from "./slots";
 import type { CncMessage, CncMessageKind } from "./messages";
-import { cncLayoutSectionsForParent } from "./layout";
+import { cncLayoutSectionsForParent } from "./competition-layout";
 import {
   disciplineSlot,
   emptyResource,

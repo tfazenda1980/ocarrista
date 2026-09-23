@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CNC_MESSAGE_KINDS, type CncMessageKind } from "@/app/lib/cnc/messages";
-import { cncProvaSelectOptions } from "@/app/lib/cnc/layout";
+import { cncProvaSelectOptions } from "@/app/lib/cnc/competition-layout";
 
 export function CncTalkToUs({ event }: { event: CncEventData }) {
   const provaOptions = cncProvaSelectOptions(event.disciplines);
