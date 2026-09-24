@@ -2,9 +2,7 @@
 
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
-import { CncPdfGroup } from "./cnc-pdf-group";
-import { CncPdfSlot } from "./cnc-pdf-slot";
-import { CncDocumentPreview } from "./cnc-document-preview";
+import { CncPdfGroup, CncOpenableDocument } from "./cnc-pdf-group";
 import { CncPrizesGallery } from "./cnc-prizes-gallery";
 
 export function CncDisciplines({ event }: { event: CncEventData }) {
@@ -66,17 +64,10 @@ export function CncDisciplines({ event }: { event: CncEventData }) {
                         {section.resources ? (
                           <CncPdfGroup resources={section.resources} />
                         ) : section.resultados ? (
-                          <div className="space-y-6">
-                            <div className="max-w-sm">
-                              <CncPdfSlot resource={section.resultados} />
-                            </div>
-                            {section.resultados.href ? (
-                              <CncDocumentPreview
-                                resource={section.resultados}
-                                hint="Resultados finais — deslize para folhear o documento"
-                              />
-                            ) : null}
-                          </div>
+                          <CncOpenableDocument
+                            resource={section.resultados}
+                            hint="Resultados finais — deslize para folhear o documento"
+                          />
                         ) : null}
                       </div>
                     ))}

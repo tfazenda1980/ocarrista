@@ -3,9 +3,12 @@ import { getSketchKind } from "@/app/lib/challenger/sketch";
 
 type CncPdfSlotProps = {
   resource: CncPdfResource;
+  selected?: boolean;
+  onOpen?: () => void;
 };
 
-function actionLabel(resource: CncPdfResource): string {
+function actionLabel(resource: CncPdfResource, inline: boolean): string {
+  if (inline) return "Abrir documento →";
   const kind = getSketchKind(resource.mime ?? null, resource.href);
   if (kind === "image") return "Ver desenho →";
   if (kind === "pdf") return "Descarregar PDF →";
@@ -15,8 +18,28 @@ function actionLabel(resource: CncPdfResource): string {
   return "Descarregar documento →";
 }
 
-export function CncPdfSlot({ resource }: CncPdfSlotProps) {
+const slotClass =
+  "card-tactical flex min-h-[5.5rem] w-full flex-col justify-center border-gold/30 p-4 text-left transition-colors hover:border-gold/50 hover:bg-gold/5";
+
+export function CncPdfSlot({ resource, selected = false, onOpen }: CncPdfSlotProps) {
   const available = Boolean(resource.href);
+  const selectedClass = selected ? "border-gold bg-gold/10" : "";
+
+  if (available && resource.href && onOpen) {
+    return (
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-pressed={selected}
+        className={`${slotClass} ${selectedClass}`}
+      >
+        <span className="font-display text-xs tracking-[0.12em] text-gold uppercase">
+          {resource.label}
+        </span>
+        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource, true)}</span>
+      </button>
+    );
+  }
 
   if (available && resource.href) {
     return (
@@ -24,12 +47,12 @@ export function CncPdfSlot({ resource }: CncPdfSlotProps) {
         href={resource.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="card-tactical flex min-h-[5.5rem] flex-col justify-center border-gold/30 p-4 transition-colors hover:border-gold/50 hover:bg-gold/5"
+        className={slotClass}
       >
         <span className="font-display text-xs tracking-[0.12em] text-gold uppercase">
           {resource.label}
         </span>
-        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource)}</span>
+        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource, false)}</span>
       </a>
     );
   }
