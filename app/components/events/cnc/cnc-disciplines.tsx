@@ -66,12 +66,14 @@ export function CncDisciplines({ event }: { event: CncEventData }) {
                         {section.resources ? (
                           <CncPdfGroup resources={section.resources} />
                         ) : section.resultados ? (
-                          <div className="max-w-sm space-y-6">
-                            <CncPdfSlot resource={section.resultados} />
+                          <div className="space-y-6">
+                            <div className="max-w-sm">
+                              <CncPdfSlot resource={section.resultados} />
+                            </div>
                             {section.resultados.href ? (
                               <CncDocumentPreview
                                 resource={section.resultados}
-                                hint="Resultados finais"
+                                hint="Resultados finais — deslize para folhear o documento"
                               />
                             ) : null}
                           </div>

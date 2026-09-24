@@ -6,7 +6,18 @@ type CncPdfGroupProps = {
   resources: CncDisciplineResources;
 };
 
+const PREVIEWS: { key: keyof CncDisciplineResources; hint: string }[] = [
+  { key: "ordens", hint: "Ordens de entrada — deslize para folhear o documento" },
+  { key: "croquis", hint: "Croqui do percurso — deslize ou descarregue o ficheiro" },
+  { key: "resultados", hint: "Resultados — deslize para folhear o documento" },
+];
+
 export function CncPdfGroup({ resources }: CncPdfGroupProps) {
+  const published = PREVIEWS.flatMap(({ key, hint }) => {
+    const resource = resources[key];
+    return resource.href ? [{ key, resource, hint }] : [];
+  });
+
   return (
     <div className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-3">
@@ -14,12 +25,13 @@ export function CncPdfGroup({ resources }: CncPdfGroupProps) {
         <CncPdfSlot resource={resources.croquis} />
         <CncPdfSlot resource={resources.resultados} />
       </div>
-      {resources.croquis.href ? (
+      {published.map((item) => (
         <CncDocumentPreview
-          resource={resources.croquis}
-          hint="Croqui do percurso — deslize ou descarregue o ficheiro"
+          key={item.key}
+          resource={item.resource}
+          hint={item.hint}
         />
-      ) : null}
+      ))}
     </div>
   );
 }
