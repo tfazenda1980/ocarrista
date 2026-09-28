@@ -6,6 +6,7 @@ import {
   getImgcLiveEdition,
   updateImgcDelegation,
 } from "@/app/lib/imgc/repository";
+import { pinForImgcDelegation } from "@/app/lib/imgc/countries";
 
 export const runtime = "nodejs";
 
@@ -21,29 +22,26 @@ export async function POST(
   const body = (await request.json().catch(() => null)) as {
     country?: string;
     city?: string;
-    lat?: number;
-    lng?: number;
     host?: boolean;
   } | null;
   const country = String(body?.country ?? "").trim();
-  const lat = Number(body?.lat);
-  const lng = Number(body?.lng);
-  if (!country || !Number.isFinite(lat) || !Number.isFinite(lng)) {
-    return NextResponse.json({ error: "País, latitude e longitude são obrigatórios." }, { status: 400 });
+  if (!country) {
+    return NextResponse.json({ error: "Indique o nome oficial do país." }, { status: 400 });
   }
   try {
+    const pin = pinForImgcDelegation(country, Boolean(body?.host));
     await createImgcDelegation(year, {
-      country,
-      city: body?.city,
-      lat,
-      lng,
+      country: pin.officialName,
+      city: String(body?.city ?? "").trim() || pin.city,
+      lat: pin.lat,
+      lng: pin.lng,
       host: Boolean(body?.host),
     });
     const event = await getImgcLiveEdition(year);
     return NextResponse.json({ ok: true, event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }
 
@@ -60,20 +58,29 @@ export async function PATCH(
     id?: string;
     country?: string;
     city?: string;
-    lat?: number;
-    lng?: number;
     host?: boolean;
   } | null;
   if (!body?.id) {
     return NextResponse.json({ error: "ID em falta." }, { status: 400 });
   }
   try {
-    await updateImgcDelegation(body.id, body);
+    const country = String(body.country ?? "").trim();
+    if (!country) {
+      return NextResponse.json({ error: "Indique o nome oficial do país." }, { status: 400 });
+    }
+    const pin = pinForImgcDelegation(country, Boolean(body.host));
+    await updateImgcDelegation(body.id, {
+      country: pin.officialName,
+      city: body.city !== undefined ? body.city : pin.city,
+      lat: pin.lat,
+      lng: pin.lng,
+      host: Boolean(body.host),
+    });
     const event = await getImgcLiveEdition(year);
     return NextResponse.json({ ok: true, event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }
 

@@ -3,7 +3,7 @@
 import { SectionShell } from "../section-shell";
 import { EventCard } from "../events/event-card";
 import { IconCalendar, IconTarget, IconShield } from "../icons";
-import { CNC_SRC, CHALLENGER_SRC, WORKSHOP_26_SRC, CASTELO_SRC } from "../../lib/site-assets";
+import { CNC_SRC, CHALLENGER_SRC, WORKSHOP_26_SRC, IMGC_SRC } from "../../lib/site-assets";
 import { useT } from "../i18n/locale-provider";
 
 const eventMeta = [
@@ -14,7 +14,7 @@ const eventMeta = [
   { icon: <IconCalendar />, href: undefined, backgroundImage: undefined },
   { icon: <IconCalendar />, href: undefined, backgroundImage: undefined },
   { icon: <IconTarget />, href: "/eventos/challenger", backgroundImage: CHALLENGER_SRC },
-  { icon: <IconTarget />, href: "/eventos/imgc", backgroundImage: CASTELO_SRC },
+  { icon: <IconTarget />, href: "/eventos/imgc", backgroundImage: IMGC_SRC },
 ];
 
 export function EventosSection() {

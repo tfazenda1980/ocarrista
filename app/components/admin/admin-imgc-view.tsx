@@ -10,6 +10,7 @@ import type {
   ImgcMessage,
 } from "@/app/lib/events/imgc-types";
 import { IMGC_FILE_ACCEPT, IMGC_IMAGE_ACCEPT, programmeSlot } from "@/app/lib/imgc/upload";
+import { IMGC_COUNTRY_NAMES } from "@/app/lib/imgc/countries";
 
 type Tab = "conteudo" | "delegacoes" | "links" | "galeria" | "contactos" | "mensagens";
 
@@ -53,8 +54,6 @@ export function AdminImgcView({ year }: { year: string }) {
 
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
   const [host, setHost] = useState(false);
 
   const [linkCategory, setLinkCategory] = useState<ImgcLinkCategory>("tomar");
@@ -180,16 +179,12 @@ export function AdminImgcView({ year }: { year: string }) {
         body: JSON.stringify({
           country,
           city,
-          lat: Number(lat),
-          lng: Number(lng),
           host,
         }),
       });
       if (await handleJson(res)) {
         setCountry("");
         setCity("");
-        setLat("");
-        setLng("");
         setHost(false);
         setFeedback("Delegação adicionada.");
       }
@@ -498,40 +493,29 @@ export function AdminImgcView({ year }: { year: string }) {
             <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase sm:col-span-2">
               Nova delegação
             </h3>
-            <input
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              placeholder="País"
-              className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
-              required
-            />
+            <p className="text-sm text-muted sm:col-span-2">
+              Basta o nome oficial do país — o pin no mapa posiciona-se automaticamente. A cidade é
+              opcional (só aparece na lista).
+            </p>
+            <CountryNameField value={country} onChange={setCountry} required />
             <input
               value={city}
               onChange={(e) => setCity(e.target.value)}
               placeholder="Cidade (opcional)"
               className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
             />
-            <input
-              value={lat}
-              onChange={(e) => setLat(e.target.value)}
-              placeholder="Latitude (ex. 51.50)"
-              className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
-              required
-            />
-            <input
-              value={lng}
-              onChange={(e) => setLng(e.target.value)}
-              placeholder="Longitude (ex. -0.12)"
-              className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
-              required
-            />
             <label className="flex items-center gap-2 text-sm text-muted sm:col-span-2">
               <input type="checkbox" checked={host} onChange={(e) => setHost(e.target.checked)} />
-              Nação anfitriã
+              Nação anfitriã (pin no Quartel da Cavalaria)
             </label>
             <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs sm:col-span-2">
-              Adicionar pin
+              Adicionar delegação
             </button>
+            <datalist id="imgc-country-names">
+              {IMGC_COUNTRY_NAMES.map((name) => (
+                <option key={name} value={name} />
+              ))}
+            </datalist>
           </form>
 
           {event.delegations.map((item) => (
@@ -692,6 +676,28 @@ export function AdminImgcView({ year }: { year: string }) {
   );
 }
 
+function CountryNameField({
+  value,
+  onChange,
+  required,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  required?: boolean;
+}) {
+  return (
+    <input
+      list="imgc-country-names"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Nome oficial do país"
+      className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
+      required={required}
+      autoComplete="off"
+    />
+  );
+}
+
 function DelegationEditor({
   item,
   busy,
@@ -705,8 +711,6 @@ function DelegationEditor({
 }) {
   const [country, setCountry] = useState(item.country);
   const [city, setCity] = useState(item.city ?? "");
-  const [lat, setLat] = useState(String(item.lat));
-  const [lng, setLng] = useState(String(item.lng));
   const [host, setHost] = useState(Boolean(item.host));
 
   return (
@@ -718,35 +722,20 @@ function DelegationEditor({
           ...item,
           country,
           city,
-          lat: Number(lat),
-          lng: Number(lng),
           host,
         });
       }}
     >
-      <input
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
-      />
+      <CountryNameField value={country} onChange={setCountry} required />
       <input
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
-      />
-      <input
-        value={lat}
-        onChange={(e) => setLat(e.target.value)}
-        className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
-      />
-      <input
-        value={lng}
-        onChange={(e) => setLng(e.target.value)}
+        placeholder="Cidade (opcional)"
         className="border border-gold/20 bg-background/80 px-4 py-3 text-sm"
       />
       <label className="flex items-center gap-2 text-sm text-muted sm:col-span-2">
         <input type="checkbox" checked={host} onChange={(e) => setHost(e.target.checked)} />
-        Nação anfitriã
+        Nação anfitriã (pin no Quartel da Cavalaria)
       </label>
       <div className="flex gap-3 sm:col-span-2">
         <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">

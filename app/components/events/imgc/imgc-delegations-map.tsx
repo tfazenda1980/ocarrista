@@ -166,7 +166,7 @@ export function ImgcDelegationsMap({ event }: { event: ImgcEventData }) {
             {active && (
               <p className="mt-6 text-xs text-muted">
                 {active.country}
-                {active.city ? ` · ${active.city}` : ""} · {active.lat.toFixed(2)}°, {active.lng.toFixed(2)}°
+                {active.city ? ` · ${active.city}` : ""}
               </p>
             )}
           </div>

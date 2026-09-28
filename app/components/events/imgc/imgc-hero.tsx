@@ -29,7 +29,7 @@ export function ImgcHero({ event }: { event: ImgcEventData }) {
           fill
           priority
           sizes="100vw"
-          className="event-hero-image object-contain object-right-bottom opacity-[0.82] sm:opacity-[0.9]"
+          className="event-hero-image object-contain object-right opacity-[0.88] sm:opacity-[0.95]"
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/58 to-background/12" />
