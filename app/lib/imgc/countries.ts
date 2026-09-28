@@ -131,6 +131,11 @@ export function resolveImgcCountry(name: string): ImgcCountryPin | null {
   return { officialName: entry.official, lat: entry.lat, lng: entry.lng };
 }
 
+export function imgcCountryKey(name: string): string {
+  const resolved = resolveImgcCountry(name);
+  return fold(resolved?.officialName ?? name);
+}
+
 export function pinForImgcDelegation(
   country: string,
   host?: boolean,

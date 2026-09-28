@@ -32,6 +32,9 @@
     }
   },
   "delegations": [
+    { "id": "can", "country": "Canada", "lat": 45.42, "lng": -75.7 },
+    { "id": "usa", "country": "Estados Unidos da América", "lat": 38.9, "lng": -77.04 },
+    { "id": "bra", "country": "Brasil", "lat": -15.79, "lng": -47.88 },
     {
       "id": "prt",
       "country": "Portugal",
@@ -39,7 +42,21 @@
       "lat": 39.45,
       "lng": -8.33,
       "host": true
-    }
+    },
+    { "id": "esp", "country": "Espanha", "lat": 40.42, "lng": -3.7 },
+    { "id": "fra", "country": "França", "lat": 48.86, "lng": 2.35 },
+    { "id": "gbr", "country": "Reino Unido", "lat": 51.51, "lng": -0.13 },
+    { "id": "che", "country": "Suíça", "lat": 46.95, "lng": 7.45 },
+    { "id": "grc", "country": "Grécia", "lat": 37.98, "lng": 23.73 },
+    { "id": "aut", "country": "Áustria", "lat": 48.21, "lng": 16.37 },
+    { "id": "pol", "country": "Polónia", "lat": 52.23, "lng": 21.01 },
+    { "id": "hun", "country": "Hungria", "lat": 47.5, "lng": 19.04 },
+    { "id": "nld", "country": "Países Baixos", "lat": 52.37, "lng": 4.89 },
+    { "id": "deu", "country": "Alemanha", "lat": 52.52, "lng": 13.4 },
+    { "id": "swe", "country": "Suécia", "lat": 59.33, "lng": 18.07 },
+    { "id": "fin", "country": "Finlândia", "lat": 60.17, "lng": 24.94 },
+    { "id": "nor", "country": "Noruega", "lat": 59.91, "lng": 10.75 },
+    { "id": "sgp", "country": "Singapura", "lat": 1.35, "lng": 103.82 }
   ],
   "links": [
     {

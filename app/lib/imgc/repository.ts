@@ -11,6 +11,7 @@ import type {
 } from "../events/imgc-types";
 import { ensureImgcSchema } from "./schema";
 import { gallerySlot, programmeSlot } from "./upload";
+import { imgcCountryKey } from "./countries";
 
 type EditionRow = {
   year: string;
@@ -98,17 +99,31 @@ export async function seedImgcYear(year: string): Promise<void> {
     `;
   }
 
-  const delCount = await sql`SELECT id FROM imgc_delegations WHERE year = ${year} LIMIT 1`;
-  if (delCount.length === 0) {
-    for (const [i, item] of base.delegations.entries()) {
+  const existingRows = (await sql`
+    SELECT id, country FROM imgc_delegations WHERE year = ${year}
+  `) as { id: string; country: string }[];
+  const byKey = new Map(existingRows.map((row) => [imgcCountryKey(row.country), row]));
+
+  for (const [i, item] of base.delegations.entries()) {
+    const key = imgcCountryKey(item.country);
+    const found = byKey.get(key);
+    if (found) {
       await sql`
-        INSERT INTO imgc_delegations (id, year, country, city, lat, lng, host, sort_order)
-        VALUES (
-          ${item.id}, ${year}, ${item.country}, ${item.city ?? ""},
-          ${item.lat}, ${item.lng}, ${item.host ?? false}, ${i}
-        )
+        UPDATE imgc_delegations SET
+          sort_order = ${i},
+          host = ${item.host ?? false},
+          updated_at = NOW()
+        WHERE id = ${found.id}
       `;
+      continue;
     }
+    await sql`
+      INSERT INTO imgc_delegations (id, year, country, city, lat, lng, host, sort_order)
+      VALUES (
+        ${item.id}, ${year}, ${item.country}, ${item.city ?? ""},
+        ${item.lat}, ${item.lng}, ${item.host ?? false}, ${i}
+      )
+    `;
   }
 
   const linkCount = await sql`SELECT id FROM imgc_links WHERE year = ${year} LIMIT 1`;
@@ -170,7 +185,7 @@ export async function getImgcLiveEdition(
       sql`
         SELECT id, country, city, lat, lng, host, sort_order
         FROM imgc_delegations WHERE year = ${year}
-        ORDER BY host DESC, sort_order ASC, country ASC
+        ORDER BY sort_order ASC, country ASC
       `,
       sql`
         SELECT id, category, title, url, description, sort_order
