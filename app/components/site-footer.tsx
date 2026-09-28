@@ -2,19 +2,21 @@
 
 import Link from "next/link";
 import { useAuthSession } from "../hooks/use-auth-session";
+import { useT } from "./i18n/locale-provider";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
   const { session } = useAuthSession();
+  const { t } = useT();
   const showLoja = session.authenticated && session.role === "user";
   const showGesco = session.authenticated && session.gescoAccess === true;
 
   const links = [
-    { href: "#eventos", label: "Eventos" },
-    { href: "#historia", label: "História" },
-    ...(showLoja ? [{ href: "#loja", label: "Loja" as const }] : []),
-    { href: "#comunidade", label: "Comunidade" },
-    ...(showGesco ? [{ href: "#gesco", label: "GesCO" as const }] : []),
+    { href: "#eventos", label: t("nav.events") },
+    { href: "#historia", label: t("nav.history") },
+    ...(showLoja ? [{ href: "#loja", label: t("nav.shop") }] : []),
+    { href: "#comunidade", label: t("nav.community") },
+    ...(showGesco ? [{ href: "#gesco", label: t("nav.gesco") }] : []),
   ];
 
   return (
@@ -23,20 +25,16 @@ export function SiteFooter() {
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold tracking-[0.2em] uppercase">
-              O Carrista
+              {t("brand.name")}
             </p>
             <p className="mt-1 font-display text-xs tracking-[0.2em] text-gold uppercase">
-              De Santa Margarida
+              {t("brand.tagline")}
             </p>
             <p className="mt-2 max-w-sm text-sm text-muted">
-              Comunidade do QCav e Ex-RC4 — eventos, história
-              {showLoja ? " e Loja do Carrista" : ""}.
+              {t("footer.blurb", { shop: showLoja ? t("footer.shopSuffix") : "" })}
             </p>
             {showGesco && (
-              <p className="mt-2 max-w-sm text-xs text-muted/80">
-                GesCO: plataforma interna de Gestão de Competências Operacionais
-                (acesso autorizado).
-              </p>
+              <p className="mt-2 max-w-sm text-xs text-muted/80">{t("footer.gesco")}</p>
             )}
           </div>
 
@@ -56,7 +54,7 @@ export function SiteFooter() {
                   href="#admin"
                   className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
                 >
-                  Admin
+                  {t("nav.admin")}
                 </a>
               ) : null
             ) : (
@@ -64,7 +62,7 @@ export function SiteFooter() {
                 href="/entrar"
                 className="font-display text-[0.65rem] tracking-[0.15em] text-muted uppercase transition-colors hover:text-gold"
               >
-                Login
+                {t("nav.login")}
               </Link>
             )}
           </nav>
@@ -73,10 +71,8 @@ export function SiteFooter() {
         <div className="gold-line my-8" />
 
         <div className="flex flex-col gap-2 text-[0.7rem] text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} O Carrista. Todos os direitos reservados.</p>
-          <p className="font-mono tracking-wider uppercase">
-            República Portuguesa · Forças Armadas
-          </p>
+          <p>{t("footer.rights", { year })}</p>
+          <p className="font-mono tracking-wider uppercase">{t("brand.republic")}</p>
         </div>
       </div>
     </footer>

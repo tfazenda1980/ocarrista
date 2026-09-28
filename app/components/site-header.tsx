@@ -6,18 +6,20 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { UnitCrest } from "./unit-crest";
 import { useAuthSession } from "../hooks/use-auth-session";
-
-const mainNavLinks = [
-  { href: "#eventos", label: "Eventos" },
-  { href: "#historia", label: "História" },
-  { href: "#comunidade", label: "Comunidade" },
-] as const;
+import { LanguageSwitcher } from "./i18n/language-switcher";
+import { useT } from "./i18n/locale-provider";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { session, logout, refresh } = useAuthSession();
   const router = useRouter();
+  const { t } = useT();
+  const mainNavLinks = [
+    { href: "#eventos", label: t("nav.events") },
+    { href: "#historia", label: t("nav.history") },
+    { href: "#comunidade", label: t("nav.community") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -55,7 +57,7 @@ export function SiteHeader() {
               O Carrista
             </span>
             <span className="hidden text-[0.6rem] tracking-[0.25em] text-gold-dim uppercase sm:block">
-              De Santa Margarida
+              {t("brand.tagline")}
             </span>
           </div>
         </a>
@@ -68,19 +70,19 @@ export function SiteHeader() {
           ))}
           {showLoja && (
             <motion.a href="#loja" className={navLinkClass} whileHover={{ y: -1 }}>
-              Loja
+              {t("nav.shop")}
             </motion.a>
           )}
           {showGesco && (
             <motion.a href="#gesco" className={navLinkClass} whileHover={{ y: -1 }}>
-              GesCO
+              {t("nav.gesco")}
             </motion.a>
           )}
           {session.authenticated ? (
             <>
               {session.role === "admin" && (
                 <motion.a href="#admin" className={navLinkClass} whileHover={{ y: -1 }}>
-                  Admin
+                  {t("nav.admin")}
                 </motion.a>
               )}
               <button
@@ -88,24 +90,29 @@ export function SiteHeader() {
                 onClick={handleLogout}
                 className={`${navLinkClass} ml-2 border-l border-gold/20 pl-8`}
               >
-                Sair
+                {t("nav.logout")}
               </button>
             </>
           ) : (
             <motion.div whileHover={{ y: -1 }} className="ml-2 border-l border-gold/20 pl-8">
               <Link href="/entrar" className={navLinkClass}>
-                Login
+                {t("nav.login")}
               </Link>
             </motion.div>
           )}
+          <LanguageSwitcher />
         </nav>
 
-        <button
+        <div className="flex items-center gap-3">
+          <div className="md:hidden">
+            <LanguageSwitcher />
+          </div>
+          <button
           type="button"
           className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20 md:hidden"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
         >
           <span
             className={`h-px w-5 bg-gold transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`}
@@ -115,6 +122,7 @@ export function SiteHeader() {
             className={`h-px w-5 bg-gold transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
           />
         </button>
+        </div>
       </div>
 
       {open && (
@@ -138,7 +146,7 @@ export function SiteHeader() {
                   className="font-display text-sm tracking-[0.15em] text-gold uppercase"
                   onClick={() => setOpen(false)}
                 >
-                  Loja
+                  {t("nav.shop")}
                 </a>
               </li>
             )}
@@ -149,7 +157,7 @@ export function SiteHeader() {
                   className="font-display text-sm tracking-[0.15em] text-gold uppercase"
                   onClick={() => setOpen(false)}
                 >
-                  GesCO
+                  {t("nav.gesco")}
                 </a>
               </li>
             )}
@@ -162,7 +170,7 @@ export function SiteHeader() {
                       className="font-display text-sm tracking-[0.15em] text-gold uppercase"
                       onClick={() => setOpen(false)}
                     >
-                      Admin
+                      {t("nav.admin")}
                     </a>
                   )}
                   <button
@@ -170,7 +178,7 @@ export function SiteHeader() {
                     className="text-left font-display text-sm tracking-[0.15em] text-gold uppercase"
                     onClick={handleLogout}
                   >
-                    Sair
+                    {t("nav.logout")}
                   </button>
                 </div>
               ) : (
@@ -182,7 +190,7 @@ export function SiteHeader() {
                     refresh();
                   }}
                 >
-                  Login
+                  {t("nav.login")}
                 </Link>
               )}
             </li>

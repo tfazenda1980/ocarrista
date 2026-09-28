@@ -2,15 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  VIDEO_DIVULGACAO_POSTER,
-  VIDEO_DIVULGACAO_SRC,
-} from "../lib/site-assets";
+import { VIDEO_DIVULGACAO_POSTER, VIDEO_DIVULGACAO_SRC } from "../lib/site-assets";
+import { useT } from "./i18n/locale-provider";
 
 export function VideoPromoSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const inView = useInView(sectionRef, { amount: 0.35, once: false });
+  const { t } = useT();
 
   useEffect(() => {
     const video = videoRef.current;
@@ -50,9 +49,9 @@ export function VideoPromoSection() {
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
         transition={{ duration: 0.6 }}
       >
-        <p className="section-label">Divulgação</p>
+        <p className="section-label">{t("home.videoLabel")}</p>
         <h2 className="font-display mt-2 text-lg font-semibold tracking-[0.15em] text-foreground uppercase sm:text-xl">
-          O Carrista em imagem
+          {t("home.videoTitle")}
         </h2>
       </motion.div>
 

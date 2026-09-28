@@ -5,7 +5,8 @@ import { useInView } from "framer-motion";
 import Image from "next/image";
 import { SectionShell } from "../section-shell";
 import { PdfHorizontalViewer } from "../pdf-horizontal-viewer";
-import { BRASAO_ALT, BRASAO_SRC, HISTORIA_SLIDESHOW_PDF } from "../../lib/site-assets";
+import { BRASAO_SRC, HISTORIA_SLIDESHOW_PDF } from "../../lib/site-assets";
+import { useT } from "../i18n/locale-provider";
 import {
   DEFAULT_MARCOS,
   loadMarcosFromJson,
@@ -53,6 +54,7 @@ function Timeline({ marcos }: { marcos: HistoriaMarco[] }) {
 }
 
 export function HistoriaSection() {
+  const { t } = useT();
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { amount: 0.12, once: true });
 
@@ -68,9 +70,9 @@ export function HistoriaSection() {
     <div ref={sectionRef} className="scroll-mt-20">
       <SectionShell
         id="historia"
-        label="Secção 02 · História"
-        title="Legado do RC4"
-        description="A história do Regimento de Cavalaria 4 e de Santa Margarida — preservada para quem serviu, para as famílias e para as gerações futuras."
+        label={t("home.historyLabel")}
+        title={t("home.historyTitle")}
+        description={t("home.historyDescription")}
         alt
       >
         {null}
@@ -81,7 +83,7 @@ export function HistoriaSection() {
           <div className="video-player-shell historia-crest-shell flex items-center justify-center">
             <Image
               src={BRASAO_SRC}
-              alt={BRASAO_ALT}
+              alt={t("home.crestAlt")}
               width={1536}
               height={1024}
               className="h-full w-full object-contain object-center"
@@ -94,7 +96,7 @@ export function HistoriaSection() {
       <PdfHorizontalViewer
         pdfUrl={HISTORIA_SLIDESHOW_PDF}
         active={inView}
-        label="História do RC4"
+        label={t("home.historyPdf")}
       />
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">

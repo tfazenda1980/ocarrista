@@ -1,41 +1,20 @@
+"use client";
+
 import { SectionShell } from "../section-shell";
 import { IconPlatform } from "../icons";
 import { gescoExternalLink } from "../../lib/gesco";
-
-const features = [
-  {
-    label: "Competências",
-    desc: "Registo e acompanhamento de competências técnicas, táticas e operacionais.",
-  },
-  {
-    label: "Formação",
-    desc: "Planos formativos, qualificações e evolução por função e especialidade.",
-  },
-  {
-    label: "Avaliação",
-    desc: "Critérios de avaliação, histórico e requisitos para progressão.",
-  },
-  {
-    label: "Prontidão",
-    desc: "Indicadores de prontidão operacional ao nível individual e de equipa.",
-  },
-  {
-    label: "Relatórios",
-    desc: "Dashboards e sínteses para comando e gestão de recursos humanos.",
-  },
-  {
-    label: "Acesso restrito",
-    desc: "Plataforma interna — uso autorizado no âmbito institucional.",
-  },
-];
+import { useT } from "../i18n/locale-provider";
 
 export function GescoSection() {
+  const { t, messages } = useT();
+  const features = messages.gesco.features;
+
   return (
     <SectionShell
       id="gesco"
-      label="Secção 05 · Plataforma interna"
-      title="GesCO"
-      description="Gestão de Competências Operacionais — plataforma interna de apoio à formação, avaliação e prontidão no Exército."
+      label={t("gesco.label")}
+      title={t("gesco.title")}
+      description={t("gesco.description")}
       alt
     >
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
@@ -48,24 +27,22 @@ export function GescoSection() {
                 </div>
                 <div>
                   <p className="font-display text-sm font-semibold tracking-wider uppercase">
-                    GesCO
+                    {t("gesco.title")}
                   </p>
-                  <p className="font-mono text-[0.6rem] text-muted">
-                    Gestão de Competências Operacionais
-                  </p>
+                  <p className="font-mono text-[0.6rem] text-muted">{t("gesco.subtitle")}</p>
                 </div>
               </div>
               <span className="flex items-center gap-2 font-mono text-[0.65rem] text-gold">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-                INTERNO
+                {t("gesco.internal")}
               </span>
             </div>
 
             <div className="space-y-3 font-mono text-xs">
               {[
-                { cmd: "status", out: "Plataforma operacional — ambiente beta" },
-                { cmd: "competencias --sync", out: "Catálogo de competências atualizado" },
-                { cmd: "prontidao --report", out: "Relatório de prontidão · Q2 2026" },
+                { cmd: "status", out: t("gesco.cmd1") },
+                { cmd: "competencias --sync", out: t("gesco.cmd2") },
+                { cmd: "prontidao --report", out: t("gesco.cmd3") },
               ].map((line) => (
                 <div key={line.cmd} className="rounded border border-gold/10 bg-background/60 p-3">
                   <p className="text-gold">
@@ -80,14 +57,9 @@ export function GescoSection() {
 
         <div>
           <p className="mb-4 font-display text-sm tracking-[0.12em] text-gold uppercase">
-            Plataforma interna
+            {t("gesco.platform")}
           </p>
-          <p className="mb-8 leading-relaxed text-muted">
-            O GesCO não é um serviço público do site O Carrista. É a ferramenta
-            institucional para gerir competências operacionais — formação,
-            avaliação e indicadores de prontidão — com acesso reservado a
-            utilizadores autorizados.
-          </p>
+          <p className="mb-8 leading-relaxed text-muted">{t("gesco.body")}</p>
 
           <div className="grid gap-4 sm:grid-cols-2">
             {features.map((f) => (
@@ -103,11 +75,9 @@ export function GescoSection() {
             ))}
           </div>
 
-          <p className="mt-8 text-sm text-muted/90">
-            Utilizadores com credenciais podem aceder ao ambiente beta.
-          </p>
+          <p className="mt-8 text-sm text-muted/90">{t("gesco.accessNote")}</p>
           <a {...gescoExternalLink} className="btn-outline mt-4 inline-flex">
-            Aceder à plataforma (interno)
+            {t("gesco.cta")}
           </a>
         </div>
       </div>

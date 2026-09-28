@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode } from "react";
 import { motion } from "framer-motion";
+import { useT } from "../i18n/locale-provider";
 
 type EventCardProps = {
   title: string;
@@ -22,6 +23,7 @@ export function EventCard({
   href,
   backgroundImage,
 }: EventCardProps) {
+  const { t } = useT();
   const inner = (
     <>
       {backgroundImage && (
@@ -54,7 +56,7 @@ export function EventCard({
         <p className="text-sm leading-relaxed text-muted sm:text-base">{description}</p>
         {href && (
           <p className="mt-4 font-display text-[0.65rem] tracking-[0.2em] text-gold uppercase opacity-0 transition-opacity group-hover:opacity-100">
-            Ver evento →
+            {t("home.viewEvent")}
           </p>
         )}
       </div>

@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import type { EventData } from "../../../lib/events/types";
+import { useT } from "../../i18n/locale-provider";
 
 export function EventFooter({ event }: { event: EventData }) {
+  const { t } = useT();
   return (
     <footer className="border-t border-gold/15 bg-background py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -13,7 +17,7 @@ export function EventFooter({ event }: { event: EventData }) {
             <p className="mt-2 text-sm text-muted">{event.contacts.organizer}</p>
           </div>
           <div>
-            <p className="section-label mb-3">Contactos</p>
+            <p className="section-label mb-3">{t("common.contacts")}</p>
             <a
               href={`mailto:${event.contacts.email}`}
               className="text-sm text-gold hover:underline"
@@ -22,18 +26,18 @@ export function EventFooter({ event }: { event: EventData }) {
             </a>
           </div>
           <div>
-            <p className="section-label mb-3">Legal</p>
+            <p className="section-label mb-3">{t("common.legal")}</p>
             <ul className="space-y-2 text-sm text-muted">
               {event.legal?.terms && (
                 <li>
                   <Link href={event.legal.terms} className="hover:text-gold">
-                    Termos e condições
+                    {t("common.terms")}
                   </Link>
                 </li>
               )}
               <li>
                 <Link href="/" className="hover:text-gold">
-                  Voltar a O Carrista
+                  {t("common.backCarrista")}
                 </Link>
               </li>
             </ul>

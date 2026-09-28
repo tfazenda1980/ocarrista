@@ -3,10 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { LEMA_QCAV_RC4 } from "../lib/site-assets";
+import { useT } from "./i18n/locale-provider";
 
 export function LemaSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { amount: 0.45, once: true });
+  const { t } = useT();
 
   return (
     <section
@@ -23,7 +25,7 @@ export function LemaSection() {
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       >
-        <p className="section-label mb-6">Lema do QCav e do RC4</p>
+        <p className="section-label mb-6">{t("home.mottoLabel")}</p>
         <motion.blockquote
           className="font-display text-2xl font-medium leading-snug tracking-[0.08em] text-foreground uppercase sm:text-3xl md:text-4xl lg:text-5xl"
           initial={{ opacity: 0, scale: 0.97 }}

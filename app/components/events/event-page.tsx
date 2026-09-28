@@ -17,6 +17,7 @@ import { EventFooter } from "./sections/event-footer";
 import { EditionPlaceholder } from "./sections/edition-placeholder";
 import { EventArchiveEdition } from "./sections/event-archive-edition";
 import { StickyBackLink } from "../sticky-back-link";
+import { useT } from "../i18n/locale-provider";
 
 type EventPageProps = {
   event: EventData;
@@ -31,6 +32,7 @@ export function EventPageView({
   activeYear,
   seriesTitle,
 }: EventPageProps) {
+  const { t } = useT();
   const published = event.published !== false;
   const showEditionBar = seriesYears && activeYear;
   const useAxesLayout =
@@ -49,7 +51,7 @@ export function EventPageView({
         )}
         <StickyBackLink
           href="/#eventos"
-          label="Agenda O Carrista"
+          label={t("common.agenda")}
           variant={showEditionBar ? "workshop" : "default"}
         />
         <main>

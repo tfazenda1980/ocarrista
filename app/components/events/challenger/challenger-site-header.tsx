@@ -3,18 +3,20 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { UnitCrest } from "../../unit-crest";
-
-const anchorLinks = [
-  { href: "#finalidade", label: "Finalidade" },
-  { href: "#provas", label: "Provas" },
-  { href: "#guarnicoes", label: "Guarnições" },
-  { href: "#classificacao", label: "Classificação" },
-  { href: "#contactos", label: "Contactos" },
-] as const;
+import { LanguageSwitcher } from "../../i18n/language-switcher";
+import { useT } from "../../i18n/locale-provider";
 
 export function ChallengerSiteHeader({ edition }: { edition: string }) {
+  const { t } = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const anchorLinks = [
+    { href: "#finalidade", label: t("challenger.navPurpose") },
+    { href: "#provas", label: t("challenger.navProvas") },
+    { href: "#guarnicoes", label: t("challenger.navCrews") },
+    { href: "#classificacao", label: t("challenger.navClass") },
+    { href: "#contactos", label: t("challenger.navContacts") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -43,7 +45,7 @@ export function ChallengerSiteHeader({ edition }: { edition: string }) {
             </span>
           </div>
         </Link>
-        <nav className="hidden items-center gap-5 lg:flex" aria-label="Secções do Challenger">
+        <nav className="hidden items-center gap-5 lg:flex" aria-label={t("challenger.navAria")}>
           {anchorLinks.map((link) => (
             <a
               key={link.href}
@@ -53,15 +55,19 @@ export function ChallengerSiteHeader({ edition }: { edition: string }) {
               {link.label}
             </a>
           ))}
+          <LanguageSwitcher />
         </nav>
-        <button
-          type="button"
-          className="font-display text-xs tracking-[0.14em] text-gold uppercase lg:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-        >
-          Menu
-        </button>
+        <div className="flex items-center gap-3 lg:hidden">
+          <LanguageSwitcher />
+          <button
+            type="button"
+            className="font-display text-xs tracking-[0.14em] text-gold uppercase"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+          >
+            {t("nav.menu")}
+          </button>
+        </div>
       </div>
       {open && (
         <nav className="border-t border-gold/15 bg-background/95 px-4 py-4 lg:hidden">

@@ -4,13 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { UnitCrest } from "../unit-crest";
-
-const anchorLinks = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#eixos", label: "Eixos" },
-  { href: "#oradores", label: "Oradores" },
-  { href: "#inscricao", label: "Inscrição" },
-];
+import { LanguageSwitcher } from "../i18n/language-switcher";
+import { useT } from "../i18n/locale-provider";
 
 type EventSiteHeaderProps = {
   edition: string;
@@ -18,8 +13,15 @@ type EventSiteHeaderProps = {
 };
 
 export function EventSiteHeader({ edition, subtitle }: EventSiteHeaderProps) {
+  const { t } = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const anchorLinks = [
+    { href: "#sobre", label: t("workshop.navAbout") },
+    { href: "#eixos", label: t("workshop.navAxes") },
+    { href: "#oradores", label: t("workshop.navSpeakers") },
+    { href: "#inscricao", label: t("workshop.navRegister") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -41,7 +43,7 @@ export function EventSiteHeader({ edition, subtitle }: EventSiteHeaderProps) {
           <UnitCrest size="nav" priority />
           <div className="flex flex-col">
             <span className="font-display text-xs font-semibold tracking-[0.18em] text-foreground uppercase sm:text-sm">
-              O Carrista
+              {t("brand.name")}
             </span>
             <span className="text-[0.55rem] tracking-[0.2em] text-gold-dim uppercase">
               {subtitle ?? edition}
@@ -60,18 +62,22 @@ export function EventSiteHeader({ edition, subtitle }: EventSiteHeaderProps) {
               {link.label}
             </motion.a>
           ))}
+          <LanguageSwitcher />
         </nav>
 
-        <button
-          type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20 lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          <span className={`h-px w-5 bg-gold ${open ? "translate-y-[5px] rotate-45" : ""}`} />
-          <span className={`h-px w-5 bg-gold ${open ? "opacity-0" : ""}`} />
-          <span className={`h-px w-5 bg-gold ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher />
+          <button
+            type="button"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20"
+            onClick={() => setOpen(!open)}
+            aria-label={t("nav.menu")}
+          >
+            <span className={`h-px w-5 bg-gold ${open ? "translate-y-[5px] rotate-45" : ""}`} />
+            <span className={`h-px w-5 bg-gold ${open ? "opacity-0" : ""}`} />
+            <span className={`h-px w-5 bg-gold ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {open && (

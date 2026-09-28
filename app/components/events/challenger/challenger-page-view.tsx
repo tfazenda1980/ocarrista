@@ -12,6 +12,7 @@ import { ChallengerProvas } from "./challenger-provas";
 import { ChallengerCrews } from "./challenger-crews";
 import { ChallengerClassification } from "./challenger-classification";
 import { ChallengerContacts } from "./challenger-contacts";
+import { useT } from "../../i18n/locale-provider";
 
 type ChallengerPageViewProps = {
   event: ChallengerEventData;
@@ -26,6 +27,7 @@ export function ChallengerPageView({
   seriesYears,
   activeYear,
 }: ChallengerPageViewProps) {
+  const { t } = useT();
   const showEditionBar = seriesYears && activeYear && seriesYears.length >= 1;
 
   return (
@@ -38,12 +40,12 @@ export function ChallengerPageView({
             years={seriesYears}
             activeYear={activeYear}
             basePath="/eventos/challenger"
-            ariaLabel="Edições do Challenger"
+            ariaLabel={t("challenger.editions")}
           />
         )}
         <StickyBackLink
           href="/#eventos"
-          label="Agenda O Carrista"
+          label={t("common.agenda")}
           variant={showEditionBar ? "workshop" : "default"}
         />
         <main>

@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import type { CncDisciplineResources, CncPdfResource } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
 import { CncDocumentPreview } from "./cnc-document-preview";
+import { useT } from "../../i18n/locale-provider";
 
 type ResourceKey = keyof CncDisciplineResources;
 
-const HINTS: Record<ResourceKey, string> = {
-  ordens: "Ordens de entrada — deslize para folhear o documento",
-  croquis: "Croqui do percurso — deslize para folhear o documento",
-  resultados: "Resultados — deslize para folhear o documento",
-};
-
 export function CncPdfGroup({ resources }: { resources: CncDisciplineResources }) {
+  const { t } = useT();
+  const HINTS: Record<ResourceKey, string> = {
+    ordens: t("cnc.ordensHint"),
+    croquis: t("cnc.croquisHint"),
+    resultados: t("cnc.resultadosHint"),
+  };
   const [openKey, setOpenKey] = useState<ResourceKey | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const open = openKey ? resources[openKey] : null;

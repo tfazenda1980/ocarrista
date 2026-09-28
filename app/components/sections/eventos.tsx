@@ -1,77 +1,43 @@
+"use client";
+
 import { SectionShell } from "../section-shell";
 import { EventCard } from "../events/event-card";
 import { IconCalendar, IconTarget, IconShield } from "../icons";
-import { CNC_SRC, CHALLENGER_SRC, WORKSHOP_26_SRC } from "../../lib/site-assets";
+import { CNC_SRC, CHALLENGER_SRC, WORKSHOP_26_SRC, CASTELO_SRC } from "../../lib/site-assets";
+import { useT } from "../i18n/locale-provider";
 
-const events = [
-  {
-    title: "Dia do Quartel da Cavalaria e do Ex-RC4",
-    meta: "EDIÇÃO ANUAL · EFEMÉRIDE",
-    description:
-      "Efeméride que evoca o combate em Viella, onde 264 cavaleiros do RC 4 desenvolveram uma notável carga de Cavalaria sob o comando do Coronel John Campbell — homenagem, memória e convívio no quartel.",
-    icon: <IconShield />,
-  },
-  {
-    title: "Concurso Nacional Combinado",
-    meta: "25 E 26 SET 2026 · ENSINO · CROSS · OBSTÁCULOS",
-    description:
-      "Prova equestre de Concurso Completo (CCE): Ensino, Cross e Obstáculos — 25 e 26 de Setembro no Centro Hípico do Quartel da Cavalaria.",
-    icon: <IconTarget />,
-    href: "/eventos/cnc",
-    backgroundImage: CNC_SRC,
-  },
-  {
-    title: "Workshop de Carros de Combate",
-    meta: "EDIÇÃO ANUAL · 2.ª EDIÇÃO 2026",
-    description:
-      "Sessões técnicas e demonstrações sobre viaturas blindadas, manutenção e doutrina — para entusiastas e profissionais.",
-    icon: <IconCalendar />,
-    href: "/eventos/workshop",
-    backgroundImage: WORKSHOP_26_SRC,
-  },
-  {
-    title: "Marcha a Cavalo à Batalha",
-    meta: "EDIÇÃO ANUAL · ARMA DA CAVALARIA",
-    description:
-      "Atividade da Arma da Cavalaria em honra do patrono Mouzinho de Albuquerque. O Quartel da Cavalaria organiza o percurso, que culmina na Batalha — tradição equestre e identidade da cavalaria portuguesa.",
-    icon: <IconShield />,
-  },
-  {
-    title: "São Martinho",
-    meta: "EDIÇÃO ANUAL · FESTA DA COMUNIDADE",
-    description:
-      "A nossa festa anual, onde celebramos também os valores da lenda de São Martinho como valores nossos — partilha, generosidade e união.",
-    icon: <IconCalendar />,
-  },
-  {
-    title: "A Noite de Fados",
-    meta: "EDIÇÃO ANUAL",
-    description:
-      "A combinação entre tradição, união e identidade do Carrista — uma noite de fado, memória e camaradagem entre a comunidade.",
-    icon: <IconCalendar />,
-  },
-  {
-    title: 'Challenger "O Carrista"',
-    meta: "EDIÇÃO ANUAL · DESTREZA",
-    description:
-      "Prova de destreza técnica e física para as guarnições de carristas — superação, precisão e espírito de equipa em ambiente competitivo.",
-    icon: <IconTarget />,
-    href: "/eventos/challenger",
-    backgroundImage: CHALLENGER_SRC,
-  },
+const eventMeta = [
+  { icon: <IconShield />, href: undefined, backgroundImage: undefined },
+  { icon: <IconTarget />, href: "/eventos/cnc", backgroundImage: CNC_SRC },
+  { icon: <IconCalendar />, href: "/eventos/workshop", backgroundImage: WORKSHOP_26_SRC },
+  { icon: <IconShield />, href: undefined, backgroundImage: undefined },
+  { icon: <IconCalendar />, href: undefined, backgroundImage: undefined },
+  { icon: <IconCalendar />, href: undefined, backgroundImage: undefined },
+  { icon: <IconTarget />, href: "/eventos/challenger", backgroundImage: CHALLENGER_SRC },
+  { icon: <IconTarget />, href: "/eventos/imgc", backgroundImage: CASTELO_SRC },
 ];
 
 export function EventosSection() {
+  const { t, messages } = useT();
+
   return (
     <SectionShell
       id="eventos"
-      label="Secção 01 · Eventos"
-      title="Agenda Anual"
-      description="Eventos com edições anuais que marcam o calendário do Carrista — do Quartel da Cavalaria de Santa Margarida aos desafios e tradições do Ex-RC4."
+      label={t("home.eventsLabel")}
+      title={t("home.eventsTitle")}
+      description={t("home.eventsDescription")}
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((event) => (
-          <EventCard key={event.title} {...event} />
+        {messages.home.events.map((event, index) => (
+          <EventCard
+            key={event.title}
+            title={event.title}
+            meta={event.meta}
+            description={event.description}
+            icon={eventMeta[index]?.icon}
+            href={eventMeta[index]?.href}
+            backgroundImage={eventMeta[index]?.backgroundImage}
+          />
         ))}
       </div>
     </SectionShell>

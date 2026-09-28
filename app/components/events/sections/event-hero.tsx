@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { EventData } from "../../../lib/events/types";
 import { EventCountdown } from "../countdown";
+import { useT } from "../../i18n/locale-provider";
 
 type EventHeroProps = {
   event: EventData;
@@ -13,6 +14,7 @@ type EventHeroProps = {
 };
 
 export function EventHero({ event, showRegistrationCta = true }: EventHeroProps) {
+  const { t } = useT();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -86,7 +88,7 @@ export function EventHero({ event, showRegistrationCta = true }: EventHeroProps)
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.28 }}
           >
-            <p className="section-label mb-3">Contagem decrescente</p>
+            <p className="section-label mb-3">{t("common.countdown")}</p>
             <EventCountdown targetDate={event.date} />
           </motion.div>
         )}
@@ -103,12 +105,12 @@ export function EventHero({ event, showRegistrationCta = true }: EventHeroProps)
                 {event.registration.cta}
               </a>
               <a href="#eixos" className="btn-outline">
-                Ver eixos e programa
+                {t("workshop.axesCta")}
               </a>
             </>
           ) : (
             <Link href="/eventos/workshop/2026" className="btn-primary">
-              Ver edição 2026
+              {t("workshop.edition2026")}
             </Link>
           )}
         </motion.div>

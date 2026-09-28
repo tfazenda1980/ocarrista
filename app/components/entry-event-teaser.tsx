@@ -7,12 +7,14 @@ import type {
   EntryTeaserInfo,
   EntryUpcomingPreview,
 } from "../lib/events/entry-teaser";
+import { useT } from "./i18n/locale-provider";
 
 type EntryEventTeaserProps =
   | { teaser: EntryTeaserInfo; preview?: null; delay?: number }
   | { teaser?: null; preview: EntryUpcomingPreview | null; delay?: number };
 
 export function EntryEventTeaser({ teaser, preview, delay = 0.28 }: EntryEventTeaserProps) {
+  const { t } = useT();
   if (teaser) {
     return (
       <motion.div
@@ -27,8 +29,8 @@ export function EntryEventTeaser({ teaser, preview, delay = 0.28 }: EntryEventTe
         >
           <div className="min-w-0 flex-1">
             <p className="entry-teaser-urgent mb-0.5 font-mono text-[0.55rem] tracking-[0.18em] text-gold uppercase">
-              Destaque · {teaser.daysRemaining}{" "}
-              {teaser.daysRemaining === 1 ? "dia" : "dias"}
+              {t("teaser.highlight")} · {teaser.daysRemaining}{" "}
+              {teaser.daysRemaining === 1 ? t("teaser.day") : t("teaser.days")}
             </p>
             <p className="font-display text-base font-bold leading-tight tracking-wide text-gold uppercase sm:text-lg">
               {teaser.edition}
@@ -40,7 +42,7 @@ export function EntryEventTeaser({ teaser, preview, delay = 0.28 }: EntryEventTe
               {teaser.dateDisplay} · {teaser.location}
             </p>
             <span className="btn-primary mt-2 inline-flex px-3 py-1.5 text-[0.6rem]">
-              Entrar no evento →
+              {t("teaser.enterEvent")}
             </span>
           </div>
           <div className="entry-teaser-thumb relative h-14 w-14 shrink-0 overflow-hidden border border-gold/25 bg-surface/80 sm:h-[4.25rem] sm:w-[4.25rem]">
@@ -68,7 +70,7 @@ export function EntryEventTeaser({ teaser, preview, delay = 0.28 }: EntryEventTe
         <div className="entry-teaser-placeholder-inner border border-gold/18 bg-background/45 px-3.5 py-2.5 text-left sm:px-4 sm:py-3">
           <div className="absolute inset-0 entry-teaser-placeholder-shine" aria-hidden />
           <div className="relative z-10">
-            <p className="section-label mb-1 text-[0.5rem]">Próximo destaque</p>
+            <p className="section-label mb-1 text-[0.5rem]">{t("teaser.nextHighlight")}</p>
             <p className="font-display text-sm font-semibold tracking-wide text-gold/90 uppercase sm:text-base">
               {preview.edition}
             </p>
@@ -79,15 +81,19 @@ export function EntryEventTeaser({ teaser, preview, delay = 0.28 }: EntryEventTe
               {preview.dateDisplay} · {preview.location}
             </p>
             <p className="mt-1.5 text-[0.65rem] leading-snug text-muted/90 sm:text-xs">
-              Alerta três semanas antes do evento.
+              {t("teaser.alert")}
               {preview.daysUntilTeaser > 0 &&
-                ` Daqui a ${preview.daysUntilTeaser} ${preview.daysUntilTeaser === 1 ? "dia" : "dias"}.`}
+                t("teaser.inDays", {
+                  n: preview.daysUntilTeaser,
+                  unit:
+                    preview.daysUntilTeaser === 1 ? t("teaser.day") : t("teaser.days"),
+                })}
             </p>
             <Link
               href={preview.href}
               className="mt-1.5 inline-block font-display text-[0.55rem] tracking-[0.16em] text-gold uppercase hover:underline"
             >
-              Ver evento →
+              {t("teaser.viewEvent")}
             </Link>
           </div>
         </div>

@@ -5,6 +5,7 @@ import type { EventData, EventModerator, EventSpeaker } from "../../../lib/event
 import { speakerHashId } from "../../../lib/events/speaker-links";
 import { resolvePersonProfile } from "../../../lib/events/person-profile";
 import { EventPersonPhoto } from "./event-person-photo";
+import { useT } from "../../i18n/locale-provider";
 
 function moderatorHashId(mod: EventModerator): string {
   return `moderador-${mod.id}`;
@@ -17,6 +18,7 @@ export function EventSpeakers({
   event: EventData;
   hideModerators?: boolean;
 }) {
+  const { t } = useT();
   function openSpeaker(speaker: EventSpeaker) {
     window.location.hash = speakerHashId(speaker);
   }
@@ -29,9 +31,9 @@ export function EventSpeakers({
     <section id="oradores" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">04 · Oradores</p>
+          <p className="section-label mb-3">{t("workshop.speakersLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            As vozes do Workshop
+            {t("workshop.speakersTitle")}
           </h2>
           <div className="gold-line mb-12 w-24" />
         </MotionReveal>
@@ -56,7 +58,7 @@ export function EventSpeakers({
                   {speaker.bio}
                 </p>
                 <span className="mt-4 inline-block font-display text-[0.6rem] tracking-[0.18em] text-gold uppercase opacity-0 transition-opacity group-hover:opacity-100">
-                  Ver perfil →
+                  {t("workshop.readMore")}
                 </span>
               </button>
             </MotionReveal>
@@ -65,7 +67,7 @@ export function EventSpeakers({
 
         {!hideModerators && event.moderators && event.moderators.length > 0 && (
           <MotionReveal className="mt-16">
-            <p className="section-label mb-3">Moderadores</p>
+            <p className="section-label mb-3">{t("workshop.moderators")}</p>
             <h3 className="font-display mb-6 text-xl font-semibold tracking-wide text-foreground uppercase sm:text-2xl">
               Condução dos painéis
             </h3>
@@ -89,14 +91,14 @@ export function EventSpeakers({
                       <p className="font-display text-base font-semibold tracking-wide text-foreground uppercase">
                         {mod.name}
                       </p>
-                      <p className="mt-1 text-sm text-gold">Moderador</p>
+                      <p className="mt-1 text-sm text-gold">{t("workshop.moderator")}</p>
                       {bio && (
                         <p className="mt-3 text-sm leading-relaxed text-muted line-clamp-2">
                           {bio}
                         </p>
                       )}
                       <span className="mt-4 inline-block font-display text-[0.6rem] tracking-[0.18em] text-gold uppercase opacity-0 transition-opacity group-hover:opacity-100">
-                        Ver perfil →
+                        {t("workshop.readMore")}
                       </span>
                     </button>
                   </li>

@@ -2,6 +2,7 @@
 
 import { MotionReveal } from "../../motion-reveal";
 import type { ChallengerProva, ChallengerStanding } from "@/app/lib/challenger/types";
+import { useT } from "../../i18n/locale-provider";
 
 /** Extrai «1.1», «2», etc. do título completo da prova. */
 export function provaShortLabel(title: string, index: number): string {
@@ -85,13 +86,14 @@ function StandingsTable({
   showProvisionalColumns?: boolean;
   showFinalColumns?: boolean;
 }) {
+  const { t } = useT();
   if (standings.length === 0) {
     return (
       <div className="card-tactical p-6">
         <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-gold uppercase">
           {title}
         </h3>
-        <p className="mt-3 text-sm text-muted">Classificação ainda não publicada.</p>
+        <p className="mt-3 text-sm text-muted">{t("challenger.classEmpty")}</p>
       </div>
     );
   }
@@ -106,7 +108,7 @@ function StandingsTable({
       <h3 className="font-display mb-3 text-sm font-semibold tracking-[0.12em] text-gold uppercase">
         {title}
       </h3>
-      <p className="mb-3 text-[0.65rem] text-muted sm:hidden">Deslize para ver a tabela completa →</p>
+      <p className="mb-3 text-[0.65rem] text-muted sm:hidden">{t("challenger.swipe")}</p>
       <div className="challenger-standings-scroll -mx-1 overflow-x-auto overscroll-x-contain px-1 pb-1">
         <table className="w-max min-w-full border-collapse text-left text-xs sm:text-sm">
           <thead>
@@ -116,7 +118,7 @@ function StandingsTable({
                 className="sticky left-0 z-20 bg-surface-elevated px-1.5 py-2 sm:px-2"
               >
                 <span className="text-[0.6rem] tracking-[0.08em] text-muted uppercase sm:text-[0.65rem]">
-                  Pos.
+                  {t("challenger.pos")}
                 </span>
               </th>
               <th
@@ -124,27 +126,27 @@ function StandingsTable({
                 className="sticky left-[2.25rem] z-20 min-w-[5.5rem] bg-surface-elevated px-1.5 py-2 sm:left-[2.5rem] sm:min-w-[6.5rem] sm:px-2"
               >
                 <span className="text-[0.6rem] tracking-[0.08em] text-muted uppercase sm:text-[0.65rem]">
-                  Guarnição
+                  {t("challenger.crew")}
                 </span>
               </th>
               {showProvisionalColumns && provColSpan > 0 && (
                 <th colSpan={provColSpan} className={thGroup}>
-                  Provas
+                  {t("challenger.provas")}
                 </th>
               )}
               {showProvisionalColumns && provSummarySpan > 0 && (
                 <th colSpan={provSummarySpan} className={thGroup}>
-                  Class. provisória
+                  {t("challenger.provClass")}
                 </th>
               )}
               {showFinalColumns && pistaSpan > 0 && (
                 <th colSpan={pistaSpan} className={thGroup}>
-                  Pista Carrista
+                  {t("challenger.track")}
                 </th>
               )}
               {showFinalColumns && finalSpan > 0 && (
                 <th colSpan={finalSpan} className={thGroup}>
-                  Class. final
+                  {t("challenger.finalClass")}
                 </th>
               )}
             </tr>
@@ -161,16 +163,16 @@ function StandingsTable({
                 ))}
               {showProvisionalColumns && (
                 <>
-                  <th className={`${thCol} border-l border-gold/15`}>T. final</th>
-                  <th className={thCol}>T. pen.</th>
-                  <th className={thCol}>Pts pen.</th>
+                  <th className={`${thCol} border-l border-gold/15`}>{t("challenger.tFinal")}</th>
+                  <th className={thCol}>{t("challenger.tPen")}</th>
+                  <th className={thCol}>{t("challenger.ptsPen")}</th>
                 </>
               )}
               {showFinalColumns && (
                 <>
-                  <th className={`${thCol} border-l border-gold/15`}>Tempo</th>
-                  <th className={thCol}>Pen.</th>
-                  <th className={`${thCol} border-l border-gold/15`}>T. Challenger</th>
+                  <th className={`${thCol} border-l border-gold/15`}>{t("challenger.time")}</th>
+                  <th className={thCol}>{t("challenger.pen")}</th>
+                  <th className={`${thCol} border-l border-gold/15`}>{t("challenger.tChallenger")}</th>
                 </>
               )}
             </tr>
@@ -270,13 +272,14 @@ export function ChallengerClassification({
   showProvisional,
   showFinal,
 }: ChallengerClassificationProps) {
+  const { t } = useT();
   return (
     <section id="classificacao" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">04 · Classificação</p>
+          <p className="section-label mb-3">{t("challenger.classLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Classificação
+            {t("challenger.classTitle")}
           </h2>
           <div className="gold-line mb-10 w-24" />
         </MotionReveal>
@@ -284,7 +287,7 @@ export function ChallengerClassification({
         {showProvisional || showFinal ? (
           <MotionReveal delay={0.05}>
             <StandingsTable
-              title="Classificação"
+              title={t("challenger.classTitle")}
               standings={standings}
               provas={provas}
               showProvisionalColumns={showProvisional}
@@ -293,7 +296,7 @@ export function ChallengerClassification({
           </MotionReveal>
         ) : (
           <p className="text-sm text-muted">
-            As classificações serão publicadas pela organização durante o evento.
+            {t("challenger.classLater")}
           </p>
         )}
       </div>

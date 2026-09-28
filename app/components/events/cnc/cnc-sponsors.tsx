@@ -2,17 +2,19 @@
 
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncSponsors({ event }: { event: CncEventData }) {
+  const { t } = useT();
   const sponsors = event.sponsors.filter((sponsor) => sponsor.logo);
 
   return (
     <section id="patrocinadores" className="event-section scroll-mt-24 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">10 · Patrocinadores</p>
+          <p className="section-label mb-3">{t("cnc.sponsorsLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Patrocinadores
+            {t("cnc.sponsorsTitle")}
           </h2>
           <div className="gold-line mb-10 w-24" />
         </MotionReveal>
@@ -20,7 +22,7 @@ export function CncSponsors({ event }: { event: CncEventData }) {
         {sponsors.length === 0 ? (
           <MotionReveal delay={0.08}>
             <p className="max-w-xl text-muted">
-              Os patrocinadores desta edição serão publicados em breve.
+              {t("cnc.sponsorsEmpty")}
             </p>
           </MotionReveal>
         ) : (

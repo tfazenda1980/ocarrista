@@ -4,26 +4,27 @@ import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfGroup, CncOpenableDocument } from "./cnc-pdf-group";
 import { CncPrizesGallery } from "./cnc-prizes-gallery";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncDisciplines({ event }: { event: CncEventData }) {
+  const { t } = useT();
   return (
     <section id="provas" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">05 · Provas</p>
+          <p className="section-label mb-3">{t("cnc.classesLabel")}</p>
           <h2 className="display-heading mb-4 text-3xl font-semibold sm:text-4xl">
-            Provas e documentação
+            {t("cnc.classesTitle")}
           </h2>
           <p className="mb-10 max-w-2xl text-muted">
-            Em cada categoria encontram subsetores com ordens de entrada, croquis e resultados.
-            A galeria de prémios é um documento em largura total com fotografias por prova.
+            {t("cnc.classesIntro")}
           </p>
           <div className="gold-line mb-12 w-24" />
         </MotionReveal>
 
         <nav
           className="mb-12 flex flex-wrap gap-3 border-b border-gold/15 pb-6"
-          aria-label="Subsecções de provas"
+          aria-label={t("cnc.classesNav")}
         >
           {event.disciplines.map((d) => (
             <a
@@ -66,7 +67,7 @@ export function CncDisciplines({ event }: { event: CncEventData }) {
                         ) : section.resultados ? (
                           <CncOpenableDocument
                             resource={section.resultados}
-                            hint="Resultados finais — deslize para folhear o documento"
+                            hint={t("cnc.resultsHint")}
                           />
                         ) : null}
                       </div>

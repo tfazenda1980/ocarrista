@@ -233,7 +233,42 @@ export async function notifyAdminCncMessage(params: {
   return { sent: true };
 }
 
-export type MemberEmailRecipient = {
+export async function notifyAdminImgcMessage(params: {
+  year: string;
+  name: string;
+  email: string;
+  body: string;
+}): Promise<{ sent: boolean; reason?: string }> {
+  const to = adminNotifyEmail();
+  const from = fromAddress();
+  const resend = resendClient();
+
+  if (!to || !from || !resend) {
+    console.info("[email] IMGC sugestões (não enviado):", params);
+    return { sent: false, reason: "email_nao_configurado" };
+  }
+
+  const adminUrl = `${siteUrl()}/admin/imgc/${encodeURIComponent(params.year)}`;
+  const htmlBody = escapeHtml(params.body).replace(/\n/g, "<br/>");
+
+  await resend.emails.send({
+    from,
+    to,
+    replyTo: params.email,
+    subject: `IMGC ${params.year} — Suggestion`,
+    html: `
+      <p>New suggestion for the International Master Gunner Conference ${escapeHtml(params.year)}.</p>
+      <p><strong>Name:</strong> ${escapeHtml(params.name)}<br/>
+      <strong>Email:</strong> ${escapeHtml(params.email)}</p>
+      <div style="margin:1.25em 0;line-height:1.6">${htmlBody}</div>
+      <p><a href="${adminUrl}">Open IMGC admin</a>. Reply to this email to contact the sender.</p>
+    `,
+  });
+
+  return { sent: true };
+}
+
+type MemberEmailRecipient = {
   name: string;
   email: string;
 };

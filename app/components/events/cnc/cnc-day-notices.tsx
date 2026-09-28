@@ -1,8 +1,10 @@
 "use client";
 
 import type { CncNotice } from "@/app/lib/events/cnc-types";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncDayNotices({ notices }: { notices: CncNotice[] }) {
+  const { t } = useT();
   const active = notices.filter((notice) => notice.active);
   if (active.length === 0) return null;
 
@@ -16,7 +18,7 @@ export function CncDayNotices({ notices }: { notices: CncNotice[] }) {
         {active.map((notice) => (
           <p key={notice.id} className="text-sm font-semibold leading-snug sm:text-base">
             <span className="mr-2 font-display text-[0.65rem] tracking-[0.16em] text-background/75 uppercase">
-              Aviso importante
+              {t("cnc.notice")}
             </span>
             {notice.body}
           </p>

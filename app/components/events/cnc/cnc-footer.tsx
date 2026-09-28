@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncFooter({ event }: { event: CncEventData }) {
+  const { t } = useT();
   return (
     <footer className="border-t border-gold/15 bg-background py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -13,9 +17,9 @@ export function CncFooter({ event }: { event: CncEventData }) {
             <p className="mt-2 text-sm text-muted">{event.location}</p>
           </div>
           <div>
-            <p className="section-label mb-3">O Carrista</p>
+            <p className="section-label mb-3">{t("brand.name")}</p>
             <Link href="/" className="text-sm text-gold hover:underline">
-              Voltar ao site
+              {t("common.backSite")}
             </Link>
           </div>
         </div>

@@ -4,15 +4,17 @@ import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
 import { CncDocumentPreview } from "./cnc-document-preview";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncUsefulInfo({ event }: { event: CncEventData }) {
+  const { t } = useT();
   return (
     <section id="informacao" className="event-section scroll-mt-24 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">07 · Informação útil</p>
+          <p className="section-label mb-3">{t("cnc.infoLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Informação útil
+            {t("cnc.infoTitle")}
           </h2>
           <div className="gold-line mb-10 w-24" />
         </MotionReveal>

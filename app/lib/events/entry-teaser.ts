@@ -5,6 +5,7 @@ import {
 } from "./highlight";
 import { getCncEdition, getCncSeries } from "./load-cnc";
 import { getChallengerEdition, getChallengerSeries } from "./load-challenger";
+import { getImgcEdition, getImgcSeries } from "./load-imgc";
 import { getWorkshopEdition, getWorkshopSeries } from "./load-workshop";
 
 export type EntryTeaserInfo = EventHighlightCandidate;
@@ -82,6 +83,22 @@ function collectFutureEditions(now: number): FutureEdition[] {
       dateDisplay: edition.dateDisplay,
       location: edition.location,
       href: `/eventos/challenger/${year}`,
+      eventTime,
+    });
+  }
+
+  for (const year of getImgcSeries().years) {
+    const edition = getImgcEdition(year);
+    if (!edition || edition.published === false) continue;
+    const eventTime = new Date(edition.date).getTime();
+    if (eventTime <= now) continue;
+    out.push({
+      key: `imgc:${year}`,
+      title: edition.title,
+      edition: edition.edition,
+      dateDisplay: edition.dateDisplay,
+      location: edition.location,
+      href: `/eventos/imgc/${year}`,
       eventTime,
     });
   }

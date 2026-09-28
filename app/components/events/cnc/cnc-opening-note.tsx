@@ -4,8 +4,10 @@ import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
 import { CncDocumentPreview } from "./cnc-document-preview";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncOpeningNote({ event }: { event: CncEventData }) {
+  const { t } = useT();
   const { openingNote } = event;
 
   return (
@@ -31,7 +33,7 @@ export function CncOpeningNote({ event }: { event: CncEventData }) {
         {openingNote.pdf?.href && (
           <MotionReveal delay={0.16}>
             <div className="mt-10">
-              <CncDocumentPreview resource={openingNote.pdf} hint="Nota de abertura" />
+              <CncDocumentPreview resource={openingNote.pdf} hint={t("cnc.openingHint")} />
             </div>
           </MotionReveal>
         )}

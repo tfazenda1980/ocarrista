@@ -1,5 +1,8 @@
+"use client";
+
 import type { CncPdfResource } from "@/app/lib/events/cnc-types";
 import { getSketchKind } from "@/app/lib/challenger/sketch";
+import { useT } from "../../i18n/locale-provider";
 
 type CncPdfSlotProps = {
   resource: CncPdfResource;
@@ -7,21 +10,26 @@ type CncPdfSlotProps = {
   onOpen?: () => void;
 };
 
-function actionLabel(resource: CncPdfResource, inline: boolean): string {
-  if (inline) return "Abrir documento →";
+function actionLabel(
+  resource: CncPdfResource,
+  inline: boolean,
+  t: (path: string) => string,
+): string {
+  if (inline) return t("pdf.open");
   const kind = getSketchKind(resource.mime ?? null, resource.href);
-  if (kind === "image") return "Ver desenho →";
-  if (kind === "pdf") return "Descarregar PDF →";
+  if (kind === "image") return t("pdf.viewDrawing");
+  if (kind === "pdf") return t("pdf.downloadPdf");
   if (resource.mime?.includes("presentation") || resource.mime?.includes("powerpoint")) {
-    return "Descarregar PPT →";
+    return t("pdf.downloadPpt");
   }
-  return "Descarregar documento →";
+  return t("pdf.downloadDoc");
 }
 
 const slotClass =
   "card-tactical flex min-h-[5.5rem] w-full flex-col justify-center border-gold/30 p-4 text-left transition-colors hover:border-gold/50 hover:bg-gold/5";
 
 export function CncPdfSlot({ resource, selected = false, onOpen }: CncPdfSlotProps) {
+  const { t } = useT();
   const available = Boolean(resource.href);
   const selectedClass = selected ? "border-gold bg-gold/10" : "";
 
@@ -36,7 +44,7 @@ export function CncPdfSlot({ resource, selected = false, onOpen }: CncPdfSlotPro
         <span className="font-display text-xs tracking-[0.12em] text-gold uppercase">
           {resource.label}
         </span>
-        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource, true)}</span>
+        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource, true, t)}</span>
       </button>
     );
   }
@@ -52,7 +60,7 @@ export function CncPdfSlot({ resource, selected = false, onOpen }: CncPdfSlotPro
         <span className="font-display text-xs tracking-[0.12em] text-gold uppercase">
           {resource.label}
         </span>
-        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource, false)}</span>
+        <span className="mt-2 text-[0.7rem] text-muted">{actionLabel(resource, false, t)}</span>
       </a>
     );
   }
@@ -60,12 +68,12 @@ export function CncPdfSlot({ resource, selected = false, onOpen }: CncPdfSlotPro
   return (
     <div
       className="card-tactical flex min-h-[5.5rem] flex-col justify-center border-dashed border-gold/15 p-4 opacity-80"
-      aria-label={`${resource.label} — documento ainda não publicado`}
+      aria-label={t("pdf.unpublished", { label: resource.label })}
     >
       <span className="font-display text-xs tracking-[0.12em] text-gold/70 uppercase">
         {resource.label}
       </span>
-      <span className="mt-2 text-[0.7rem] text-muted">Documento em breve</span>
+      <span className="mt-2 text-[0.7rem] text-muted">{t("pdf.soon")}</span>
     </div>
   );
 }

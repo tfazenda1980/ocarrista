@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useT } from "../i18n/locale-provider";
 
 type CountdownProps = {
   targetDate: string;
@@ -25,6 +26,7 @@ function calcTimeLeft(target: number): TimeLeft | null {
 }
 
 export function EventCountdown({ targetDate }: CountdownProps) {
+  const { t } = useT();
   const target = new Date(targetDate).getTime();
   const [left, setLeft] = useState<TimeLeft | null>(() => calcTimeLeft(target));
 
@@ -36,16 +38,16 @@ export function EventCountdown({ targetDate }: CountdownProps) {
   if (!left) {
     return (
       <p className="font-display text-sm tracking-[0.2em] text-gold uppercase">
-        O evento está a decorrer ou já terminou
+        {t("common.countdownDone")}
       </p>
     );
   }
 
   const units = [
-    { label: "Dias", value: left.days },
-    { label: "Horas", value: left.hours },
-    { label: "Min", value: left.minutes },
-    { label: "Seg", value: left.seconds },
+    { label: t("common.days"), value: left.days },
+    { label: t("common.hours"), value: left.hours },
+    { label: t("common.minutes"), value: left.minutes },
+    { label: t("common.seconds"), value: left.seconds },
   ];
 
   return (

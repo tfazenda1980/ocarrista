@@ -4,11 +4,13 @@ import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { CncPdfSlot } from "./cnc-pdf-slot";
 import { CncDocumentPreview } from "./cnc-document-preview";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncRegulation({ event }: { event: CncEventData }) {
+  const { t } = useT();
   const regulation = event.regulation ?? {
-    title: "Regulamento",
-    body: "O regulamento oficial desta edição será publicado nesta área.",
+    title: t("cnc.navRules"),
+    body: t("cnc.sponsorsEmpty"),
     pdf: null,
   };
 
@@ -35,7 +37,7 @@ export function CncRegulation({ event }: { event: CncEventData }) {
         {regulation.pdf?.href && (
           <MotionReveal delay={0.16}>
             <div className="mt-10">
-              <CncDocumentPreview resource={regulation.pdf} hint="Regulamento oficial" />
+              <CncDocumentPreview resource={regulation.pdf} hint={t("cnc.regulationHint")} />
             </div>
           </MotionReveal>
         )}

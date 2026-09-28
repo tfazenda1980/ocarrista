@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "../i18n/locale-provider";
 
 type LojaProductRequestProps = {
   productName: string;
 };
 
 export function LojaProductRequest({ productName }: LojaProductRequestProps) {
+  const { t } = useT();
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
@@ -23,11 +25,11 @@ export function LojaProductRequest({ productName }: LojaProductRequestProps) {
     const data = (await res.json()) as { message?: string; error?: string };
     if (!res.ok) {
       setStatus("error");
-      setMessage(data.error ?? "Não foi possível enviar.");
+      setMessage(data.error ?? t("loja.error"));
       return;
     }
     setStatus("ok");
-    setMessage(data.message ?? "Pedido enviado.");
+    setMessage(data.message ?? t("loja.ok"));
     setOpen(false);
     setNote("");
   };
@@ -35,7 +37,7 @@ export function LojaProductRequest({ productName }: LojaProductRequestProps) {
   if (status === "ok") {
     return (
       <p className="font-display text-[0.65rem] tracking-[0.12em] text-gold uppercase">
-        Pedido enviado ✓
+        {t("loja.sent")}
       </p>
     );
   }
@@ -47,7 +49,7 @@ export function LojaProductRequest({ productName }: LojaProductRequestProps) {
         onClick={() => setOpen(true)}
         className="font-display text-[0.65rem] tracking-[0.15em] text-gold uppercase hover:underline"
       >
-        Solicitar →
+        {t("loja.request")}
       </button>
     );
   }
@@ -57,7 +59,7 @@ export function LojaProductRequest({ productName }: LojaProductRequestProps) {
       <textarea
         value={note}
         onChange={(e) => setNote(e.target.value)}
-        placeholder="Quantidade, tamanho ou nota (opcional)"
+        placeholder={t("loja.notePlaceholder")}
         rows={2}
         className="w-full resize-none border border-gold/20 bg-background/80 px-2 py-1.5 text-xs focus:border-gold/50 focus:outline-none"
       />
@@ -68,7 +70,7 @@ export function LojaProductRequest({ productName }: LojaProductRequestProps) {
           onClick={submit}
           className="btn-primary flex-1 px-2 py-1.5 text-[0.65rem]"
         >
-          {status === "loading" ? "A enviar…" : "Enviar pedido"}
+          {status === "loading" ? t("loja.sending") : t("loja.send")}
         </button>
         <button
           type="button"
@@ -79,7 +81,7 @@ export function LojaProductRequest({ productName }: LojaProductRequestProps) {
           }}
           className="btn-outline px-2 py-1.5 text-[0.65rem]"
         >
-          Cancelar
+          {t("loja.cancel")}
         </button>
       </div>
       {status === "error" && <p className="text-xs text-muted">{message}</p>}

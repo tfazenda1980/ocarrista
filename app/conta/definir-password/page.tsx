@@ -4,8 +4,11 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { TacticalBackground } from "@/app/components/tactical-background";
+import { LanguageSwitcher } from "@/app/components/i18n/language-switcher";
+import { useT } from "@/app/components/i18n/locale-provider";
 
 function Form() {
+  const { t } = useT();
   const router = useRouter();
   const params = useSearchParams();
   const token = params.get("token") ?? "";
@@ -17,7 +20,7 @@ function Form() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirm) {
-      setError("As passwords não coincidem.");
+      setError(t("password.mismatch"));
       return;
     }
     setError("");
@@ -28,7 +31,7 @@ function Form() {
     });
     const data = (await res.json()) as { error?: string };
     if (!res.ok) {
-      setError(data.error ?? "Não foi possível guardar.");
+      setError(data.error ?? t("password.error"));
       return;
     }
     setOk(true);
@@ -36,15 +39,11 @@ function Form() {
   };
 
   if (!token) {
-    return <p className="text-muted">Link inválido. Peça um novo convite após aprovação.</p>;
+    return <p className="text-muted">{t("password.invalid")}</p>;
   }
 
   if (ok) {
-    return (
-      <p className="text-gold">
-        Password definida. A redirecionar para entrar…
-      </p>
-    );
+    return <p className="text-gold">{t("password.ok")}</p>;
   }
 
   return (
@@ -53,7 +52,7 @@ function Form() {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Nova password (mín. 8 caracteres)"
+        placeholder={t("password.newPassword")}
         required
         minLength={8}
         className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
@@ -62,30 +61,32 @@ function Form() {
         type="password"
         value={confirm}
         onChange={(e) => setConfirm(e.target.value)}
-        placeholder="Confirmar password"
+        placeholder={t("password.confirm")}
         required
         className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm focus:border-gold/50 focus:outline-none"
       />
       {error && <p className="text-sm text-muted">{error}</p>}
       <button type="submit" className="btn-primary w-full">
-        Guardar password
+        {t("password.save")}
       </button>
     </form>
   );
 }
 
 export default function DefinirPasswordPage() {
+  const { t } = useT();
   return (
     <>
       <TacticalBackground />
       <main className="relative z-10 mx-auto max-w-md px-4 py-24 sm:px-6">
-        <Link href="/" className="mb-8 inline-block font-mono text-xs text-muted hover:text-gold">
-          ← O Carrista
-        </Link>
-        <h1 className="font-display mb-6 text-2xl font-semibold uppercase">
-          Definir password
-        </h1>
-        <Suspense fallback={<p className="text-muted">A carregar…</p>}>
+        <div className="mb-8 flex items-center justify-between">
+          <Link href="/" className="font-mono text-xs text-muted hover:text-gold">
+            {t("password.back")}
+          </Link>
+          <LanguageSwitcher />
+        </div>
+        <h1 className="font-display mb-6 text-2xl font-semibold uppercase">{t("password.title")}</h1>
+        <Suspense fallback={<p className="text-muted">{t("password.loading")}</p>}>
           <Form />
         </Suspense>
       </main>

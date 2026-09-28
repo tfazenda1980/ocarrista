@@ -4,27 +4,29 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { UnitCrest } from "../../unit-crest";
-
-const anchorLinks = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#nota-abertura", label: "Nota" },
-  { href: "#programa", label: "Programa" },
-  { href: "#regulamento", label: "Regulamento" },
-  { href: "#provas", label: "Provas" },
-  { href: "#galeria", label: "Galeria" },
-  { href: "#informacao", label: "Informação" },
-  { href: "#contactos", label: "Contactos" },
-  { href: "#fale-connosco", label: "Fale connosco" },
-  { href: "#patrocinadores", label: "Patrocínios" },
-] as const;
+import { LanguageSwitcher } from "../../i18n/language-switcher";
+import { useT } from "../../i18n/locale-provider";
 
 type CncSiteHeaderProps = {
   edition: string;
 };
 
 export function CncSiteHeader({ edition }: CncSiteHeaderProps) {
+  const { t } = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const anchorLinks = [
+    { href: "#sobre", label: t("cnc.navAbout") },
+    { href: "#nota-abertura", label: t("cnc.navNote") },
+    { href: "#programa", label: t("cnc.navProgram") },
+    { href: "#regulamento", label: t("cnc.navRules") },
+    { href: "#provas", label: t("cnc.navClasses") },
+    { href: "#galeria", label: t("cnc.navGallery") },
+    { href: "#informacao", label: t("cnc.navInfo") },
+    { href: "#contactos", label: t("cnc.navContacts") },
+    { href: "#fale-connosco", label: t("cnc.navTalk") },
+    { href: "#patrocinadores", label: t("cnc.navSponsors") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -46,7 +48,7 @@ export function CncSiteHeader({ edition }: CncSiteHeaderProps) {
           <UnitCrest size="nav" priority />
           <div className="flex flex-col">
             <span className="font-display text-xs font-semibold tracking-[0.18em] text-foreground uppercase sm:text-sm">
-              O Carrista
+              {t("brand.name")}
             </span>
             <span className="text-[0.55rem] tracking-[0.2em] text-gold-dim uppercase">
               {edition}
@@ -65,18 +67,22 @@ export function CncSiteHeader({ edition }: CncSiteHeaderProps) {
               {link.label}
             </motion.a>
           ))}
+          <LanguageSwitcher />
         </nav>
 
-        <button
-          type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20 2xl:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          <span className={`h-px w-5 bg-gold ${open ? "translate-y-[5px] rotate-45" : ""}`} />
-          <span className={`h-px w-5 bg-gold ${open ? "opacity-0" : ""}`} />
-          <span className={`h-px w-5 bg-gold ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
-        </button>
+        <div className="flex items-center gap-2 2xl:hidden">
+          <LanguageSwitcher />
+          <button
+            type="button"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-gold/20"
+            onClick={() => setOpen(!open)}
+            aria-label={t("nav.menu")}
+          >
+            <span className={`h-px w-5 bg-gold ${open ? "translate-y-[5px] rotate-45" : ""}`} />
+            <span className={`h-px w-5 bg-gold ${open ? "opacity-0" : ""}`} />
+            <span className={`h-px w-5 bg-gold ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {open && (

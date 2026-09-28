@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Barlow, Oswald, Geist_Mono } from "next/font/google";
 import { HashScrollManager } from "./components/hash-scroll-manager";
 import { SessionInactivityGuard } from "./components/session-inactivity-guard";
+import { LocaleProvider } from "./components/i18n/locale-provider";
+import { getTranslator } from "./lib/i18n/get-locale";
+import { HTML_LANG } from "./lib/i18n/config";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -21,26 +24,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "O Carrista",
-  description:
-    "O Carrista — De Santa Margarida. Comunidade Ex-RC4: eventos anuais, história do Regimento de Cavalaria 4 e Loja do Carrista.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { t } = await getTranslator();
+  return {
+    title: t("meta.title"),
+    description: t("meta.description"),
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { locale, messages } = await getTranslator();
+
   return (
     <html
-      lang="pt"
+      lang={HTML_LANG[locale]}
       className={`${oswald.variable} ${barlow.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <HashScrollManager />
-        <SessionInactivityGuard />
-        {children}
+        <LocaleProvider locale={locale} messages={messages}>
+          <HashScrollManager />
+          <SessionInactivityGuard />
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

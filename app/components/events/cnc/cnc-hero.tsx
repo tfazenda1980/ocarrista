@@ -5,12 +5,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
 import { EventCountdown } from "../countdown";
+import { useT } from "../../i18n/locale-provider";
 
 type CncHeroProps = {
   event: CncEventData;
 };
 
 export function CncHero({ event }: CncHeroProps) {
+  const { t } = useT();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -43,7 +45,7 @@ export function CncHero({ event }: CncHeroProps) {
         className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-16 pt-8 sm:px-6 sm:pb-24 lg:pb-28"
       >
         <p className="font-mono mb-3 text-[0.7rem] tracking-[0.25em] text-gold uppercase">
-          {event.edition} · Prova equestre
+          {event.edition} · {t("cnc.equestrian")}
         </p>
         <motion.h1
           className="display-heading max-w-4xl text-4xl font-bold text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
@@ -81,7 +83,7 @@ export function CncHero({ event }: CncHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.28 }}
         >
-          <p className="section-label mb-3">Contagem decrescente</p>
+          <p className="section-label mb-3">{t("common.countdown")}</p>
           <EventCountdown targetDate={event.date} />
         </motion.div>
 
@@ -92,10 +94,10 @@ export function CncHero({ event }: CncHeroProps) {
           transition={{ delay: 0.35 }}
         >
           <a href="#provas" className="btn-primary">
-            Ver provas e documentos
+            {t("cnc.viewDocs")}
           </a>
           <a href="#informacao" className="btn-outline">
-            Informação útil
+            {t("cnc.usefulCta")}
           </a>
         </motion.div>
       </motion.div>

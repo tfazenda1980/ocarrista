@@ -8,6 +8,7 @@ import {
   getWorkshopEdition,
   isWorkshopYearValid,
 } from "@/app/lib/events/load-workshop";
+import { getTranslator } from "@/app/lib/i18n/get-locale";
 
 type PageProps = {
   params: Promise<{ year: string }>;
@@ -15,17 +16,19 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { year } = await params;
+  const { t } = await getTranslator();
   const event = getWorkshopEdition(year);
-  if (!event) return { title: "Perguntas | O Carrista" };
+  if (!event) return { title: t("workshop.questionsMeta") };
   return {
-    title: `Perguntas ao debate — Workshop ${year} | O Carrista`,
-    description: "Envie uma pergunta para a sessão de debate do Workshop.",
+    title: t("workshop.questionsTitle", { year }),
+    description: t("workshop.questionsDescription"),
     robots: { index: false, follow: false },
   };
 }
 
 export default async function WorkshopPerguntasPage({ params }: PageProps) {
   const { year } = await params;
+  const { t } = await getTranslator();
   if (!isWorkshopYearValid(year)) notFound();
   const event = getWorkshopEdition(year);
   if (!event || event.published === false) notFound();
@@ -39,7 +42,7 @@ export default async function WorkshopPerguntasPage({ params }: PageProps) {
           label="Workshop"
           variant="default"
         />
-        <Suspense fallback={<p className="text-muted">A carregar…</p>}>
+        <Suspense fallback={<p className="text-muted">{t("password.loading")}</p>}>
           <WorkshopQaAudience year={year} />
         </Suspense>
       </main>

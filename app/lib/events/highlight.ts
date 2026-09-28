@@ -1,5 +1,6 @@
 import { getCncEdition, getCncSeries } from "./load-cnc";
 import { getChallengerEdition, getChallengerSeries } from "./load-challenger";
+import { getImgcEdition, getImgcSeries } from "./load-imgc";
 import { getWorkshopEdition, getWorkshopSeries } from "./load-workshop";
 
 /** Janela de destaque na entrada: três semanas antes até ao fim do evento. */
@@ -96,6 +97,25 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
       dateDisplay: edition.dateDisplay,
       location: edition.location,
       href: `/eventos/challenger/${year}`,
+      cardImage: edition.cardImage,
+      daysRemaining: days,
+      eventTime: new Date(edition.date).getTime(),
+    });
+  }
+
+  const imgcSeries = getImgcSeries();
+  for (const year of imgcSeries.years) {
+    const edition = getImgcEdition(year);
+    if (!edition || edition.published === false || !edition.cardImage) continue;
+    const days = inHighlightWindow(edition.date, edition.endDate, now);
+    if (days === null) continue;
+    out.push({
+      key: `imgc:${year}`,
+      title: edition.title,
+      edition: edition.edition,
+      dateDisplay: edition.dateDisplay,
+      location: edition.location,
+      href: `/eventos/imgc/${year}`,
       cardImage: edition.cardImage,
       daysRemaining: days,
       eventTime: new Date(edition.date).getTime(),

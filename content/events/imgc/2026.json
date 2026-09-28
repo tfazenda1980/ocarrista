@@ -1,0 +1,105 @@
+{
+  "year": "2026",
+  "slug": "imgc",
+  "published": true,
+  "title": "International Master Gunner Conference 2026",
+  "edition": "IMGC 2026",
+  "slogan": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery.",
+  "date": "2026-10-05",
+  "endDate": "2026-10-09",
+  "dateDisplay": "5–9 OCT 2026",
+  "location": "Quartel da Cavalaria, Santa Margarida",
+  "heroImage": "/images/cc_castelo.png",
+  "cardImage": "/images/cc_castelo.png",
+  "about": {
+    "title": "The conference",
+    "body": "The International Master Gunner Conference 2026 gathers Master Gunners and gunnery specialists to exchange doctrine, training methods and operational experience. Five days at the Cavalry Barracks in Santa Margarida — connecting professionals who keep the gunnery craft alive across nations."
+  },
+  "barracks": {
+    "title": "Cavalry Barracks",
+    "body": "The Quartel da Cavalaria in Santa Margarida is the home of the Portuguese Cavalry Arm — a living garrison of crews, horses and armour. Delegates will work on a military installation with controlled access, in the landscape of the Tagus valley, a short drive from Tomar."
+  },
+  "practical": {
+    "title": "Practical information",
+    "body": "Working language: English. The barracks is a restricted military area — bring a valid identity document and follow the joining instructions issued by the organisation. Dress: service uniform or equivalent for official sessions; smart casual for social moments. Further details will be published with the programme."
+  },
+  "programme": {
+    "title": "Programme",
+    "body": "The conference programme (sessions, ranges, social events and timings) will be published here as a document. Open it in the viewer or download it for offline use.",
+    "pdf": {
+      "label": "Conference programme",
+      "href": null
+    }
+  },
+  "delegations": [
+    {
+      "id": "prt",
+      "country": "Portugal",
+      "city": "Santa Margarida",
+      "lat": 39.45,
+      "lng": -8.33,
+      "host": true
+    }
+  ],
+  "links": [
+    {
+      "id": "cm-tomar",
+      "category": "tomar",
+      "title": "Município de Tomar",
+      "url": "https://www.cm-tomar.pt/",
+      "description": "Official city information, agenda and visitor services."
+    },
+    {
+      "id": "convento",
+      "category": "tomar",
+      "title": "Convento de Cristo",
+      "url": "https://www.conventocristo.gov.pt/",
+      "description": "UNESCO World Heritage — Templar and Manueline architecture."
+    },
+    {
+      "id": "visit-tomar",
+      "category": "tomar",
+      "title": "Visit Portugal — Tomar",
+      "url": "https://www.visitportugal.com/en/destinos/centro-de-portugal/thomar",
+      "description": "Overview of Tomar for international visitors."
+    },
+    {
+      "id": "cp",
+      "category": "transport",
+      "title": "Comboios de Portugal",
+      "url": "https://www.cp.pt/passageiros/en",
+      "description": "Rail links to Tomar (from Lisbon Oriente / Santa Apolónia)."
+    },
+    {
+      "id": "maps-qcav",
+      "category": "transport",
+      "title": "Map — Cavalry Barracks, Santa Margarida",
+      "url": "https://maps.google.com/?q=Campo%20Militar%20de%20Santa%20Margarida",
+      "description": "Location of the garrison (approx. 20–25 minutes by road from Tomar)."
+    },
+    {
+      "id": "airport",
+      "category": "transport",
+      "title": "Lisbon Airport (LIS)",
+      "url": "https://www.aeroportolisboa.pt/en",
+      "description": "Nearest international airport — about 1 h 30 by road to Santa Margarida."
+    },
+    {
+      "id": "ipma",
+      "category": "other",
+      "title": "IPMA — weather",
+      "url": "https://www.ipma.pt/en/",
+      "description": "National weather service for the conference week."
+    }
+  ],
+  "photoGallery": [],
+  "contacts": {
+    "organizer": "Quartel da Cavalaria / O Carrista",
+    "email": "ocarrista.cc@gmail.com",
+    "notes": "For joining instructions and administrative queries, contact the organisation. This channel does not replace official military correspondence."
+  },
+  "seo": {
+    "title": "International Master Gunner Conference 2026 | O Carrista",
+    "description": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery. 5–9 October 2026 at the Cavalry Barracks, Santa Margarida."
+  }
+}

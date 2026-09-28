@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
+import { useT } from "./i18n/locale-provider";
 
 const SPREAD_BREAKPOINT_PX = 1024;
 
@@ -190,10 +191,13 @@ function NavChevron({ direction }: { direction: "left" | "right" }) {
 export function PdfHorizontalViewer({
   pdfUrl,
   active,
-  label = "História do RC4",
-  hint = "Deslize ou use as setas para mudar de página",
+  label,
+  hint,
   showDownloadFooter = true,
 }: PdfHorizontalViewerProps) {
+  const { t } = useT();
+  const resolvedLabel = label ?? t("home.historyPdf");
+  const resolvedHint = hint ?? t("pdf.defaultHint");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [doc, setDoc] = useState<PdfDoc | null>(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -303,24 +307,24 @@ export function PdfHorizontalViewer({
   if (!active) return null;
 
   const spreadHint = isSpread
-    ? " · vista de caderno (duas páginas)"
+    ? t("pdf.spreadHint")
     : "";
 
   return (
     <div className="pdf-horizontal-wrap">
       <div className="border-y border-gold/15 bg-surface/40 px-4 py-3 text-center sm:px-6">
         <p className="font-display text-xs tracking-[0.2em] text-gold uppercase">
-          {label}
+          {resolvedLabel}
         </p>
         <p className="mt-1 text-xs text-muted">
-          {hint}
+          {resolvedHint}
           {spreadHint} ·{" "}
           {pageRangeLabel(focusPage, totalPages, isSpread)}
         </p>
       </div>
 
       {loading && (
-        <p className="py-16 text-center text-sm text-muted">A carregar documento…</p>
+        <p className="py-16 text-center text-sm text-muted">{t("pdf.loading")}</p>
       )}
 
       {error && (
@@ -334,7 +338,7 @@ export function PdfHorizontalViewer({
             className="pdf-horizontal-nav pdf-horizontal-nav--prev"
             onClick={() => goToSpread(spreadIndex - 1)}
             disabled={atStart}
-            aria-label="Página anterior"
+            aria-label={t("pdf.prev")}
           >
             <NavChevron direction="left" />
           </button>
@@ -377,7 +381,7 @@ export function PdfHorizontalViewer({
             className="pdf-horizontal-nav pdf-horizontal-nav--next"
             onClick={() => goToSpread(spreadIndex + 1)}
             disabled={atEnd}
-            aria-label="Página seguinte"
+            aria-label={t("pdf.next")}
           >
             <NavChevron direction="right" />
           </button>
@@ -387,7 +391,7 @@ export function PdfHorizontalViewer({
       {showDownloadFooter && (
         <div className="flex justify-center gap-4 border-t border-gold/10 px-4 py-3">
           <a href={baseUrl} download className="btn-outline px-4 py-2 text-[0.65rem]">
-            Descarregar PDF
+            {t("pdf.downloadPdf").replace(" →", "")}
           </a>
         </div>
       )}

@@ -4,8 +4,10 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData, CncGalleryPhoto } from "@/app/lib/events/cnc-types";
+import { useT } from "../../i18n/locale-provider";
 
 export function CncPhotoGallery({ event }: { event: CncEventData }) {
+  const { t } = useT();
   const [lightbox, setLightbox] = useState<CncGalleryPhoto | null>(null);
   const photos = event.photoGallery ?? [];
 
@@ -13,16 +15,16 @@ export function CncPhotoGallery({ event }: { event: CncEventData }) {
     <section id="galeria" className="event-section scroll-mt-24 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">06 · Galeria fotográfica</p>
+          <p className="section-label mb-3">{t("cnc.galleryLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Galeria fotográfica
+            {t("cnc.galleryTitle")}
           </h2>
           <div className="gold-line mb-12 w-24" />
         </MotionReveal>
 
         {photos.length === 0 ? (
           <p className="max-w-2xl text-sm leading-relaxed text-muted">
-            As fotografias desta edição serão publicadas pela organização.
+            {t("cnc.galleryEmpty")}
           </p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -61,7 +63,7 @@ export function CncPhotoGallery({ event }: { event: CncEventData }) {
               className="absolute right-6 top-6 font-mono text-xs text-gold"
               onClick={() => setLightbox(null)}
             >
-              FECHAR
+              {t("common.close")}
             </button>
             <motion.div
               className="relative max-h-[85vh] max-w-5xl"

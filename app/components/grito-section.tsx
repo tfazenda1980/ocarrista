@@ -3,10 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { GRITO_LINHA_1, GRITO_LINHA_2 } from "../lib/site-assets";
+import { useT } from "./i18n/locale-provider";
 
 export function GritoSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { amount: 0.45, once: true });
+  const { t } = useT();
 
   return (
     <section
@@ -27,7 +29,7 @@ export function GritoSection() {
         }
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
-        <p className="section-label mb-6">Grito d&apos;O Carrista</p>
+        <p className="section-label mb-6">{t("home.shoutLabel")}</p>
         <p className="font-display text-2xl font-medium tracking-[0.12em] text-foreground uppercase sm:text-3xl md:text-4xl">
           {GRITO_LINHA_1}
         </p>

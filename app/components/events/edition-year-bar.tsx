@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useT } from "../i18n/locale-provider";
 
 type EditionYearBarProps = {
   years: string[];
@@ -14,18 +15,20 @@ export function EditionYearBar({
   years,
   activeYear,
   basePath = "/eventos/workshop",
-  ariaLabel = "Edições do evento",
+  ariaLabel,
 }: EditionYearBarProps) {
   const pathname = usePathname();
+  const { t } = useT();
+  const resolvedAria = ariaLabel ?? t("common.editions");
 
   return (
     <nav
-      aria-label={ariaLabel}
+      aria-label={resolvedAria}
       className="edition-year-bar sticky top-16 z-40 border-b border-gold/35 bg-background/95 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 sm:gap-2 sm:px-6">
         <span className="mr-2 shrink-0 font-mono text-[0.6rem] tracking-[0.2em] text-gold-dim uppercase sm:mr-4">
-          Edição
+          {t("common.edition")}
         </span>
         {years.map((year) => {
           const href = `${basePath}/${year}`;

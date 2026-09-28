@@ -2,25 +2,26 @@
 
 import { MotionReveal } from "../../motion-reveal";
 import type { ChallengerCrew } from "@/app/lib/challenger/types";
+import { useT } from "../../i18n/locale-provider";
 
 export function ChallengerCrews({ crews }: { crews: ChallengerCrew[] }) {
+  const { t } = useT();
   return (
     <section id="guarnicoes" className="event-section scroll-mt-24 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">03 · Guarnições</p>
+          <p className="section-label mb-3">{t("challenger.crewsLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Guarnições inscritas
+            {t("challenger.crewsTitle")}
           </h2>
           <div className="gold-line mb-10 w-24" />
           <p className="mb-10 max-w-2xl text-sm text-muted">
-            Cada guarnição é constituída por quatro elementos. A lista reflecte as inscrições
-            confirmadas para esta edição.
+            {t("challenger.crewsIntro")}
           </p>
         </MotionReveal>
 
         {crews.length === 0 ? (
-          <p className="text-sm text-muted">Ainda não há guarnições publicadas.</p>
+          <p className="text-sm text-muted">{t("challenger.crewsEmpty")}</p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2">
             {crews.map((crew, i) => (

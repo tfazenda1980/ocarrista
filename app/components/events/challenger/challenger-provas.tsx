@@ -3,22 +3,24 @@
 import { MotionReveal } from "../../motion-reveal";
 import type { ChallengerProva } from "@/app/lib/challenger/types";
 import { ChallengerProvaSketch } from "./challenger-prova-sketch";
+import { useT } from "../../i18n/locale-provider";
 
 export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
+  const { t } = useT();
   return (
     <section id="provas" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">02 · Provas</p>
+          <p className="section-label mb-3">{t("challenger.provasLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Provas e croquis
+            {t("challenger.provasTitle")}
           </h2>
           <div className="gold-line mb-10 w-24" />
         </MotionReveal>
 
         {provas.length === 0 && (
           <p className="text-sm text-muted">
-            As provas e respetivos croquis serão publicados em breve pela organização.
+            {t("challenger.provasEmpty")}
           </p>
         )}
       </div>
@@ -40,7 +42,7 @@ export function ChallengerProvas({ provas }: { provas: ChallengerProva[] }) {
                     )}
                     {!prova.sketch_url && (
                       <p className="mt-6 text-[0.7rem] text-muted">
-                        Croqui / briefing — documento em breve
+                        {t("challenger.sketchSoon")}
                       </p>
                     )}
                   </article>

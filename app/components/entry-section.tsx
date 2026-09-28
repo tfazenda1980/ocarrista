@@ -8,6 +8,7 @@ import type {
   EntryUpcomingPreview,
 } from "../lib/events/entry-teaser";
 import { EntryEventTeaser } from "./entry-event-teaser";
+import { useT } from "./i18n/locale-provider";
 
 type EntrySectionProps = {
   teasers: EntryTeaserInfo[];
@@ -18,6 +19,7 @@ export function EntrySection({
   teasers,
   preview,
 }: EntrySectionProps) {
+  const { t } = useT();
   return (
     <section
       id="entrada"
@@ -57,7 +59,7 @@ export function EntrySection({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            De Santa Margarida
+            {t("brand.tagline")}
           </motion.p>
 
           <motion.p
@@ -66,10 +68,7 @@ export function EntrySection({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.2 }}
           >
-            A comunidade dos carristas e amigos do Quartel da Cavalaria e do
-            RC4. O Carrista de Santa Margarida será local de coordenação de
-            eventos, divulgação cultural e histórica, bem como uma rede de
-            confiança entre quem serviu e quem continua este legado.
+            {t("home.intro")}
           </motion.p>
 
           <div className="space-y-3">

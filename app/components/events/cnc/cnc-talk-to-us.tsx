@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { MotionReveal } from "../../motion-reveal";
 import type { CncEventData } from "@/app/lib/events/cnc-types";
+import { useT } from "../../i18n/locale-provider";
 import { CNC_MESSAGE_KINDS, type CncMessageKind } from "@/app/lib/cnc/messages";
 import { cncProvaSelectOptions } from "@/app/lib/cnc/competition-layout";
 
 export function CncTalkToUs({ event }: { event: CncEventData }) {
+  const { t } = useT();
   const provaOptions = cncProvaSelectOptions(event.disciplines);
   const [kind, setKind] = useState<CncMessageKind>("contact");
   const [provaId, setProvaId] = useState(provaOptions[0]?.id ?? "");
@@ -38,16 +40,16 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
       });
       const json = (await res.json()) as { error?: string; message?: string };
       if (!res.ok) {
-        setError(json.error ?? "Não foi possível enviar.");
+        setError(json.error ?? t("cnc.sendError"));
         return;
       }
-      setFeedback(json.message ?? "Mensagem recebida.");
+      setFeedback(json.message ?? t("cnc.sendOk"));
       setName("");
       setEmail("");
       setMessage("");
       setKind("contact");
     } catch {
-      setError("Erro de rede. Tente novamente.");
+      setError(t("common.network"));
     } finally {
       setBusy(false);
     }
@@ -57,9 +59,9 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
     <section id="fale-connosco" className="event-section scroll-mt-24 bg-surface/40 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <MotionReveal>
-          <p className="section-label mb-3">09 · Fale connosco</p>
+          <p className="section-label mb-3">{t("cnc.talkLabel")}</p>
           <h2 className="display-heading mb-6 text-3xl font-semibold sm:text-4xl">
-            Fale connosco
+            {t("cnc.talkTitle")}
           </h2>
           <div className="gold-line mb-10 w-24" />
         </MotionReveal>
@@ -67,12 +69,10 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
         <MotionReveal delay={0.08}>
           <form onSubmit={submit} className="card-tactical max-w-xl space-y-4 p-8 sm:p-10">
             <p className="text-sm leading-relaxed text-muted">
-              Esclarecimentos, questões sobre uma prova, ou sugestões para edições futuras. Este
-              canal destina-se à organização e não substitui os procedimentos junto do júri no
-              terreno.
+              {t("cnc.talkBody")}
             </p>
             <label className="block text-xs tracking-wide text-muted uppercase">
-              Tipo
+              {t("cnc.type")}
               <select
                 value={kind}
                 onChange={(e) => setKind(e.target.value as CncMessageKind)}
@@ -80,14 +80,20 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
               >
                 {CNC_MESSAGE_KINDS.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {item.label}
+                    {t(
+                      item.id === "contact"
+                        ? "cnc.kindContact"
+                        : item.id === "prova"
+                          ? "cnc.kindProva"
+                          : "cnc.kindSuggestion",
+                    )}
                   </option>
                 ))}
               </select>
             </label>
             {kind === "prova" && (
               <label className="block text-xs tracking-wide text-muted uppercase">
-                Prova
+                {t("cnc.class")}
                 <select
                   value={provaId}
                   onChange={(e) => setProvaId(e.target.value)}
@@ -105,7 +111,7 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Nome"
+              placeholder={t("common.name")}
               className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
               required
             />
@@ -113,14 +119,14 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder={t("common.email")}
               className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
               required
             />
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="A sua mensagem"
+              placeholder={t("common.message")}
               rows={6}
               className="w-full border border-gold/20 bg-background/80 px-4 py-3 text-sm"
               required
@@ -136,7 +142,7 @@ export function CncTalkToUs({ event }: { event: CncEventData }) {
             {error && <p className="text-sm text-red-400">{error}</p>}
             {feedback && <p className="text-sm text-gold">{feedback}</p>}
             <button type="submit" disabled={busy} className="btn-primary px-4 py-2 text-xs">
-              {busy ? "A enviar…" : "Enviar"}
+              {busy ? t("common.sending") : t("common.send")}
             </button>
           </form>
         </MotionReveal>
