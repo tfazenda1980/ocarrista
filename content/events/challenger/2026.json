@@ -2,22 +2,58 @@
   "year": "2026",
   "slug": "challenger",
   "published": true,
-  "title": "Challenger O Carrista",
-  "edition": "Challenger 2026",
-  "slogan": "Destreza técnica, física e espírito de equipa — a pista final das guarnições de carristas.",
-  "purpose": "O Challenger O Carrista é a prova anual de destreza técnica e física para guarnições de Carros de Combate. Reúne equipas de quatro elementos que enfrentam uma sequência de provas cronometradas e avaliadas, com critérios de precisão, velocidade, trabalho em equipa e rigor operacional. Este espaço reúne o regulamento das provas, os croquis e briefings, a lista de guarnições inscritas e as classificações provisórias e finais à medida que a organização as publica.",
+  "title": {
+    "pt": "Challenger O Carrista",
+    "en": "Challenger O Carrista",
+    "fr": "Challenger O Carrista"
+  },
+  "edition": {
+    "pt": "Challenger 2026",
+    "en": "Challenger 2026",
+    "fr": "Challenger 2026"
+  },
+  "slogan": {
+    "pt": "Destreza técnica, física e espírito de equipa — a pista final das guarnições de carristas.",
+    "en": "Technical skill, fitness and teamwork — the final course for tank crews.",
+    "fr": "Adresse technique, condition physique et esprit d’équipe — la piste finale des équipages de chars."
+  },
+  "purpose": {
+    "pt": "O Challenger O Carrista é a prova anual de destreza técnica e física para guarnições de Carros de Combate. Reúne equipas de quatro elementos que enfrentam uma sequência de provas cronometradas e avaliadas, com critérios de precisão, velocidade, trabalho em equipa e rigor operacional. Este espaço reúne o regulamento das provas, os croquis e briefings, a lista de guarnições inscritas e as classificações provisórias e finais à medida que a organização as publica.",
+    "en": "Challenger O Carrista is the annual technical and physical skills event for main battle tank crews. Teams of four take on a sequence of timed and scored stands, judged on accuracy, speed, teamwork and operational discipline. This page gathers the event rules, sketches and briefings, the list of entered crews, and provisional and final standings as the organisation publishes them.",
+    "fr": "Le Challenger O Carrista est l’épreuve annuelle d’adresse technique et physique pour les équipages de chars de combat. Des équipes de quatre éléments enchaînent des ateliers chronométrés et notés, selon des critères de précision, de vitesse, de travail d’équipe et de rigueur opérationnelle. Cet espace rassemble le règlement des épreuves, les croquis et briefings, la liste des équipages inscrits et les classements provisoire et final au fur et à mesure de leur publication."
+  },
   "date": "2026-06-17T09:00:00+01:00",
   "endDate": "2026-06-18T09:00:00+01:00",
-  "dateDisplay": "17 e 18 de Junho de 2026",
-  "location": "Quartel da Cavalaria · Santa Margarida",
+  "dateDisplay": {
+    "pt": "17 e 18 de Junho de 2026",
+    "en": "17 and 18 June 2026",
+    "fr": "17 et 18 juin 2026"
+  },
+  "location": {
+    "pt": "Quartel da Cavalaria · Santa Margarida",
+    "en": "Cavalry Barracks · Santa Margarida",
+    "fr": "Caserne de Cavalerie · Santa Margarida"
+  },
   "heroImage": "/images/challenger.png",
   "cardImage": "/images/challenger.png",
   "seo": {
-    "title": "Challenger O Carrista 2026 | O Carrista",
-    "description": "Prova de destreza técnica e física para guarnições de carristas — provas, inscrições e classificação."
+    "title": {
+      "pt": "Challenger O Carrista 2026 | O Carrista",
+      "en": "Challenger O Carrista 2026 | O Carrista",
+      "fr": "Challenger O Carrista 2026 | O Carrista"
+    },
+    "description": {
+      "pt": "Prova de destreza técnica e física para guarnições de carristas — provas, inscrições e classificação.",
+      "en": "A technical and physical skills event for tank crews — stands, entries and classification.",
+      "fr": "Épreuve d’adresse technique et physique pour les équipages de chars — ateliers, inscriptions et classement."
+    }
   },
   "contacts": {
     "email": "ocarrista.cc@gmail.com",
-    "organizer": "O Carrista · QCav e Ex-RC4"
+    "organizer": {
+      "pt": "O Carrista · QCav e Ex-RC4",
+      "en": "O Carrista · QCav and Ex-RC4",
+      "fr": "O Carrista · QCav et Ex-RC4"
+    }
   }
 }

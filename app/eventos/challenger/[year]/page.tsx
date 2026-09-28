@@ -7,6 +7,8 @@ import {
   getChallengerSeries,
   isChallengerYearValid,
 } from "@/app/lib/events/load-challenger";
+import { getRequestLocale } from "@/app/lib/i18n/get-locale";
+import { localizeContent } from "@/app/lib/i18n/localized";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +18,8 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { year } = await params;
-  const event = getChallengerEdition(year);
+  const locale = await getRequestLocale();
+  const event = localizeContent(getChallengerEdition(year), locale);
   if (!event) return { title: "Challenger | O Carrista" };
   return {
     title: event.seo.title,
@@ -31,9 +34,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ChallengerYearPage({ params }: PageProps) {
   const { year } = await params;
+  const locale = await getRequestLocale();
   if (!isChallengerYearValid(year)) notFound();
 
-  const event = getChallengerEdition(year);
+  const event = localizeContent(getChallengerEdition(year), locale);
   if (!event || !event.published) notFound();
 
   const series = getChallengerSeries();

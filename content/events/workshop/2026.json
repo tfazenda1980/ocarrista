@@ -2,47 +2,131 @@
   "year": "2026",
   "slug": "workshop",
   "published": true,
-  "title": "Workshop de Carros de Combate",
-  "edition": "Workshop 2026 — 2.ª Edição",
-  "slogan": "Experiência, doutrina e inovação ao serviço do carrista moderno.",
+  "title": {
+    "pt": "Workshop de Carros de Combate",
+    "en": "Main Battle Tank Workshop",
+    "fr": "Workshop des chars de combat"
+  },
+  "edition": {
+    "pt": "Workshop 2026 — 2.ª Edição",
+    "en": "Workshop 2026 — 2nd Edition",
+    "fr": "Workshop 2026 — 2e édition"
+  },
+  "slogan": {
+    "pt": "Experiência, doutrina e inovação ao serviço do carrista moderno.",
+    "en": "Experience, doctrine and innovation in the service of the modern tank crewman.",
+    "fr": "Expérience, doctrine et innovation au service du tankiste moderne."
+  },
   "date": "2026-06-18T09:00:00+01:00",
-  "dateDisplay": "18 de Junho de 2026",
-  "location": "Quartel da Cavalaria · Santa Margarida",
+  "dateDisplay": {
+    "pt": "18 de Junho de 2026",
+    "en": "18 June 2026",
+    "fr": "18 juin 2026"
+  },
+  "location": {
+    "pt": "Quartel da Cavalaria · Santa Margarida",
+    "en": "Quartel da Cavalaria · Santa Margarida",
+    "fr": "Quartel da Cavalaria · Santa Margarida"
+  },
   "heroImage": "/images/workshop26.png",
   "cardImage": "/images/workshop26.png",
-  "purpose": "Reunir carristas, especialistas e decisores num ambiente propício ao debate sobre a guerra moderna, quer pelo impacto da tecnologia nos Carros de Combate, quer pela necessária transformação do conhecimento em prática operacional.",
+  "purpose": {
+    "pt": "Reunir carristas, especialistas e decisores num ambiente propício ao debate sobre a guerra moderna, quer pelo impacto da tecnologia nos Carros de Combate, quer pela necessária transformação do conhecimento em prática operacional.",
+    "en": "Bring together tank crewmen, specialists and decision-makers in a setting suited to debate on modern warfare — both the impact of technology on main battle tanks and the necessary conversion of knowledge into operational practice.",
+    "fr": "Réunir tankistes, spécialistes et décideurs dans un cadre propice au débat sur la guerre moderne, tant par l’impact de la technologie sur les chars de combat que par la nécessaire transformation du savoir en pratique opérationnelle."
+  },
   "objectives": [
-    "Analisar o impacto da guerra contemporânea nos Carros de Combate",
-    "Partilhar experiência de campo e lições aprendidas entre várias gerações de Carristas",
-    "Ligar a inovação tecnológica à doutrina, ao treino e à formação",
-    "Traduzir a evolução em ações práticas operacionais"
+    {
+      "pt": "Analisar o impacto da guerra contemporânea nos Carros de Combate",
+      "en": "Analyse the impact of contemporary warfare on main battle tanks",
+      "fr": "Analyser l’impact de la guerre contemporaine sur les chars de combat"
+    },
+    {
+      "pt": "Partilhar experiência de campo e lições aprendidas entre várias gerações de Carristas",
+      "en": "Share field experience and lessons learned across generations of tank crewmen",
+      "fr": "Partager l’expérience de terrain et les leçons apprises entre plusieurs générations de tankistes"
+    },
+    {
+      "pt": "Ligar a inovação tecnológica à doutrina, ao treino e à formação",
+      "en": "Link technological innovation to doctrine, training and education",
+      "fr": "Relier l’innovation technologique à la doctrine, à l’instruction et à la formation"
+    },
+    {
+      "pt": "Traduzir a evolução em ações práticas operacionais",
+      "en": "Turn that evolution into practical operational action",
+      "fr": "Traduire cette évolution en actions opérationnelles concrètes"
+    }
   ],
   "themes": [
     {
       "id": "guerra-atual",
-      "title": "A Guerra Atual",
-      "subtitle": "Lições da guerra atual",
-      "description": "Cenários operacionais, ameaças emergentes e implicações para a doutrina e o emprego de forças blindadas.",
-      "details": "Painéis sobre UAV, guerra electrónica, proteção balística, coordenação joint e lições de teatros recentes — com foco na decisão do comandante de carro e da unidade."
+      "title": {
+        "pt": "A Guerra Atual",
+        "en": "Current Warfare",
+        "fr": "La guerre actuelle"
+      },
+      "subtitle": {
+        "pt": "Lições da guerra atual",
+        "en": "Lessons from current warfare",
+        "fr": "Leçons de la guerre actuelle"
+      },
+      "description": {
+        "pt": "Cenários operacionais, ameaças emergentes e implicações para a doutrina e o emprego de forças blindadas.",
+        "en": "Operational scenarios, emerging threats and implications for doctrine and the employment of armoured forces.",
+        "fr": "Scénarios opérationnels, menaces émergentes et implications pour la doctrine et l’emploi des forces blindées."
+      },
+      "details": {
+        "pt": "Painéis sobre UAV, guerra electrónica, proteção balística, coordenação joint e lições de teatros recentes — com foco na decisão do comandante de carro e da unidade.",
+        "en": "Panels on UAVs, electronic warfare, ballistic protection, joint coordination and lessons from recent theatres — focused on the decisions of the tank commander and the unit.",
+        "fr": "Panels sur les UAV, la guerre électronique, la protection balistique, la coordination interarmées et les leçons des théâtres récents — centrés sur la décision du chef de char et de l’unité."
+      }
     },
     {
       "id": "experiencia-pratica",
-      "title": "Experiência em Prática",
-      "subtitle": "Transformar conhecimento em mudança",
-      "description": "Workshops técnicos, estudos de caso e dinâmicas de equipa para converter experiência em procedimentos e competências.",
-      "details": "Sessões interactivas sobre manutenção, tiro, táticas de secção e pelotão, simulação e cultura de segurança operacional."
+      "title": {
+        "pt": "Experiência em Prática",
+        "en": "Experience in Practice",
+        "fr": "Expérience en pratique"
+      },
+      "subtitle": {
+        "pt": "Transformar conhecimento em mudança",
+        "en": "Turning knowledge into change",
+        "fr": "Transformer le savoir en changement"
+      },
+      "description": {
+        "pt": "Workshops técnicos, estudos de caso e dinâmicas de equipa para converter experiência em procedimentos e competências.",
+        "en": "Technical workshops, case studies and team exercises to convert experience into procedures and skills.",
+        "fr": "Ateliers techniques, études de cas et dynamiques d’équipe pour convertir l’expérience en procédures et en compétences."
+      },
+      "details": {
+        "pt": "Sessões interactivas sobre manutenção, tiro, táticas de secção e pelotão, simulação e cultura de segurança operacional.",
+        "en": "Interactive sessions on maintenance, gunnery, section and platoon tactics, simulation and a culture of operational safety.",
+        "fr": "Séances interactives sur la maintenance, le tir, les tactiques de section et de peloton, la simulation et la culture de sécurité opérationnelle."
+      }
     }
   ],
   "panels": [
     {
-      "name": "Abertura",
+      "name": {
+        "pt": "Abertura",
+        "en": "Opening",
+        "fr": "Ouverture"
+      },
       "sessions": [
         {
           "time": "09:00",
           "endTime": "09:10",
           "duration": "10'",
-          "title": "Abertura",
-          "description": "Recepção e discurso. Orientação estratégica do Exército para o presente e futuro do CC Leopard 2A6.",
+          "title": {
+            "pt": "Abertura",
+            "en": "Opening",
+            "fr": "Ouverture"
+          },
+          "description": {
+            "pt": "Recepção e discurso. Orientação estratégica do Exército para o presente e futuro do CC Leopard 2A6.",
+            "en": "Welcome and address. The Army’s strategic guidance for the present and future of the CC Leopard 2A6.",
+            "fr": "Accueil et discours. Orientation stratégique de l’Armée pour le présent et l’avenir du CC Leopard 2A6."
+          },
           "highlight": true,
           "kind": "session"
         },
@@ -50,22 +134,42 @@
           "time": "09:10",
           "endTime": "09:25",
           "duration": "15'",
-          "title": "Sessão inicial",
-          "description": "Evolução do papel do CC, impacto da guerra moderna, integração com tecnologia e necessidades de adaptação.",
+          "title": {
+            "pt": "Sessão inicial",
+            "en": "Opening session",
+            "fr": "Séance d’ouverture"
+          },
+          "description": {
+            "pt": "Evolução do papel do CC, impacto da guerra moderna, integração com tecnologia e necessidades de adaptação.",
+            "en": "The evolving role of the MBT, the impact of modern warfare, integration with technology and the need to adapt.",
+            "fr": "Évolution du rôle du char de combat, impact de la guerre moderne, intégration technologique et besoins d’adaptation."
+          },
           "kind": "session"
         }
       ]
     },
     {
-      "name": "Painel 1 — Lições da guerra atual",
+      "name": {
+        "pt": "Painel 1 — Lições da guerra atual",
+        "en": "Panel 1 — Lessons from current warfare",
+        "fr": "Panel 1 — Leçons de la guerre actuelle"
+      },
       "axisId": "guerra-atual",
       "sessions": [
         {
           "time": "09:30",
           "endTime": "10:00",
           "duration": "30'",
-          "title": "O campo de batalha transparente: drones e sensores",
-          "description": "Generalização dos drones, redução do efeito surpresa e impacto nas manobras.",
+          "title": {
+            "pt": "O campo de batalha transparente: drones e sensores",
+            "en": "The transparent battlefield: drones and sensors",
+            "fr": "Le champ de bataille transparent : drones et capteurs"
+          },
+          "description": {
+            "pt": "Generalização dos drones, redução do efeito surpresa e impacto nas manobras.",
+            "en": "The widespread use of drones, the erosion of surprise and the impact on manoeuvre.",
+            "fr": "Généralisation des drones, réduction de l’effet de surprise et impact sur la manœuvre."
+          },
           "speaker": "Maj Nuno Silva",
           "kind": "session"
         },
@@ -73,23 +177,43 @@
           "time": "10:00",
           "endTime": "10:30",
           "duration": "30'",
-          "title": "Sobrevivência do CC: lições do combate moderno",
-          "description": "Análise de perdas reais e medidas táticas e técnicas de mitigação. Blindagem ou consciência situacional?",
+          "title": {
+            "pt": "Sobrevivência do CC: lições do combate moderno",
+            "en": "MBT survivability: lessons from modern combat",
+            "fr": "Survie du char de combat : leçons du combat moderne"
+          },
+          "description": {
+            "pt": "Análise de perdas reais e medidas táticas e técnicas de mitigação. Blindagem ou consciência situacional?",
+            "en": "Analysis of actual losses and tactical and technical mitigation measures. Armour or situational awareness?",
+            "fr": "Analyse des pertes réelles et mesures tactiques et techniques de mitigation. Blindage ou conscience situationnelle ?"
+          },
           "speaker": "Maj Teixeira Pinto",
           "kind": "session"
         },
         {
           "time": "10:30",
           "endTime": "10:50",
-          "title": "Intervalo · coffee break",
+          "title": {
+            "pt": "Intervalo · coffee break",
+            "en": "Break · coffee break",
+            "fr": "Pause · coffee break"
+          },
           "kind": "break"
         },
         {
           "time": "10:50",
           "endTime": "11:20",
           "duration": "30'",
-          "title": "O papel do Master Gunner mudou",
-          "description": "Do especialista em tiro ao gestor de letalidade e consciência situacional.",
+          "title": {
+            "pt": "O papel do Master Gunner mudou",
+            "en": "The role of the Master Gunner has changed",
+            "fr": "Le rôle du Master Gunner a changé"
+          },
+          "description": {
+            "pt": "Do especialista em tiro ao gestor de letalidade e consciência situacional.",
+            "en": "From gunnery specialist to manager of lethality and situational awareness.",
+            "fr": "De spécialiste du tir à gestionnaire de la létalité et de la conscience situationnelle."
+          },
           "speaker": "SMor Victor Branco",
           "kind": "session"
         },
@@ -97,23 +221,43 @@
           "time": "11:20",
           "endTime": "11:45",
           "duration": "25'",
-          "title": "Sessão de debate",
-          "description": "Conclusões do Painel 1.",
+          "title": {
+            "pt": "Sessão de debate",
+            "en": "Discussion session",
+            "fr": "Séance de débat"
+          },
+          "description": {
+            "pt": "Conclusões do Painel 1.",
+            "en": "Panel 1 conclusions.",
+            "fr": "Conclusions du Panel 1."
+          },
           "kind": "session",
           "qaRoom": "debate-painel-1"
         }
       ]
     },
     {
-      "name": "Painel 2 — Transformar conhecimento em mudança",
+      "name": {
+        "pt": "Painel 2 — Transformar conhecimento em mudança",
+        "en": "Panel 2 — Turning knowledge into change",
+        "fr": "Panel 2 — Transformer le savoir en changement"
+      },
       "axisId": "experiencia-pratica",
       "sessions": [
         {
           "time": "14:05",
           "endTime": "14:35",
           "duration": "30'",
-          "title": "FND Eslováquia e a Tríade do Carrista",
-          "description": "Condição física, proficiência técnica e engenho tático — o que mudou e o que precisa de mudar.",
+          "title": {
+            "pt": "FND Eslováquia e a Tríade do Carrista",
+            "en": "FND Slovakia and the Carrista Triad",
+            "fr": "FND Slovaquie et la triade du Carrista"
+          },
+          "description": {
+            "pt": "Condição física, proficiência técnica e engenho tático — o que mudou e o que precisa de mudar.",
+            "en": "Physical condition, technical proficiency and tactical ingenuity — what has changed and what still needs to change.",
+            "fr": "Condition physique, maîtrise technique et ingéniosité tactique — ce qui a changé et ce qui doit encore changer."
+          },
           "speaker": "Cap Marco Lopes · Ten João Leal",
           "kind": "session"
         },
@@ -121,8 +265,16 @@
           "time": "14:35",
           "endTime": "14:50",
           "duration": "15'",
-          "title": "Manutenção do CC: alterações de paradigmas",
-          "description": "Alterações a requisitos e procedimentos de manutenção face aos conflitos recentes.",
+          "title": {
+            "pt": "Manutenção do CC: alterações de paradigmas",
+            "en": "MBT maintenance: shifting paradigms",
+            "fr": "Maintenance du char de combat : changement de paradigmes"
+          },
+          "description": {
+            "pt": "Alterações a requisitos e procedimentos de manutenção face aos conflitos recentes.",
+            "en": "Changes to maintenance requirements and procedures in light of recent conflicts.",
+            "fr": "Évolution des exigences et des procédures de maintenance au regard des conflits récents."
+          },
           "speaker": "TCor Sérgio Capelo",
           "kind": "session"
         },
@@ -130,23 +282,43 @@
           "time": "14:50",
           "endTime": "15:05",
           "duration": "15'",
-          "title": "Simulação: o presente e o futuro",
-          "description": "Colaboração com Espanha nas TTP nacionais, projetos futuros e integração no treino e nas operações.",
+          "title": {
+            "pt": "Simulação: o presente e o futuro",
+            "en": "Simulation: present and future",
+            "fr": "Simulation : le présent et l’avenir"
+          },
+          "description": {
+            "pt": "Colaboração com Espanha nas TTP nacionais, projetos futuros e integração no treino e nas operações.",
+            "en": "Cooperation with Spain on national TTPs, future projects and integration into training and operations.",
+            "fr": "Collaboration avec l’Espagne sur les TTP nationales, projets futurs et intégration dans l’instruction et les opérations."
+          },
           "speaker": "TCor Pereira Coutinho",
           "kind": "session"
         },
         {
           "time": "15:05",
           "endTime": "15:25",
-          "title": "Intervalo · coffee break",
+          "title": {
+            "pt": "Intervalo · coffee break",
+            "en": "Break · coffee break",
+            "fr": "Pause · coffee break"
+          },
           "kind": "break"
         },
         {
           "time": "15:25",
           "endTime": "15:55",
           "duration": "30'",
-          "title": "Consciência situacional e proteção passiva",
-          "description": "Câmaras de condução, vigilância 360º, controlo de procedimentos do MG, rede de camuflagem e capacete modular.",
+          "title": {
+            "pt": "Consciência situacional e proteção passiva",
+            "en": "Situational awareness and passive protection",
+            "fr": "Conscience situationnelle et protection passive"
+          },
+          "description": {
+            "pt": "Câmaras de condução, vigilância 360º, controlo de procedimentos do MG, rede de camuflagem e capacete modular.",
+            "en": "Driver cameras, 360° surveillance, MG procedure control, camouflage netting and a modular helmet.",
+            "fr": "Caméras de conduite, surveillance 360°, contrôle des procédures du MG, filet de camouflage et casque modulaire."
+          },
           "speaker": "SAj Alexandre Mendes · 1SARG Fábio Cabral",
           "kind": "session"
         },
@@ -154,38 +326,74 @@
           "time": "15:55",
           "endTime": "16:20",
           "duration": "25'",
-          "title": "Sessão de debate",
-          "description": "Conclusões do Painel 2.",
+          "title": {
+            "pt": "Sessão de debate",
+            "en": "Discussion session",
+            "fr": "Séance de débat"
+          },
+          "description": {
+            "pt": "Conclusões do Painel 2.",
+            "en": "Panel 2 conclusions.",
+            "fr": "Conclusions du Panel 2."
+          },
           "kind": "session",
           "qaRoom": "debate-painel-2"
         }
       ]
     },
     {
-      "name": "Encerramento",
+      "name": {
+        "pt": "Encerramento",
+        "en": "Closing",
+        "fr": "Clôture"
+      },
       "sessions": [
         {
           "time": "16:20",
           "endTime": "16:35",
           "duration": "15'",
-          "title": "Considerações finais",
-          "description": "Síntese de orientações para o CC Leopard 2A6 — sessão interna de trabalho na semana seguinte.",
+          "title": {
+            "pt": "Considerações finais",
+            "en": "Closing remarks",
+            "fr": "Considérations finales"
+          },
+          "description": {
+            "pt": "Síntese de orientações para o CC Leopard 2A6 — sessão interna de trabalho na semana seguinte.",
+            "en": "Summary of guidance for the CC Leopard 2A6 — an internal working session the following week.",
+            "fr": "Synthèse des orientations pour le CC Leopard 2A6 — séance de travail interne la semaine suivante."
+          },
           "kind": "session"
         },
         {
           "time": "16:35",
           "endTime": "16:50",
           "duration": "15'",
-          "title": "Encerramento",
-          "description": "Reflexões finais e encerramento do Workshop.",
+          "title": {
+            "pt": "Encerramento",
+            "en": "Closing",
+            "fr": "Clôture"
+          },
+          "description": {
+            "pt": "Reflexões finais e encerramento do Workshop.",
+            "en": "Final reflections and close of the Workshop.",
+            "fr": "Réflexions finales et clôture du Workshop."
+          },
           "highlight": true,
           "kind": "session"
         },
         {
           "time": "16:55",
           "endTime": "17:00",
-          "title": "Foto de grupo",
-          "description": "Foto de grupo junto ao Leopard 2A6.",
+          "title": {
+            "pt": "Foto de grupo",
+            "en": "Group photograph",
+            "fr": "Photo de groupe"
+          },
+          "description": {
+            "pt": "Foto de grupo junto ao Leopard 2A6.",
+            "en": "Group photograph beside the Leopard 2A6.",
+            "fr": "Photo de groupe auprès du Leopard 2A6."
+          },
           "kind": "activity"
         }
       ]
@@ -195,8 +403,16 @@
     "time": "12:00",
     "endTime": "12:30",
     "duration": "30'",
-    "title": "Challenger O Carrista — Pista Final",
-    "description": "Prova de destreza técnica e física — pista final do Challenger com as guarnições de carristas.",
+    "title": {
+      "pt": "Challenger O Carrista — Pista Final",
+      "en": "Challenger O Carrista — Final Course",
+      "fr": "Challenger O Carrista — Piste finale"
+    },
+    "description": {
+      "pt": "Prova de destreza técnica e física — pista final do Challenger com as guarnições de carristas.",
+      "en": "A test of technical and physical skill — the Challenger final course with tank crews.",
+      "fr": "Épreuve d’adresse technique et physique — piste finale du Challenger avec les équipages de chars."
+    },
     "kind": "activity"
   },
   "speakers": [
@@ -204,27 +420,71 @@
       "id": "maj-nuno-silva",
       "name": "Maj Nuno Silva",
       "fullName": "Nuno Miguel de Melo Oliveira da Silva",
-      "role": "Major de Cavalaria · Orador e Moderador",
+      "role": {
+        "pt": "Major de Cavalaria · Orador e Moderador",
+        "en": "Major de Cavalaria · Speaker and Moderator",
+        "fr": "Major de Cavalaria · Orateur et modérateur"
+      },
       "image": "/eventos/workshop/2026/oradores/maj-nuno-silva.jpg",
-      "bio": "36 anos, 18 de serviço. Oficial de Operações do Grupo de Carros de Combate — Leopard 2 A6, ECC VJTF22 e instrutor de cursos.",
+      "bio": {
+        "pt": "36 anos, 18 de serviço. Oficial de Operações do Grupo de Carros de Combate — Leopard 2 A6, ECC VJTF22 e instrutor de cursos.",
+        "en": "36 years old, 18 years of service. Operations Officer of the Grupo de Carros de Combate — Leopard 2 A6, ECC VJTF22 and course instructor.",
+        "fr": "36 ans, 18 ans de service. Officier des opérations du Grupo de Carros de Combate — Leopard 2 A6, ECC VJTF22 et instructeur de cours."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Maj Cav Nuno Miguel de Melo Oliveira da Silva tem 36 anos de idade e 18 anos de serviço, tendo sido promovido ao atual posto em 1 de outubro de 2025."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Maj Cav Nuno Miguel de Melo Oliveira da Silva tem 36 anos de idade e 18 anos de serviço, tendo sido promovido ao atual posto em 1 de outubro de 2025.",
+            "en": "Maj Cav Nuno Miguel de Melo Oliveira da Silva is 36 years old and has 18 years of service, having been promoted to his current rank on 1 October 2025.",
+            "fr": "Le Maj Cav Nuno Miguel de Melo Oliveira da Silva a 36 ans et 18 ans de service ; il a été promu à son grade actuel le 1er octobre 2025."
+          }
         },
         {
-          "title": "Grupo de Carros de Combate",
-          "body": "Em outubro de 2013, após o término do Curso de Cavalaria da Academia Militar, o Maj Cav Oliveira da Silva foi colocado no Grupo de Carros de Combate da Brigada Mecanizada, onde desde essa data frequentou o curso de Chefe de Carro de Combate Leopard 2 A6, o que lhe permitiu desempenhar várias funções relacionadas com este sistema de armas, nomeadamente: Comandante do 2.º Pelotão do 1.º Esquadrão de Carros de Combate, 2.º Comandante do 2.º Esquadrão de Carros de Combate, Comandante do 1.º Esquadrão de Carros de Combate e Comandante do Esquadrão de Carros de Combate da Very High Readiness Joint Task Force 22 (ECC VJTF22). Atualmente desempenha as funções de Oficial de Operações do Grupo de Carros de Combate."
+          "title": {
+            "pt": "Grupo de Carros de Combate",
+            "en": "Grupo de Carros de Combate",
+            "fr": "Grupo de Carros de Combate"
+          },
+          "body": {
+            "pt": "Em outubro de 2013, após o término do Curso de Cavalaria da Academia Militar, o Maj Cav Oliveira da Silva foi colocado no Grupo de Carros de Combate da Brigada Mecanizada, onde desde essa data frequentou o curso de Chefe de Carro de Combate Leopard 2 A6, o que lhe permitiu desempenhar várias funções relacionadas com este sistema de armas, nomeadamente: Comandante do 2.º Pelotão do 1.º Esquadrão de Carros de Combate, 2.º Comandante do 2.º Esquadrão de Carros de Combate, Comandante do 1.º Esquadrão de Carros de Combate e Comandante do Esquadrão de Carros de Combate da Very High Readiness Joint Task Force 22 (ECC VJTF22). Atualmente desempenha as funções de Oficial de Operações do Grupo de Carros de Combate.",
+            "en": "In October 2013, after completing the Curso de Cavalaria at the Academia Militar, Maj Cav Oliveira da Silva was posted to the Grupo de Carros de Combate of the Brigada Mecanizada. He then attended the Chefe de Carro de Combate Leopard 2 A6 course, which enabled him to hold several appointments related to this weapon system, namely: Commander of the 2.º Pelotão of the 1.º Esquadrão de Carros de Combate, 2nd-in-command of the 2.º Esquadrão de Carros de Combate, Commander of the 1.º Esquadrão de Carros de Combate, and Commander of the Esquadrão de Carros de Combate of the Very High Readiness Joint Task Force 22 (ECC VJTF22). He currently serves as Operations Officer of the Grupo de Carros de Combate.",
+            "fr": "En octobre 2013, après l’achèvement du Curso de Cavalaria de l’Academia Militar, le Maj Cav Oliveira da Silva a été affecté au Grupo de Carros de Combate de la Brigada Mecanizada. Il a ensuite suivi le cours de Chefe de Carro de Combate Leopard 2 A6, ce qui lui a permis d’exercer plusieurs fonctions liées à ce système d’armes, notamment : commandant du 2.º Pelotão du 1.º Esquadrão de Carros de Combate, second du 2.º Esquadrão de Carros de Combate, commandant du 1.º Esquadrão de Carros de Combate et commandant de l’Esquadrão de Carros de Combate de la Very High Readiness Joint Task Force 22 (ECC VJTF22). Il exerce actuellement les fonctions d’officier des opérations du Grupo de Carros de Combate."
+          }
         },
         {
-          "title": "Instrução e exercícios",
-          "body": "Durante o seu percurso militar, foi diversas vezes diretor e instrutor de cursos Leopard, participou em vários exercícios de simulação no Reino de Espanha, bem como participou em diversos ciclos de treino operacionais, dos quais destaca-se o ciclo de treino associado à Full Operational Capability do Grupo de Carros de Combate, a sua participação no exercício Trident Juncture, bem como o período de aprontamento e manutenção da prontidão do ECC VJTF22."
+          "title": {
+            "pt": "Instrução e exercícios",
+            "en": "Instruction and exercises",
+            "fr": "Instruction et exercices"
+          },
+          "body": {
+            "pt": "Durante o seu percurso militar, foi diversas vezes diretor e instrutor de cursos Leopard, participou em vários exercícios de simulação no Reino de Espanha, bem como participou em diversos ciclos de treino operacionais, dos quais destaca-se o ciclo de treino associado à Full Operational Capability do Grupo de Carros de Combate, a sua participação no exercício Trident Juncture, bem como o período de aprontamento e manutenção da prontidão do ECC VJTF22.",
+            "en": "During his military career he has repeatedly served as director and instructor of Leopard courses, taken part in several simulation exercises in the Kingdom of Spain, and completed a number of operational training cycles. Among these he highlights the training cycle associated with Full Operational Capability of the Grupo de Carros de Combate, his participation in exercise Trident Juncture, and the period of force generation and sustained readiness of ECC VJTF22.",
+            "fr": "Au long de son parcours militaire, il a été à plusieurs reprises directeur et instructeur de cours Leopard, a participé à plusieurs exercices de simulation dans le Royaume d’Espagne, ainsi qu’à divers cycles d’instruction opérationnelle, parmi lesquels se distinguent le cycle associé à la Full Operational Capability du Grupo de Carros de Combate, sa participation à l’exercice Trident Juncture, ainsi que la période d’aprontement et de maintien en condition de l’ECC VJTF22."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «O campo de batalha transparente: drones e sensores» (Painel 1)",
-            "Moderador — Painel 2 «Experiência em Prática» / «Transformar conhecimento em mudança»"
+            {
+              "pt": "Orador — sessão «O campo de batalha transparente: drones e sensores» (Painel 1)",
+              "en": "Speaker — session “The transparent battlefield: drones and sensors” (Panel 1)",
+              "fr": "Orateur — séance « Le champ de bataille transparent : drones et capteurs » (Panel 1)"
+            },
+            {
+              "pt": "Moderador — Painel 2 «Experiência em Prática» / «Transformar conhecimento em mudança»",
+              "en": "Moderator — Panel 2 “Experience in Practice” / “Turning knowledge into change”",
+              "fr": "Modérateur — Panel 2 « Expérience en pratique » / « Transformer le savoir en changement »"
+            }
           ]
         }
       ]
@@ -233,51 +493,143 @@
       "id": "tcor-pereira-coutinho",
       "name": "TCor Pereira Coutinho",
       "fullName": "António Xavier Mendes Rocha Pereira Coutinho",
-      "role": "Tenente-Coronel de Infantaria (Comando) · Orador",
+      "role": {
+        "pt": "Tenente-Coronel de Infantaria (Comando) · Orador",
+        "en": "Tenente-Coronel de Infantaria (Comando) · Speaker",
+        "fr": "Tenente-Coronel de Infantaria (Comando) · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/tcor-pereira-coutinho.png",
-      "bio": "Chefe do CCTSC — ex-comandante no Afeganistão e percurso em Comandos, formação e planeamento militar.",
+      "bio": {
+        "pt": "Chefe do CCTSC — ex-comandante no Afeganistão e percurso em Comandos, formação e planeamento militar.",
+        "en": "Head of the CCTSC — former commander in Afghanistan, with a career in the Comandos, training and military planning.",
+        "fr": "Chef du CCTSC — ancien commandant en Afghanistan, parcours dans les Comandos, la formation et la planification militaire."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Tenente-Coronel de Infantaria «Comando» António Xavier Mendes Rocha Pereira Coutinho nasceu em Évora, a 16 de janeiro de 1982. Ingressou na Academia Militar em 2000, tendo sido promovido ao atual posto em 20 de dezembro de 2023."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Tenente-Coronel de Infantaria «Comando» António Xavier Mendes Rocha Pereira Coutinho nasceu em Évora, a 16 de janeiro de 1982. Ingressou na Academia Militar em 2000, tendo sido promovido ao atual posto em 20 de dezembro de 2023.",
+            "en": "Tenente-Coronel de Infantaria “Comando” António Xavier Mendes Rocha Pereira Coutinho was born in Évora on 16 January 1982. He entered the Academia Militar in 2000 and was promoted to his current rank on 20 December 2023.",
+            "fr": "Le Tenente-Coronel de Infantaria « Comando » António Xavier Mendes Rocha Pereira Coutinho est né à Évora le 16 janvier 1982. Il est entré à l’Academia Militar en 2000 et a été promu à son grade actuel le 20 décembre 2023."
+          }
         },
         {
-          "title": "Formação",
-          "body": "É licenciado em Ciências Militares — Infantaria pela Academia Militar, tendo concluído em 2005 o Tirocínio e em 2010 o Curso de Promoção a Capitão na extinta Escola Prática de Infantaria. Está habilitado com o Curso de Promoção a Oficial Superior (2015/16), o Curso Avançado de Planeamento Militar Terrestre (2019) e o Curso de Estado-Maior Conjunto (2019/20), ministrados pelo Instituto Universitário Militar."
+          "title": {
+            "pt": "Formação",
+            "en": "Education",
+            "fr": "Formation"
+          },
+          "body": {
+            "pt": "É licenciado em Ciências Militares — Infantaria pela Academia Militar, tendo concluído em 2005 o Tirocínio e em 2010 o Curso de Promoção a Capitão na extinta Escola Prática de Infantaria. Está habilitado com o Curso de Promoção a Oficial Superior (2015/16), o Curso Avançado de Planeamento Militar Terrestre (2019) e o Curso de Estado-Maior Conjunto (2019/20), ministrados pelo Instituto Universitário Militar.",
+            "en": "He holds a degree in Military Sciences — Infantaria from the Academia Militar, having completed the Tirocínio in 2005 and the Curso de Promoção a Capitão in 2010 at the former Escola Prática de Infantaria. He is qualified on the Curso de Promoção a Oficial Superior (2015/16), the Curso Avançado de Planeamento Militar Terrestre (2019) and the Curso de Estado-Maior Conjunto (2019/20), delivered by the Instituto Universitário Militar.",
+            "fr": "Il est licencié en Ciências Militares — Infantaria par l’Academia Militar, ayant achevé en 2005 le Tirocínio et en 2010 le Curso de Promoção a Capitão à l’ancienne Escola Prática de Infantaria. Il est titulaire du Curso de Promoção a Oficial Superior (2015/16), du Curso Avançado de Planeamento Militar Terrestre (2019) et du Curso de Estado-Maior Conjunto (2019/20), dispensés par l’Instituto Universitário Militar."
+          }
         },
         {
-          "title": "Cursos de especialização",
-          "body": "Possui ainda cursos de especialização, destacando-se:",
+          "title": {
+            "pt": "Cursos de especialização",
+            "en": "Specialist courses",
+            "fr": "Cours de spécialisation"
+          },
+          "body": {
+            "pt": "Possui ainda cursos de especialização, destacando-se:",
+            "en": "He also holds specialist courses, among which:",
+            "fr": "Il possède également des cours de spécialisation, dont :"
+          },
           "items": [
-            "Curso de Comandos (2006)",
-            "Curso de Defesa Nuclear, Biológica, Química e Radiológica (2007)",
-            "Counter-IED Train the Trainers Course (2007)"
+            {
+              "pt": "Curso de Comandos (2006)",
+              "en": "Curso de Comandos (2006)",
+              "fr": "Curso de Comandos (2006)"
+            },
+            {
+              "pt": "Curso de Defesa Nuclear, Biológica, Química e Radiológica (2007)",
+              "en": "Curso de Defesa Nuclear, Biológica, Química e Radiológica (2007)",
+              "fr": "Curso de Defesa Nuclear, Biológica, Química e Radiológica (2007)"
+            },
+            {
+              "pt": "Counter-IED Train the Trainers Course (2007)",
+              "en": "Counter-IED Train the Trainers Course (2007)",
+              "fr": "Counter-IED Train the Trainers Course (2007)"
+            }
           ]
         },
         {
-          "title": "Ensino e formação militar",
-          "body": "Na área do Ensino e Formação Militar, é qualificado em Análise de Trabalho, Desenho Curricular e Gestão da Formação, tendo frequentado ainda os cursos NATO M7-135 — Global Programming Analysis, M7-136 — Systems Approach to Training e S7-126 — E-Learning Instructional Design, na NATO School Oberammergau."
+          "title": {
+            "pt": "Ensino e formação militar",
+            "en": "Military education and training",
+            "fr": "Enseignement et formation militaire"
+          },
+          "body": {
+            "pt": "Na área do Ensino e Formação Militar, é qualificado em Análise de Trabalho, Desenho Curricular e Gestão da Formação, tendo frequentado ainda os cursos NATO M7-135 — Global Programming Analysis, M7-136 — Systems Approach to Training e S7-126 — E-Learning Instructional Design, na NATO School Oberammergau.",
+            "en": "In military education and training he is qualified in job analysis, curriculum design and training management, and has also attended NATO courses M7-135 — Global Programming Analysis, M7-136 — Systems Approach to Training and S7-126 — E-Learning Instructional Design at the NATO School Oberammergau.",
+            "fr": "Dans le domaine de l’enseignement et de la formation militaire, il est qualifié en analyse du travail, conception curriculaire et gestion de la formation, et a également suivi les cours OTAN M7-135 — Global Programming Analysis, M7-136 — Systems Approach to Training et S7-126 — E-Learning Instructional Design, à la NATO School Oberammergau."
+          }
         },
         {
-          "title": "De Comando",
-          "body": "Ao longo da carreira desempenhou funções de comando no Centro de Tropas Comando, onde foi Comandante de Grupo de Instrução, Comandante de Grupo de Combate na 1.ª Companhia de Comandos, 2.º Comandante da 1.ª Companhia de Comandos e Comandante do 1.º Grupo de Combate de Comandos na missão QRF/FND/ISAF, no Teatro de Operações do Afeganistão (2008). No Comando de Instrução e Doutrina comandou a Companhia de Comando e Serviços."
+          "title": {
+            "pt": "De Comando",
+            "en": "Command appointments",
+            "fr": "Fonctions de commandement"
+          },
+          "body": {
+            "pt": "Ao longo da carreira desempenhou funções de comando no Centro de Tropas Comando, onde foi Comandante de Grupo de Instrução, Comandante de Grupo de Combate na 1.ª Companhia de Comandos, 2.º Comandante da 1.ª Companhia de Comandos e Comandante do 1.º Grupo de Combate de Comandos na missão QRF/FND/ISAF, no Teatro de Operações do Afeganistão (2008). No Comando de Instrução e Doutrina comandou a Companhia de Comando e Serviços.",
+            "en": "Throughout his career he has held command appointments at the Centro de Tropas Comando, where he was Commander of an instruction group, Commander of a combat group in the 1.ª Companhia de Comandos, 2nd-in-command of the 1.ª Companhia de Comandos, and Commander of the 1.º Grupo de Combate de Comandos on mission QRF/FND/ISAF in the Afghanistan theatre of operations (2008). At the Comando de Instrução e Doutrina he commanded the Companhia de Comando e Serviços.",
+            "fr": "Au long de sa carrière, il a exercé des fonctions de commandement au Centro de Tropas Comando, où il a été commandant de grupo de instrução, commandant de grupo de combate à la 1.ª Companhia de Comandos, second de la 1.ª Companhia de Comandos et commandant du 1.º Grupo de Combate de Comandos dans la mission QRF/FND/ISAF, sur le théâtre d’opérations d’Afghanistan (2008). Au Comando de Instrução e Doutrina, il a commandé la Companhia de Comando e Serviços."
+          }
         },
         {
-          "title": "De Estado-Maior",
-          "body": "Desempenhou funções de Estado-Maior como Ajudante-de-Campo de Sua Excelência o Chefe do Estado-Maior do Exército, Adjunto na Repartição de Estudos e Planeamento do Comando de Instrução e Doutrina e, posteriormente, na Direção de Formação do Comando do Pessoal, onde exerceu funções de Oficial Adjunto, Oficial de Estudos e Chefe da Secção de Estudos, Planeamento e Organização. Chefiou ainda a Repartição de Tecnologias Educativas e Qualificação, tendo conduzido, enquanto representante do Exército, o processo de reconhecimento da qualificação de Nível 4 — Técnico Militar Terrestre, no âmbito do alinhamento com o Sistema Nacional de Qualificações."
+          "title": {
+            "pt": "De Estado-Maior",
+            "en": "Staff appointments",
+            "fr": "Fonctions d’état-major"
+          },
+          "body": {
+            "pt": "Desempenhou funções de Estado-Maior como Ajudante-de-Campo de Sua Excelência o Chefe do Estado-Maior do Exército, Adjunto na Repartição de Estudos e Planeamento do Comando de Instrução e Doutrina e, posteriormente, na Direção de Formação do Comando do Pessoal, onde exerceu funções de Oficial Adjunto, Oficial de Estudos e Chefe da Secção de Estudos, Planeamento e Organização. Chefiou ainda a Repartição de Tecnologias Educativas e Qualificação, tendo conduzido, enquanto representante do Exército, o processo de reconhecimento da qualificação de Nível 4 — Técnico Militar Terrestre, no âmbito do alinhamento com o Sistema Nacional de Qualificações.",
+            "en": "He has held staff appointments as Aide-de-Camp to His Excellency the Chefe do Estado-Maior do Exército, staff officer in the Repartição de Estudos e Planeamento of the Comando de Instrução e Doutrina and, later, in the Direção de Formação of the Comando do Pessoal, where he served as deputy officer, studies officer and head of the Secção de Estudos, Planeamento e Organização. He also headed the Repartição de Tecnologias Educativas e Qualificação and, as the Army’s representative, led the recognition of the Level 4 — Técnico Militar Terrestre qualification, in the context of alignment with the Sistema Nacional de Qualificações.",
+            "fr": "Il a exercé des fonctions d’état-major comme aide de camp de Son Excellence le Chefe do Estado-Maior do Exército, adjoint à la Repartição de Estudos e Planeamento du Comando de Instrução e Doutrina, puis à la Direção de Formação du Comando do Pessoal, où il a été officier adjoint, officier d’études et chef de la Secção de Estudos, Planeamento e Organização. Il a également dirigé la Repartição de Tecnologias Educativas e Qualificação et, en tant que représentant de l’Armée, conduit le processus de reconnaissance de la qualification de Nível 4 — Técnico Militar Terrestre, dans le cadre de l’alignement sur le Sistema Nacional de Qualificações."
+          }
         },
         {
-          "title": "Cargo actual",
-          "body": "Actualmente exerce funções como Chefe do Centro de Capacitação Tática, Simulação e Certificação (CCTSC). Reside em Évora e é pai de duas filhas."
+          "title": {
+            "pt": "Cargo actual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Actualmente exerce funções como Chefe do Centro de Capacitação Tática, Simulação e Certificação (CCTSC). Reside em Évora e é pai de duas filhas.",
+            "en": "He currently serves as Head of the Centro de Capacitação Tática, Simulação e Certificação (CCTSC). He lives in Évora and is the father of two daughters.",
+            "fr": "Il exerce actuellement les fonctions de chef du Centro de Capacitação Tática, Simulação e Certificação (CCTSC). Il réside à Évora et est père de deux filles."
+          }
         },
         {
-          "title": "Distinções",
-          "body": "Da sua folha de serviços constam diversos louvores e condecorações."
+          "title": {
+            "pt": "Distinções",
+            "en": "Distinctions",
+            "fr": "Distinctions"
+          },
+          "body": {
+            "pt": "Da sua folha de serviços constam diversos louvores e condecorações.",
+            "en": "His service record includes several citations and decorations.",
+            "fr": "Sa feuille de services comporte plusieurs citations et décorations."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «Simulação: o presente e o futuro» (Painel 2)"
+            {
+              "pt": "Orador — sessão «Simulação: o presente e o futuro» (Painel 2)",
+              "en": "Speaker — session “Simulation: present and future” (Panel 2)",
+              "fr": "Orateur — séance « Simulation : le présent et l’avenir » (Panel 2)"
+            }
           ]
         }
       ]
@@ -286,54 +638,158 @@
       "id": "tcor-sergio-capelo",
       "name": "TCor Sérgio Capelo",
       "fullName": "Sérgio Miguel Capelo",
-      "role": "Tenente-Coronel de Cavalaria · Orador",
+      "role": {
+        "pt": "Tenente-Coronel de Cavalaria · Orador",
+        "en": "Tenente-Coronel de Cavalaria · Speaker",
+        "fr": "Tenente-Coronel de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/tcor-sergio-capelo.png",
-      "bio": "25 anos de serviço. Comandante do Batalhão de Apoio de Serviços da BrigMec — ex-comandante no Kosovo e no Iraque.",
+      "bio": {
+        "pt": "25 anos de serviço. Comandante do Batalhão de Apoio de Serviços da BrigMec — ex-comandante no Kosovo e no Iraque.",
+        "en": "25 years of service. Commander of the Batalhão de Apoio de Serviços of BrigMec — former commander in Kosovo and Iraq.",
+        "fr": "25 ans de service. Commandant du Batalhão de Apoio de Serviços de la BrigMec — ancien commandant au Kosovo et en Irak."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Tenente-Coronel de Cavalaria Sérgio Miguel Capelo nasceu em 1980, no distrito da Guarda. Tem 25 anos de serviço e foi promovido ao atual posto em 2023."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Tenente-Coronel de Cavalaria Sérgio Miguel Capelo nasceu em 1980, no distrito da Guarda. Tem 25 anos de serviço e foi promovido ao atual posto em 2023.",
+            "en": "Tenente-Coronel de Cavalaria Sérgio Miguel Capelo was born in 1980 in the district of Guarda. He has 25 years of service and was promoted to his current rank in 2023.",
+            "fr": "Le Tenente-Coronel de Cavalaria Sérgio Miguel Capelo est né en 1980 dans le district de Guarda. Il totalise 25 ans de service et a été promu à son grade actuel en 2023."
+          }
         },
         {
-          "title": "Formação",
-          "body": "É licenciado em Ciências Militares, na especialidade de Cavalaria, pela Academia Militar. Está habilitado com o Curso de Promoção a Capitão e o Curso de Promoção a Oficial Superior. Possui ainda outros cursos militares, de destacar:",
+          "title": {
+            "pt": "Formação",
+            "en": "Education",
+            "fr": "Formation"
+          },
+          "body": {
+            "pt": "É licenciado em Ciências Militares, na especialidade de Cavalaria, pela Academia Militar. Está habilitado com o Curso de Promoção a Capitão e o Curso de Promoção a Oficial Superior. Possui ainda outros cursos militares, de destacar:",
+            "en": "He holds a degree in Military Sciences, Cavalaria specialisation, from the Academia Militar. He is qualified on the Curso de Promoção a Capitão and the Curso de Promoção a Oficial Superior. He also holds further military courses, notably:",
+            "fr": "Il est licencié en Ciências Militares, spécialité Cavalaria, par l’Academia Militar. Il est titulaire du Curso de Promoção a Capitão et du Curso de Promoção a Oficial Superior. Il possède également d’autres cours militaires, dont :"
+          },
           "items": [
-            "Curso de Segurança Militar",
-            "Curso de Chefe de Carro de Combate Leopard 2A6",
-            "Curso de Defesa Nuclear, Biológica e Química",
-            "Curso de Formadores de Sistema Lança Míssil TOW2",
-            "Curso de Vigilância do Campo de Batalha",
-            "Curso de Proteção Ambiental"
+            {
+              "pt": "Curso de Segurança Militar",
+              "en": "Curso de Segurança Militar",
+              "fr": "Curso de Segurança Militar"
+            },
+            {
+              "pt": "Curso de Chefe de Carro de Combate Leopard 2A6",
+              "en": "Curso de Chefe de Carro de Combate Leopard 2A6",
+              "fr": "Curso de Chefe de Carro de Combate Leopard 2A6"
+            },
+            {
+              "pt": "Curso de Defesa Nuclear, Biológica e Química",
+              "en": "Curso de Defesa Nuclear, Biológica e Química",
+              "fr": "Curso de Defesa Nuclear, Biológica e Química"
+            },
+            {
+              "pt": "Curso de Formadores de Sistema Lança Míssil TOW2",
+              "en": "Curso de Formadores de Sistema Lança Míssil TOW2",
+              "fr": "Curso de Formadores de Sistema Lança Míssil TOW2"
+            },
+            {
+              "pt": "Curso de Vigilância do Campo de Batalha",
+              "en": "Curso de Vigilância do Campo de Batalha",
+              "fr": "Curso de Vigilância do Campo de Batalha"
+            },
+            {
+              "pt": "Curso de Proteção Ambiental",
+              "en": "Curso de Proteção Ambiental",
+              "fr": "Curso de Proteção Ambiental"
+            }
           ]
         },
         {
-          "title": "Carreira",
-          "body": "Ao longo da sua carreira prestou serviço no Esquadrão de Reconhecimento da Brigada Mecanizada, Escola Prática de Cavalaria, Grupo de Carros de Combate da Brigada Mecanizada e Quartel-General da Brigada Mecanizada, desempenhando nestas unidades funções de Comando, Formador e Director de Curso, e de Estado-Maior."
+          "title": {
+            "pt": "Carreira",
+            "en": "Career path",
+            "fr": "Carrière"
+          },
+          "body": {
+            "pt": "Ao longo da sua carreira prestou serviço no Esquadrão de Reconhecimento da Brigada Mecanizada, Escola Prática de Cavalaria, Grupo de Carros de Combate da Brigada Mecanizada e Quartel-General da Brigada Mecanizada, desempenhando nestas unidades funções de Comando, Formador e Director de Curso, e de Estado-Maior.",
+            "en": "Throughout his career he has served in the Esquadrão de Reconhecimento of the Brigada Mecanizada, the Escola Prática de Cavalaria, the Grupo de Carros de Combate of the Brigada Mecanizada and the Quartel-General of the Brigada Mecanizada, holding command, instructor and course-director, and staff appointments in those units.",
+            "fr": "Au long de sa carrière, il a servi à l’Esquadrão de Reconhecimento de la Brigada Mecanizada, à l’Escola Prática de Cavalaria, au Grupo de Carros de Combate de la Brigada Mecanizada et au Quartel-General de la Brigada Mecanizada, y exerçant des fonctions de commandement, de formateur et directeur de cours, et d’état-major."
+          }
         },
         {
-          "title": "De Comando",
-          "body": "No âmbito das funções de Comando destacam-se os cargos de Comandante do 3.º Pelotão de Reconhecimento, do Esquadrão de Reconhecimento da Brigada Mecanizada, Comandante do Esquadrão de Formação da Escola Prática de Cavalaria, Comandante do Esquadrão de Comando e Serviços do Grupo de Carros de Combate, Comandante do Esquadrão de Apoio do Agrupamento India no teatro de operações do Kosovo, Comandante do Esquadrão de Reconhecimento da Brigada Mecanizada e Comandante da 10.ª Força Nacional Destacada no teatro de operações do Iraque."
+          "title": {
+            "pt": "De Comando",
+            "en": "Command appointments",
+            "fr": "Fonctions de commandement"
+          },
+          "body": {
+            "pt": "No âmbito das funções de Comando destacam-se os cargos de Comandante do 3.º Pelotão de Reconhecimento, do Esquadrão de Reconhecimento da Brigada Mecanizada, Comandante do Esquadrão de Formação da Escola Prática de Cavalaria, Comandante do Esquadrão de Comando e Serviços do Grupo de Carros de Combate, Comandante do Esquadrão de Apoio do Agrupamento India no teatro de operações do Kosovo, Comandante do Esquadrão de Reconhecimento da Brigada Mecanizada e Comandante da 10.ª Força Nacional Destacada no teatro de operações do Iraque.",
+            "en": "His command appointments include Commander of the 3.º Pelotão de Reconhecimento of the Esquadrão de Reconhecimento of the Brigada Mecanizada, Commander of the Esquadrão de Formação of the Escola Prática de Cavalaria, Commander of the Esquadrão de Comando e Serviços of the Grupo de Carros de Combate, Commander of the Esquadrão de Apoio of Agrupamento India in the Kosovo theatre of operations, Commander of the Esquadrão de Reconhecimento of the Brigada Mecanizada, and Commander of the 10.ª Força Nacional Destacada in the Iraq theatre of operations.",
+            "fr": "Parmi ses fonctions de commandement figurent celles de commandant du 3.º Pelotão de Reconhecimento de l’Esquadrão de Reconhecimento de la Brigada Mecanizada, commandant de l’Esquadrão de Formação de l’Escola Prática de Cavalaria, commandant de l’Esquadrão de Comando e Serviços du Grupo de Carros de Combate, commandant de l’Esquadrão de Apoio de l’Agrupamento India sur le théâtre d’opérations du Kosovo, commandant de l’Esquadrão de Reconhecimento de la Brigada Mecanizada et commandant de la 10.ª Força Nacional Destacada sur le théâtre d’opérations d’Irak."
+          }
         },
         {
-          "title": "De Estado-Maior",
-          "body": "No âmbito das funções de Estado-Maior destacam-se os cargos desempenhados nas secções de Estado-Maior do Quartel-General da Brigada Mecanizada: Adjunto e Chefe da Secção Logística (G4), Adjunto e Chefe da Secção de Treino e Doutrina (G7), Chefe da Secção de Operações (G3) e Oficial Preboste na área da Polícia do Exército."
+          "title": {
+            "pt": "De Estado-Maior",
+            "en": "Staff appointments",
+            "fr": "Fonctions d’état-major"
+          },
+          "body": {
+            "pt": "No âmbito das funções de Estado-Maior destacam-se os cargos desempenhados nas secções de Estado-Maior do Quartel-General da Brigada Mecanizada: Adjunto e Chefe da Secção Logística (G4), Adjunto e Chefe da Secção de Treino e Doutrina (G7), Chefe da Secção de Operações (G3) e Oficial Preboste na área da Polícia do Exército.",
+            "en": "His staff appointments include posts in the staff sections of the Quartel-General of the Brigada Mecanizada: deputy and head of the Logistic Section (G4), deputy and head of the Training and Doctrine Section (G7), head of the Operations Section (G3), and provost officer in the Polícia do Exército domain.",
+            "fr": "Parmi ses fonctions d’état-major figurent les postes occupés dans les sections d’état-major du Quartel-General de la Brigada Mecanizada : adjoint et chef de la Secção Logística (G4), adjoint et chef de la Secção de Treino e Doutrina (G7), chef de la Secção de Operações (G3) et officier prévôt dans le domaine de la Polícia do Exército."
+          }
         },
         {
-          "title": "Formador e director de curso",
-          "body": "No âmbito da formação destacam-se os cargos de Formador e Director de Curso dos vários quadros da Arma de Cavalaria e do Exército Português."
+          "title": {
+            "pt": "Formador e director de curso",
+            "en": "Instructor and course director",
+            "fr": "Formateur et directeur de cours"
+          },
+          "body": {
+            "pt": "No âmbito da formação destacam-se os cargos de Formador e Director de Curso dos vários quadros da Arma de Cavalaria e do Exército Português.",
+            "en": "In training, his appointments include instructor and course director for the various cadres of the Arma de Cavalaria and of the Exército Português.",
+            "fr": "Dans le domaine de la formation, se distinguent les fonctions de formateur et de directeur de cours des divers cadres de l’Arma de Cavalaria et de l’Exército Português."
+          }
         },
         {
-          "title": "Cargo actual",
-          "body": "Actualmente é o Comandante do Batalhão de Apoio de Serviços da Brigada Mecanizada do Exército Português."
+          "title": {
+            "pt": "Cargo actual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Actualmente é o Comandante do Batalhão de Apoio de Serviços da Brigada Mecanizada do Exército Português.",
+            "en": "He is currently Commander of the Batalhão de Apoio de Serviços of the Brigada Mecanizada of the Exército Português.",
+            "fr": "Il est actuellement commandant du Batalhão de Apoio de Serviços de la Brigada Mecanizada de l’Exército Português."
+          }
         },
         {
-          "title": "Experiência logística e internacional",
-          "body": "A nível logístico, destaca-se a sua participação, no planeamento, coordenação, sincronização e supervisão, do Apoio Logístico a uma unidade de escalão brigada, de exercícios nacionais e internacionais (com a participação de vários países), dos quais se destacam os da série BETA (realizados em Espanha), TAURUS e ORION (estes, realizados em Portugal), e certificação e projeção de forças, no âmbito da NATO (Forças Nacionais Destacadas para a Área de Atuação da Eslováquia) e da União Europeia (European Union Battle Group 25-2/26-1), compromissos internacionais assumidos por Portugal."
+          "title": {
+            "pt": "Experiência logística e internacional",
+            "en": "Logistic and international experience",
+            "fr": "Expérience logistique et internationale"
+          },
+          "body": {
+            "pt": "A nível logístico, destaca-se a sua participação, no planeamento, coordenação, sincronização e supervisão, do Apoio Logístico a uma unidade de escalão brigada, de exercícios nacionais e internacionais (com a participação de vários países), dos quais se destacam os da série BETA (realizados em Espanha), TAURUS e ORION (estes, realizados em Portugal), e certificação e projeção de forças, no âmbito da NATO (Forças Nacionais Destacadas para a Área de Atuação da Eslováquia) e da União Europeia (European Union Battle Group 25-2/26-1), compromissos internacionais assumidos por Portugal.",
+            "en": "On the logistic side, he has taken part in the planning, coordination, synchronisation and supervision of logistic support to a brigade-level formation, in national and international exercises (involving several countries), among them the BETA series (held in Spain), TAURUS and ORION (held in Portugal), as well as the certification and projection of forces under NATO (Forças Nacionais Destacadas to the Slovakia area of operations) and the European Union (European Union Battle Group 25-2/26-1) — international commitments assumed by Portugal.",
+            "fr": "Sur le plan logistique, se distingue sa participation à la planification, à la coordination, à la synchronisation et à la supervision de l’appui logistique à une unité d’échelon brigade, d’exercices nationaux et internationaux (avec la participation de plusieurs pays), parmi lesquels la série BETA (conduits en Espagne), TAURUS et ORION (conduits au Portugal), ainsi que la certification et la projection de forces, dans le cadre de l’OTAN (Forças Nacionais Destacadas vers la zone d’action de la Slovaquie) et de l’Union européenne (European Union Battle Group 25-2/26-1), engagements internationaux assumés par le Portugal."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «Manutenção do CC: alterações de paradigmas» (Painel 2)"
+            {
+              "pt": "Orador — sessão «Manutenção do CC: alterações de paradigmas» (Painel 2)",
+              "en": "Speaker — session “MBT maintenance: shifting paradigms” (Panel 2)",
+              "fr": "Orateur — séance « Maintenance du char de combat : changement de paradigmes » (Panel 2)"
+            }
           ]
         }
       ]
@@ -342,34 +798,90 @@
       "id": "maj-teixeira-pinto",
       "name": "Maj Teixeira Pinto",
       "fullName": "Luís Teixeira Pinto",
-      "role": "Major de Cavalaria · Orador",
+      "role": {
+        "pt": "Major de Cavalaria · Orador",
+        "en": "Major de Cavalaria · Speaker",
+        "fr": "Major de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/maj-teixeira-pinto.png",
-      "bio": "Ex-comandante de esquadrão no RCav3 e pelotão HUMINT no Agrupamento ISTAR — três comissões no Iraque, Mali e República Centro-Africana.",
+      "bio": {
+        "pt": "Ex-comandante de esquadrão no RCav3 e pelotão HUMINT no Agrupamento ISTAR — três comissões no Iraque, Mali e República Centro-Africana.",
+        "en": "Former squadron commander at RCav3 and HUMINT platoon commander in the Agrupamento ISTAR — three tours in Iraq, Mali and the Central African Republic.",
+        "fr": "Ancien commandant d’escadron au RCav3 et commandant de peloton HUMINT à l’Agrupamento ISTAR — trois commissions en Irak, au Mali et en République centrafricaine."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Major de Cavalaria Luís Teixeira Pinto entrou para a Academia Militar em 2004, tendo passado ao quadro permanente em 2010."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Major de Cavalaria Luís Teixeira Pinto entrou para a Academia Militar em 2004, tendo passado ao quadro permanente em 2010.",
+            "en": "Major de Cavalaria Luís Teixeira Pinto entered the Academia Militar in 2004 and transferred to the regular cadre in 2010.",
+            "fr": "Le Major de Cavalaria Luís Teixeira Pinto est entré à l’Academia Militar en 2004 et a intégré le cadre permanent en 2010."
+          }
         },
         {
-          "title": "Regimento de Cavalaria 3",
-          "body": "Colocado no Regimento de Cavalaria 3 em Estremoz, desempenhou funções em subalterno como Comandante de Pelotão de Reconhecimento e 2.º Comandante de Esquadrão de Reconhecimento e, em Capitão, como Comandante de Esquadrão de Reconhecimento durante a VJTF da eNRF 2018, entre 2017 e 2020."
+          "title": {
+            "pt": "Regimento de Cavalaria 3",
+            "en": "Regimento de Cavalaria 3",
+            "fr": "Regimento de Cavalaria 3"
+          },
+          "body": {
+            "pt": "Colocado no Regimento de Cavalaria 3 em Estremoz, desempenhou funções em subalterno como Comandante de Pelotão de Reconhecimento e 2.º Comandante de Esquadrão de Reconhecimento e, em Capitão, como Comandante de Esquadrão de Reconhecimento durante a VJTF da eNRF 2018, entre 2017 e 2020.",
+            "en": "Posted to the Regimento de Cavalaria 3 in Estremoz, he served as a junior officer as Commander of a reconnaissance platoon and 2nd-in-command of a reconnaissance squadron and, as Capitão, as Commander of a reconnaissance squadron during the VJTF of eNRF 2018, between 2017 and 2020.",
+            "fr": "Affecté au Regimento de Cavalaria 3 à Estremoz, il a exercé, comme officier subalterne, les fonctions de commandant de peloton de reconnaissance et de second d’escadron de reconnaissance et, comme Capitão, celles de commandant d’escadron de reconnaissance pendant la VJTF de l’eNRF 2018, entre 2017 et 2020."
+          }
         },
         {
-          "title": "Agrupamento ISTAR",
-          "body": "Entre 2020 e 2024, como Capitão e Major, desempenhou funções ligadas às Informações no Agrupamento ISTAR, em particular como Comandante do Pelotão HUMINT."
+          "title": {
+            "pt": "Agrupamento ISTAR",
+            "en": "Agrupamento ISTAR",
+            "fr": "Agrupamento ISTAR"
+          },
+          "body": {
+            "pt": "Entre 2020 e 2024, como Capitão e Major, desempenhou funções ligadas às Informações no Agrupamento ISTAR, em particular como Comandante do Pelotão HUMINT.",
+            "en": "Between 2020 and 2024, as Capitão and Major, he held intelligence appointments in the Agrupamento ISTAR, in particular as Commander of the HUMINT platoon.",
+            "fr": "Entre 2020 et 2024, comme Capitão puis Major, il a exercé des fonctions liées au renseignement à l’Agrupamento ISTAR, en particulier comme commandant du peloton HUMINT."
+          }
         },
         {
-          "title": "Missões no estrangeiro",
-          "body": "Para além das funções em território nacional, cumpriu três comissões de serviço nos teatros de operações do Iraque (2015–16), Mali (2020–21) e República Centro-Africana (2023)."
+          "title": {
+            "pt": "Missões no estrangeiro",
+            "en": "Overseas missions",
+            "fr": "Missions à l’étranger"
+          },
+          "body": {
+            "pt": "Para além das funções em território nacional, cumpriu três comissões de serviço nos teatros de operações do Iraque (2015–16), Mali (2020–21) e República Centro-Africana (2023).",
+            "en": "In addition to appointments on national territory, he completed three tours of duty in the theatres of operations of Iraq (2015–16), Mali (2020–21) and the Central African Republic (2023).",
+            "fr": "Outre ses fonctions sur le territoire national, il a accompli trois commissions de service sur les théâtres d’opérations d’Irak (2015–16), du Mali (2020–21) et de la République centrafricaine (2023)."
+          }
         },
         {
-          "title": "Cargo actual",
-          "body": "Após o término do Curso de Estado-Maior Conjunto em 2025, foi colocado no Estado-Maior do Exército, desempenhando actualmente as funções de coordenador de área na Repartição de Capacidades da Divisão de Planeamento Militar Terrestre."
+          "title": {
+            "pt": "Cargo actual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Após o término do Curso de Estado-Maior Conjunto em 2025, foi colocado no Estado-Maior do Exército, desempenhando actualmente as funções de coordenador de área na Repartição de Capacidades da Divisão de Planeamento Militar Terrestre.",
+            "en": "After completing the Curso de Estado-Maior Conjunto in 2025, he was posted to the Estado-Maior do Exército, where he currently serves as area coordinator in the Repartição de Capacidades of the Divisão de Planeamento Militar Terrestre.",
+            "fr": "Après l’achèvement du Curso de Estado-Maior Conjunto en 2025, il a été affecté à l’Estado-Maior do Exército, où il exerce actuellement les fonctions de coordinateur de domaine à la Repartição de Capacidades de la Divisão de Planeamento Militar Terrestre."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «Sobrevivência do CC: lições do combate moderno» (Painel 1)"
+            {
+              "pt": "Orador — sessão «Sobrevivência do CC: lições do combate moderno» (Painel 1)",
+              "en": "Speaker — session “MBT survivability: lessons from modern combat” (Panel 1)",
+              "fr": "Orateur — séance « Survie du char de combat : leçons du combat moderne » (Panel 1)"
+            }
           ]
         }
       ]
@@ -378,34 +890,90 @@
       "id": "cap-marco-lopes",
       "name": "Cap Marco Lopes",
       "fullName": "Marco Aurélio Viana Lopes",
-      "role": "Capitão de Cavalaria · Orador",
+      "role": {
+        "pt": "Capitão de Cavalaria · Orador",
+        "en": "Capitão de Cavalaria · Speaker",
+        "fr": "Capitão de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/cap-marco-lopes.png",
-      "bio": "14 anos de serviço. Ex-comandante de esquadrão no GCC e nas FND na Eslováquia — Mestrado Integrado em Ciências Militares (Cavalaria).",
+      "bio": {
+        "pt": "14 anos de serviço. Ex-comandante de esquadrão no GCC e nas FND na Eslováquia — Mestrado Integrado em Ciências Militares (Cavalaria).",
+        "en": "14 years of service. Former squadron commander in the GCC and in the FND in Slovakia — Integrated Master’s in Military Sciences (Cavalaria).",
+        "fr": "14 ans de service. Ancien commandant d’escadron au GCC et dans les FND en Slovaquie — master intégré en Ciências Militares (Cavalaria)."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Capitão de Cavalaria Marco Aurélio Viana Lopes é natural de Corroios, concelho do Seixal, tem 32 anos de idade e 14 anos de serviço. Foi promovido ao atual posto em 4 de outubro de 2023."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Capitão de Cavalaria Marco Aurélio Viana Lopes é natural de Corroios, concelho do Seixal, tem 32 anos de idade e 14 anos de serviço. Foi promovido ao atual posto em 4 de outubro de 2023.",
+            "en": "Capitão de Cavalaria Marco Aurélio Viana Lopes is from Corroios, in the municipality of Seixal; he is 32 years old and has 14 years of service. He was promoted to his current rank on 4 October 2023.",
+            "fr": "Le Capitão de Cavalaria Marco Aurélio Viana Lopes est originaire de Corroios, commune de Seixal ; il a 32 ans et 14 ans de service. Il a été promu à son grade actuel le 4 octobre 2023."
+          }
         },
         {
-          "title": "Formação",
-          "body": "Está habilitado com o Mestrado Integrado em Ciências Militares, na especialidade de Cavalaria. Para além dos cursos de carreira, possui diversas qualificações militares complementares, das quais se destacam:",
+          "title": {
+            "pt": "Formação",
+            "en": "Education",
+            "fr": "Formation"
+          },
+          "body": {
+            "pt": "Está habilitado com o Mestrado Integrado em Ciências Militares, na especialidade de Cavalaria. Para além dos cursos de carreira, possui diversas qualificações militares complementares, das quais se destacam:",
+            "en": "He holds the Integrated Master’s in Military Sciences, Cavalaria specialisation. In addition to career courses, he has several complementary military qualifications, among which:",
+            "fr": "Il est titulaire du Mestrado Integrado em Ciências Militares, spécialité Cavalaria. Outre les cours de carrière, il possède plusieurs qualifications militaires complémentaires, dont :"
+          },
           "items": [
-            "Curso de Chefe de Carro de Combate Leopard 2A6",
-            "Curso de Chefe de Viatura VBR Pandur II 8x8"
+            {
+              "pt": "Curso de Chefe de Carro de Combate Leopard 2A6",
+              "en": "Curso de Chefe de Carro de Combate Leopard 2A6",
+              "fr": "Curso de Chefe de Carro de Combate Leopard 2A6"
+            },
+            {
+              "pt": "Curso de Chefe de Viatura VBR Pandur II 8x8",
+              "en": "Curso de Chefe de Viatura VBR Pandur II 8x8",
+              "fr": "Curso de Chefe de Viatura VBR Pandur II 8x8"
+            }
           ]
         },
         {
-          "title": "Grupo de Carros de Combate",
-          "body": "Após a conclusão do curso na Academia Militar, em outubro de 2017, foi colocado no Grupo de Carros de Combate da Brigada Mecanizada, onde tem desempenhado diversas funções, designadamente as de Comandante de Pelotão, 2.º Comandante de Esquadrão e Comandante do 1.º Esquadrão de Carros de Combate. Em acumulação de funções, exerceu igualmente o cargo de 2.º Comandante do Esquadrão de Carros de Combate do Agrupamento Mecanizado VJTF/eNRF 2022."
+          "title": {
+            "pt": "Grupo de Carros de Combate",
+            "en": "Grupo de Carros de Combate",
+            "fr": "Grupo de Carros de Combate"
+          },
+          "body": {
+            "pt": "Após a conclusão do curso na Academia Militar, em outubro de 2017, foi colocado no Grupo de Carros de Combate da Brigada Mecanizada, onde tem desempenhado diversas funções, designadamente as de Comandante de Pelotão, 2.º Comandante de Esquadrão e Comandante do 1.º Esquadrão de Carros de Combate. Em acumulação de funções, exerceu igualmente o cargo de 2.º Comandante do Esquadrão de Carros de Combate do Agrupamento Mecanizado VJTF/eNRF 2022.",
+            "en": "After completing the course at the Academia Militar in October 2017, he was posted to the Grupo de Carros de Combate of the Brigada Mecanizada, where he has held several appointments, including Platoon Commander, 2nd-in-command of a squadron and Commander of the 1.º Esquadrão de Carros de Combate. Concurrently, he also served as 2nd-in-command of the Esquadrão de Carros de Combate of the Agrupamento Mecanizado VJTF/eNRF 2022.",
+            "fr": "Après l’achèvement du cours à l’Academia Militar, en octobre 2017, il a été affecté au Grupo de Carros de Combate de la Brigada Mecanizada, où il a exercé diverses fonctions, notamment celles de commandant de peloton, de second d’escadron et de commandant du 1.º Esquadrão de Carros de Combate. En cumul de fonctions, il a également été second de l’Esquadrão de Carros de Combate de l’Agrupamento Mecanizado VJTF/eNRF 2022."
+          }
         },
         {
-          "title": "Missões no estrangeiro",
-          "body": "Desempenhou as funções de Comandante de Esquadrão dos Pelotões de Carros de Combate da 1.ª e 2.ª Forças Nacionais Destacadas integradas no Multinational Battlegroup Slovakia, durante os respetivos períodos de aprontamento. Recentemente, exerceu as funções de Comandante do Subagrupamento da 3.ª FND/SubAgr(-)/MNBG SVK, constituindo a primeira força portuguesa de escalão companhia projetada para a Área de Operações da Eslováquia no âmbito daquela missão."
+          "title": {
+            "pt": "Missões no estrangeiro",
+            "en": "Overseas missions",
+            "fr": "Missions à l’étranger"
+          },
+          "body": {
+            "pt": "Desempenhou as funções de Comandante de Esquadrão dos Pelotões de Carros de Combate da 1.ª e 2.ª Forças Nacionais Destacadas integradas no Multinational Battlegroup Slovakia, durante os respetivos períodos de aprontamento. Recentemente, exerceu as funções de Comandante do Subagrupamento da 3.ª FND/SubAgr(-)/MNBG SVK, constituindo a primeira força portuguesa de escalão companhia projetada para a Área de Operações da Eslováquia no âmbito daquela missão.",
+            "en": "He served as Squadron Commander of the main battle tank platoons of the 1.ª and 2.ª Forças Nacionais Destacadas integrated in the Multinational Battlegroup Slovakia, during their respective force-generation periods. More recently he served as Commander of the sub-battlegroup of the 3.ª FND/SubAgr(-)/MNBG SVK, constituting the first Portuguese company-level force projected to the Slovakia area of operations under that mission.",
+            "fr": "Il a exercé les fonctions de commandant d’escadron des pelotons de chars de combat de la 1.ª et de la 2.ª Forças Nacionais Destacadas intégrées au Multinational Battlegroup Slovakia, pendant les périodes d’aprontement respectives. Récemment, il a exercé les fonctions de commandant du sous-groupement de la 3.ª FND/SubAgr(-)/MNBG SVK, constituant la première force portugaise d’échelon compagnie projetée vers la zone d’opérations de la Slovaquie dans le cadre de cette mission."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «FND Eslováquia e a Tríade do Carrista» (Painel 2)"
+            {
+              "pt": "Orador — sessão «FND Eslováquia e a Tríade do Carrista» (Painel 2)",
+              "en": "Speaker — session “FND Slovakia and the Carrista Triad” (Panel 2)",
+              "fr": "Orateur — séance « FND Slovaquie et la triade du Carrista » (Panel 2)"
+            }
           ]
         }
       ]
@@ -414,34 +982,90 @@
       "id": "ten-joao-leal",
       "name": "Ten João Leal",
       "fullName": "João Pedro Simão de Castro Leal",
-      "role": "Tenente de Cavalaria · Orador",
+      "role": {
+        "pt": "Tenente de Cavalaria · Orador",
+        "en": "Tenente de Cavalaria · Speaker",
+        "fr": "Tenente de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/ten-joao-leal.png",
-      "bio": "9 anos de serviço. 2.º Comandante do Esquadrão de Reconhecimento da BrigMec — ex-comandante de pelotão na 3.ª FND na Eslováquia.",
+      "bio": {
+        "pt": "9 anos de serviço. 2.º Comandante do Esquadrão de Reconhecimento da BrigMec — ex-comandante de pelotão na 3.ª FND na Eslováquia.",
+        "en": "9 years of service. 2nd-in-command of the Esquadrão de Reconhecimento of BrigMec — former platoon commander in the 3.ª FND in Slovakia.",
+        "fr": "9 ans de service. Second de l’Esquadrão de Reconhecimento de la BrigMec — ancien commandant de peloton dans la 3.ª FND en Slovaquie."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Tenente de Cavalaria João Pedro Simão de Castro Leal é natural de Tomar, tem 28 anos de idade e conta com 9 anos de serviço. Foi promovido ao atual posto em 1 de outubro de 2023."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Tenente de Cavalaria João Pedro Simão de Castro Leal é natural de Tomar, tem 28 anos de idade e conta com 9 anos de serviço. Foi promovido ao atual posto em 1 de outubro de 2023.",
+            "en": "Tenente de Cavalaria João Pedro Simão de Castro Leal is from Tomar; he is 28 years old and has 9 years of service. He was promoted to his current rank on 1 October 2023.",
+            "fr": "Le Tenente de Cavalaria João Pedro Simão de Castro Leal est originaire de Tomar ; il a 28 ans et 9 ans de service. Il a été promu à son grade actuel le 1er octobre 2023."
+          }
         },
         {
-          "title": "Formação",
-          "body": "Está habilitado com o Mestrado Integrado em Ciências Militares, na especialidade de Cavalaria. Possui ainda outros cursos de qualificação, de entre os quais se destaca o Curso de Chefe de Carro de Combate Leopard 2A6."
+          "title": {
+            "pt": "Formação",
+            "en": "Education",
+            "fr": "Formation"
+          },
+          "body": {
+            "pt": "Está habilitado com o Mestrado Integrado em Ciências Militares, na especialidade de Cavalaria. Possui ainda outros cursos de qualificação, de entre os quais se destaca o Curso de Chefe de Carro de Combate Leopard 2A6.",
+            "en": "He holds the Integrated Master’s in Military Sciences, Cavalaria specialisation. He also holds further qualification courses, among which the Curso de Chefe de Carro de Combate Leopard 2A6.",
+            "fr": "Il est titulaire du Mestrado Integrado em Ciências Militares, spécialité Cavalaria. Il possède également d’autres cours de qualification, parmi lesquels se distingue le Curso de Chefe de Carro de Combate Leopard 2A6."
+          }
         },
         {
-          "title": "Carreira",
-          "body": "Após a conclusão do curso na Academia Militar, em outubro de 2021, foi colocado no Grupo de Carros de Combate e posteriormente no Esquadrão de Reconhecimento da Brigada Mecanizada."
+          "title": {
+            "pt": "Carreira",
+            "en": "Career path",
+            "fr": "Carrière"
+          },
+          "body": {
+            "pt": "Após a conclusão do curso na Academia Militar, em outubro de 2021, foi colocado no Grupo de Carros de Combate e posteriormente no Esquadrão de Reconhecimento da Brigada Mecanizada.",
+            "en": "After completing the course at the Academia Militar in October 2021, he was posted to the Grupo de Carros de Combate and subsequently to the Esquadrão de Reconhecimento of the Brigada Mecanizada.",
+            "fr": "Après l’achèvement du cours à l’Academia Militar, en octobre 2021, il a été affecté au Grupo de Carros de Combate puis à l’Esquadrão de Reconhecimento de la Brigada Mecanizada."
+          }
         },
         {
-          "title": "Missão na Eslováquia",
-          "body": "Foi o Comandante de Pelotão de Carros de Combate da 3.ª Força Nacional Destacada/SubAgrupamento do Multinational Battlegroup Slovakia entre agosto de 2025 e fevereiro de 2026."
+          "title": {
+            "pt": "Missão na Eslováquia",
+            "en": "Mission in Slovakia",
+            "fr": "Mission en Slovaquie"
+          },
+          "body": {
+            "pt": "Foi o Comandante de Pelotão de Carros de Combate da 3.ª Força Nacional Destacada/SubAgrupamento do Multinational Battlegroup Slovakia entre agosto de 2025 e fevereiro de 2026.",
+            "en": "He was the main battle tank Platoon Commander of the 3.ª Força Nacional Destacada/SubAgrupamento of the Multinational Battlegroup Slovakia between August 2025 and February 2026.",
+            "fr": "Il a été commandant de peloton de chars de combat de la 3.ª Força Nacional Destacada/SubAgrupamento du Multinational Battlegroup Slovakia entre août 2025 et février 2026."
+          }
         },
         {
-          "title": "Cargo actual",
-          "body": "Actualmente exerce as funções de 2.º Comandante do Esquadrão de Reconhecimento da Brigada Mecanizada."
+          "title": {
+            "pt": "Cargo actual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Actualmente exerce as funções de 2.º Comandante do Esquadrão de Reconhecimento da Brigada Mecanizada.",
+            "en": "He currently serves as 2nd-in-command of the Esquadrão de Reconhecimento of the Brigada Mecanizada.",
+            "fr": "Il exerce actuellement les fonctions de second de l’Esquadrão de Reconhecimento de la Brigada Mecanizada."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «FND Eslováquia e a Tríade do Carrista» (Painel 2)"
+            {
+              "pt": "Orador — sessão «FND Eslováquia e a Tríade do Carrista» (Painel 2)",
+              "en": "Speaker — session “FND Slovakia and the Carrista Triad” (Panel 2)",
+              "fr": "Orateur — séance « FND Slovaquie et la triade du Carrista » (Panel 2)"
+            }
           ]
         }
       ]
@@ -450,38 +1074,106 @@
       "id": "smor-vitor-branco",
       "name": "SMor Victor Branco",
       "fullName": "Victor Manuel Duarte Branco",
-      "role": "Sargento-Mor de Cavalaria · Orador",
+      "role": {
+        "pt": "Sargento-Mor de Cavalaria · Orador",
+        "en": "Sargento-Mor de Cavalaria · Speaker",
+        "fr": "Sargento-Mor de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/smor-vitor-branco.png",
-      "bio": "39 anos de serviço. Sargento-Mor de Cavalaria desde dezembro de 2023 e Sargento-Mor do Exército desde janeiro de 2024.",
+      "bio": {
+        "pt": "39 anos de serviço. Sargento-Mor de Cavalaria desde dezembro de 2023 e Sargento-Mor do Exército desde janeiro de 2024.",
+        "en": "39 years of service. Sargento-Mor de Cavalaria since December 2023 and Sargento-Mor do Exército since January 2024.",
+        "fr": "39 ans de service. Sargento-Mor de Cavalaria depuis décembre 2023 et Sargento-Mor do Exército depuis janvier 2024."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Sargento-Mor de Cavalaria, Victor Manuel Duarte Branco nasceu a 19 de dezembro de 1968 em Mirandela, tem 39 anos de serviço e foi promovido ao atual posto em 26 de dezembro de 2023."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Sargento-Mor de Cavalaria, Victor Manuel Duarte Branco nasceu a 19 de dezembro de 1968 em Mirandela, tem 39 anos de serviço e foi promovido ao atual posto em 26 de dezembro de 2023.",
+            "en": "Sargento-Mor de Cavalaria Victor Manuel Duarte Branco was born on 19 December 1968 in Mirandela; he has 39 years of service and was promoted to his current rank on 26 December 2023.",
+            "fr": "Le Sargento-Mor de Cavalaria Victor Manuel Duarte Branco est né le 19 décembre 1968 à Mirandela ; il totalise 39 ans de service et a été promu à son grade actuel le 26 décembre 2023."
+          }
         },
         {
-          "title": "Formação e cursos",
-          "body": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+          "title": {
+            "pt": "Formação e cursos",
+            "en": "Education and courses",
+            "fr": "Formation et cours"
+          },
+          "body": {
+            "pt": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+            "en": "He is qualified on the Curso de Cavalaria of the Escola de Sargentos do Exército and the curricular career courses. He also holds, among others:",
+            "fr": "Il est titulaire du Curso de Cavalaria de l’Escola de Sargentos do Exército et des cours curriculaires de carrière. Il possède également, entre autres :"
+          },
           "items": [
-            "Master Gunner do Carro Combate M60A3 TTS, nos Estados Unidos da América",
-            "Master Gunner, Video Training Equipment e Turret Training Equipment do Carro Combate Leopard 2A6, nos Países Baixos",
-            "NATO NCO's Orientation Course na NATO School, na Alemanha",
-            "NATO NCO's Intermediate Leadership Course no Swiss Armed Forces College, na Suíça",
-            "NATO NCO's Advanced Course no Swiss Armed Forces College, na Suíça"
+            {
+              "pt": "Master Gunner do Carro Combate M60A3 TTS, nos Estados Unidos da América",
+              "en": "Master Gunner of the M60A3 TTS main battle tank, in the United States of America",
+              "fr": "Master Gunner du char de combat M60A3 TTS, aux États-Unis d’Amérique"
+            },
+            {
+              "pt": "Master Gunner, Video Training Equipment e Turret Training Equipment do Carro Combate Leopard 2A6, nos Países Baixos",
+              "en": "Master Gunner, Video Training Equipment and Turret Training Equipment of the Leopard 2A6 main battle tank, in the Netherlands",
+              "fr": "Master Gunner, Video Training Equipment et Turret Training Equipment du char de combat Leopard 2A6, aux Pays-Bas"
+            },
+            {
+              "pt": "NATO NCO's Orientation Course na NATO School, na Alemanha",
+              "en": "NATO NCO's Orientation Course at the NATO School, in Germany",
+              "fr": "NATO NCO's Orientation Course à la NATO School, en Allemagne"
+            },
+            {
+              "pt": "NATO NCO's Intermediate Leadership Course no Swiss Armed Forces College, na Suíça",
+              "en": "NATO NCO's Intermediate Leadership Course at the Swiss Armed Forces College, in Switzerland",
+              "fr": "NATO NCO's Intermediate Leadership Course au Swiss Armed Forces College, en Suisse"
+            },
+            {
+              "pt": "NATO NCO's Advanced Course no Swiss Armed Forces College, na Suíça",
+              "en": "NATO NCO's Advanced Course at the Swiss Armed Forces College, in Switzerland",
+              "fr": "NATO NCO's Advanced Course au Swiss Armed Forces College, en Suisse"
+            }
           ]
         },
         {
-          "title": "De Comando",
+          "title": {
+            "pt": "De Comando",
+            "en": "Command appointments",
+            "fr": "Fonctions de commandement"
+          },
           "items": [
-            "Grupo de Carros de Combate da Brigada Mecanizada — Sargento de Pelotão de Carros de Combate"
+            {
+              "pt": "Grupo de Carros de Combate da Brigada Mecanizada — Sargento de Pelotão de Carros de Combate",
+              "en": "Grupo de Carros de Combate of the Brigada Mecanizada — tank platoon sergeant",
+              "fr": "Grupo de Carros de Combate de la Brigada Mecanizada — sergent de peloton de chars de combat"
+            }
           ]
         },
         {
-          "title": "De Estado-Maior",
-          "body": "No Grupo de Carros de Combate da Brigada Mecanizada como Sargento de Operações, Sargento de Informações, Sargento de Logística e Adjunto de Comandante de Esquadrão de Carros de Combate. No quartel-general da Brigada Mecanizada como Sargento Adjunto das Operações da Secção de Operações. No Grupo de Aviação Ligeira do Exército como Sargento de Operações, Informações e Segurança. No quartel-general da Brigada de Reação Rápida como Sargento de Informações. No Regimento de Paraquedistas como Sargento de Pessoal. No Regimento de Lanceiros N.º 2 como Sargento de Operações, Informações e Segurança, Chefe do Centro de Gestão Documental, Chefe do Posto de Controlo de Matérias Classificadas e Adjunto do Comandante do Grupo de Comando e Serviços. No Agrupamento Sanitário como Adjunto do Comandante do Agrupamento Sanitário. No Estado-Maior do Exército como Sargento Adjunto da Repartição de Gestão Estratégica do Gabinete de Gestão da Informação e do Conhecimento."
+          "title": {
+            "pt": "De Estado-Maior",
+            "en": "Staff appointments",
+            "fr": "Fonctions d’état-major"
+          },
+          "body": {
+            "pt": "No Grupo de Carros de Combate da Brigada Mecanizada como Sargento de Operações, Sargento de Informações, Sargento de Logística e Adjunto de Comandante de Esquadrão de Carros de Combate. No quartel-general da Brigada Mecanizada como Sargento Adjunto das Operações da Secção de Operações. No Grupo de Aviação Ligeira do Exército como Sargento de Operações, Informações e Segurança. No quartel-general da Brigada de Reação Rápida como Sargento de Informações. No Regimento de Paraquedistas como Sargento de Pessoal. No Regimento de Lanceiros N.º 2 como Sargento de Operações, Informações e Segurança, Chefe do Centro de Gestão Documental, Chefe do Posto de Controlo de Matérias Classificadas e Adjunto do Comandante do Grupo de Comando e Serviços. No Agrupamento Sanitário como Adjunto do Comandante do Agrupamento Sanitário. No Estado-Maior do Exército como Sargento Adjunto da Repartição de Gestão Estratégica do Gabinete de Gestão da Informação e do Conhecimento.",
+            "en": "In the Grupo de Carros de Combate of the Brigada Mecanizada as operations sergeant, intelligence sergeant, logistic sergeant and deputy to a tank squadron commander. At the headquarters of the Brigada Mecanizada as operations sergeant in the Operations Section. In the Grupo de Aviação Ligeira do Exército as operations, intelligence and security sergeant. At the headquarters of the Brigada de Reação Rápida as intelligence sergeant. In the Regimento de Paraquedistas as personnel sergeant. In the Regimento de Lanceiros N.º 2 as operations, intelligence and security sergeant, head of the document management centre, head of the classified-material control post and deputy to the commander of the Grupo de Comando e Serviços. In the Agrupamento Sanitário as deputy to the commander of the Agrupamento Sanitário. In the Estado-Maior do Exército as sergeant in the Repartição de Gestão Estratégica of the Gabinete de Gestão da Informação e do Conhecimento.",
+            "fr": "Au Grupo de Carros de Combate de la Brigada Mecanizada comme sergent des opérations, sergent du renseignement, sergent de logistique et adjoint du commandant d’escadron de chars. Au quartier général de la Brigada Mecanizada comme sergent adjoint des opérations de la section opérations. Au Grupo de Aviação Ligeira do Exército comme sergent des opérations, du renseignement et de la sécurité. Au quartier général de la Brigada de Reação Rápida comme sergent du renseignement. Au Regimento de Paraquedistas comme sergent du personnel. Au Regimento de Lanceiros N.º 2 comme sergent des opérations, du renseignement et de la sécurité, chef du centro de gestão documental, chef du posto de controlo de matérias classificadas et adjoint du commandant du Grupo de Comando e Serviços. À l’Agrupamento Sanitário comme adjoint du commandant de l’Agrupamento Sanitário. À l’Estado-Maior do Exército comme sergent adjoint de la Repartição de Gestão Estratégica du Gabinete de Gestão da Informação e do Conhecimento."
+          }
         },
         {
-          "title": "Cargo atual",
-          "body": "Desde 18 de janeiro de 2024 desempenha as funções de Sargento-Mor do Exército."
+          "title": {
+            "pt": "Cargo atual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Desde 18 de janeiro de 2024 desempenha as funções de Sargento-Mor do Exército.",
+            "en": "Since 18 January 2024 he has served as Sargento-Mor do Exército.",
+            "fr": "Depuis le 18 janvier 2024, il exerce les fonctions de Sargento-Mor do Exército."
+          }
         }
       ]
     },
@@ -489,37 +1181,101 @@
       "id": "saj-alexandre-mendes",
       "name": "SAj Alexandre Mendes",
       "fullName": "Alexandre Miguel Faustino Mendes",
-      "role": "Sargento-Ajudante de Cavalaria · Orador",
+      "role": {
+        "pt": "Sargento-Ajudante de Cavalaria · Orador",
+        "en": "Sargento-Ajudante de Cavalaria · Speaker",
+        "fr": "Sargento-Ajudante de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/saj-alexandre-mendes.png",
-      "bio": "26 anos de serviço. Sargento de Operações do GCC — três missões no estrangeiro (Kosovo, Afeganistão e Eslováquia).",
+      "bio": {
+        "pt": "26 anos de serviço. Sargento de Operações do GCC — três missões no estrangeiro (Kosovo, Afeganistão e Eslováquia).",
+        "en": "26 years of service. Operations sergeant of the GCC — three overseas missions (Kosovo, Afghanistan and Slovakia).",
+        "fr": "26 ans de service. Sergent des opérations du GCC — trois missions à l’étranger (Kosovo, Afghanistan et Slovaquie)."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Sargento-Ajudante de Cavalaria, Alexandre Miguel Faustino Mendes nasceu a 12 de novembro de 1979 em Caldas da Rainha, tem 26 anos de serviço e foi promovido ao atual posto em 16 de maio de 2022."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Sargento-Ajudante de Cavalaria, Alexandre Miguel Faustino Mendes nasceu a 12 de novembro de 1979 em Caldas da Rainha, tem 26 anos de serviço e foi promovido ao atual posto em 16 de maio de 2022.",
+            "en": "Sargento-Ajudante de Cavalaria Alexandre Miguel Faustino Mendes was born on 12 November 1979 in Caldas da Rainha; he has 26 years of service and was promoted to his current rank on 16 May 2022.",
+            "fr": "Le Sargento-Ajudante de Cavalaria Alexandre Miguel Faustino Mendes est né le 12 novembre 1979 à Caldas da Rainha ; il totalise 26 ans de service et a été promu à son grade actuel le 16 mai 2022."
+          }
         },
         {
-          "title": "Formação e cursos",
-          "body": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+          "title": {
+            "pt": "Formação e cursos",
+            "en": "Education and courses",
+            "fr": "Formation et cours"
+          },
+          "body": {
+            "pt": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+            "en": "He is qualified on the Curso de Cavalaria of the Escola de Sargentos do Exército and the curricular career courses. He also holds, among others:",
+            "fr": "Il est titulaire du Curso de Cavalaria de l’Escola de Sargentos do Exército et des cours curriculaires de carrière. Il possède également, entre autres :"
+          },
           "items": [
-            "Curso de Chefe de CC Leopard 2A6",
-            "Curso de Instrutor Avançado de Tiro (Master Gunner) CC Leopard 2A6"
+            {
+              "pt": "Curso de Chefe de CC Leopard 2A6",
+              "en": "Curso de Chefe de CC Leopard 2A6",
+              "fr": "Curso de Chefe de CC Leopard 2A6"
+            },
+            {
+              "pt": "Curso de Instrutor Avançado de Tiro (Master Gunner) CC Leopard 2A6",
+              "en": "Curso de Instrutor Avançado de Tiro (Master Gunner) CC Leopard 2A6",
+              "fr": "Curso de Instrutor Avançado de Tiro (Master Gunner) CC Leopard 2A6"
+            }
           ]
         },
         {
-          "title": "De Comando",
-          "body": "No Grupo de Carros de Combate: Chefe de CC Leopard 2A6 e Sargento de Pelotão de Carros de Combate dos diversos esquadrões de CC do GCC."
+          "title": {
+            "pt": "De Comando",
+            "en": "Command appointments",
+            "fr": "Fonctions de commandement"
+          },
+          "body": {
+            "pt": "No Grupo de Carros de Combate: Chefe de CC Leopard 2A6 e Sargento de Pelotão de Carros de Combate dos diversos esquadrões de CC do GCC.",
+            "en": "In the Grupo de Carros de Combate: Chefe de CC Leopard 2A6 and tank platoon sergeant in the various tank squadrons of the GCC.",
+            "fr": "Au Grupo de Carros de Combate : Chefe de CC Leopard 2A6 et sergent de peloton de chars des divers escadrons de CC du GCC."
+          }
         },
         {
-          "title": "De Estado-Maior",
-          "body": "No Grupo de Carros de Combate: Master Gunner, Sargento de Informações, Sargento de Pessoal e Adjunto do Comandante de Esquadrão de Carros de Combate."
+          "title": {
+            "pt": "De Estado-Maior",
+            "en": "Staff appointments",
+            "fr": "Fonctions d’état-major"
+          },
+          "body": {
+            "pt": "No Grupo de Carros de Combate: Master Gunner, Sargento de Informações, Sargento de Pessoal e Adjunto do Comandante de Esquadrão de Carros de Combate.",
+            "en": "In the Grupo de Carros de Combate: Master Gunner, intelligence sergeant, personnel sergeant and deputy to a tank squadron commander.",
+            "fr": "Au Grupo de Carros de Combate : Master Gunner, sergent du renseignement, sergent du personnel et adjoint du commandant d’escadron de chars de combat."
+          }
         },
         {
-          "title": "Cargo atual",
-          "body": "Desde 12 de fevereiro de 2026 desempenha as funções de Sargento de Operações do GCC."
+          "title": {
+            "pt": "Cargo atual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Desde 12 de fevereiro de 2026 desempenha as funções de Sargento de Operações do GCC.",
+            "en": "Since 12 February 2026 he has served as operations sergeant of the GCC.",
+            "fr": "Depuis le 12 février 2026, il exerce les fonctions de sergent des opérations du GCC."
+          }
         },
         {
-          "title": "Missões no estrangeiro",
-          "body": "Cumpriu três missões no estrangeiro, no âmbito das Forças Nacionais Destacadas: como Comandante de Secção do 2.º Pelotão da BTROOP do Agrupamento India/KFOR no Kosovo; como Sargento de Pelotão do Pelotão Mobile da 2.ª FND QRF/RS no Afeganistão; e como Adjunto do Comandante/Master Gunner da 2.ª FND Pel CC/MNBG na Eslováquia."
+          "title": {
+            "pt": "Missões no estrangeiro",
+            "en": "Overseas missions",
+            "fr": "Missions à l’étranger"
+          },
+          "body": {
+            "pt": "Cumpriu três missões no estrangeiro, no âmbito das Forças Nacionais Destacadas: como Comandante de Secção do 2.º Pelotão da BTROOP do Agrupamento India/KFOR no Kosovo; como Sargento de Pelotão do Pelotão Mobile da 2.ª FND QRF/RS no Afeganistão; e como Adjunto do Comandante/Master Gunner da 2.ª FND Pel CC/MNBG na Eslováquia.",
+            "en": "He completed three overseas missions with the Forças Nacionais Destacadas: as section commander of the 2.º Pelotão of BTROOP of Agrupamento India/KFOR in Kosovo; as platoon sergeant of the Mobile Platoon of the 2.ª FND QRF/RS in Afghanistan; and as deputy commander/Master Gunner of the 2.ª FND Pel CC/MNBG in Slovakia.",
+            "fr": "Il a accompli trois missions à l’étranger, dans le cadre des Forças Nacionais Destacadas : comme commandant de section du 2.º Pelotão de la BTROOP de l’Agrupamento India/KFOR au Kosovo ; comme sergent de peloton du Pelotão Mobile de la 2.ª FND QRF/RS en Afghanistan ; et comme adjoint du commandant/Master Gunner de la 2.ª FND Pel CC/MNBG en Slovaquie."
+          }
         }
       ]
     },
@@ -527,42 +1283,114 @@
       "id": "1sarg-fabio-cabral",
       "name": "1SARG Fábio Cabral",
       "fullName": "Fábio Alexandre Tavares Cabral",
-      "role": "Primeiro Sargento de Cavalaria · Orador",
+      "role": {
+        "pt": "Primeiro Sargento de Cavalaria · Orador",
+        "en": "Primeiro Sargento de Cavalaria · Speaker",
+        "fr": "Primeiro Sargento de Cavalaria · Orateur"
+      },
       "image": "/eventos/workshop/2026/oradores/1sarg-fabio-cabral.png",
-      "bio": "13 anos de serviço. Sargento de Reabastecimentos do ERec/BrigMec — Chefe de CC e Master Driver Leopard 2A6.",
+      "bio": {
+        "pt": "13 anos de serviço. Sargento de Reabastecimentos do ERec/BrigMec — Chefe de CC e Master Driver Leopard 2A6.",
+        "en": "13 years of service. Supply sergeant of ERec/BrigMec — Chefe de CC and Master Driver Leopard 2A6.",
+        "fr": "13 ans de service. Sergent des ravitaillements de l’ERec/BrigMec — Chefe de CC et Master Driver Leopard 2A6."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Primeiro Sargento de Cavalaria, Fábio Alexandre Tavares Cabral nasceu a 17 de julho de 1995 na Guarda, tem 13 anos de serviço e foi promovido ao atual posto em 1 de outubro de 2022."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Primeiro Sargento de Cavalaria, Fábio Alexandre Tavares Cabral nasceu a 17 de julho de 1995 na Guarda, tem 13 anos de serviço e foi promovido ao atual posto em 1 de outubro de 2022.",
+            "en": "Primeiro Sargento de Cavalaria Fábio Alexandre Tavares Cabral was born on 17 July 1995 in Guarda; he has 13 years of service and was promoted to his current rank on 1 October 2022.",
+            "fr": "Le Primeiro Sargento de Cavalaria Fábio Alexandre Tavares Cabral est né le 17 juillet 1995 à Guarda ; il totalise 13 ans de service et a été promu à son grade actuel le 1er octobre 2022."
+          }
         },
         {
-          "title": "Formação e cursos",
-          "body": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+          "title": {
+            "pt": "Formação e cursos",
+            "en": "Education and courses",
+            "fr": "Formation et cours"
+          },
+          "body": {
+            "pt": "Está habilitado com o Curso de Cavalaria da Escola de Sargentos do Exército e os cursos curriculares de carreira. Possui ainda, entre outros:",
+            "en": "He is qualified on the Curso de Cavalaria of the Escola de Sargentos do Exército and the curricular career courses. He also holds, among others:",
+            "fr": "Il est titulaire du Curso de Cavalaria de l’Escola de Sargentos do Exército et des cours curriculaires de carrière. Il possède également, entre autres :"
+          },
           "items": [
-            "Curso de Chefe de CC Leopard 2A6",
-            "Curso de Formador de Condução (Master Driver) CC Leopard 2A6"
+            {
+              "pt": "Curso de Chefe de CC Leopard 2A6",
+              "en": "Curso de Chefe de CC Leopard 2A6",
+              "fr": "Curso de Chefe de CC Leopard 2A6"
+            },
+            {
+              "pt": "Curso de Formador de Condução (Master Driver) CC Leopard 2A6",
+              "en": "Curso de Formador de Condução (Master Driver) CC Leopard 2A6",
+              "fr": "Curso de Formador de Condução (Master Driver) CC Leopard 2A6"
+            }
           ]
         },
         {
-          "title": "De Comando",
-          "body": "No GCC/ERec: Chefe de CC Leopard 2A6 e Sargento de Pelotão de Carros de Combate do 1.º ECC do GCC; Comandante e Sargento de Pelotão da Secção de Reabastecimentos do ECS/GCC."
+          "title": {
+            "pt": "De Comando",
+            "en": "Command appointments",
+            "fr": "Fonctions de commandement"
+          },
+          "body": {
+            "pt": "No GCC/ERec: Chefe de CC Leopard 2A6 e Sargento de Pelotão de Carros de Combate do 1.º ECC do GCC; Comandante e Sargento de Pelotão da Secção de Reabastecimentos do ECS/GCC.",
+            "en": "In the GCC/ERec: Chefe de CC Leopard 2A6 and tank platoon sergeant of the 1.º ECC of the GCC; commander and platoon sergeant of the supply section of the ECS/GCC.",
+            "fr": "Au GCC/ERec : Chefe de CC Leopard 2A6 et sergent de peloton de chars du 1.º ECC du GCC ; commandant et sergent de peloton de la secção de reabastecimentos de l’ECS/GCC."
+          }
         },
         {
-          "title": "De Estado-Maior",
-          "body": "Formador de Condução e Sargento de Justiça do GCC."
+          "title": {
+            "pt": "De Estado-Maior",
+            "en": "Staff appointments",
+            "fr": "Fonctions d’état-major"
+          },
+          "body": {
+            "pt": "Formador de Condução e Sargento de Justiça do GCC.",
+            "en": "Driving instructor and justice sergeant of the GCC.",
+            "fr": "Formateur de conduite et sergent de justice du GCC."
+          }
         },
         {
-          "title": "Cargo actual",
-          "body": "Desde 1 de outubro de 2025 desempenha as funções de Sargento de Reabastecimentos do ERec/BrigMec."
+          "title": {
+            "pt": "Cargo actual",
+            "en": "Current appointment",
+            "fr": "Fonction actuelle"
+          },
+          "body": {
+            "pt": "Desde 1 de outubro de 2025 desempenha as funções de Sargento de Reabastecimentos do ERec/BrigMec.",
+            "en": "Since 1 October 2025 he has served as supply sergeant of ERec/BrigMec.",
+            "fr": "Depuis le 1er octobre 2025, il exerce les fonctions de sergent des ravitaillements de l’ERec/BrigMec."
+          }
         },
         {
-          "title": "Missões no estrangeiro",
-          "body": "Cumpriu uma missão no estrangeiro, no âmbito das Forças Nacionais Destacadas, como Chefe de CC Leopard 2 A6 da 2.ª FND Pel CC/MNBG na Eslováquia."
+          "title": {
+            "pt": "Missões no estrangeiro",
+            "en": "Overseas missions",
+            "fr": "Missions à l’étranger"
+          },
+          "body": {
+            "pt": "Cumpriu uma missão no estrangeiro, no âmbito das Forças Nacionais Destacadas, como Chefe de CC Leopard 2 A6 da 2.ª FND Pel CC/MNBG na Eslováquia.",
+            "en": "He completed one overseas mission with the Forças Nacionais Destacadas, as Chefe de CC Leopard 2 A6 of the 2.ª FND Pel CC/MNBG in Slovakia.",
+            "fr": "Il a accompli une mission à l’étranger, dans le cadre des Forças Nacionais Destacadas, comme Chefe de CC Leopard 2 A6 de la 2.ª FND Pel CC/MNBG en Slovaquie."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Orador — sessão «Consciência situacional e proteção passiva» (Painel 2)"
+            {
+              "pt": "Orador — sessão «Consciência situacional e proteção passiva» (Painel 2)",
+              "en": "Speaker — session “Situational awareness and passive protection” (Panel 2)",
+              "fr": "Orateur — séance « Conscience situationnelle et protection passive » (Panel 2)"
+            }
           ]
         }
       ]
@@ -573,45 +1401,125 @@
       "id": "maj-tiago-ferreira",
       "name": "Maj Tiago Ferreira",
       "fullName": "Tiago Filipe dos Santos Ferreira",
-      "role": "Major de Cavalaria · Moderador",
+      "role": {
+        "pt": "Major de Cavalaria · Moderador",
+        "en": "Major de Cavalaria · Moderator",
+        "fr": "Major de Cavalaria · Modérateur"
+      },
       "axisId": "guerra-atual",
       "image": "/eventos/workshop/2026/oradores/maj-tiago-ferreira.png",
-      "bio": "Cerca de 20 anos de serviço. Ex-GCC e docente na Escola de Sargentos — moderador do Painel 1 «A Guerra Atual».",
+      "bio": {
+        "pt": "Cerca de 20 anos de serviço. Ex-GCC e docente na Escola de Sargentos — moderador do Painel 1 «A Guerra Atual».",
+        "en": "About 20 years of service. Formerly GCC and lecturer at the Escola de Sargentos — moderator of Panel 1 “Current Warfare”.",
+        "fr": "Environ 20 ans de service. Ancien du GCC et enseignant à l’Escola de Sargentos — modérateur du Panel 1 « La guerre actuelle »."
+      },
       "bioSections": [
         {
-          "title": "Percurso",
-          "body": "O Major Tiago Filipe dos Santos Ferreira nasceu em Avanca, concelho de Estarreja, em 23 de março de 1985. Ingressou na Academia Militar em 2005, tendo concluído o Curso de Cavalaria em outubro de 2011, data a partir da qual passou a integrar os quadros do Grupo de Carros de Combate. Foi promovido ao atual posto em 1 de janeiro de 2024."
+          "title": {
+            "pt": "Percurso",
+            "en": "Career",
+            "fr": "Parcours"
+          },
+          "body": {
+            "pt": "O Major Tiago Filipe dos Santos Ferreira nasceu em Avanca, concelho de Estarreja, em 23 de março de 1985. Ingressou na Academia Militar em 2005, tendo concluído o Curso de Cavalaria em outubro de 2011, data a partir da qual passou a integrar os quadros do Grupo de Carros de Combate. Foi promovido ao atual posto em 1 de janeiro de 2024.",
+            "en": "Major Tiago Filipe dos Santos Ferreira was born in Avanca, in the municipality of Estarreja, on 23 March 1985. He entered the Academia Militar in 2005 and completed the Curso de Cavalaria in October 2011, from which date he joined the cadre of the Grupo de Carros de Combate. He was promoted to his current rank on 1 January 2024.",
+            "fr": "Le Major Tiago Filipe dos Santos Ferreira est né à Avanca, commune d’Estarreja, le 23 mars 1985. Il est entré à l’Academia Militar en 2005 et a achevé le Curso de Cavalaria en octobre 2011, date à partir de laquelle il a intégré les cadres du Grupo de Carros de Combate. Il a été promu à son grade actuel le 1er janvier 2024."
+          }
         },
         {
-          "title": "Formação",
-          "body": "Para além do Curso de Cavalaria da Academia Militar e dos cursos de promoção inerentes à carreira, destacam-se, entre outros:",
+          "title": {
+            "pt": "Formação",
+            "en": "Education",
+            "fr": "Formation"
+          },
+          "body": {
+            "pt": "Para além do Curso de Cavalaria da Academia Militar e dos cursos de promoção inerentes à carreira, destacam-se, entre outros:",
+            "en": "In addition to the Curso de Cavalaria of the Academia Militar and the promotion courses inherent to the career, the following stand out, among others:",
+            "fr": "Outre le Curso de Cavalaria de l’Academia Militar et les cours de promotion inhérents à la carrière, se distinguent, entre autres :"
+          },
           "items": [
-            "Curso de Chefe de Carros Leopard 2 A6",
-            "Curso de Defesa Nuclear, Biológica e Química (NBQ)",
-            "Curso de Operações de Apoio à Paz",
-            "Curso de Lições Aprendidas — Nível 2"
+            {
+              "pt": "Curso de Chefe de Carros Leopard 2 A6",
+              "en": "Curso de Chefe de Carros Leopard 2 A6",
+              "fr": "Curso de Chefe de Carros Leopard 2 A6"
+            },
+            {
+              "pt": "Curso de Defesa Nuclear, Biológica e Química (NBQ)",
+              "en": "Curso de Defesa Nuclear, Biológica e Química (NBQ)",
+              "fr": "Curso de Defesa Nuclear, Biológica e Química (NBQ)"
+            },
+            {
+              "pt": "Curso de Operações de Apoio à Paz",
+              "en": "Curso de Operações de Apoio à Paz",
+              "fr": "Curso de Operações de Apoio à Paz"
+            },
+            {
+              "pt": "Curso de Lições Aprendidas — Nível 2",
+              "en": "Curso de Lições Aprendidas — Nível 2",
+              "fr": "Curso de Lições Aprendidas — Nível 2"
+            }
           ]
         },
         {
-          "title": "Funções em Unidades",
+          "title": {
+            "pt": "Funções em Unidades",
+            "en": "Appointments in units",
+            "fr": "Fonctions en unités"
+          },
           "items": [
-            "Grupo de Carros de Combate (2011–2020) — Comandante de Pelotão de Carros de Combate Leopard 2 A6, 2.º Comandante do 2.º Esquadrão de Carros de Combate (2ECC), Comandante do 1.º Esquadrão de Carros de Combate (1ECC), Oficial de Pessoal, Oficial de Informações e Oficial de Operações",
-            "Escola de Sargentos do Exército (2020–2023) — docente em Unidades Curriculares dos Cursos Técnicos Superiores Profissionais em Tecnologias Militares Terrestres e Comandante da 1.ª Companhia de Alunos",
-            "Desde setembro de 2023 — Repartição de Treino e Doutrina do Estado-Maior da Brigada Mecanizada"
+            {
+              "pt": "Grupo de Carros de Combate (2011–2020) — Comandante de Pelotão de Carros de Combate Leopard 2 A6, 2.º Comandante do 2.º Esquadrão de Carros de Combate (2ECC), Comandante do 1.º Esquadrão de Carros de Combate (1ECC), Oficial de Pessoal, Oficial de Informações e Oficial de Operações",
+              "en": "Grupo de Carros de Combate (2011–2020) — Commander of a Leopard 2 A6 tank platoon, 2nd-in-command of the 2.º Esquadrão de Carros de Combate (2ECC), Commander of the 1.º Esquadrão de Carros de Combate (1ECC), Personnel Officer, Intelligence Officer and Operations Officer",
+              "fr": "Grupo de Carros de Combate (2011–2020) — commandant de peloton de chars Leopard 2 A6, second du 2.º Esquadrão de Carros de Combate (2ECC), commandant du 1.º Esquadrão de Carros de Combate (1ECC), officier du personnel, officier du renseignement et officier des opérations"
+            },
+            {
+              "pt": "Escola de Sargentos do Exército (2020–2023) — docente em Unidades Curriculares dos Cursos Técnicos Superiores Profissionais em Tecnologias Militares Terrestres e Comandante da 1.ª Companhia de Alunos",
+              "en": "Escola de Sargentos do Exército (2020–2023) — lecturer in curricular units of the Cursos Técnicos Superiores Profissionais em Tecnologias Militares Terrestres and Commander of the 1.ª Companhia de Alunos",
+              "fr": "Escola de Sargentos do Exército (2020–2023) — enseignant dans des unités curriculaires des Cursos Técnicos Superiores Profissionais em Tecnologias Militares Terrestres et commandant de la 1.ª Companhia de Alunos"
+            },
+            {
+              "pt": "Desde setembro de 2023 — Repartição de Treino e Doutrina do Estado-Maior da Brigada Mecanizada",
+              "en": "Since September 2023 — Repartição de Treino e Doutrina of the staff of the Brigada Mecanizada",
+              "fr": "Depuis septembre 2023 — Repartição de Treino e Doutrina de l’état-major de la Brigada Mecanizada"
+            }
           ]
         },
         {
-          "title": "Plano operacional",
-          "body": "Participou numa missão no estrangeiro entre 2017 e 2018, integrando o 6.º Contingente Nacional / Força Nacional Destacada / Operation Inherent Resolve (6.º CN/FND/OIR), onde desempenhou as funções de Chief Trainer da Equipa de Formação da 2.ª Companhia de Manobra."
+          "title": {
+            "pt": "Plano operacional",
+            "en": "Operational record",
+            "fr": "Volet opérationnel"
+          },
+          "body": {
+            "pt": "Participou numa missão no estrangeiro entre 2017 e 2018, integrando o 6.º Contingente Nacional / Força Nacional Destacada / Operation Inherent Resolve (6.º CN/FND/OIR), onde desempenhou as funções de Chief Trainer da Equipa de Formação da 2.ª Companhia de Manobra.",
+            "en": "He took part in an overseas mission between 2017 and 2018, in the 6.º Contingente Nacional / Força Nacional Destacada / Operation Inherent Resolve (6.º CN/FND/OIR), where he served as Chief Trainer of the training team of the 2.ª Companhia de Manobra.",
+            "fr": "Il a participé à une mission à l’étranger entre 2017 et 2018, au sein du 6.º Contingente Nacional / Força Nacional Destacada / Operation Inherent Resolve (6.º CN/FND/OIR), où il a exercé les fonctions de Chief Trainer de l’équipe de formation de la 2.ª Companhia de Manobra."
+          }
         },
         {
-          "title": "Distinções e vida pessoal",
-          "body": "Da sua folha de serviços constam seis louvores e sete condecorações. É casado e pai de um filho."
+          "title": {
+            "pt": "Distinções e vida pessoal",
+            "en": "Distinctions and personal life",
+            "fr": "Distinctions et vie personnelle"
+          },
+          "body": {
+            "pt": "Da sua folha de serviços constam seis louvores e sete condecorações. É casado e pai de um filho.",
+            "en": "His service record includes six citations and seven decorations. He is married and the father of a son.",
+            "fr": "Sa feuille de services comporte six citations et sept décorations. Il est marié et père d’un fils."
+          }
         },
         {
-          "title": "No Workshop 2026",
+          "title": {
+            "pt": "No Workshop 2026",
+            "en": "At Workshop 2026",
+            "fr": "Au Workshop 2026"
+          },
           "items": [
-            "Moderador — Painel 1 «A Guerra Atual» / «Lições da guerra atual»"
+            {
+              "pt": "Moderador — Painel 1 «A Guerra Atual» / «Lições da guerra atual»",
+              "en": "Moderator — Panel 1 “Current Warfare” / “Lessons from current warfare”",
+              "fr": "Modérateur — Panel 1 « La guerre actuelle » / « Leçons de la guerre actuelle »"
+            }
           ]
         }
       ]
@@ -623,22 +1531,50 @@
     }
   ],
   "gallery": [
-    { "src": "/images/workshop26.png", "alt": "Workshop 2026 — identidade visual", "type": "image" }
+    {
+      "src": "/images/workshop26.png",
+      "alt": {
+        "pt": "Workshop 2026 — identidade visual",
+        "en": "Workshop 2026 — visual identity",
+        "fr": "Workshop 2026 — identité visuelle"
+      },
+      "type": "image"
+    }
   ],
   "registration": {
     "enabled": true,
-    "cta": "Solicitar inscrição",
-    "note": "Áreas reservadas a convidados e membros serão disponibilizadas após confirmação."
+    "cta": {
+      "pt": "Solicitar inscrição",
+      "en": "Request registration",
+      "fr": "Demander une inscription"
+    },
+    "note": {
+      "pt": "Áreas reservadas a convidados e membros serão disponibilizadas após confirmação.",
+      "en": "Areas reserved for guests and members will be made available after confirmation.",
+      "fr": "Les espaces réservés aux invités et aux membres seront ouverts après confirmation."
+    }
   },
   "seo": {
-    "title": "Workshop 2026 — Carros de Combate | O Carrista",
-    "description": "Workshop profissional de carros de combate no Quartel da Cavalaria. Doutrina, inovação e experiência operacional — Santa Margarida, 2026."
+    "title": {
+      "pt": "Workshop 2026 — Carros de Combate | O Carrista",
+      "en": "Workshop 2026 — Main Battle Tanks | O Carrista",
+      "fr": "Workshop 2026 — Chars de combat | O Carrista"
+    },
+    "description": {
+      "pt": "Workshop profissional de carros de combate no Quartel da Cavalaria. Doutrina, inovação e experiência operacional — Santa Margarida, 2026.",
+      "en": "A professional main battle tank workshop at the Quartel da Cavalaria. Doctrine, innovation and operational experience — Santa Margarida, 2026.",
+      "fr": "Workshop professionnel de chars de combat au Quartel da Cavalaria. Doctrine, innovation et expérience opérationnelle — Santa Margarida, 2026."
+    }
   },
   "contacts": {
     "email": "ocarrista.cc@gmail.com",
     "organizer": "O Carrista · QCav e Ex-RC4"
   },
   "legal": {
-    "terms": "/termos"
+    "terms": {
+      "pt": "/termos",
+      "en": "/termos",
+      "fr": "/termos"
+    }
   }
 }

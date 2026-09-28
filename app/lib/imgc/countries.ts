@@ -1,3 +1,6 @@
+import type { Locale } from "../i18n/config";
+import { pickLocalized } from "../i18n/localized";
+
 /** Pin of the Cavalry Barracks when the country is marked as host. */
 export const IMGC_HOST_PIN = { lat: 39.45, lng: -8.33, city: "Santa Margarida" };
 
@@ -155,4 +158,73 @@ export function pinForImgcDelegation(
     };
   }
   return resolved;
+}
+
+const PT_NAME: Record<string, string> = {
+  Canada: "Canadá",
+  "United States of America": "Estados Unidos da América",
+  Brazil: "Brasil",
+  Portugal: "Portugal",
+  Spain: "Espanha",
+  France: "França",
+  "United Kingdom": "Reino Unido",
+  Switzerland: "Suíça",
+  Greece: "Grécia",
+  Austria: "Áustria",
+  Poland: "Polónia",
+  Hungary: "Hungria",
+  Netherlands: "Países Baixos",
+  Germany: "Alemanha",
+  Sweden: "Suécia",
+  Finland: "Finlândia",
+  Norway: "Noruega",
+  Singapore: "Singapura",
+};
+
+const FR_NAME: Record<string, string> = {
+  Canada: "Canada",
+  "United States of America": "États-Unis d’Amérique",
+  Brazil: "Brésil",
+  Portugal: "Portugal",
+  Spain: "Espagne",
+  France: "France",
+  "United Kingdom": "Royaume-Uni",
+  Switzerland: "Suisse",
+  Greece: "Grèce",
+  Austria: "Autriche",
+  Poland: "Pologne",
+  Hungary: "Hongrie",
+  Netherlands: "Pays-Bas",
+  Germany: "Allemagne",
+  Sweden: "Suède",
+  Finland: "Finlande",
+  Norway: "Norvège",
+  Singapore: "Singapour",
+};
+
+function portugueseName(entry: CountryEntry): string {
+  if (PT_NAME[entry.official]) return PT_NAME[entry.official];
+  const aliases = entry.aliases ?? [];
+  const withAccent = aliases.find((alias) => /[àáâãéêíóôõúçñ]/i.test(alias));
+  if (withAccent) return withAccent;
+  const skip = new Set(
+    [entry.official, "USA", "US", "UK", "UAE", "Great Britain", "Britain", "England", "United States", "Korea"].map(
+      (item) => item.toLowerCase(),
+    ),
+  );
+  const last = [...aliases].reverse().find((alias) => !skip.has(alias.toLowerCase()) && alias.length > 3);
+  return last ?? entry.official;
+}
+
+export function countryDisplayName(name: string, locale: Locale): string {
+  const entry = byName.get(fold(name));
+  if (!entry) return name;
+  return pickLocalized(
+    {
+      en: entry.official,
+      pt: portugueseName(entry),
+      fr: FR_NAME[entry.official] ?? entry.official,
+    },
+    locale,
+  );
 }

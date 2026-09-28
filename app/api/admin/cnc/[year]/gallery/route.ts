@@ -8,6 +8,7 @@ import {
   updateCncGalleryPhoto,
 } from "@/app/lib/cnc/repository";
 import { uploadCncAsset } from "@/app/lib/cnc/upload";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -38,7 +39,7 @@ export async function POST(
       filename: uploaded.filename,
     });
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao publicar fotografia.";
     return NextResponse.json({ error: message }, { status: 503 });
@@ -78,7 +79,7 @@ export async function PATCH(
       await updateCncGalleryPhoto(data.id, { caption: data.caption });
     }
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao actualizar fotografia.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -103,7 +104,7 @@ export async function DELETE(
   try {
     await deleteCncGalleryPhoto(year, id);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao eliminar fotografia.";
     return NextResponse.json({ error: message }, { status: 500 });

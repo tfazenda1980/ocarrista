@@ -12,6 +12,14 @@ import type {
 import { ensureImgcSchema } from "./schema";
 import { gallerySlot, programmeSlot } from "./upload";
 import { imgcCountryKey } from "./countries";
+import {
+  applyAdminLocale,
+  displayLocalized,
+  localizeContent,
+  overlayLocalized,
+  serializeLocalized,
+} from "../i18n/localized";
+import { type Locale } from "../i18n/config";
 
 type EditionRow = {
   year: string;
@@ -89,12 +97,12 @@ export async function seedImgcYear(year: string): Promise<void> {
         practical_title, practical_body, programme_title, programme_body,
         organizer, email, phone, notes
       ) VALUES (
-        ${year}, ${base.about.title}, ${base.about.body},
-        ${base.barracks.title}, ${base.barracks.body},
-        ${base.practical.title}, ${base.practical.body},
-        ${base.programme.title}, ${base.programme.body},
-        ${base.contacts.organizer}, ${base.contacts.email},
-        ${base.contacts.phone ?? ""}, ${base.contacts.notes ?? ""}
+        ${year}, ${serializeLocalized(base.about.title)}, ${serializeLocalized(base.about.body)},
+        ${serializeLocalized(base.barracks.title)}, ${serializeLocalized(base.barracks.body)},
+        ${serializeLocalized(base.practical.title)}, ${serializeLocalized(base.practical.body)},
+        ${serializeLocalized(base.programme.title)}, ${serializeLocalized(base.programme.body)},
+        ${serializeLocalized(base.contacts.organizer)}, ${base.contacts.email},
+        ${base.contacts.phone ?? ""}, ${serializeLocalized(base.contacts.notes ?? "")}
       )
     `;
   }
@@ -132,8 +140,8 @@ export async function seedImgcYear(year: string): Promise<void> {
       await sql`
         INSERT INTO imgc_links (id, year, category, title, url, description, sort_order)
         VALUES (
-          ${item.id}, ${year}, ${item.category}, ${item.title}, ${item.url},
-          ${item.description ?? ""}, ${i}
+          ${item.id}, ${year}, ${item.category}, ${serializeLocalized(item.title)}, ${item.url},
+          ${serializeLocalized(item.description ?? "")}, ${i}
         )
       `;
     }
@@ -154,7 +162,7 @@ function assetMap(rows: AssetRow[]) {
 function pdfFromAsset(asset: AssetRow | undefined, fallback: ImgcPdfResource): ImgcPdfResource {
   if (!asset) return fallback;
   return {
-    label: asset.label || fallback.label,
+    label: overlayLocalized(asset.label, fallback.label, "en") as ImgcPdfResource["label"],
     href: asset.url || fallback.href,
     mime: asset.mime,
     filename: asset.filename,
@@ -163,13 +171,15 @@ function pdfFromAsset(asset: AssetRow | undefined, fallback: ImgcPdfResource): I
 
 export async function getImgcLiveEdition(
   year: string,
-  options?: { strict?: boolean },
+  options?: { strict?: boolean; resolveLocale?: Locale },
 ): Promise<ImgcEventData | null> {
   const base = getImgcEdition(year);
   if (!base) return null;
+  const resolve = (event: ImgcEventData) =>
+    options?.resolveLocale ? localizeContent(event, options.resolveLocale) : event;
   if (!dbConfigured()) {
     if (options?.strict) throw new Error("DATABASE_URL em falta");
-    return base;
+    return resolve(base);
   }
 
   try {
@@ -210,23 +220,25 @@ export async function getImgcLiveEdition(
       })
       .filter((photo): photo is ImgcGalleryPhoto => photo !== null);
 
-    return {
+    const linksById = new Map(base.links.map((item) => [item.id, item]));
+
+    return resolve({
       ...base,
       about: {
-        title: edition?.about_title || base.about.title,
-        body: edition?.about_body || base.about.body,
+        title: overlayLocalized(edition?.about_title, base.about.title, "en") as ImgcEventData["about"]["title"],
+        body: overlayLocalized(edition?.about_body, base.about.body, "en") as ImgcEventData["about"]["body"],
       },
       barracks: {
-        title: edition?.barracks_title || base.barracks.title,
-        body: edition?.barracks_body || base.barracks.body,
+        title: overlayLocalized(edition?.barracks_title, base.barracks.title, "en") as ImgcEventData["barracks"]["title"],
+        body: overlayLocalized(edition?.barracks_body, base.barracks.body, "en") as ImgcEventData["barracks"]["body"],
       },
       practical: {
-        title: edition?.practical_title || base.practical.title,
-        body: edition?.practical_body || base.practical.body,
+        title: overlayLocalized(edition?.practical_title, base.practical.title, "en") as ImgcEventData["practical"]["title"],
+        body: overlayLocalized(edition?.practical_body, base.practical.body, "en") as ImgcEventData["practical"]["body"],
       },
       programme: {
-        title: edition?.programme_title || base.programme.title,
-        body: edition?.programme_body || base.programme.body,
+        title: overlayLocalized(edition?.programme_title, base.programme.title, "en") as ImgcEventData["programme"]["title"],
+        body: overlayLocalized(edition?.programme_body, base.programme.body, "en") as ImgcEventData["programme"]["body"],
         pdf: pdfFromAsset(assetsBySlot.get(programmeSlot()), base.programme.pdf),
       },
       delegations: (delegationRows as DelegationRow[]).map((row) => ({
@@ -237,25 +249,32 @@ export async function getImgcLiveEdition(
         lng: asNumber(row.lng),
         host: Boolean(row.host),
       })),
-      links: (linkRows as LinkRow[]).map((row) => ({
-        id: row.id,
-        category: row.category,
-        title: row.title,
-        url: row.url,
-        description: row.description || undefined,
-      })),
+      links: (linkRows as LinkRow[]).map((row) => {
+        const fallback = linksById.get(row.id);
+        return {
+          id: row.id,
+          category: row.category,
+          title: overlayLocalized(row.title, fallback?.title, "en") as ImgcLink["title"],
+          url: row.url,
+          description: overlayLocalized(row.description, fallback?.description, "en") as ImgcLink["description"],
+        };
+      }),
       photoGallery,
       contacts: {
-        organizer: edition?.organizer || base.contacts.organizer,
+        organizer: overlayLocalized(
+          edition?.organizer,
+          base.contacts.organizer,
+          "en",
+        ) as ImgcEventData["contacts"]["organizer"],
         email: edition?.email || base.contacts.email,
         phone: edition?.phone || base.contacts.phone,
-        notes: edition?.notes || base.contacts.notes,
+        notes: overlayLocalized(edition?.notes, base.contacts.notes, "en") as ImgcEventData["contacts"]["notes"],
       },
-    };
+    });
   } catch (err) {
     if (options?.strict) throw err;
     console.warn("[imgc] live edition fallback JSON", err);
-    return base;
+    return resolve(base);
   }
 }
 
@@ -278,23 +297,24 @@ export async function updateImgcContent(
 ): Promise<void> {
   await seedImgcYear(year);
   const sql = await sqlClient();
+  const base = getImgcEdition(year);
   const current = await getImgcLiveEdition(year, { strict: true });
-  if (!current) throw new Error("Edição IMGC não encontrada.");
+  if (!current || !base) throw new Error("Edição IMGC não encontrada.");
 
   await sql`
     UPDATE imgc_editions SET
-      about_title = ${fields.about_title ?? current.about.title},
-      about_body = ${fields.about_body ?? current.about.body},
-      barracks_title = ${fields.barracks_title ?? current.barracks.title},
-      barracks_body = ${fields.barracks_body ?? current.barracks.body},
-      practical_title = ${fields.practical_title ?? current.practical.title},
-      practical_body = ${fields.practical_body ?? current.practical.body},
-      programme_title = ${fields.programme_title ?? current.programme.title},
-      programme_body = ${fields.programme_body ?? current.programme.body},
-      organizer = ${fields.organizer ?? current.contacts.organizer},
+      about_title = ${applyAdminLocale(current.about.title, base.about.title, fields.about_title ?? displayLocalized(current.about.title), "pt")},
+      about_body = ${applyAdminLocale(current.about.body, base.about.body, fields.about_body ?? displayLocalized(current.about.body), "pt")},
+      barracks_title = ${applyAdminLocale(current.barracks.title, base.barracks.title, fields.barracks_title ?? displayLocalized(current.barracks.title), "pt")},
+      barracks_body = ${applyAdminLocale(current.barracks.body, base.barracks.body, fields.barracks_body ?? displayLocalized(current.barracks.body), "pt")},
+      practical_title = ${applyAdminLocale(current.practical.title, base.practical.title, fields.practical_title ?? displayLocalized(current.practical.title), "pt")},
+      practical_body = ${applyAdminLocale(current.practical.body, base.practical.body, fields.practical_body ?? displayLocalized(current.practical.body), "pt")},
+      programme_title = ${applyAdminLocale(current.programme.title, base.programme.title, fields.programme_title ?? displayLocalized(current.programme.title), "pt")},
+      programme_body = ${applyAdminLocale(current.programme.body, base.programme.body, fields.programme_body ?? displayLocalized(current.programme.body), "pt")},
+      organizer = ${applyAdminLocale(current.contacts.organizer, base.contacts.organizer, fields.organizer ?? displayLocalized(current.contacts.organizer), "pt")},
       email = ${fields.email ?? current.contacts.email},
       phone = ${fields.phone ?? current.contacts.phone ?? ""},
-      notes = ${fields.notes ?? current.contacts.notes ?? ""},
+      notes = ${applyAdminLocale(current.contacts.notes, base.contacts.notes, fields.notes ?? displayLocalized(current.contacts.notes ?? ""), "pt")},
       updated_at = NOW()
     WHERE year = ${year}
   `;

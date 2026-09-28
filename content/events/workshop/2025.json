@@ -2,13 +2,37 @@
   "year": "2025",
   "slug": "workshop",
   "published": false,
-  "title": "Workshop de Carros de Combate",
-  "edition": "Workshop 2025 — 1.ª Edição",
-  "slogan": "A primeira edição do Workshop de Carros de Combate — O Carrista.",
+  "title": {
+    "pt": "Workshop de Carros de Combate",
+    "en": "Main Battle Tank Workshop",
+    "fr": "Workshop des chars de combat"
+  },
+  "edition": {
+    "pt": "Workshop 2025 — 1.ª Edição",
+    "en": "Workshop 2025 — 1st Edition",
+    "fr": "Workshop 2025 — 1re édition"
+  },
+  "slogan": {
+    "pt": "A primeira edição do Workshop de Carros de Combate — O Carrista.",
+    "en": "The first edition of the Main Battle Tank Workshop — O Carrista.",
+    "fr": "La première édition du Workshop des chars de combat — O Carrista."
+  },
   "date": "2025-06-18T09:00:00+01:00",
-  "dateDisplay": "18 de Junho de 2025",
-  "location": "Quartel da Cavalaria · Santa Margarida",
-  "purpose": "Primeira edição do Workshop — arquivo histórico O Carrista.",
+  "dateDisplay": {
+    "pt": "18 de Junho de 2025",
+    "en": "18 June 2025",
+    "fr": "18 juin 2025"
+  },
+  "location": {
+    "pt": "Quartel da Cavalaria · Santa Margarida",
+    "en": "Quartel da Cavalaria · Santa Margarida",
+    "fr": "Quartel da Cavalaria · Santa Margarida"
+  },
+  "purpose": {
+    "pt": "Primeira edição do Workshop — arquivo histórico O Carrista.",
+    "en": "First edition of the Workshop — O Carrista historical archive.",
+    "fr": "Première édition du Workshop — archives historiques O Carrista."
+  },
   "objectives": [],
   "themes": [],
   "panels": [],
@@ -16,16 +40,36 @@
   "gallery": [],
   "registration": {
     "enabled": false,
-    "cta": "Inscrições encerradas"
+    "cta": {
+      "pt": "Inscrições encerradas",
+      "en": "Registration closed",
+      "fr": "Inscriptions closes"
+    }
   },
   "archivePdf": {
-    "label": "Cadernos QCav — 1.º Workshop 2025",
+    "label": {
+      "pt": "Cadernos QCav — 1.º Workshop 2025",
+      "en": "Cadernos QCav — 1st Workshop 2025",
+      "fr": "Cadernos QCav — 1er Workshop 2025"
+    },
     "href": "/eventos/workshop/2025/cadernos-qcav-workshop-2025.pdf",
-    "hint": "Deslize ou use as setas para folhear o caderno"
+    "hint": {
+      "pt": "Deslize ou use as setas para folhear o caderno",
+      "en": "Swipe or use the arrows to browse the notebook",
+      "fr": "Faites glisser ou utilisez les flèches pour feuilleter le cahier"
+    }
   },
   "seo": {
-    "title": "Workshop 2025 — 1.ª Edição | O Carrista",
-    "description": "Primeira edição do Workshop de Carros de Combate — Quartel da Cavalaria, 2025."
+    "title": {
+      "pt": "Workshop 2025 — 1.ª Edição | O Carrista",
+      "en": "Workshop 2025 — 1st Edition | O Carrista",
+      "fr": "Workshop 2025 — 1re édition | O Carrista"
+    },
+    "description": {
+      "pt": "Primeira edição do Workshop de Carros de Combate — Quartel da Cavalaria, 2025.",
+      "en": "First edition of the Main Battle Tank Workshop — Quartel da Cavalaria, 2025.",
+      "fr": "Première édition du Workshop des chars de combat — Quartel da Cavalaria, 2025."
+    }
   },
   "contacts": {
     "email": "ocarrista.cc@gmail.com",

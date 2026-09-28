@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MotionReveal } from "../../motion-reveal";
 import type { ImgcDelegation, ImgcEventData } from "@/app/lib/events/imgc-types";
+import { countryDisplayName } from "@/app/lib/imgc/countries";
 import { useT } from "../../i18n/locale-provider";
 
 function pinPercent(delegation: ImgcDelegation) {
@@ -15,7 +16,7 @@ function pinPercent(delegation: ImgcDelegation) {
 }
 
 export function ImgcDelegationsMap({ event }: { event: ImgcEventData }) {
-  const { t } = useT();
+  const { t, locale } = useT();
   const [activeId, setActiveId] = useState<string | null>(
     event.delegations.find((d) => d.host)?.id ?? event.delegations[0]?.id ?? null,
   );
@@ -121,7 +122,7 @@ export function ImgcDelegationsMap({ event }: { event: ImgcEventData }) {
                           ? "h-3.5 w-3.5 border-gold bg-gold/80"
                           : "h-3 w-3 border-gold/70 bg-gold/50 hover:bg-gold"
                     }`}
-                    aria-label={delegation.country}
+                    aria-label={countryDisplayName(delegation.country, locale)}
                   />
                 );
               })}
@@ -148,7 +149,7 @@ export function ImgcDelegationsMap({ event }: { event: ImgcEventData }) {
                       }`}
                     >
                       <span className="font-display text-sm tracking-wide text-foreground uppercase">
-                        {delegation.country}
+                        {countryDisplayName(delegation.country, locale)}
                       </span>
                       {delegation.city && (
                         <span className="mt-1 block text-xs text-muted">{delegation.city}</span>
@@ -165,7 +166,7 @@ export function ImgcDelegationsMap({ event }: { event: ImgcEventData }) {
             )}
             {active && (
               <p className="mt-6 text-xs text-muted">
-                {active.country}
+                {countryDisplayName(active.country, locale)}
                 {active.city ? ` · ${active.city}` : ""}
               </p>
             )}

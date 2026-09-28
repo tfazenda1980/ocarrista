@@ -8,6 +8,7 @@ import {
   updateCncDiscipline,
 } from "@/app/lib/cnc/repository";
 import type { CncDisciplineKind } from "@/app/lib/cnc/slots";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -40,7 +41,7 @@ export async function POST(
       kind: data.kind === "gallery" ? "gallery" : "resources",
     });
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao criar prova.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -89,7 +90,7 @@ export async function PATCH(
       });
     }
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao actualizar prova.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -114,7 +115,7 @@ export async function DELETE(
   try {
     await deleteCncDiscipline(year, id);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao eliminar prova.";
     return NextResponse.json({ error: message }, { status: 500 });

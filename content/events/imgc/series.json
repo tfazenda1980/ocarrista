@@ -1,6 +1,10 @@
 {
   "slug": "imgc",
-  "title": "International Master Gunner Conference",
+  "title": {
+    "pt": "International Master Gunner Conference",
+    "en": "International Master Gunner Conference",
+    "fr": "International Master Gunner Conference"
+  },
   "defaultYear": "2026",
   "years": ["2026"]
 }

@@ -11,6 +11,7 @@ import type {
 } from "@/app/lib/events/cnc-types";
 import { CNC_FILE_ACCEPT, CNC_IMAGE_ACCEPT } from "@/app/lib/cnc/upload";
 import { cncMessageKindLabel, type CncMessage } from "@/app/lib/cnc/messages";
+import { displayLocalized } from "@/app/lib/i18n/localized";
 import {
   disciplineSlot,
   generalProgramSlot,
@@ -79,16 +80,16 @@ export function AdminCncView({ year }: { year: string }) {
 
   const applyEvent = useCallback((next: CncEventData) => {
     setEvent(next);
-    setOpeningTitle(next.openingNote.title);
-    setOpeningBody(next.openingNote.body);
-    setProgramTitle(next.generalProgram.title);
-    setProgramBody(next.generalProgram.body);
-    setRegulationTitle(next.regulation?.title ?? "Regulamento");
-    setRegulationBody(next.regulation?.body ?? "");
-    setOrganizer(next.contacts.organizer);
+    setOpeningTitle(displayLocalized(next.openingNote.title));
+    setOpeningBody(displayLocalized(next.openingNote.body));
+    setProgramTitle(displayLocalized(next.generalProgram.title));
+    setProgramBody(displayLocalized(next.generalProgram.body));
+    setRegulationTitle(displayLocalized(next.regulation?.title) || "Regulamento");
+    setRegulationBody(displayLocalized(next.regulation?.body ?? ""));
+    setOrganizer(displayLocalized(next.contacts.organizer));
     setEmail(next.contacts.email);
     setPhone(next.contacts.phone ?? "");
-    setNotes(next.contacts.notes ?? "");
+    setNotes(displayLocalized(next.contacts.notes ?? ""));
   }, []);
 
   const load = useCallback(async () => {

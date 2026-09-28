@@ -7,6 +7,7 @@ import {
   reorderCncUsefulInfo,
   updateCncUsefulInfo,
 } from "@/app/lib/cnc/repository";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -35,7 +36,7 @@ export async function POST(
   try {
     await createCncUsefulInfo(year, { title: data.title, description: data.description });
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao criar item.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -81,7 +82,7 @@ export async function PATCH(
       });
     }
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao actualizar item.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -106,7 +107,7 @@ export async function DELETE(
   try {
     await deleteCncUsefulInfo(year, id);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao eliminar item.";
     return NextResponse.json({ error: message }, { status: 500 });

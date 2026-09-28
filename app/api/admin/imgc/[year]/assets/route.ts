@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/app/lib/auth/session";
 import { clearImgcAsset, getImgcLiveEdition, upsertImgcAsset } from "@/app/lib/imgc/repository";
 import { uploadImgcAsset } from "@/app/lib/imgc/upload";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -41,7 +42,7 @@ export async function POST(
     }
 
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro no documento.";
     return NextResponse.json({ error: message }, { status: 503 });

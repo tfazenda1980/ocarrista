@@ -1,6 +1,10 @@
 {
   "slug": "challenger",
-  "title": "Challenger O Carrista",
+  "title": {
+    "pt": "Challenger O Carrista",
+    "en": "Challenger O Carrista",
+    "fr": "Challenger O Carrista"
+  },
   "defaultYear": "2026",
   "years": ["2026"]
 }

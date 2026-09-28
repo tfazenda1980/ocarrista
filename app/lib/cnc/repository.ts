@@ -14,6 +14,14 @@ import type { CncAsset, CncDisciplineKind } from "./slots";
 import type { CncMessage, CncMessageKind } from "./messages";
 import { cncLayoutSectionsForParent } from "./competition-layout";
 import {
+  applyAdminLocale,
+  displayLocalized,
+  localizeContent,
+  overlayLocalized,
+  serializeLocalized,
+} from "../i18n/localized";
+import { type Locale } from "../i18n/config";
+import {
   disciplineSlot,
   emptyResource,
   gallerySlot,
@@ -107,7 +115,7 @@ export async function seedCncYear(year: string): Promise<void> {
       await sql`
         UPDATE cnc_editions
         SET
-          opening_note_body = ${base.openingNote.body},
+          opening_note_body = ${serializeLocalized(base.openingNote.body)},
           updated_at = NOW()
         WHERE year = ${year}
           AND opening_note_body = ${previous}
@@ -125,16 +133,16 @@ export async function seedCncYear(year: string): Promise<void> {
     )
     VALUES (
       ${year},
-      ${base.openingNote.title},
-      ${base.openingNote.body},
-      ${base.generalProgram.title},
-      ${base.generalProgram.body},
-      ${base.contacts.organizer},
+      ${serializeLocalized(base.openingNote.title)},
+      ${serializeLocalized(base.openingNote.body)},
+      ${serializeLocalized(base.generalProgram.title)},
+      ${serializeLocalized(base.generalProgram.body)},
+      ${serializeLocalized(base.contacts.organizer)},
       ${base.contacts.email},
       ${base.contacts.phone ?? ""},
-      ${base.contacts.notes ?? ""},
-      ${base.regulation.title},
-      ${base.regulation.body}
+      ${serializeLocalized(base.contacts.notes ?? "")},
+      ${serializeLocalized(base.regulation.title)},
+      ${serializeLocalized(base.regulation.body)}
     )
   `;
 
@@ -144,8 +152,8 @@ export async function seedCncYear(year: string): Promise<void> {
       VALUES (
         ${discipline.id},
         ${year},
-        ${discipline.title},
-        ${discipline.description ?? null},
+        ${serializeLocalized(discipline.title)},
+        ${discipline.description ? serializeLocalized(discipline.description) : null},
         ${index},
         ${discipline.galleryPdf ? "gallery" : discipline.sections?.length ? "grouped" : "resources"},
         ${null}
@@ -158,7 +166,7 @@ export async function seedCncYear(year: string): Promise<void> {
         VALUES (
           ${section.id},
           ${year},
-          ${section.title},
+          ${serializeLocalized(section.title)},
           ${null},
           ${sectionIndex},
           ${section.resultados && !section.resources ? "resultados" : "resources"},
@@ -175,8 +183,8 @@ export async function seedCncYear(year: string): Promise<void> {
       VALUES (
         ${item.id},
         ${year},
-        ${item.title},
-        ${item.description ?? null},
+        ${serializeLocalized(item.title)},
+        ${item.description ? serializeLocalized(item.description) : null},
         ${index}
       )
       ON CONFLICT (id) DO NOTHING
@@ -236,8 +244,8 @@ function disciplineFromRow(
   if (row.kind === "gallery") {
     return {
       id: row.id,
-      title: row.title,
-      description: row.description ?? undefined,
+      title: overlayLocalized(row.title, fallback?.title, "pt") as CncDiscipline["title"],
+      description: overlayLocalized(row.description, fallback?.description, "pt") as CncDiscipline["description"],
       galleryPdf: emptyResource(
         fallback?.galleryPdf?.label ?? "Galeria de Prémios (PDF)",
         assets.get(disciplineSlot(row.id, "gallery")),
@@ -248,8 +256,8 @@ function disciplineFromRow(
 
   return {
     id: row.id,
-    title: row.title,
-    description: row.description ?? undefined,
+    title: overlayLocalized(row.title, fallback?.title, "pt") as CncDiscipline["title"],
+    description: overlayLocalized(row.description, fallback?.description, "pt") as CncDiscipline["description"],
     resources: {
       ordens: emptyResource(
         "Ordens de Entrada",
@@ -278,7 +286,7 @@ function sectionFromRow(
   if (row.kind === "resultados") {
     return {
       id: row.id,
-      title: row.title,
+      title: overlayLocalized(row.title, fallback?.title, "pt") as CncDisciplineSection["title"],
       resultados: emptyResource(
         fallback?.resultados?.label ?? "Resultados finais",
         assets.get(disciplineSlot(row.id, "resultados")),
@@ -289,7 +297,7 @@ function sectionFromRow(
 
   return {
     id: row.id,
-    title: row.title,
+    title: overlayLocalized(row.title, fallback?.title, "pt") as CncDisciplineSection["title"],
     resources: {
       ordens: emptyResource(
         "Ordens de Entrada",
@@ -338,8 +346,12 @@ function assembleDisciplines(
       const sectionFallback = new Map((parentFallback?.sections ?? []).map((section) => [section.id, section]));
       return {
         id: row.id,
-        title: row.title,
-        description: row.description ?? parentFallback?.description,
+        title: overlayLocalized(row.title, parentFallback?.title, "pt") as CncDiscipline["title"],
+        description: overlayLocalized(
+          row.description,
+          parentFallback?.description,
+          "pt",
+        ) as CncDiscipline["description"],
         sections: kids.map((child) =>
           sectionFromRow(
             { ...child, sort_order: asNumber(child.sort_order) },
@@ -396,8 +408,8 @@ function usefulFromRow(
 ): CncUsefulInfoItem {
   return {
     id: row.id,
-    title: row.title,
-    description: row.description ?? undefined,
+    title: overlayLocalized(row.title, fallback?.title, "pt") as CncUsefulInfoItem["title"],
+    description: overlayLocalized(row.description, fallback?.description, "pt") as CncUsefulInfoItem["description"],
     pdf: emptyResource(
       fallback?.pdf.label ?? `${row.title} (PDF)`,
       assets.get(usefulSlot(row.id)),
@@ -421,13 +433,15 @@ function sponsorFromRow(
 
 export async function getCncLiveEdition(
   year: string,
-  options?: { strict?: boolean },
+  options?: { strict?: boolean; resolveLocale?: Locale },
 ): Promise<CncEventData | null> {
   const base = getCncEdition(year);
   if (!base) return null;
+  const resolve = (event: CncEventData) =>
+    options?.resolveLocale ? localizeContent(event, options.resolveLocale) : event;
   if (!dbConfigured()) {
     if (options?.strict) throw new Error("DATABASE_URL em falta");
-    return base;
+    return resolve(base);
   }
 
   try {
@@ -531,11 +545,19 @@ export async function getCncLiveEdition(
       pdf: { label: "Regulamento (PDF)", href: null },
     };
 
-    return {
+    return resolve({
       ...base,
       openingNote: {
-        title: edition?.opening_note_title || base.openingNote.title,
-        body: edition?.opening_note_body || base.openingNote.body,
+        title: overlayLocalized(
+          edition?.opening_note_title,
+          base.openingNote.title,
+          "pt",
+        ) as CncEventData["openingNote"]["title"],
+        body: overlayLocalized(
+          edition?.opening_note_body,
+          base.openingNote.body,
+          "pt",
+        ) as CncEventData["openingNote"]["body"],
         pdf: emptyResource(
           base.openingNote.pdf?.label ?? "Nota de Abertura (PDF)",
           assetsBySlot.get(openingNoteSlot()),
@@ -543,8 +565,16 @@ export async function getCncLiveEdition(
         ),
       },
       generalProgram: {
-        title: edition?.general_program_title || base.generalProgram.title,
-        body: edition?.general_program_body || base.generalProgram.body,
+        title: overlayLocalized(
+          edition?.general_program_title,
+          base.generalProgram.title,
+          "pt",
+        ) as CncEventData["generalProgram"]["title"],
+        body: overlayLocalized(
+          edition?.general_program_body,
+          base.generalProgram.body,
+          "pt",
+        ) as CncEventData["generalProgram"]["body"],
         pdf: emptyResource(
           base.generalProgram.pdf?.label ?? "Programa geral (PDF)",
           assetsBySlot.get(generalProgramSlot()),
@@ -552,8 +582,16 @@ export async function getCncLiveEdition(
         ),
       },
       regulation: {
-        title: edition?.regulation_title || regulationBase.title,
-        body: edition?.regulation_body || regulationBase.body,
+        title: overlayLocalized(
+          edition?.regulation_title,
+          regulationBase.title,
+          "pt",
+        ) as CncEventData["regulation"]["title"],
+        body: overlayLocalized(
+          edition?.regulation_body,
+          regulationBase.body,
+          "pt",
+        ) as CncEventData["regulation"]["body"],
         pdf: emptyResource(
           regulationBase.pdf?.label ?? "Regulamento (PDF)",
           assetsBySlot.get(regulationSlot()),
@@ -566,16 +604,20 @@ export async function getCncLiveEdition(
       photoGallery,
       notices,
       contacts: {
-        organizer: edition?.organizer || base.contacts.organizer,
+        organizer: overlayLocalized(
+          edition?.organizer,
+          base.contacts.organizer,
+          "pt",
+        ) as CncEventData["contacts"]["organizer"],
         email: edition?.email || base.contacts.email,
         phone: edition?.phone ?? base.contacts.phone,
-        notes: edition?.notes ?? base.contacts.notes,
+        notes: overlayLocalized(edition?.notes, base.contacts.notes, "pt") as CncEventData["contacts"]["notes"],
       },
-    };
+    });
   } catch (err) {
     console.error("[cnc] getCncLiveEdition", err);
     if (options?.strict) throw err;
-    return base;
+    return resolve(base);
   }
 }
 
@@ -597,21 +639,22 @@ export async function updateCncContent(
   await seedCncYear(year);
   const sql = await sqlClient();
   const current = await getCncLiveEdition(year);
-  if (!current) throw new Error("Edição CNC não encontrada.");
+  const base = getCncEdition(year);
+  if (!current || !base) throw new Error("Edição CNC não encontrada.");
 
   await sql`
     UPDATE cnc_editions
     SET
-      opening_note_title = ${fields.opening_note_title ?? current.openingNote.title},
-      opening_note_body = ${fields.opening_note_body ?? current.openingNote.body},
-      general_program_title = ${fields.general_program_title ?? current.generalProgram.title},
-      general_program_body = ${fields.general_program_body ?? current.generalProgram.body},
-      regulation_title = ${fields.regulation_title ?? current.regulation.title},
-      regulation_body = ${fields.regulation_body ?? current.regulation.body},
-      organizer = ${fields.organizer ?? current.contacts.organizer},
+      opening_note_title = ${applyAdminLocale(current.openingNote.title, base.openingNote.title, fields.opening_note_title ?? displayLocalized(current.openingNote.title), "pt")},
+      opening_note_body = ${applyAdminLocale(current.openingNote.body, base.openingNote.body, fields.opening_note_body ?? displayLocalized(current.openingNote.body), "pt")},
+      general_program_title = ${applyAdminLocale(current.generalProgram.title, base.generalProgram.title, fields.general_program_title ?? displayLocalized(current.generalProgram.title), "pt")},
+      general_program_body = ${applyAdminLocale(current.generalProgram.body, base.generalProgram.body, fields.general_program_body ?? displayLocalized(current.generalProgram.body), "pt")},
+      regulation_title = ${applyAdminLocale(current.regulation.title, base.regulation.title, fields.regulation_title ?? displayLocalized(current.regulation.title), "pt")},
+      regulation_body = ${applyAdminLocale(current.regulation.body, base.regulation.body, fields.regulation_body ?? displayLocalized(current.regulation.body), "pt")},
+      organizer = ${applyAdminLocale(current.contacts.organizer, base.contacts.organizer, fields.organizer ?? displayLocalized(current.contacts.organizer), "pt")},
       email = ${fields.email ?? current.contacts.email},
       phone = ${fields.phone ?? current.contacts.phone ?? ""},
-      notes = ${fields.notes ?? current.contacts.notes ?? ""},
+      notes = ${applyAdminLocale(current.contacts.notes, base.contacts.notes, fields.notes ?? displayLocalized(current.contacts.notes ?? ""), "pt")},
       updated_at = NOW()
     WHERE year = ${year}
   `;

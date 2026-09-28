@@ -1,4 +1,5 @@
 import type { CncDisciplineKind } from "./slots";
+import { displayLocalized } from "../i18n/localized";
 
 export type CncLayoutSection = {
   id: string;
@@ -46,10 +47,13 @@ export function cncProvaSelectOptions(
     if (discipline.galleryPdf) continue;
     if (discipline.sections?.length) {
       for (const section of discipline.sections) {
-        options.push({ id: section.id, label: `${discipline.title} · ${section.title}` });
+        options.push({
+          id: section.id,
+          label: `${displayLocalized(discipline.title)} · ${displayLocalized(section.title)}`,
+        });
       }
     } else {
-      options.push({ id: discipline.id, label: discipline.title });
+      options.push({ id: discipline.id, label: displayLocalized(discipline.title) });
     }
   }
   return options;

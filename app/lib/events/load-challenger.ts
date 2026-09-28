@@ -3,11 +3,11 @@ import series from "../../../content/events/challenger/series.json";
 import edition2026 from "../../../content/events/challenger/2026.json";
 
 const editions: Record<string, ChallengerEventData> = {
-  "2026": edition2026 as ChallengerEventData,
+  "2026": edition2026 as unknown as ChallengerEventData,
 };
 
 export function getChallengerSeries(): ChallengerSeries {
-  return series as ChallengerSeries;
+  return series as unknown as ChallengerSeries;
 }
 
 export function getChallengerEdition(year: string): ChallengerEventData | null {
@@ -15,9 +15,9 @@ export function getChallengerEdition(year: string): ChallengerEventData | null {
 }
 
 export function getChallengerYearsForStaticParams(): { year: string }[] {
-  return (series as ChallengerSeries).years.map((year) => ({ year }));
+  return (series as unknown as ChallengerSeries).years.map((year) => ({ year }));
 }
 
 export function isChallengerYearValid(year: string): boolean {
-  return (series as ChallengerSeries).years.includes(year);
+  return (series as unknown as ChallengerSeries).years.includes(year);
 }

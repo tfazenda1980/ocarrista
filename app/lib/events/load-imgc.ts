@@ -3,10 +3,10 @@ import series from "../../../content/events/imgc/series.json";
 import edition2026 from "../../../content/events/imgc/2026.json";
 
 const editions: Record<string, ImgcEventData> = {
-  "2026": edition2026 as ImgcEventData,
+  "2026": edition2026 as unknown as ImgcEventData,
 };
 
-export const imgcSeries = series as ImgcSeries;
+export const imgcSeries = series as unknown as ImgcSeries;
 
 export function getImgcSeries(): ImgcSeries {
   return imgcSeries;

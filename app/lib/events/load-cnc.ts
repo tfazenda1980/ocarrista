@@ -3,10 +3,10 @@ import series from "../../../content/events/cnc/series.json";
 import edition2026 from "../../../content/events/cnc/2026.json";
 
 const editions: Record<string, CncEventData> = {
-  "2026": edition2026 as CncEventData,
+  "2026": edition2026 as unknown as CncEventData,
 };
 
-export const cncSeries = series as CncSeries;
+export const cncSeries = series as unknown as CncSeries;
 
 export function getCncSeries(): CncSeries {
   return cncSeries;

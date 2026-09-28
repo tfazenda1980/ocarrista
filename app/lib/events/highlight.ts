@@ -2,6 +2,8 @@ import { getCncEdition, getCncSeries } from "./load-cnc";
 import { getChallengerEdition, getChallengerSeries } from "./load-challenger";
 import { getImgcEdition, getImgcSeries } from "./load-imgc";
 import { getWorkshopEdition, getWorkshopSeries } from "./load-workshop";
+import { DEFAULT_LOCALE, type Locale } from "../i18n/config";
+import { localizeContent } from "../i18n/localized";
 
 /** Janela de destaque na entrada: três semanas antes até ao fim do evento. */
 export const EVENT_HIGHLIGHT_WINDOW_MS = 21 * 24 * 60 * 60 * 1000;
@@ -43,12 +45,15 @@ function inHighlightWindow(
 }
 
 /** Eventos publicados na janela de destaque (≤3 semanas ou em curso). */
-export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCandidate[] {
+export function getEventsInHighlightWindow(
+  now = Date.now(),
+  locale: Locale = DEFAULT_LOCALE,
+): EventHighlightCandidate[] {
   const out: EventHighlightCandidate[] = [];
 
   const workshopSeries = getWorkshopSeries();
   for (const year of workshopSeries.years) {
-    const edition = getWorkshopEdition(year);
+    const edition = localizeContent(getWorkshopEdition(year), locale);
     if (!edition || edition.published === false || !edition.cardImage) continue;
     const days = inHighlightWindow(edition.date, edition.endDate, now);
     if (days === null) continue;
@@ -67,7 +72,7 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
 
   const cncSeries = getCncSeries();
   for (const year of cncSeries.years) {
-    const edition = getCncEdition(year);
+    const edition = localizeContent(getCncEdition(year), locale);
     if (!edition || edition.published === false || !edition.cardImage) continue;
     const days = inHighlightWindow(edition.date, edition.endDate, now);
     if (days === null) continue;
@@ -86,7 +91,7 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
 
   const challengerSeries = getChallengerSeries();
   for (const year of challengerSeries.years) {
-    const edition = getChallengerEdition(year);
+    const edition = localizeContent(getChallengerEdition(year), locale);
     if (!edition || edition.published === false || !edition.cardImage) continue;
     const days = inHighlightWindow(edition.date, edition.endDate, now);
     if (days === null) continue;
@@ -105,7 +110,7 @@ export function getEventsInHighlightWindow(now = Date.now()): EventHighlightCand
 
   const imgcSeries = getImgcSeries();
   for (const year of imgcSeries.years) {
-    const edition = getImgcEdition(year);
+    const edition = localizeContent(getImgcEdition(year), locale);
     if (!edition || edition.published === false || !edition.cardImage) continue;
     const days = inHighlightWindow(edition.date, edition.endDate, now);
     if (days === null) continue;

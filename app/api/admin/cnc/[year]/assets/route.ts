@@ -6,6 +6,7 @@ import {
   upsertCncAsset,
 } from "@/app/lib/cnc/repository";
 import { uploadCncAsset } from "@/app/lib/cnc/upload";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -47,7 +48,7 @@ export async function POST(
     }
 
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro no documento.";
     return NextResponse.json({ error: message }, { status: 503 });

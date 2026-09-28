@@ -4,11 +4,11 @@ import series from "../../../content/events/workshop/series.json";
 import edition2026 from "../../../content/events/workshop/2026.json";
 import edition2025 from "../../../content/events/workshop/2025.json";
 const editions: Record<string, EventData> = {
-  "2026": edition2026 as EventData,
-  "2025": edition2025 as EventData,
+  "2026": edition2026 as unknown as EventData,
+  "2025": edition2025 as unknown as EventData,
 };
 
-export const workshopSeries = series as WorkshopSeries;
+export const workshopSeries = series as unknown as WorkshopSeries;
 
 export function getWorkshopSeries(): WorkshopSeries {
   return workshopSeries;

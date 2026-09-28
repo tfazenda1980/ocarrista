@@ -2,32 +2,88 @@
   "year": "2026",
   "slug": "imgc",
   "published": true,
-  "title": "International Master Gunner Conference 2026",
-  "edition": "IMGC 2026",
-  "slogan": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery.",
+  "title": {
+    "pt": "International Master Gunner Conference 2026",
+    "en": "International Master Gunner Conference 2026",
+    "fr": "International Master Gunner Conference 2026"
+  },
+  "edition": {
+    "pt": "IMGC 2026",
+    "en": "IMGC 2026",
+    "fr": "IMGC 2026"
+  },
+  "slogan": {
+    "pt": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery.",
+    "en": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery.",
+    "fr": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery."
+  },
   "date": "2026-10-05",
   "endDate": "2026-10-09",
-  "dateDisplay": "5–9 OCT 2026",
-  "location": "Quartel da Cavalaria, Santa Margarida",
+  "dateDisplay": {
+    "pt": "5–9 OUT 2026",
+    "en": "5–9 OCT 2026",
+    "fr": "5–9 OCT 2026"
+  },
+  "location": {
+    "pt": "Quartel da Cavalaria, Santa Margarida",
+    "en": "Cavalry Barracks, Santa Margarida",
+    "fr": "Caserne de Cavalerie, Santa Margarida"
+  },
   "heroImage": "/images/imgc.jpg",
   "cardImage": "/images/imgc.jpg",
   "about": {
-    "title": "The conference",
-    "body": "The International Master Gunner Conference 2026 gathers Master Gunners and gunnery specialists to exchange doctrine, training methods and operational experience. Five days at the Cavalry Barracks in Santa Margarida — connecting professionals who keep the gunnery craft alive across nations."
+    "title": {
+      "pt": "A conferência",
+      "en": "The conference",
+      "fr": "La conférence"
+    },
+    "body": {
+      "pt": "A International Master Gunner Conference 2026 reúne Master Gunners e especialistas de tiro para partilhar doutrina, métodos de instrução e experiência operacional. Cinco dias no Quartel da Cavalaria, em Santa Margarida — a ligar profissionais que mantêm vivo o ofício do tiro entre nações.",
+      "en": "The International Master Gunner Conference 2026 gathers Master Gunners and gunnery specialists to exchange doctrine, training methods and operational experience. Five days at the Cavalry Barracks in Santa Margarida — connecting professionals who keep the gunnery craft alive across nations.",
+      "fr": "L’International Master Gunner Conference 2026 réunit des Master Gunners et des spécialistes du tir pour échanger doctrine, méthodes d’instruction et expérience opérationnelle. Cinq jours à la Caserne de Cavalerie de Santa Margarida — un lien entre professionnels qui font vivre le métier du tir d’une nation à l’autre."
+    }
   },
   "barracks": {
-    "title": "Cavalry Barracks",
-    "body": "The Quartel da Cavalaria in Santa Margarida is the home of the Portuguese Cavalry Arm — a living garrison of crews, horses and armour. Delegates will work on a military installation with controlled access, in the landscape of the Tagus valley, a short drive from Tomar."
+    "title": {
+      "pt": "Quartel da Cavalaria",
+      "en": "Cavalry Barracks",
+      "fr": "Caserne de Cavalerie"
+    },
+    "body": {
+      "pt": "O Quartel da Cavalaria em Santa Margarida é a casa da Arma de Cavalaria portuguesa — uma guarnição viva de tripulantes, cavalos e blindados. Os delegados trabalharão numa instalação militar de acesso controlado, na paisagem do vale do Tejo, a curta distância de Tomar.",
+      "en": "The Quartel da Cavalaria in Santa Margarida is the home of the Portuguese Cavalry Arm — a living garrison of crews, horses and armour. Delegates will work on a military installation with controlled access, in the landscape of the Tagus valley, a short drive from Tomar.",
+      "fr": "La Caserne de Cavalerie de Santa Margarida est le foyer de l’arme de Cavalerie portugaise — une garnison vivante d’équipages, de chevaux et de blindés. Les délégations travailleront dans une installation militaire à accès contrôlé, dans le paysage de la vallée du Tage, à quelques minutes de Tomar."
+    }
   },
   "practical": {
-    "title": "Practical information",
-    "body": "Working language: English. The barracks is a restricted military area — bring a valid identity document and follow the joining instructions issued by the organisation. Dress: service uniform or equivalent for official sessions; smart casual for social moments. Further details will be published with the programme."
+    "title": {
+      "pt": "Informação prática",
+      "en": "Practical information",
+      "fr": "Informations pratiques"
+    },
+    "body": {
+      "pt": "Língua de trabalho: inglês. O quartel é uma área militar restrita — traga um documento de identificação válido e cumpra as instruções de apresentação da organização. Traje: uniforme de serviço ou equivalente nas sessões oficiais; smart casual nos momentos sociais. Mais pormenores serão publicados com o programa.",
+      "en": "Working language: English. The barracks is a restricted military area — bring a valid identity document and follow the joining instructions issued by the organisation. Dress: service uniform or equivalent for official sessions; smart casual for social moments. Further details will be published with the programme.",
+      "fr": "Langue de travail : anglais. La caserne est une zone militaire réglementée — munissez-vous d’une pièce d’identité valide et suivez les instructions d’accueil de l’organisation. Tenue : uniforme de service ou équivalent pour les séances officielles ; smart casual pour les moments conviviaux. Davantage de précisions seront publiées avec le programme."
+    }
   },
   "programme": {
-    "title": "Programme",
-    "body": "The conference programme (sessions, ranges, social events and timings) will be published here as a document. Open it in the viewer or download it for offline use.",
+    "title": {
+      "pt": "Programa",
+      "en": "Programme",
+      "fr": "Programme"
+    },
+    "body": {
+      "pt": "O programa da conferência (sessões, campos de tiro, momentos sociais e horários) será publicado aqui em documento. Abra-o no visualizador ou descarregue-o para uso offline.",
+      "en": "The conference programme (sessions, ranges, social events and timings) will be published here as a document. Open it in the viewer or download it for offline use.",
+      "fr": "Le programme de la conférence (séances, champs de tir, moments conviviaux et horaires) sera publié ici sous forme de document. Ouvrez-le dans le visualiseur ou téléchargez-le pour un usage hors ligne."
+    },
     "pdf": {
-      "label": "Conference programme",
+      "label": {
+        "pt": "Programa da conferência",
+        "en": "Conference programme",
+        "fr": "Programme de la conférence"
+      },
       "href": null
     }
   },
@@ -62,61 +118,133 @@
     {
       "id": "cm-tomar",
       "category": "tomar",
-      "title": "Município de Tomar",
+      "title": {
+        "pt": "Município de Tomar",
+        "en": "Municipality of Tomar",
+        "fr": "Municipalité de Tomar"
+      },
       "url": "https://www.cm-tomar.pt/",
-      "description": "Official city information, agenda and visitor services."
+      "description": {
+        "pt": "Informação oficial da cidade, agenda e serviços ao visitante.",
+        "en": "Official city information, agenda and visitor services.",
+        "fr": "Informations officielles de la ville, agenda et services aux visiteurs."
+      }
     },
     {
       "id": "convento",
       "category": "tomar",
-      "title": "Convento de Cristo",
+      "title": {
+        "pt": "Convento de Cristo",
+        "en": "Convent of Christ",
+        "fr": "Couvent du Christ"
+      },
       "url": "https://www.conventocristo.gov.pt/",
-      "description": "UNESCO World Heritage — Templar and Manueline architecture."
+      "description": {
+        "pt": "Património Mundial UNESCO — arquitectura templária e manuelina.",
+        "en": "UNESCO World Heritage — Templar and Manueline architecture.",
+        "fr": "Patrimoine mondial UNESCO — architecture templière et manuéline."
+      }
     },
     {
       "id": "visit-tomar",
       "category": "tomar",
-      "title": "Visit Portugal — Tomar",
+      "title": {
+        "pt": "Visit Portugal — Tomar",
+        "en": "Visit Portugal — Tomar",
+        "fr": "Visit Portugal — Tomar"
+      },
       "url": "https://www.visitportugal.com/en/destinos/centro-de-portugal/thomar",
-      "description": "Overview of Tomar for international visitors."
+      "description": {
+        "pt": "Visão geral de Tomar para visitantes internacionais.",
+        "en": "Overview of Tomar for international visitors.",
+        "fr": "Présentation de Tomar pour les visiteurs internationaux."
+      }
     },
     {
       "id": "cp",
       "category": "transport",
-      "title": "Comboios de Portugal",
+      "title": {
+        "pt": "Comboios de Portugal",
+        "en": "Comboios de Portugal",
+        "fr": "Comboios de Portugal"
+      },
       "url": "https://www.cp.pt/passageiros/en",
-      "description": "Rail links to Tomar (from Lisbon Oriente / Santa Apolónia)."
+      "description": {
+        "pt": "Ligações ferroviárias a Tomar (desde Lisboa Oriente / Santa Apolónia).",
+        "en": "Rail links to Tomar (from Lisbon Oriente / Santa Apolónia).",
+        "fr": "Liaisons ferroviaires vers Tomar (depuis Lisbonne Oriente / Santa Apolónia)."
+      }
     },
     {
       "id": "maps-qcav",
       "category": "transport",
-      "title": "Map — Cavalry Barracks, Santa Margarida",
+      "title": {
+        "pt": "Mapa — Quartel da Cavalaria, Santa Margarida",
+        "en": "Map — Cavalry Barracks, Santa Margarida",
+        "fr": "Carte — Caserne de Cavalerie, Santa Margarida"
+      },
       "url": "https://maps.google.com/?q=Campo%20Militar%20de%20Santa%20Margarida",
-      "description": "Location of the garrison (approx. 20–25 minutes by road from Tomar)."
+      "description": {
+        "pt": "Localização da guarnição (cerca de 20–25 minutos de Tomar por estrada).",
+        "en": "Location of the garrison (approx. 20–25 minutes by road from Tomar).",
+        "fr": "Emplacement de la garnison (environ 20–25 minutes de Tomar par la route)."
+      }
     },
     {
       "id": "airport",
       "category": "transport",
-      "title": "Lisbon Airport (LIS)",
+      "title": {
+        "pt": "Aeroporto de Lisboa (LIS)",
+        "en": "Lisbon Airport (LIS)",
+        "fr": "Aéroport de Lisbonne (LIS)"
+      },
       "url": "https://www.aeroportolisboa.pt/en",
-      "description": "Nearest international airport — about 1 h 30 by road to Santa Margarida."
+      "description": {
+        "pt": "Aeroporto internacional mais próximo — cerca de 1 h 30 de estrada até Santa Margarida.",
+        "en": "Nearest international airport — about 1 h 30 by road to Santa Margarida.",
+        "fr": "Aéroport international le plus proche — environ 1 h 30 de route jusqu’à Santa Margarida."
+      }
     },
     {
       "id": "ipma",
       "category": "other",
-      "title": "IPMA — weather",
+      "title": {
+        "pt": "IPMA — meteorologia",
+        "en": "IPMA — weather",
+        "fr": "IPMA — météo"
+      },
       "url": "https://www.ipma.pt/en/",
-      "description": "National weather service for the conference week."
+      "description": {
+        "pt": "Serviço nacional de meteorologia para a semana da conferência.",
+        "en": "National weather service for the conference week.",
+        "fr": "Service météorologique national pour la semaine de la conférence."
+      }
     }
   ],
   "photoGallery": [],
   "contacts": {
-    "organizer": "Quartel da Cavalaria / O Carrista",
+    "organizer": {
+      "pt": "Quartel da Cavalaria / O Carrista",
+      "en": "Cavalry Barracks / O Carrista",
+      "fr": "Caserne de Cavalerie / O Carrista"
+    },
     "email": "ocarrista.cc@gmail.com",
-    "notes": "For joining instructions and administrative queries, contact the organisation. This channel does not replace official military correspondence."
+    "notes": {
+      "pt": "Para instruções de apresentação e questões administrativas, contacte a organização. Este canal não substitui a correspondência militar oficial.",
+      "en": "For joining instructions and administrative queries, contact the organisation. This channel does not replace official military correspondence.",
+      "fr": "Pour les instructions d’accueil et les questions administratives, contactez l’organisation. Ce canal ne remplace pas la correspondance militaire officielle."
+    }
   },
   "seo": {
-    "title": "International Master Gunner Conference 2026 | O Carrista",
-    "description": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery. 5–9 October 2026 at the Cavalry Barracks, Santa Margarida."
+    "title": {
+      "pt": "International Master Gunner Conference 2026 | O Carrista",
+      "en": "International Master Gunner Conference 2026 | O Carrista",
+      "fr": "International Master Gunner Conference 2026 | O Carrista"
+    },
+    "description": {
+      "pt": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery. 5–9 de outubro de 2026 no Quartel da Cavalaria, Santa Margarida.",
+      "en": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery. 5–9 October 2026 at the Cavalry Barracks, Santa Margarida.",
+      "fr": "Connecting Master Gunners. Sharing Expertise. Advancing Gunnery. 5–9 octobre 2026 à la Caserne de Cavalerie, Santa Margarida."
+    }
   }
 }

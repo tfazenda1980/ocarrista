@@ -7,6 +7,8 @@ import { getCncEdition, getCncSeries } from "./load-cnc";
 import { getChallengerEdition, getChallengerSeries } from "./load-challenger";
 import { getImgcEdition, getImgcSeries } from "./load-imgc";
 import { getWorkshopEdition, getWorkshopSeries } from "./load-workshop";
+import { DEFAULT_LOCALE, type Locale } from "../i18n/config";
+import { localizeContent } from "../i18n/localized";
 
 export type EntryTeaserInfo = EventHighlightCandidate;
 
@@ -22,8 +24,10 @@ export type EntryUpcomingPreview = {
 };
 
 /** Destaques na homepage (≤3 semanas, todos os eventos publicados). */
-export function getEntryTeasersForHomepage(): EntryTeaserInfo[] {
-  return getEventsInHighlightWindow();
+export function getEntryTeasersForHomepage(
+  locale: Locale = DEFAULT_LOCALE,
+): EntryTeaserInfo[] {
+  return getEventsInHighlightWindow(Date.now(), locale);
 }
 
 type FutureEdition = {
@@ -36,11 +40,11 @@ type FutureEdition = {
   eventTime: number;
 };
 
-function collectFutureEditions(now: number): FutureEdition[] {
+function collectFutureEditions(now: number, locale: Locale): FutureEdition[] {
   const out: FutureEdition[] = [];
 
   for (const year of getWorkshopSeries().years) {
-    const edition = getWorkshopEdition(year);
+    const edition = localizeContent(getWorkshopEdition(year), locale);
     if (!edition || edition.published === false) continue;
     const eventTime = new Date(edition.date).getTime();
     if (eventTime <= now) continue;
@@ -56,7 +60,7 @@ function collectFutureEditions(now: number): FutureEdition[] {
   }
 
   for (const year of getCncSeries().years) {
-    const edition = getCncEdition(year);
+    const edition = localizeContent(getCncEdition(year), locale);
     if (!edition || edition.published === false) continue;
     const eventTime = new Date(edition.date).getTime();
     if (eventTime <= now) continue;
@@ -72,7 +76,7 @@ function collectFutureEditions(now: number): FutureEdition[] {
   }
 
   for (const year of getChallengerSeries().years) {
-    const edition = getChallengerEdition(year);
+    const edition = localizeContent(getChallengerEdition(year), locale);
     if (!edition || edition.published === false) continue;
     const eventTime = new Date(edition.date).getTime();
     if (eventTime <= now) continue;
@@ -88,7 +92,7 @@ function collectFutureEditions(now: number): FutureEdition[] {
   }
 
   for (const year of getImgcSeries().years) {
-    const edition = getImgcEdition(year);
+    const edition = localizeContent(getImgcEdition(year), locale);
     if (!edition || edition.published === false) continue;
     const eventTime = new Date(edition.date).getTime();
     if (eventTime <= now) continue;
@@ -107,10 +111,12 @@ function collectFutureEditions(now: number): FutureEdition[] {
 }
 
 /** Próximo evento quando ainda não há destaque activo na entrada. */
-export function getUpcomingEventPreview(): EntryUpcomingPreview | null {
+export function getUpcomingEventPreview(
+  locale: Locale = DEFAULT_LOCALE,
+): EntryUpcomingPreview | null {
   const now = Date.now();
   const dayMs = 24 * 60 * 60 * 1000;
-  const next = collectFutureEditions(now)[0];
+  const next = collectFutureEditions(now, locale)[0];
   if (!next) return null;
 
   const diff = next.eventTime - now;

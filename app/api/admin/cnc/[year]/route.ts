@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/app/lib/auth/session";
 import { dbConfigured } from "@/app/lib/db/client";
 import { getCncLiveEdition, updateCncContent } from "@/app/lib/cnc/repository";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -18,13 +19,13 @@ export async function GET(
   try {
     if (!dbConfigured()) {
       const event = await getCncLiveEdition(year);
-      return NextResponse.json({ configured: false, event });
+      return NextResponse.json({ configured: false, event: event ? cmsPlain(event) : event });
     }
     const event = await getCncLiveEdition(year, { strict: true });
     if (!event) {
       return NextResponse.json({ error: "Edição CNC não encontrada." }, { status: 404 });
     }
-    return NextResponse.json({ configured: dbConfigured(), event });
+    return NextResponse.json({ configured: dbConfigured(), event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao carregar CNC.";
     return NextResponse.json({ error: message, configured: dbConfigured() }, { status: 500 });
@@ -64,7 +65,7 @@ export async function PATCH(
   try {
     await updateCncContent(year, data);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao guardar.";
     return NextResponse.json({ error: message }, { status: 500 });

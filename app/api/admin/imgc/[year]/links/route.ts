@@ -7,6 +7,7 @@ import {
   updateImgcLink,
 } from "@/app/lib/imgc/repository";
 import type { ImgcLinkCategory } from "@/app/lib/events/imgc-types";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 const CATEGORIES: ImgcLinkCategory[] = ["tomar", "transport", "stay", "other"];
 
@@ -40,7 +41,7 @@ export async function POST(
   try {
     await createImgcLink(year, { category, title, url, description: body?.description });
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -69,7 +70,7 @@ export async function PATCH(
   try {
     await updateImgcLink(body.id, body);
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -90,7 +91,7 @@ export async function DELETE(
   try {
     await deleteImgcLink(year, id);
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 500 });

@@ -1,122 +1,218 @@
 [
   {
     "year": "1762",
-    "title": "Regimento de Mecklenburg",
-    "text": "Origem da linhagem que, através de sucessivas reorganizações, alimenta a tradição do Regimento de Cavalaria 4."
+    "title": { "pt": "Regimento de Mecklenburg", "en": "Mecklenburg Regiment", "fr": "Régiment de Mecklembourg" },
+    "text": {
+      "pt": "Origem da linhagem que, através de sucessivas reorganizações, alimenta a tradição do Regimento de Cavalaria 4.",
+      "en": "Origin of the lineage that, through successive reorganisations, feeds the tradition of Cavalry Regiment 4.",
+      "fr": "Origine de la lignée qui, à travers des réorganisations successives, nourrit la tradition du Régiment de Cavalerie 4."
+    }
   },
   {
     "year": "1809",
-    "title": "Albergaria, Grijó e Porto",
-    "text": "Em 10 a 12 de maio de 1809, 105 militares sob o Tenente Sanches de Baena: combates de Albergaria e Grijó e passagem do Douro com tomada do Porto."
+    "title": { "pt": "Albergaria, Grijó e Porto", "en": "Albergaria, Grijó and Porto", "fr": "Albergaria, Grijó et Porto" },
+    "text": {
+      "pt": "Em 10 a 12 de maio de 1809, 105 militares sob o Tenente Sanches de Baena: combates de Albergaria e Grijó e passagem do Douro com tomada do Porto.",
+      "en": "On 10–12 May 1809, 105 soldiers under Lieutenant Sanches de Baena: the actions at Albergaria and Grijó and the crossing of the Douro with the taking of Porto.",
+      "fr": "Du 10 au 12 mai 1809, 105 militaires sous le lieutenant Sanches de Baena : combats d’Albergaria et de Grijó et passage du Douro avec la prise de Porto."
+    }
   },
   {
     "year": "1810",
-    "title": "Batalha do Buçaco",
-    "text": "27 de setembro de 1810 — 451 militares do RC4, sob o Major Azevedo Coutinho, na Guerra Peninsular."
+    "title": { "pt": "Batalha do Buçaco", "en": "Battle of Bussaco", "fr": "Bataille de Buçaco" },
+    "text": {
+      "pt": "27 de setembro de 1810 — 451 militares do RC4, sob o Major Azevedo Coutinho, na Guerra Peninsular.",
+      "en": "27 September 1810 — 451 RC4 soldiers, under Major Azevedo Coutinho, in the Peninsular War.",
+      "fr": "27 septembre 1810 — 451 militaires du RC4, sous le major Azevedo Coutinho, pendant la guerre péninsulaire."
+    }
   },
   {
     "year": "1811",
-    "title": "Batalha de Fuentes de Oñoro",
-    "text": "5 de maio de 1811 — 104 militares, ao comando do Capitão Casimiro Botelho."
+    "title": { "pt": "Batalha de Fuentes de Oñoro", "en": "Battle of Fuentes de Oñoro", "fr": "Bataille de Fuentes de Oñoro" },
+    "text": {
+      "pt": "5 de maio de 1811 — 104 militares, ao comando do Capitão Casimiro Botelho.",
+      "en": "5 May 1811 — 104 soldiers, commanded by Captain Casimiro Botelho.",
+      "fr": "5 mai 1811 — 104 militaires, sous le commandement du capitaine Casimiro Botelho."
+    }
   },
   {
     "year": "1812",
-    "title": "Fuente del Maestre",
-    "text": "3 de janeiro de 1812 — 155 militares, Capitão Maia e Vasconcellos."
+    "title": { "pt": "Fuente del Maestre", "en": "Fuente del Maestre", "fr": "Fuente del Maestre" },
+    "text": {
+      "pt": "3 de janeiro de 1812 — 155 militares, Capitão Maia e Vasconcellos.",
+      "en": "3 January 1812 — 155 soldiers, Captain Maia e Vasconcellos.",
+      "fr": "3 janvier 1812 — 155 militaires, capitaine Maia e Vasconcellos."
+    }
   },
   {
     "year": "1812",
-    "title": "Arapiles",
-    "text": "15 e 16 de novembro de 1812 — 342 militares, Coronel John Campbell."
+    "title": { "pt": "Arapiles", "en": "Arapiles", "fr": "Arapiles" },
+    "text": {
+      "pt": "15 e 16 de novembro de 1812 — 342 militares, Coronel John Campbell.",
+      "en": "15 and 16 November 1812 — 342 soldiers, Colonel John Campbell.",
+      "fr": "15 et 16 novembre 1812 — 342 militaires, colonel John Campbell."
+    }
   },
   {
     "year": "1813",
-    "title": "Pirinéus",
-    "text": "28 e 30 de julho de 1813 — 271 militares, Coronel John Campbell, nos combates de travessia dos Pirinéus."
+    "title": { "pt": "Pirinéus", "en": "Pyrenees", "fr": "Pyrénées" },
+    "text": {
+      "pt": "28 e 30 de julho de 1813 — 271 militares, Coronel John Campbell, nos combates de travessia dos Pirinéus.",
+      "en": "28 and 30 July 1813 — 271 soldiers, Colonel John Campbell, in the fighting to cross the Pyrenees.",
+      "fr": "28 et 30 juillet 1813 — 271 militaires, colonel John Campbell, dans les combats de traversée des Pyrénées."
+    }
   },
   {
     "year": "1814",
-    "title": "Viella",
-    "text": "13 de março de 1814 — 264 cavaleiros do RC4, notável carga de Cavalaria sob o Coronel John Campbell em Viella, África; epícente da memória evocado pelo Dia do Quartel."
+    "title": { "pt": "Viella", "en": "Viella", "fr": "Viella" },
+    "text": {
+      "pt": "13 de março de 1814 — 264 cavaleiros do RC4, notável carga de Cavalaria sob o Coronel John Campbell em Viella, África; epícente da memória evocado pelo Dia do Quartel.",
+      "en": "13 March 1814 — 264 RC4 troopers, a remarkable cavalry charge under Colonel John Campbell at Viella, in Africa; the heart of the memory recalled on Barracks Day.",
+      "fr": "13 mars 1814 — 264 cavaliers du RC4, notable charge de cavalerie sous le colonel John Campbell à Viella, en Afrique ; épicentre de la mémoire évoquée par le Jour de la Caserne."
+    }
   },
   {
     "year": "1814",
-    "title": "Nérac",
-    "text": "31 de março de 1814 — 266 militares, Coronel John Campbell, na fase final da campanha."
+    "title": { "pt": "Nérac", "en": "Nérac", "fr": "Nérac" },
+    "text": {
+      "pt": "31 de março de 1814 — 266 militares, Coronel John Campbell, na fase final da campanha.",
+      "en": "31 March 1814 — 266 soldiers, Colonel John Campbell, in the final phase of the campaign.",
+      "fr": "31 mars 1814 — 266 militaires, colonel John Campbell, dans la phase finale de la campagne."
+    }
   },
   {
     "year": "1827",
-    "title": "Guerras Liberais",
-    "text": "Batalha de Coruche da Beira e combates das Pontes do Prado e da Barca."
+    "title": { "pt": "Guerras Liberais", "en": "Liberal Wars", "fr": "Guerres libérales" },
+    "text": {
+      "pt": "Batalha de Coruche da Beira e combates das Pontes do Prado e da Barca.",
+      "en": "Battle of Coruche da Beira and the actions at Pontes do Prado and da Barca.",
+      "fr": "Bataille de Coruche da Beira et combats des Pontes do Prado et da Barca."
+    }
   },
   {
     "year": "1895",
-    "title": "Coolela (Moçambique)",
-    "text": "7 de novembro de 1895 — elementos do RC4 no combate de Coolela; Capitão Mouzinho de Albuquerque."
+    "title": { "pt": "Coolela (Moçambique)", "en": "Coolela (Mozambique)", "fr": "Coolela (Mozambique)" },
+    "text": {
+      "pt": "7 de novembro de 1895 — elementos do RC4 no combate de Coolela; Capitão Mouzinho de Albuquerque.",
+      "en": "7 November 1895 — RC4 elements in the action at Coolela; Captain Mouzinho de Albuquerque.",
+      "fr": "7 novembre 1895 — éléments du RC4 au combat de Coolela ; capitaine Mouzinho de Albuquerque."
+    }
   },
   {
     "year": "1896",
-    "title": "Mujenga",
-    "text": "19 e 20 de outubro de 1896 — esquadrão do RC4, Alferes Augusto Reis."
+    "title": { "pt": "Mujenga", "en": "Mujenga", "fr": "Mujenga" },
+    "text": {
+      "pt": "19 e 20 de outubro de 1896 — esquadrão do RC4, Alferes Augusto Reis.",
+      "en": "19 and 20 October 1896 — an RC4 squadron, Second Lieutenant Augusto Reis.",
+      "fr": "19 et 20 octobre 1896 — escadron du RC4, sous-lieutenant Augusto Reis."
+    }
   },
   {
     "year": "1915",
-    "title": "Môngua (Angola)",
-    "text": "18 a 20 de agosto de 1915 — 3.º Esquadrão de Cavalaria do RC4, Capitão Luizello Godinho."
+    "title": { "pt": "Môngua (Angola)", "en": "Môngua (Angola)", "fr": "Môngua (Angola)" },
+    "text": {
+      "pt": "18 a 20 de agosto de 1915 — 3.º Esquadrão de Cavalaria do RC4, Capitão Luizello Godinho.",
+      "en": "18–20 August 1915 — 3rd Cavalry Squadron of RC4, Captain Luizello Godinho.",
+      "fr": "18 au 20 août 1915 — 3e Escadron de cavalerie du RC4, capitaine Luizello Godinho."
+    }
   },
   {
     "year": "1915",
-    "title": "Socorro Cuamato–Cuanhama",
-    "text": "20 a 24 de agosto de 1915 — 4.º Pelotão do 3.º Esquadrão do RC4, integrado em destacamento ao comando do Tenente Correia Torres."
+    "title": { "pt": "Socorro Cuamato–Cuanhama", "en": "Cuamato–Cuanhama relief", "fr": "Secours Cuamato–Cuanhama" },
+    "text": {
+      "pt": "20 a 24 de agosto de 1915 — 4.º Pelotão do 3.º Esquadrão do RC4, integrado em destacamento ao comando do Tenente Correia Torres.",
+      "en": "20–24 August 1915 — 4th Platoon of RC4’s 3rd Squadron, in a detachment commanded by Lieutenant Correia Torres.",
+      "fr": "20 au 24 août 1915 — 4e peloton du 3e escadron du RC4, intégré à un détachement commandé par le lieutenant Correia Torres."
+    }
   },
   {
     "year": "1968–1975",
-    "title": "TO Angola",
-    "text": "Teatro de Operações em Angola — BCav 2854, 3845, 3862, 3883 e 8423/73; CCav 2720, 3377, 3418, 3419, 8450/72, 8451/72, 8453/72, 8454/73, 8455/73, 8456/73 e 8457/73."
+    "title": { "pt": "TO Angola", "en": "Angola theatre", "fr": "TO Angola" },
+    "text": {
+      "pt": "Teatro de Operações em Angola — BCav 2854, 3845, 3862, 3883 e 8423/73; CCav 2720, 3377, 3418, 3419, 8450/72, 8451/72, 8453/72, 8454/73, 8455/73, 8456/73 e 8457/73.",
+      "en": "Theatre of operations in Angola — BCav 2854, 3845, 3862, 3883 and 8423/73; CCav 2720, 3377, 3418, 3419, 8450/72, 8451/72, 8453/72, 8454/73, 8455/73, 8456/73 and 8457/73.",
+      "fr": "Théâtre d’opérations en Angola — BCav 2854, 3845, 3862, 3883 et 8423/73 ; CCav 2720, 3377, 3418, 3419, 8450/72, 8451/72, 8453/72, 8454/73, 8455/73, 8456/73 et 8457/73."
+    }
   },
   {
     "year": "1970–1975",
-    "title": "TO Moçambique",
-    "text": "Teatro de Operações em Moçambique — BCav 2923, 3837, 3878, 8420/72, 8421/73, 8422/73 e 8424/74; CCav 2722, 2766, 2787, 3320 e 1CCav/8420/72."
+    "title": { "pt": "TO Moçambique", "en": "Mozambique theatre", "fr": "TO Mozambique" },
+    "text": {
+      "pt": "Teatro de Operações em Moçambique — BCav 2923, 3837, 3878, 8420/72, 8421/73, 8422/73 e 8424/74; CCav 2722, 2766, 2787, 3320 e 1CCav/8420/72.",
+      "en": "Theatre of operations in Mozambique — BCav 2923, 3837, 3878, 8420/72, 8421/73, 8422/73 and 8424/74; CCav 2722, 2766, 2787, 3320 and 1CCav/8420/72.",
+      "fr": "Théâtre d’opérations au Mozambique — BCav 2923, 3837, 3878, 8420/72, 8421/73, 8422/73 et 8424/74 ; CCav 2722, 2766, 2787, 3320 et 1CCav/8420/72."
+    }
   },
   {
     "year": "1970–1974",
-    "title": "TO Guiné",
-    "text": "Teatro de Operações na Guiné — CCav 2721, 3420, 3568 e CCav/8452/72."
+    "title": { "pt": "TO Guiné", "en": "Guinea theatre", "fr": "TO Guinée" },
+    "text": {
+      "pt": "Teatro de Operações na Guiné — CCav 2721, 3420, 3568 e CCav/8452/72.",
+      "en": "Theatre of operations in Guinea — CCav 2721, 3420, 3568 and CCav/8452/72.",
+      "fr": "Théâtre d’opérations en Guinée — CCav 2721, 3420, 3568 et CCav/8452/72."
+    }
   },
   {
     "year": "1999–2013",
-    "title": "FND — Kosovo",
-    "text": "Forças Nacionais Destacadas — Comando Agr BRAVO (1999–2000); Agr DELTA (2000–2001); Agr INDIA (2012–2013)."
+    "title": { "pt": "FND — Kosovo", "en": "Deployed forces — Kosovo", "fr": "FND — Kosovo" },
+    "text": {
+      "pt": "Forças Nacionais Destacadas — Comando Agr BRAVO (1999–2000); Agr DELTA (2000–2001); Agr INDIA (2012–2013).",
+      "en": "Portuguese deployed forces — Agr BRAVO HQ (1999–2000); Agr DELTA (2000–2001); Agr INDIA (2012–2013).",
+      "fr": "Forces nationales détachées — commandement Agr BRAVO (1999–2000) ; Agr DELTA (2000–2001) ; Agr INDIA (2012–2013)."
+    }
   },
   {
     "year": "2001–2006",
-    "title": "FND — Bósnia-Herzegovina",
-    "text": "Forças Nacionais Destacadas — ERec/Agr ECHO (2001); Cmd MNBG (2003–2004); Agr GOLF (2003–2004); 1.º Pelotão 2BIMec/SFOR (2004); GCC/BrigMec/SFOR (2006)."
+    "title": { "pt": "FND — Bósnia-Herzegovina", "en": "Deployed forces — Bosnia-Herzegovina", "fr": "FND — Bosnie-Herzégovine" },
+    "text": {
+      "pt": "Forças Nacionais Destacadas — ERec/Agr ECHO (2001); Cmd MNBG (2003–2004); Agr GOLF (2003–2004); 1.º Pelotão 2BIMec/SFOR (2004); GCC/BrigMec/SFOR (2006).",
+      "en": "Portuguese deployed forces — ERec/Agr ECHO (2001); MNBG HQ (2003–2004); Agr GOLF (2003–2004); 1st Platoon 2BIMec/SFOR (2004); GCC/BrigMec/SFOR (2006).",
+      "fr": "Forces nationales détachées — ERec/Agr ECHO (2001) ; Cmd MNBG (2003–2004) ; Agr GOLF (2003–2004) ; 1er peloton 2BIMec/SFOR (2004) ; GCC/BrigMec/SFOR (2006)."
+    }
   },
   {
     "year": "2006",
-    "title": "Quartel da Cavalaria",
-    "text": "Casa da Arma em Santa Margarida — organização do Dia do Quartel, da Marcha a Cavalo à Batalha e das grandes atividades da comunidade O Carrista."
+    "title": { "pt": "Quartel da Cavalaria", "en": "Cavalry Barracks", "fr": "Caserne de Cavalerie" },
+    "text": {
+      "pt": "Casa da Arma em Santa Margarida — organização do Dia do Quartel, da Marcha a Cavalo à Batalha e das grandes atividades da comunidade O Carrista.",
+      "en": "Home of the Arm in Santa Margarida — organisation of Barracks Day, the Mounted March to Batalha and the major activities of the O Carrista community.",
+      "fr": "Maison de l’arme à Santa Margarida — organisation du Jour de la Caserne, de la Marche à cheval vers Batalha et des grandes activités de la communauté O Carrista."
+    }
   },
   {
     "year": "2013–2020",
-    "title": "FND — Afeganistão",
-    "text": "Forças Nacionais Destacadas — 7.º CN/ISAF (2013–2014); 4.ª QRF/RS (2019–2020)."
+    "title": { "pt": "FND — Afeganistão", "en": "Deployed forces — Afghanistan", "fr": "FND — Afghanistan" },
+    "text": {
+      "pt": "Forças Nacionais Destacadas — 7.º CN/ISAF (2013–2014); 4.ª QRF/RS (2019–2020).",
+      "en": "Portuguese deployed forces — 7th CN/ISAF (2013–2014); 4th QRF/RS (2019–2020).",
+      "fr": "Forces nationales détachées — 7e CN/ISAF (2013–2014) ; 4e QRF/RS (2019–2020)."
+    }
   },
   {
     "year": "2019–2020",
-    "title": "FND — Iraque",
-    "text": "Forças Nacionais Destacadas — 10.º CN/OIR (2019–2020)."
+    "title": { "pt": "FND — Iraque", "en": "Deployed forces — Iraq", "fr": "FND — Irak" },
+    "text": {
+      "pt": "Forças Nacionais Destacadas — 10.º CN/OIR (2019–2020).",
+      "en": "Portuguese deployed forces — 10th CN/OIR (2019–2020).",
+      "fr": "Forces nationales détachées — 10e CN/OIR (2019–2020)."
+    }
   },
   {
     "year": "2024",
-    "title": "Carros de Combate em Operações",
-    "text": "Marco recente da capacidade operacional dos carristas — formação, emprego e experiência em operações com carros de combate."
+    "title": { "pt": "Carros de Combate em Operações", "en": "Main battle tanks in operations", "fr": "Chars de combat en opérations" },
+    "text": {
+      "pt": "Marco recente da capacidade operacional dos carristas — formação, emprego e experiência em operações com carros de combate.",
+      "en": "A recent landmark of tank-crew operational capability — training, employment and experience in operations with main battle tanks.",
+      "fr": "Repère récent de la capacité opérationnelle des tankistes — formation, emploi et expérience en opérations avec chars de combat."
+    }
   },
   {
     "year": "2024–2026",
-    "title": "FND — Eslováquia",
-    "text": "Forças Nacionais Destacadas — 1.º FND/PelCC (2024–2025); 2.º FND/PelCC (2025); 3.º FND/SubAgr (2025–2026); 4.º FND/SubAgr (2026)."
+    "title": { "pt": "FND — Eslováquia", "en": "Deployed forces — Slovakia", "fr": "FND — Slovaquie" },
+    "text": {
+      "pt": "Forças Nacionais Destacadas — 1.º FND/PelCC (2024–2025); 2.º FND/PelCC (2025); 3.º FND/SubAgr (2025–2026); 4.º FND/SubAgr (2026).",
+      "en": "Portuguese deployed forces — 1st FND/PelCC (2024–2025); 2nd FND/PelCC (2025); 3rd FND/SubAgr (2025–2026); 4th FND/SubAgr (2026).",
+      "fr": "Forces nationales détachées — 1re FND/PelCC (2024–2025) ; 2e FND/PelCC (2025) ; 3e FND/SubAgr (2025–2026) ; 4e FND/SubAgr (2026)."
+    }
   }
 ]

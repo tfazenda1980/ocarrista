@@ -1,4 +1,5 @@
 import type { CncDiscipline, CncPdfResource } from "../events/cnc-types";
+import { overlayLocalized, type LocalizedText } from "../i18n/localized";
 
 export type CncDisciplineKind = "resources" | "gallery" | "grouped" | "resultados";
 
@@ -44,20 +45,25 @@ export function disciplineSlot(
 }
 
 export function emptyResource(
-  label: string,
+  label: LocalizedText,
   asset?: CncAsset | null,
   fallback?: CncPdfResource | null,
 ): CncPdfResource {
+  const mergedLabel = overlayLocalized(
+    asset?.label,
+    fallback?.label ?? label,
+    "pt",
+  ) as CncPdfResource["label"];
   if (asset) {
     return {
-      label: asset.label || fallback?.label || label,
+      label: mergedLabel,
       href: asset.url,
       mime: asset.mime,
       filename: asset.filename,
     };
   }
   return {
-    label: fallback?.label || label,
+    label: mergedLabel,
     href: fallback?.href ?? null,
     mime: fallback?.mime ?? null,
     filename: fallback?.filename ?? null,

@@ -2,8 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { UnitCrest, UnitCrestWatermark } from "./unit-crest";
+import { useT } from "./i18n/locale-provider";
 
 export function Hero() {
+  const { t } = useT();
   const { scrollY } = useScroll();
   const glowY = useTransform(scrollY, [0, 500], [0, 80]);
   const gridY = useTransform(scrollY, [0, 500], [0, -32]);
@@ -56,7 +58,7 @@ export function Hero() {
             transition={{ duration: 0.7 }}
           >
             <span className="inline-block h-px w-8 bg-gold/60" />
-            Regimento de Cavalaria 4 · Ex-RC4
+            {t("home.kicker")}
           </motion.p>
 
           <motion.h1
@@ -65,7 +67,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            O Carrista
+            {t("brand.name")}
           </motion.h1>
 
           <motion.p
@@ -74,7 +76,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            De Santa Margarida
+            {t("brand.tagline")}
           </motion.p>
 
           <motion.p
@@ -83,10 +85,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.2 }}
           >
-            A comunidade dos carristas e amigos do Quartel da Cavalaria e do
-            RC4. O Carrista de Santa Margarida será local de coordenação de
-            eventos, divulgação cultural e histórica, bem como uma rede de
-            confiança entre quem serviu e quem continua este legado.
+            {t("home.intro")}
           </motion.p>
 
           <motion.div
@@ -96,10 +95,10 @@ export function Hero() {
             transition={{ duration: 0.75, delay: 0.3 }}
           >
             <motion.a href="#comunidade" className="btn-primary" whileHover={{ y: -2 }}>
-              Aderir à Comunidade
+              {t("home.ctaCommunity")}
             </motion.a>
             <motion.a href="#loja" className="btn-outline" whileHover={{ y: -2 }}>
-              Loja do Carrista
+              {t("home.ctaShop")}
             </motion.a>
           </motion.div>
 
@@ -110,9 +109,9 @@ export function Hero() {
             transition={{ duration: 0.75, delay: 0.4 }}
           >
             {[
-              { value: "7", label: "Eventos Anuais" },
-              { value: "RC4", label: "Regimento de Cavalaria 4" },
-              { value: "GesCO", label: "Competências Operacionais" },
+              { value: "7", label: t("home.statEvents") },
+              { value: "RC4", label: t("home.statRegiment") },
+              { value: "GesCO", label: t("home.statGesco") },
             ].map((stat) => (
               <div key={stat.label}>
                 <dt className="font-display text-2xl font-semibold text-gold sm:text-3xl">
@@ -152,7 +151,7 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.6 }}
       >
-        <span className="section-label text-[0.55rem] text-muted">Scroll</span>
+        <span className="section-label text-[0.55rem] text-muted">{t("home.scroll")}</span>
         <span className="h-8 w-px bg-gradient-to-b from-gold/60 to-transparent" />
       </motion.div>
     </section>

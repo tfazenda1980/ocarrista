@@ -2,41 +2,109 @@
   "year": "2026",
   "slug": "cnc",
   "published": true,
-  "title": "Concurso Nacional Combinado",
-  "edition": "CNC 2026",
-  "slogan": "Ensino, Cross e Obstáculos — a tradição equestre no Quartel da Cavalaria.",
-  "rationale": "O Concurso Completo de Equitação (CCE) é a prova equestre que combina três disciplinas: Ensino (harmonia e precisão), Cross (resistência, terreno e obstáculos naturais) e Obstáculos (gymnastique sobre saltos). O Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria reúne atletas e cavaleiros em diferentes níveis — da iniciação ao preliminar. Este espaço contém a documentação oficial e divulgação útil, tais como ordens de entrada, croquis de percursos e os resultados alcançados.",
+  "title": {
+    "pt": "Concurso Nacional Combinado",
+    "en": "National Combined Event",
+    "fr": "Concours national combiné"
+  },
+  "edition": {
+    "pt": "CNC 2026",
+    "en": "CNC 2026",
+    "fr": "CNC 2026"
+  },
+  "slogan": {
+    "pt": "Ensino, Cross e Obstáculos — a tradição equestre no Quartel da Cavalaria.",
+    "en": "Dressage, cross-country and show jumping — the equestrian tradition at the Cavalry Barracks.",
+    "fr": "Dressage, cross et obstacles — la tradition équestre à la Caserne de Cavalerie."
+  },
+  "rationale": {
+    "pt": "O Concurso Completo de Equitação (CCE) é a prova equestre que combina três disciplinas: Ensino (harmonia e precisão), Cross (resistência, terreno e obstáculos naturais) e Obstáculos (gymnastique sobre saltos). O Concurso Nacional Combinado da Brigada Mecanizada e do Quartel da Cavalaria reúne atletas e cavaleiros em diferentes níveis — da iniciação ao preliminar. Este espaço contém a documentação oficial e divulgação útil, tais como ordens de entrada, croquis de percursos e os resultados alcançados.",
+    "en": "Eventing (CCE) combines three disciplines: dressage (harmony and precision), cross-country (endurance, terrain and natural obstacles) and show jumping (gymnastics over fences). The National Combined Event of the Mechanized Brigade and the Cavalry Barracks brings together athletes and riders at different levels — from introductory to preliminary. This space holds official documents and useful information: start orders, course sketches and results.",
+    "fr": "Le concours complet d’équitation (CCE) associe trois disciplines : le dressage (harmonie et précision), le cross (endurance, terrain et obstacles naturels) et les obstacles (gymnastique sur les sauts). Le Concours national combiné de la Brigade mécanisée et de la Caserne de Cavalerie réunit athlètes et cavaliers à différents niveaux — de l’initiation au préliminaire. Cet espace rassemble la documentation officielle et les informations utiles : ordres d’entrée, croquis de parcours et résultats."
+  },
   "date": "2026-09-25T08:00:00+01:00",
   "endDate": "2026-09-26T18:00:00+01:00",
-  "dateDisplay": "25 e 26 de Setembro de 2026",
-  "location": "Centro Hípico · Quartel da Cavalaria · Santa Margarida",
+  "dateDisplay": {
+    "pt": "25 e 26 de Setembro de 2026",
+    "en": "25 and 26 September 2026",
+    "fr": "25 et 26 septembre 2026"
+  },
+  "location": {
+    "pt": "Centro Hípico · Quartel da Cavalaria · Santa Margarida",
+    "en": "Equestrian Centre · Cavalry Barracks · Santa Margarida",
+    "fr": "Centre hippique · Caserne de Cavalerie · Santa Margarida"
+  },
   "heroImage": "/images/cnc.png",
   "cardImage": "/images/cnc.png",
   "seo": {
-    "title": "Concurso Nacional Combinado 2026 | O Carrista",
-    "description": "Concurso Nacional Combinado 2026, 25 e 26 de Setembro, no Quartel da Cavalaria — Ensino, Cross e Obstáculos, programa, provas e informação útil para concorrentes."
+    "title": {
+      "pt": "Concurso Nacional Combinado 2026 | O Carrista",
+      "en": "National Combined Event 2026 | O Carrista",
+      "fr": "Concours national combiné 2026 | O Carrista"
+    },
+    "description": {
+      "pt": "Concurso Nacional Combinado 2026, 25 e 26 de Setembro, no Quartel da Cavalaria — Ensino, Cross e Obstáculos, programa, provas e informação útil para concorrentes.",
+      "en": "National Combined Event 2026, 25 and 26 September, at the Cavalry Barracks — dressage, cross-country and show jumping, programme, classes and information for competitors.",
+      "fr": "Concours national combiné 2026, 25 et 26 septembre, à la Caserne de Cavalerie — dressage, cross et obstacles, programme, épreuves et informations utiles pour les concurrents."
+    }
   },
   "openingNote": {
-    "title": "Nota de Abertura",
-    "body": "É sempre um grande privilégio e motivo de orgulho contar com a visita e a participação de todos. Ano após ano, esta comunhão em torno do Cavalo serve como fonte de inspiração e dá força para que o legado equestre militar continue a ser trilhado. Em nome do Exmo. Comandante da Brigada Mecanizada e do Comandante do Quartel da Cavalaria, saudamos todos os que nos apoiaram na realização deste evento, todos os concorrentes e todos os visitantes, esperando que o XVIII Concurso Nacional Combinado de Equitação supere todas as vossas expectativas.",
+    "title": {
+      "pt": "Nota de Abertura",
+      "en": "Opening note",
+      "fr": "Mot d’ouverture"
+    },
+    "body": {
+      "pt": "É sempre um grande privilégio e motivo de orgulho contar com a visita e a participação de todos. Ano após ano, esta comunhão em torno do Cavalo serve como fonte de inspiração e dá força para que o legado equestre militar continue a ser trilhado. Em nome do Exmo. Comandante da Brigada Mecanizada e do Comandante do Quartel da Cavalaria, saudamos todos os que nos apoiaram na realização deste evento, todos os concorrentes e todos os visitantes, esperando que o XVIII Concurso Nacional Combinado de Equitação supere todas as vossas expectativas.",
+      "en": "It is always a privilege and a source of pride to welcome every visitor and competitor. Year after year, this gathering around the Horse inspires us and gives strength so that the military equestrian legacy continues. On behalf of the Commander of the Mechanized Brigade and the Commander of the Cavalry Barracks, we greet all who supported this event, all competitors and all visitors, hoping that the 18th National Combined Eventing Championship exceeds your expectations.",
+      "fr": "C’est toujours un grand privilège et un motif de fierté d’accueillir chaque visiteur et chaque concurrent. Année après année, cette communion autour du Cheval inspire et donne la force de poursuivre l’héritage équestre militaire. Au nom du commandant de la Brigade mécanisée et du commandant de la Caserne de Cavalerie, nous saluons tous ceux qui ont soutenu cet événement, tous les concurrents et tous les visiteurs, en espérant que le XVIIIe Concours national combiné d’équitation dépasse vos attentes."
+    },
     "pdf": {
-      "label": "Nota de Abertura (PDF)",
+      "label": {
+        "pt": "Nota de Abertura (PDF)",
+        "en": "Opening note (PDF)",
+        "fr": "Mot d’ouverture (PDF)"
+      },
       "href": null
     }
   },
   "generalProgram": {
-    "title": "Programa geral",
-    "body": "O programa abrange a calendarização das fases de Ensino, Cross e Obstáculos por categoria, briefings de segurança, inspeções veterinárias e entrega de prémios. Os horários definitivos serão publicados em PDF assim que homologados pela organização.",
+    "title": {
+      "pt": "Programa geral",
+      "en": "General programme",
+      "fr": "Programme général"
+    },
+    "body": {
+      "pt": "O programa abrange a calendarização das fases de Ensino, Cross e Obstáculos por categoria, briefings de segurança, inspeções veterinárias e entrega de prémios. Os horários definitivos serão publicados em PDF assim que homologados pela organização.",
+      "en": "The programme covers the timetable of dressage, cross-country and show jumping by class, safety briefings, veterinary inspections and the prize-giving. Definitive times will be published as a PDF once confirmed by the organisation.",
+      "fr": "Le programme couvre le calendrier des phases de dressage, de cross et d’obstacles par catégorie, les briefings de sécurité, les inspections vétérinaires et la remise des prix. Les horaires définitifs seront publiés en PDF dès homologation par l’organisation."
+    },
     "pdf": {
-      "label": "Programa geral (PDF)",
+      "label": {
+        "pt": "Programa geral (PDF)",
+        "en": "General programme (PDF)",
+        "fr": "Programme général (PDF)"
+      },
       "href": null
     }
   },
   "regulation": {
-    "title": "Regulamento",
-    "body": "O regulamento oficial desta edição do Concurso Nacional Combinado será publicado nesta área. Consulte o PDF assim que a organização o homologar.",
+    "title": {
+      "pt": "Regulamento",
+      "en": "Rules",
+      "fr": "Règlement"
+    },
+    "body": {
+      "pt": "O regulamento oficial desta edição do Concurso Nacional Combinado será publicado nesta área. Consulte o PDF assim que a organização o homologar.",
+      "en": "The official rules for this edition of the National Combined Event will be published in this section. Open the PDF once the organisation has confirmed it.",
+      "fr": "Le règlement officiel de cette édition du Concours national combiné sera publié dans cette rubrique. Consultez le PDF dès homologation par l’organisation."
+    },
     "pdf": {
-      "label": "Regulamento (PDF)",
+      "label": {
+        "pt": "Regulamento (PDF)",
+        "en": "Rules (PDF)",
+        "fr": "Règlement (PDF)"
+      },
       "href": null
     }
   },
@@ -45,131 +113,167 @@
   "disciplines": [
     {
       "id": "iniciacao",
-      "title": "CNC Iniciação",
-      "description": "Categoria de entrada ao concurso completo, com percursos e critérios adaptados a cavaleiros e cavalos em formação.",
+      "title": {
+        "pt": "CNC Iniciação",
+        "en": "CNC Introductory",
+        "fr": "CNC Initiation"
+      },
+      "description": {
+        "pt": "Categoria de entrada ao concurso completo, com percursos e critérios adaptados a cavaleiros e cavalos em formação.",
+        "en": "Entry class for eventing, with courses and criteria suited to riders and horses in training.",
+        "fr": "Catégorie d’entrée au concours complet, avec parcours et critères adaptés aux cavaliers et chevaux en formation."
+      },
       "sections": [
         {
           "id": "iniciacao-ensino",
-          "title": "Ensino",
+          "title": { "pt": "Ensino", "en": "Dressage", "fr": "Dressage" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "iniciacao-cross",
-          "title": "Cross",
+          "title": { "pt": "Cross", "en": "Cross-country", "fr": "Cross" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "iniciacao-obstaculos",
-          "title": "Obstáculos",
+          "title": { "pt": "Obstáculos", "en": "Show jumping", "fr": "Obstacles" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "iniciacao-finais",
-          "title": "Resultados finais",
-          "resultados": { "label": "Resultados finais", "href": null }
+          "title": { "pt": "Resultados finais", "en": "Final results", "fr": "Résultats finaux" },
+          "resultados": { "label": { "pt": "Resultados finais", "en": "Final results", "fr": "Résultats finaux" }, "href": null }
         }
       ]
     },
     {
       "id": "preliminar",
-      "title": "CNC Preliminar",
-      "description": "Nível intermédio com exigência técnica acrescida nas três fases do CCE.",
+      "title": {
+        "pt": "CNC Preliminar",
+        "en": "CNC Preliminary",
+        "fr": "CNC Préliminaire"
+      },
+      "description": {
+        "pt": "Nível intermédio com exigência técnica acrescida nas três fases do CCE.",
+        "en": "Intermediate level with greater technical demand in all three eventing phases.",
+        "fr": "Niveau intermédiaire avec une exigence technique accrue dans les trois phases du CCE."
+      },
       "sections": [
         {
           "id": "preliminar-ensino",
-          "title": "Ensino",
+          "title": { "pt": "Ensino", "en": "Dressage", "fr": "Dressage" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "preliminar-cross",
-          "title": "Cross",
+          "title": { "pt": "Cross", "en": "Cross-country", "fr": "Cross" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "preliminar-obstaculos",
-          "title": "Obstáculos",
+          "title": { "pt": "Obstáculos", "en": "Show jumping", "fr": "Obstacles" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "preliminar-finais",
-          "title": "Resultados finais",
-          "resultados": { "label": "Resultados finais", "href": null }
+          "title": { "pt": "Resultados finais", "en": "Final results", "fr": "Résultats finaux" },
+          "resultados": { "label": { "pt": "Resultados finais", "en": "Final results", "fr": "Résultats finaux" }, "href": null }
         }
       ]
     },
     {
       "id": "open",
-      "title": "Provas Open",
-      "description": "Competição open por altura de obstáculos, com ordens de entrada, croquis e resultados em cada prova.",
+      "title": {
+        "pt": "Provas Open",
+        "en": "Open classes",
+        "fr": "Épreuves Open"
+      },
+      "description": {
+        "pt": "Competição open por altura de obstáculos, com ordens de entrada, croquis e resultados em cada prova.",
+        "en": "Open competition by fence height, with start orders, sketches and results for each class.",
+        "fr": "Compétition open par hauteur d’obstacles, avec ordres d’entrée, croquis et résultats pour chaque épreuve."
+      },
       "sections": [
         {
           "id": "open-050",
-          "title": "Prova Open 0,50m",
+          "title": { "pt": "Prova Open 0,50m", "en": "Open class 0.50 m", "fr": "Épreuve Open 0,50 m" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "open-090",
-          "title": "Prova Open 0,90m",
+          "title": { "pt": "Prova Open 0,90m", "en": "Open class 0.90 m", "fr": "Épreuve Open 0,90 m" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "open-100",
-          "title": "Prova Open 1,00m",
+          "title": { "pt": "Prova Open 1,00m", "en": "Open class 1.00 m", "fr": "Épreuve Open 1,00 m" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         },
         {
           "id": "open-110",
-          "title": "Prova Open 1,10m",
+          "title": { "pt": "Prova Open 1,10m", "en": "Open class 1.10 m", "fr": "Épreuve Open 1,10 m" },
           "resources": {
-            "ordens": { "label": "Ordens de Entrada", "href": null },
-            "croquis": { "label": "Croquis", "href": null },
-            "resultados": { "label": "Resultados", "href": null }
+            "ordens": { "label": { "pt": "Ordens de Entrada", "en": "Start orders", "fr": "Ordres d’entrée" }, "href": null },
+            "croquis": { "label": { "pt": "Croquis", "en": "Course sketch", "fr": "Croquis" }, "href": null },
+            "resultados": { "label": { "pt": "Resultados", "en": "Results", "fr": "Résultats" }, "href": null }
           }
         }
       ]
     },
     {
       "id": "premios",
-      "title": "Galeria de Prémios",
-      "description": "Documento em largura total com cada prova apresentada e os respetivos prémios em fotografia.",
+      "title": {
+        "pt": "Galeria de Prémios",
+        "en": "Prize gallery",
+        "fr": "Galerie des prix"
+      },
+      "description": {
+        "pt": "Documento em largura total com cada prova apresentada e os respetivos prémios em fotografia.",
+        "en": "Full-width document showing each class and its prizes in photographs.",
+        "fr": "Document en pleine largeur présentant chaque épreuve et les prix correspondants en photographie."
+      },
       "galleryPdf": {
-        "label": "Galeria de Prémios (PDF)",
+        "label": {
+          "pt": "Galeria de Prémios (PDF)",
+          "en": "Prize gallery (PDF)",
+          "fr": "Galerie des prix (PDF)"
+        },
         "href": null
       }
     }
@@ -177,28 +281,60 @@
   "usefulInfo": [
     {
       "id": "cmsm",
-      "title": "Planta do CMSM",
-      "description": "Planta geral do Centro Hípico Militar de Santa Margarida.",
-      "pdf": { "label": "Planta do CMSM (PDF)", "href": null }
+      "title": {
+        "pt": "Planta do CMSM",
+        "en": "CMSM site plan",
+        "fr": "Plan du CMSM"
+      },
+      "description": {
+        "pt": "Planta geral do Centro Hípico Militar de Santa Margarida.",
+        "en": "General plan of the Santa Margarida Military Equestrian Centre.",
+        "fr": "Plan général du Centre hippique militaire de Santa Margarida."
+      },
+      "pdf": { "label": { "pt": "Planta do CMSM (PDF)", "en": "CMSM site plan (PDF)", "fr": "Plan du CMSM (PDF)" }, "href": null }
     },
     {
       "id": "qcav",
-      "title": "Planta do QCav",
-      "description": "Planta do Quartel da Cavalaria — acessos e áreas de apoio.",
-      "pdf": { "label": "Planta do QCav (PDF)", "href": null }
+      "title": {
+        "pt": "Planta do QCav",
+        "en": "QCav site plan",
+        "fr": "Plan du QCav"
+      },
+      "description": {
+        "pt": "Planta do Quartel da Cavalaria — acessos e áreas de apoio.",
+        "en": "Cavalry Barracks plan — access and support areas.",
+        "fr": "Plan de la Caserne de Cavalerie — accès et zones d’appui."
+      },
+      "pdf": { "label": { "pt": "Planta do QCav (PDF)", "en": "QCav site plan (PDF)", "fr": "Plan du QCav (PDF)" }, "href": null }
     },
     {
       "id": "cavalariças",
-      "title": "Área das Cavalariças",
-      "description": "Localização das boxes, picadeiros e zona de preparação dos equinos.",
-      "pdf": { "label": "Área das Cavalariças (PDF)", "href": null }
+      "title": {
+        "pt": "Área das Cavalariças",
+        "en": "Stables area",
+        "fr": "Zone des écuries"
+      },
+      "description": {
+        "pt": "Localização das boxes, picadeiros e zona de preparação dos equinos.",
+        "en": "Location of boxes, arenas and the horse preparation area.",
+        "fr": "Emplacement des boxes, des carrières et de la zone de préparation des chevaux."
+      },
+      "pdf": { "label": { "pt": "Área das Cavalariças (PDF)", "en": "Stables area (PDF)", "fr": "Zone des écuries (PDF)" }, "href": null }
     }
   ],
   "contacts": {
-    "organizer": "Organização CNC — Quartel da Cavalaria",
+    "organizer": {
+      "pt": "Organização CNC — Quartel da Cavalaria",
+      "en": "CNC organisation — Cavalry Barracks",
+      "fr": "Organisation CNC — Caserne de Cavalerie"
+    },
     "email": "ocarrista.cc@gmail.com",
     "phone": "",
-    "notes": "Para questões de inscrição, documentação veterinária e horários de reconhecimento de pista."
+    "notes": {
+      "pt": "Para questões de inscrição, documentação veterinária e horários de reconhecimento de pista.",
+      "en": "For entries, veterinary paperwork and course-walk times.",
+      "fr": "Pour les inscriptions, les documents vétérinaires et les horaires de reconnaissance de piste."
+    }
   },
   "sponsors": []
 }

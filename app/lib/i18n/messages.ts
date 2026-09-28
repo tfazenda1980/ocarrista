@@ -38,6 +38,13 @@ export const pt = {
   home: {
     intro:
       "A comunidade dos carristas e amigos do Quartel da Cavalaria e do RC4. O Carrista de Santa Margarida será local de coordenação de eventos, divulgação cultural e histórica, bem como uma rede de confiança entre quem serviu e quem continua este legado.",
+    kicker: "Regimento de Cavalaria 4 · Ex-RC4",
+    ctaCommunity: "Aderir à Comunidade",
+    ctaShop: "Loja do Carrista",
+    statEvents: "Eventos Anuais",
+    statRegiment: "Regimento de Cavalaria 4",
+    statGesco: "Competências Operacionais",
+    scroll: "Scroll",
     shoutLabel: "Grito d'O Carrista",
     mottoLabel: "Lema do QCav e do RC4",
     videoLabel: "Divulgação",
@@ -522,6 +529,13 @@ export const en: Messages = {
   home: {
     intro:
       "The community of tank crews and friends of the Cavalry Barracks and RC4. O Carrista of Santa Margarida is a place to coordinate events, share cultural and historical memory, and keep a network of trust among those who served and those who carry this legacy forward.",
+    kicker: "Cavalry Regiment 4 · Ex-RC4",
+    ctaCommunity: "Join the community",
+    ctaShop: "O Carrista shop",
+    statEvents: "Annual events",
+    statRegiment: "Cavalry Regiment 4",
+    statGesco: "Operational skills",
+    scroll: "Scroll",
     shoutLabel: "O Carrista battle cry",
     mottoLabel: "QCav and RC4 motto",
     videoLabel: "Film",
@@ -1003,6 +1017,13 @@ export const fr: Messages = {
   home: {
     intro:
       "La communauté des carristes et des amis du Quartier de Cavalerie et du RC4. O Carrista de Santa Margarida est un lieu de coordination des événements, de diffusion culturelle et historique, et un réseau de confiance entre ceux qui ont servi et ceux qui poursuivent cet héritage.",
+    kicker: "Régiment de Cavalerie 4 · Ex-RC4",
+    ctaCommunity: "Rejoindre la communauté",
+    ctaShop: "Boutique du Carrista",
+    statEvents: "Événements annuels",
+    statRegiment: "Régiment de Cavalerie 4",
+    statGesco: "Compétences opérationnelles",
+    scroll: "Défiler",
     shoutLabel: "Cri d’O Carrista",
     mottoLabel: "Devise du QCav et du RC4",
     videoLabel: "Film",

@@ -7,6 +7,7 @@ import {
   updateImgcDelegation,
 } from "@/app/lib/imgc/repository";
 import { pinForImgcDelegation } from "@/app/lib/imgc/countries";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -38,7 +39,7 @@ export async function POST(
       host: Boolean(body?.host),
     });
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 400 });
@@ -77,7 +78,7 @@ export async function PATCH(
       host: Boolean(body.host),
     });
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 400 });
@@ -98,7 +99,7 @@ export async function DELETE(
   try {
     await deleteImgcDelegation(year, id);
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 500 });

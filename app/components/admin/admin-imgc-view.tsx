@@ -11,6 +11,7 @@ import type {
 } from "@/app/lib/events/imgc-types";
 import { IMGC_FILE_ACCEPT, IMGC_IMAGE_ACCEPT, programmeSlot } from "@/app/lib/imgc/upload";
 import { IMGC_COUNTRY_NAMES } from "@/app/lib/imgc/countries";
+import { displayLocalized } from "@/app/lib/i18n/localized";
 
 type Tab = "conteudo" | "delegacoes" | "links" | "galeria" | "contactos" | "mensagens";
 
@@ -65,18 +66,18 @@ export function AdminImgcView({ year }: { year: string }) {
 
   const applyEvent = useCallback((next: ImgcEventData) => {
     setEvent(next);
-    setAboutTitle(next.about.title);
-    setAboutBody(next.about.body);
-    setBarracksTitle(next.barracks.title);
-    setBarracksBody(next.barracks.body);
-    setPracticalTitle(next.practical.title);
-    setPracticalBody(next.practical.body);
-    setProgrammeTitle(next.programme.title);
-    setProgrammeBody(next.programme.body);
-    setOrganizer(next.contacts.organizer);
+    setAboutTitle(displayLocalized(next.about.title));
+    setAboutBody(displayLocalized(next.about.body));
+    setBarracksTitle(displayLocalized(next.barracks.title));
+    setBarracksBody(displayLocalized(next.barracks.body));
+    setPracticalTitle(displayLocalized(next.practical.title));
+    setPracticalBody(displayLocalized(next.practical.body));
+    setProgrammeTitle(displayLocalized(next.programme.title));
+    setProgrammeBody(displayLocalized(next.programme.body));
+    setOrganizer(displayLocalized(next.contacts.organizer));
     setEmail(next.contacts.email);
     setPhone(next.contacts.phone ?? "");
-    setNotes(next.contacts.notes ?? "");
+    setNotes(displayLocalized(next.contacts.notes ?? ""));
   }, []);
 
   const load = useCallback(async () => {

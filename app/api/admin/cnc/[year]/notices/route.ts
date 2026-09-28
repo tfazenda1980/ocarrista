@@ -6,6 +6,7 @@ import {
   getCncLiveEdition,
   setCncNoticeActive,
 } from "@/app/lib/cnc/repository";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -34,7 +35,7 @@ export async function POST(
   try {
     await createCncNotice(year, data.body);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao publicar aviso.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -66,7 +67,7 @@ export async function PATCH(
   try {
     await setCncNoticeActive(year, data.id, data.active);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao actualizar aviso.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -91,7 +92,7 @@ export async function DELETE(
   try {
     await deleteCncNotice(year, id);
     const event = await getCncLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao eliminar aviso.";
     return NextResponse.json({ error: message }, { status: 500 });

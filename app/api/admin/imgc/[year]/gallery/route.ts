@@ -7,6 +7,7 @@ import {
   updateImgcGalleryPhoto,
 } from "@/app/lib/imgc/repository";
 import { uploadImgcAsset } from "@/app/lib/imgc/upload";
+import { cmsPlain } from "@/app/lib/i18n/localized";
 
 export const runtime = "nodejs";
 
@@ -34,7 +35,7 @@ export async function POST(
       filename: uploaded.filename,
     });
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro ao publicar fotografia.";
     return NextResponse.json({ error: message }, { status: 503 });
@@ -57,7 +58,7 @@ export async function PATCH(
   try {
     await updateImgcGalleryPhoto(body.id, { caption: body.caption });
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 500 });
@@ -78,7 +79,7 @@ export async function DELETE(
   try {
     await deleteImgcGalleryPhoto(year, id);
     const event = await getImgcLiveEdition(year);
-    return NextResponse.json({ ok: true, event });
+    return NextResponse.json({ ok: true, event: event ? cmsPlain(event) : event });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro.";
     return NextResponse.json({ error: message }, { status: 500 });

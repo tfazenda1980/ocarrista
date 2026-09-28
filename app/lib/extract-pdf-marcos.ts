@@ -1,7 +1,9 @@
+import type { LocalizedText } from "./i18n/localized";
+
 export type HistoriaMarco = {
   year: string;
-  title: string;
-  text: string;
+  title: LocalizedText;
+  text: LocalizedText;
 };
 
 const YEAR_RE = /\b(1[6-9]\d{2}|20\d{2})\b/g;

@@ -7,6 +7,7 @@ import { SectionShell } from "../section-shell";
 import { PdfHorizontalViewer } from "../pdf-horizontal-viewer";
 import { BRASAO_SRC, HISTORIA_SLIDESHOW_PDF } from "../../lib/site-assets";
 import { useT } from "../i18n/locale-provider";
+import { pickLocalized } from "../../lib/i18n/localized";
 import {
   DEFAULT_MARCOS,
   loadMarcosFromJson,
@@ -14,6 +15,7 @@ import {
 } from "../../lib/extract-pdf-marcos";
 
 function Timeline({ marcos }: { marcos: HistoriaMarco[] }) {
+  const { locale } = useT();
   return (
     <div className="relative">
       <div className="absolute top-0 bottom-0 left-4 w-px bg-gradient-to-b from-gold/60 via-gold/20 to-transparent sm:left-1/2 sm:-translate-x-px" />
@@ -40,10 +42,10 @@ function Timeline({ marcos }: { marcos: HistoriaMarco[] }) {
                 {item.year}
               </span>
               <h3 className="font-display mt-1 text-lg font-semibold tracking-wide uppercase">
-                {item.title}
+                {pickLocalized(item.title, locale)}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
-                {item.text}
+                {pickLocalized(item.text, locale)}
               </p>
             </div>
           </li>
